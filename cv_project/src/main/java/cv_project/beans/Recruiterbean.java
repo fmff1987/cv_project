@@ -1,4 +1,4 @@
-package beans;
+package cv_project.beans;
 
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
