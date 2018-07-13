@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"       
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Manager</title>
+       <h:outputStylesheet library="css" name="../resources/CSS/style.css"  />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </h:head>
+    
+    <h:body>
+             
+       <h3>Create order</h3>
+       
+       <h:form>
+    	
+    		<h:panelGrid columns="2" cellpadding="5" >
+		       		       	       
+		       <p:outputLabel value="Name:" for="name" />
+		       <p:selectOneMenu id="name" value="" effect="fold" editable="true">
+		            <f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItems value="" />
+        	   </p:selectOneMenu>
+       	 	
+       	 	   <p:outputLabel value="Seniority:" for="sen" />
+		       <p:selectOneMenu id="sen" value="" effect="fold" editable="true">
+		            <f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItems value="" />
+        	   </p:selectOneMenu>
+		      	         	 
+       	 	   <p:outputLabel value="Technologies:" for="tech" />
+        	   <p:autoComplete id="tech" value=""  />
+        		
+		       <p:outputLabel value="Candidates:" for="number" />
+		       <p:spinner id="number" value="" min="0" />
+        		
+        	   <p:outputLabel for="dl" value="Deadline:" />
+        	   <p:calendar id="dl" value="" pages="2" effect="fold" />
+        	 
+        	</h:panelGrid>
+        	   
+        	   <p:commandButton value="Submit"  />
+        	
+        </h:form>
+        
+    </h:body>
+    
+</html>
