@@ -9,7 +9,7 @@ public class Order {
 	protected long idManager;
 	protected List<Recruiter> ListR = new ArrayList<Recruiter>();
 	protected List<Candidate> ListC = new ArrayList<Candidate>();
-	protected String[] seniority= {"RL", "Junior", "Senior", "Pleno"};
+	
 	
 	public long getId() {
 		return id;
@@ -35,12 +35,7 @@ public class Order {
 	public void setListC(List<Candidate> listC) {
 		ListC = listC;
 	}
-	public String[] getSeniority() {
-		return seniority;
-	}
-	public void setSeniority(String[] seniority) {
-		this.seniority = seniority;
-	}
+
 	
 	
 	
