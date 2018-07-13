@@ -29,8 +29,5 @@ public class Managerbean {
 
 	public void setCm(ControllerManager cm) {
 		this.cm = cm;
-	}
-	
-	
-	
+	}	
 }
