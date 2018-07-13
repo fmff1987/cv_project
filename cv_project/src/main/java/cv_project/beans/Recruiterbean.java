@@ -4,7 +4,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import control.ControllerRecruiter;
+import cv_project.control.ControllerRecruiter;
 import cv_project.models.Order;
 import cv_project.models.Recruiter;
 
