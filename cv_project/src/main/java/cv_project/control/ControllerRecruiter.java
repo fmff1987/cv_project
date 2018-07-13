@@ -1,4 +1,4 @@
-package control;
+package cv_project.control;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
