@@ -1,7 +1,9 @@
-package beans;
+package cv_project.beans;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+
+import control.ControllerManager;
 import cv_project.models.Manager;
 
 @RequestScoped
