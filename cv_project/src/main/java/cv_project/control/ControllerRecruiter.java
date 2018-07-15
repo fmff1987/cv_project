@@ -1,20 +1,19 @@
 package cv_project.control;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import cv_project.models.Recruiter;
-import cv_project.repositories.EntityRepository;
+import cv_project.repositories.RecruiterRepository;
 
 @RequestScoped
 public class ControllerRecruiter {
 	
 	@Inject
-	EntityRepository <Recruiter> db;
-	
-	
-	
-	
+	RecruiterRepository db;
+		
 	public void createRecruiter(Recruiter p) {
 		db.createEntity(p);
 	}
@@ -27,6 +26,10 @@ public class ControllerRecruiter {
 	
 	public void updateList() {
 		db.updateLocalList();
+	}
+
+	public List<Recruiter> getRec() {
+		return db.getList(Recruiter.class);
 	}
 	
 }

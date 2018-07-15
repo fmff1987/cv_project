@@ -1,5 +1,7 @@
 package cv_project.beans;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import cv_project.control.ControllerManager;
@@ -31,6 +33,8 @@ public class Managerbean {
 		this.cm = cm;
 	}
 	
-	
+	public List<Manager> getMan(){
+		return cm.getMan();
+	}
 	
 }

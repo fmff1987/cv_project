@@ -1,5 +1,6 @@
 package cv_project.repositories;
 
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,9 @@ public abstract class EntityRepository<T extends Person> {
 
 	public T getEntity(Class<T> entClass, Long id) {
 		return em.find(entClass, id);
+	}
+	public List<T> getList(Class<T> entClass) {
+		return localList;
 	}
 
 	public void updateEntity(T ent) {

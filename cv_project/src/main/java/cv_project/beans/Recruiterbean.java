@@ -1,5 +1,6 @@
 package cv_project.beans;
 
+import java.util.Collection;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ public class Recruiterbean {
 	 @Inject
 	 private ControllerRecruiter cr;
 	 
+	 
 	 ////////////////////////////// GETTER & SETTER
 	public Recruiter getRecruiter() {
 		return recruiter;
@@ -35,11 +37,15 @@ public class Recruiterbean {
 		this.cr = cr;
 	}
 	
-	public void getListO(){
-		recruiter.getListO();
+	public List<Recruiter> getRec(){
+		return cr.getRec();
 	}
 	
-	public void setList(List<Order> listO){
-		recruiter.setListO(listO);
-	}
+//	public void getListO(){
+//		recruiter.getListO();
+//	}
+//	
+//	public void setList(List<Order> listO){
+//		recruiter.setListO(listO);
+//	}
 }
