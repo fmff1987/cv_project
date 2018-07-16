@@ -11,7 +11,7 @@ public class CandidateRepository extends EntityRepository<Candidate> {
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	protected void loadFromDB() {
-		localList = em.createQuery("SELECT e FROM Product e").getResultList();
+		localList = em.createQuery("SELECT e FROM Candidate e").getResultList();
 	}
 		
 	@Override

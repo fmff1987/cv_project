@@ -6,7 +6,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import cv_project.models.Manager;
-import cv_project.repositories.EntityRepository;
 import cv_project.repositories.ManagerRepository;
 
 @RequestScoped
@@ -29,5 +28,8 @@ public class ControllerManager {
 	public void createManager(Manager p) {
 	
 		db.createEntity(p);
+	}
+	public void updateMan() {
+	db.updateLocalList();
 	}
 }

@@ -1,10 +1,11 @@
 package cv_project.repositories;
 
-import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
 import cv_project.models.Person;
 
 @Transactional

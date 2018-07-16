@@ -1,12 +1,12 @@
 package cv_project.beans;
 
-import java.util.Collection;
 import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import cv_project.control.ControllerRecruiter;
-import cv_project.models.Order;
 import cv_project.models.Recruiter;
 
 @Named("recruiterbean")
@@ -41,11 +41,18 @@ public class Recruiterbean {
 		return cr.getRec();
 	}
 	
-//	public void getListO(){
-//		recruiter.getListO();
-//	}
-//	
-//	public void setList(List<Order> listO){
-//		recruiter.setListO(listO);
-//	}
+	public void createRec() {
+		cr.createRecruiter(recruiter);
+		//return "index";
+	}
+	
+	public void removeRec() {
+		cr.removeRecruter(recruiter);
+	}
+	public void updateRec() {
+		cr.updateList();
+	}
+	
+	
+
 }

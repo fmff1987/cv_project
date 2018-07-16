@@ -2,6 +2,7 @@ package cv_project.models;
 
 public abstract class Person {
 	
+	
 	long id;
 	String name;
 	String email;
@@ -25,4 +26,5 @@ public abstract class Person {
 		this.email = email;
 	}
 	
+  
 }
