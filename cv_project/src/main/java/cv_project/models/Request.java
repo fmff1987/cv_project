@@ -23,7 +23,7 @@ public class Request extends cv_project.models.Entity{
         @ManyToOne
 	protected Manager idManager;
         
-        @ManyToMany(mappedBy="Recruiter")
+        @ManyToMany(mappedBy="requestList")
 	protected List<Recruiter> recruiterList = new ArrayList<>();
         
         @OneToMany(fetch = FetchType.EAGER, mappedBy = "idRequest", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
