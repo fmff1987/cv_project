@@ -28,6 +28,9 @@ public abstract class EntityRepository<T extends Entity> {
 	public T getEntity(Class<T> entClass, Long id) {
 		return em.find(entClass, id);
 	}
+	public List<T> getList(Class<T> entClass) {
+		return localList;
+	}
 
 	public void updateEntity(T ent) {
 		em.merge(ent);

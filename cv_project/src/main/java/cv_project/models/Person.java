@@ -19,4 +19,5 @@ public abstract class Person extends Entity{
 		this.email = email;
 	}
 	
+  
 }
