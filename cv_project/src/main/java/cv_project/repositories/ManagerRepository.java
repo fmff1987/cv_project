@@ -2,20 +2,20 @@ package cv_project.repositories;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import cv_project.models.Candidate;
-
+import cv_project.models.Manager;
 
 @ApplicationScoped
-public class CandidateRepository extends EntityRepository<Candidate> {
-		
+public class ManagerRepository extends EntityRepository<Manager> {
+
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	protected void loadFromDB() {
-		localList = em.createQuery("SELECT e FROM Candidate e").getResultList();
+		localList = em.createQuery("SELECT e FROM Manager e").getResultList();
 	}
-		
+	
 	@Override
 	public void updateLocalList() {
 		loadFromDB();
 	}
+	
 }

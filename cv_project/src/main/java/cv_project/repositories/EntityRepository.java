@@ -1,9 +1,11 @@
 package cv_project.repositories;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+
 import cv_project.models.Person;
 
 @Transactional
@@ -25,6 +27,9 @@ public abstract class EntityRepository<T extends Person> {
 
 	public T getEntity(Class<T> entClass, Long id) {
 		return em.find(entClass, id);
+	}
+	public List<T> getList(Class<T> entClass) {
+		return localList;
 	}
 
 	public void updateEntity(T ent) {

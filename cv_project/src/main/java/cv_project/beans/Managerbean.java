@@ -1,11 +1,16 @@
 package cv_project.beans;
 
+import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+
 import cv_project.control.ControllerManager;
 import cv_project.models.Manager;
 
 @RequestScoped
+@Named("ManBean")
 public class Managerbean {
 	
 	//////////////////////////////ATRIBUTS
@@ -29,5 +34,24 @@ public class Managerbean {
 
 	public void setCm(ControllerManager cm) {
 		this.cm = cm;
+<<<<<<< HEAD
 	}	
+=======
+	}
+	
+	public List<Manager> getMan(){
+		return cm.getMan();
+	
+	}
+	public void createMan() {
+		cm.createManager(manager);
+	}
+	public void removeMan() {
+		cm.removeManage(manager);
+	}
+	public void updateMan() {
+		cm.updateMan();
+	}
+	
+>>>>>>> origin/Ricardo
 }

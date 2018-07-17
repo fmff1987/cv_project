@@ -4,28 +4,38 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-
-</h:head>
+<h:head></h:head>
 <h:body>
 
 	<h1>Registo de Usuários</h1>
 	<h:form>
-		Nome <h:inputText></h:inputText>
+		Nome <h:inputText value="#{ManBean.manager.name}" ></h:inputText>
 		<br> </br>
-		Email <h:inputText></h:inputText><br> </br>
+		Email <h:inputText value="#{ManBean.manager.email}"></h:inputText>
+		<br> </br>
 
-		<p:outputLabel value="Categoria" />
+<!-- 		<p:outputLabel value="Categoria" />
 		<p:selectOneListbox value="#{selectOneView.option}">
 			<f:selectItem itemLabel="Manager" itemValue="1" />
 			<f:selectItem itemLabel="Recrutador" itemValue="2" />
 
-		</p:selectOneListbox>
+		</p:selectOneListbox> -->
 
 
-		<p:commandButton value="Submit"
-			actionListener="#{dropdownView.displayLocation}" icon="ui-icon-check" />
+		<p:commandButton value="Criar"
+			action="#{ManBean.createMan()}" icon="ui-icon-check" />
 
+		<p:dataTable var="manager" value="#{ManBean.man}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{manager.name}" />	
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{manager.email}" />
+			</p:column>
+
+			
+		</p:dataTable>
 	</h:form>
 
 
