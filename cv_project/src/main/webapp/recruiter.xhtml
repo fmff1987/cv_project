@@ -9,12 +9,139 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"       
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:p="http://primefaces.org/ui">
-    <head>
+    
+    <h:head>
+    
         <title>CV Management - Recruiter</title>
         <h:outputStylesheet library="css" name="../resources/CSS/style.css"  />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <h1>Recruiter</h1>
-    </body>
+        
+    </h:head>
+    
+    <h:body>
+        
+        <h1>Página do recrutador</h1>
+        <h:form>
+        
+        <p:growl id="msgs" showDetail="true"/>
+        
+        <p:dataTable id="OrderList" var="order" value="" editable="true" style="margin-bottom:20px" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+        
+        	<f:facet name="header">
+	            Lista de pedidos
+	       	</f:facet>
+	       	
+	       	<p:column style="width:16px" >
+	       		<p:rowToggler />
+		    </p:column>
+            
+	       	<p:column filterBy="#{order}" headerText="Id Pedido" >
+	       		<h:outputText value="Sem pedidos" />
+		    </p:column>
+	       		
+		    <p:column filterBy="#{order}" headerText="Manager">
+		    	<f:facet name="filter">
+	                <p:selectOneMenu>
+	                    <f:selectItem itemLabel="Selecione" />
+	                    <f:selectItems value="" />
+	                </p:selectOneMenu>
+            	</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+ 
+		    <p:column filterBy="#{order}" headerText="Experiência">
+		    	<f:facet name="filter">
+	                <p:selectOneMenu editable="true" >
+						<f:selectItem itemLabel="Junior" itemValue="" />
+						<f:selectItem itemLabel="Pleno" itemValue="" />
+						<f:selectItem itemLabel="Senior" itemValue="" />
+						<f:selectItem itemLabel="RL" itemValue="" />
+	                </p:selectOneMenu>
+            	</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+		    
+		    <p:column filterBy="#{order}" headerText="Tecnologia">
+		        <h:outputText value="" />
+		    </p:column>
+		    
+		    <p:column filterBy="#{order}" headerText="Nº Candidatos">
+		        <h:outputText value="" />
+		    </p:column>
+		    
+		    <p:column filterBy="#{order}" headerText="Recrutador">
+		    	<f:facet name="filter">
+	                <p:selectOneMenu>
+	                    <f:selectItem itemLabel="Selecione" />
+	                    <f:selectItems value="" />
+	                </p:selectOneMenu>
+            	</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+		    
+		    <p:column filterBy="#{order}" headerText="Data Limite" >
+		    	<f:facet name="filter" >
+        			<p:calendar value="" />
+        		</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+			
+			
+			
+			<p:rowExpansion>
+	            <p:dataTable value="" editable="true"  >
+	               
+	                <f:facet name="header">
+		            	Lista de candidatos
+		       		</f:facet>
+		       		
+		       		<p:column style="width:32px" >
+            			 <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
+       				</p:column>
+       				
+		       		<p:column headerText="Nome" >
+		       			<p:cellEditor>
+			               <f:facet name="output"><h:outputText value="sem candidato nenhum registado"/></f:facet>
+			               <f:facet name="input"><p:inputText id="nome" value="" style="width:100%"/></f:facet>
+           				</p:cellEditor>
+			    	</p:column>
+		       		
+		       		<p:column headerText="Email" >
+		       			<p:cellEditor>
+			               <f:facet name="output"><h:outputText value=""/></f:facet>
+			               <f:facet name="input"><p:inputText id="email" value="" style="width:100%"/></f:facet>
+           				</p:cellEditor>
+			    	</p:column>
+		       		
+		       		<p:column headerText="CV" >
+		       			<p:cellEditor>
+			               <f:facet name="output"><h:outputText value=""/></f:facet>
+			               <f:facet name="input"><p:inputText id="cv" value="" style="width:100%"/></f:facet>
+           				</p:cellEditor>
+			    	</p:column>
+			    	
+			    	<p:column style="width:32px">
+           				 <p:rowEditor />
+       				</p:column>
+       				
+       				<p:column style="width:32px" >
+            			 <span class="ui-icon ui-icon-trash"/>
+       				</p:column>
+		       		
+	            </p:dataTable>
+	            	<p:commandButton value="Adicionar candidato" />
+		       		<p:commandButton value="Enviar pedido" action="index" />
+        	</p:rowExpansion>
+		
+		
+		</p:dataTable>
+		
+		<p:commandButton value="Voltar" action="index" />
+		
+		</h:form>
+		 
+    </h:body>
 </html>
