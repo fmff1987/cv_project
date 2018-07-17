@@ -5,7 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import cv_project.control.ControllerRecruiter;
-import cv_project.models.Order;
+import cv_project.models.Request;
 import cv_project.models.Recruiter;
 
 @Named("recruiterbean")
@@ -35,11 +35,11 @@ public class Recruiterbean {
 		this.cr = cr;
 	}
 	
-	public void getListO(){
+	/*public void getListO(){
 		recruiter.getListO();
 	}
 	
-	public void setList(List<Order> listO){
+	public void setList(List<Request> listO){
 		recruiter.setListO(listO);
-	}
+	}*/
 }

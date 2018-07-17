@@ -1,13 +1,15 @@
 package cv_project.repositories;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import cv_project.models.Person;
+
+import cv_project.models.Entity;
 
 @Transactional
-public abstract class EntityRepository<T extends Person> {
+public abstract class EntityRepository<T extends Entity> {
 
 	@PersistenceContext(unitName = "database")
 	protected EntityManager em;

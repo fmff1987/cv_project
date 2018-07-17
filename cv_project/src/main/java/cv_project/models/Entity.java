@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cv_project.models;
 
 import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +26,8 @@ public class Entity implements Serializable{
     }
     
     @Override
-    public boolean equals(Object other) {
-            return (other instanceof Entity) && (id != null) ? id.equals(((Entity) other).id) : (other == this);
+    public boolean equals(Object obj) {
+            return (obj instanceof Entity) && (id != null) ? id.equals(((Entity) obj).id) : (obj == this);
     }
 
     @Override
