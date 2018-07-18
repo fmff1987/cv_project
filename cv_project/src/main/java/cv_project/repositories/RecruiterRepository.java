@@ -2,6 +2,7 @@ package cv_project.repositories;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+
 import cv_project.models.Recruiter;
 
 @ApplicationScoped
