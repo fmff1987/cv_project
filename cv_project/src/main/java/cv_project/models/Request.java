@@ -1,17 +1,9 @@
 package cv_project.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import javax.persistence.FetchType;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,33 +13,32 @@ public class Request extends cv_project.models.Entity{
 	private static final long serialVersionUID = 1L;
     
         @ManyToOne
-	protected Manager idManager;
+	protected Manager manager;
         
-        @ManyToMany(mappedBy="requestList")
-	protected List<Recruiter> recruiterList = new ArrayList<>();
+        @ManyToOne
+	protected Recruiter recruiter;
         
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "idRequest", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.REFRESH })
-	protected List<Candidate> cadidateList = new ArrayList<>();
+        @OneToOne
+	protected Candidate candidate;
 	
 	
 	public Manager getIdManager() {
-		return idManager;
+		return manager;
 	}
-	public void setIdManager(Manager idManager) {
-		this.idManager = idManager;
+	public void setIdManager(Manager id) {
+		this.manager = id;
 	}
-	public List getRecruiterList() {
-		return recruiterList;
+	public Recruiter getRecruiterList() {
+		return recruiter;
 	}
-	public void setRecruiterList(List<Recruiter> rList) {
-		recruiterList = rList;
+	public void setRecruiterList(Recruiter id) {
+		recruiter = id;
 	}
-	public List<Candidate> getCandidateList() {
-		return cadidateList;
+	public Candidate getCandidateList() {
+		return candidate;
 	}
-	public void setCandidateList(List<Candidate> cList) {
-		cadidateList = cList;
+	public void setCandidateList(Candidate id) {
+		candidate = id;
 	}
 
 }

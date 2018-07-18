@@ -3,7 +3,7 @@ package cv_project.models;
 import javax.persistence.Entity;
 import javax.persistence.Table;
         
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -12,16 +12,16 @@ public class Candidate extends Person {
 	
     protected String cv;
     
-    @ManyToOne
-    protected Request idRequest;
+    @OneToOne(mappedBy="candidate")
+    protected Request request;
     
     
 
     public Request getIdRequest() {
-            return idRequest;
+            return request;
     }
-    public void setIdRequest(Request idOrder) {
-            this.idRequest = idOrder;
+    public void setIdRequest(Request id) {
+            this.request = id;
     }
     
     public String getCv() {
