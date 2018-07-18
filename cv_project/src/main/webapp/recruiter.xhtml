@@ -48,6 +48,10 @@ and open the template in the editor.
 		        <h:outputText value="sem pedidos" />
 		    </p:column>
 		    
+		    <p:column headerText="Email">
+		        <h:outputText value="" />
+		    </p:column>
+		    
 		    <p:column filterBy="#{order}" headerText="Data Limite / Hora" >
 		    	<f:facet name="filter" >
         			<p:calendar pattern="MM/dd/yyyy HH:00" />
@@ -76,6 +80,19 @@ and open the template in the editor.
  			    <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" /> 
 		    </p:column>
 			
+			<p:column filterBy="#{order}" headerText="Aprovação">
+		        <f:facet name="filter">
+	                <p:selectOneButton onchange="">
+	                    <f:selectItem itemLabel="Sim" itemValue="false" />
+	                    <f:selectItem itemLabel="Não" itemValue="false" />
+	                </p:selectOneButton>
+            	</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+		    
+		    <p:column headerText="Comentários">
+		        <h:outputText value="" />
+		    </p:column>
 		</p:dataTable>
 		
 			<p:commandButton value="Voltar" action="index" />
