@@ -16,7 +16,163 @@ and open the template in the editor.
 </h:head>
 <h:body>
 	<h:form>
+<<<<<<< HEAD
         <h1>Adm Pagina Geral</h1>
+		<h1 style="text-align:center;">Adm Pagina Geral</h1>
+
+		<p:layout style="min-height:350px;border-style:none;min-width:700px;">
+			<p:layoutUnit position="west" resizable="true" size="250" style="border-style:hidden;">
+
+				
+				<p:menu toggleable="true">
+					<p:submenu label="Menu">
+						<p:menuitem value="Criar Usuarios" icon="ui-icon-disk" />	
+						<p:menuitem value="Arquivo" icon="ui-icon-arrowrefresh-1-w" />
+					</p:submenu>
+					<p:submenu label="Non-Ajax">
+						<p:menuitem value="Delete" ajax="false" icon="ui-icon-close" />
+					</p:submenu>
+					<p:submenu label="Navigations">
+						<p:menuitem value="Home" outcome="index.xhtml" icon="ui-icon-home" />
+						<p:menuitem value="Voltar" outcome="index.xhtml" />
+						<p:menuitem value="Home" outcome="index.xhtml" />
+					</p:submenu>
+				</p:menu>
+			</p:layoutUnit>
+
+																								<!-- Tabela Consultar -->
+			<p:layoutUnit position="center" style="border-style:none;">
+				<p:dataTable id="tabela" editable="true" var ="cars"  value=""				
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="15,25,50" style="margin-bottom:20px">
+					
+					<p:column style="width:16px">
+						<p:rowToggler/> 
+					</p:column>
+			
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Consulta de Pedidos" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column filterBy="#{car.id}" headerText="ID Pedido"
+						filterMatchMode="contains">
+						<h:outputText value="#{car.id}" />
+					</p:column>
+
+					<p:column filterBy="#{car.brand}" headerText="Manager" filterMatchMode="exact">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('carsTable').filter()">
+								<f:selectItem itemLabel="Selecionar um" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems />
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{car.brand}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{car.id}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column filterBy="#{car.id}" headerText="Tecnologia" filterMatchMode="contains">
+						<p:cellEditor>
+							<h:outputText value="#{car.id}" />
+						</p:cellEditor>
+					</p:column>
+
+					<p:column filterBy="#{car.brand}" headerText="Experiencia" filterMatchMode="exact">
+						<f:facet name="filter">
+							<p:selectOneMenu value="" effect="fold" editable="true">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItem itemLabel="Junior" itemValue="" />
+								<f:selectItem itemLabel="Intermedio" itemValue="" />
+								<f:selectItem itemLabel="Senior" itemValue="" />
+								<f:selectItem itemLabel="RC" itemValue="" />
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{car.brand}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{car.year}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{car.year}" style="width:96%"
+									label="Tecnologia" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column filterBy="#{car.brand}" headerText="Recrutadores" filterMatchMode="exact">
+						<f:facet name="filter">
+							<p:selectOneMenu onchange="PF('carsTable').filter()">
+								<f:selectItem itemLabel="Selecionar um" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems />
+							</p:selectOneMenu>
+						</f:facet>
+						<h:outputText value="#{car.brand}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{car.id}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInput" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Data Limite" filterMatchMode="equals" sortBy="#{car.id}">
+						<h:outputText />
+					</p:column>
+
+					<p:column headerText="N* Candidatos" sortBy="#{car.id}">
+						<h:outputText value="#{car.year}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{car.year}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{car.year}" style="width:96%" label="Year" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:35px">
+						<p:rowEditor />
+					</p:column>
+					
+					<p:column style="width:35px">
+						<p:commandButton icon="ui-icon-trash" title="Delete this actor"
+							action="#{ProductBean.removeProduct(product)}" ajax="false" />
+					</p:column>	
+						
+					<p:rowExpansion>
+						<p:dataTable  var="car" value="">
+							<f:facet name="header">
+					          	Lista de Candidatos 
+							</f:facet>
+							    
+							<p:column headerText="Nome">
+								<h:outputText value="#{car.id}" />
+							</p:column>
+						
+						</p:dataTable>
+							
+						<p:commandButton value="Criar novo pedido" />
+					</p:rowExpansion>
+									
+				</p:dataTable>
+			</p:layoutUnit>
+		</p:layout>
+            <h1>Adm Pagina Geral</h1>
+>>>>>>> Ricardo
 
 		
 		<!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU -->
@@ -180,5 +336,6 @@ and open the template in the editor.
 
 	</h:form>
 
-</h:body>
+
+	</h:body>
 </html>
