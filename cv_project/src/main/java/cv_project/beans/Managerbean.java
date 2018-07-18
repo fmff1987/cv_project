@@ -1,11 +1,9 @@
 package cv_project.beans;
 
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import cv_project.control.ControllerManager;
 import cv_project.models.Manager;
 
@@ -43,9 +41,11 @@ public class Managerbean {
 	public void createMan() {
 		cm.createManager(manager);
 	}
+	
 	public void removeMan() {
 		cm.removeManage(manager);
 	}
+	
 	public void updateMan() {
 		cm.updateMan();
 	}
