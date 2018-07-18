@@ -44,6 +44,16 @@ and open the template in the editor.
 		        <h:outputText value="" />
 		    </p:column>
 		    
+		    <p:column filterBy="#{order}" headerText="Recrutador">
+		    	<f:facet name="filter">
+	                <p:selectOneMenu>
+	                    <f:selectItem itemLabel="Selecione" />
+	                    <f:selectItems value="" />
+	                </p:selectOneMenu>
+            	</f:facet>
+		        <h:outputText value="" />
+		    </p:column>
+		    
 		    <p:column headerText="Candidato">
 		        <h:outputText value="sem pedidos" />
 		    </p:column>
@@ -59,16 +69,6 @@ and open the template in the editor.
 		        <h:outputText value="" />
 		    </p:column>
 		    
-		    <p:column filterBy="#{order}" headerText="Recrutador">
-		    	<f:facet name="filter">
-	                <p:selectOneMenu>
-	                    <f:selectItem itemLabel="Selecione" />
-	                    <f:selectItems value="" />
-	                </p:selectOneMenu>
-            	</f:facet>
-		        <h:outputText value="" />
-		    </p:column>
-		    
 		    <p:column headerText="CV Original" style="width:140px">
 		       	<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
         			<p:fileDownload value="#{fileDownloadView.file}" />
@@ -80,19 +80,21 @@ and open the template in the editor.
  			    <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" /> 
 		    </p:column>
 			
-			<p:column filterBy="#{order}" headerText="Aprovação">
-		        <f:facet name="filter">
-	                <p:selectOneButton onchange="">
-	                    <f:selectItem itemLabel="Sim" itemValue="false" />
-	                    <f:selectItem itemLabel="Não" itemValue="false" />
-	                </p:selectOneButton>
-            	</f:facet>
-		        <h:outputText value="" />
+			<p:column headerText="Estado" >
+	            <p:selectOneButton value="#{selectOneView.option}" >
+			        <f:selectItem itemLabel="Sim" itemValue="" />
+			        <f:selectItem itemLabel="Não" itemValue="" />
+                </p:selectOneButton>
 		    </p:column>
 		    
-		    <p:column headerText="Comentários">
-		        <h:outputText value="" />
+		    <p:column headerText="Comentário">
+			     <p:scrollPanel mode="native" style="width:230px;height:200px">
+    				<p>
+				      kskskskskskskskskssasasasasas
+				    </p>
+				</p:scrollPanel>
 		    </p:column>
+		    
 		</p:dataTable>
 		
 			<p:commandButton value="Voltar" action="index" />
