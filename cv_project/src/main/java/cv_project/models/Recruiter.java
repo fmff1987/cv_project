@@ -3,16 +3,25 @@ package cv_project.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import javax.persistence.ManyToMany;
+
+
+@Entity
+@Table(name="recruiter")
 public class Recruiter extends Person {
 	
-	protected List<Order> ListO = new ArrayList<Order>();
-
-	public List<Order> getListO() {
-		return ListO;
+       @ManyToMany
+	protected List<Request> requestList= new ArrayList<>();
+       
+	public List getListO() {
+		return requestList;
 	}
 
-	public void setListO(List<Order> listO) {
-		ListO = listO;
+	public void setListO(List<Request> rList) {
+		requestList = rList;
 	}
 	
 }

@@ -21,31 +21,31 @@
 		       		       	       
 		       <p:outputLabel value="Nome:" for="name" />
 		       <p:selectOneMenu id="name" value="" effect="fold" editable="true">
-		            <f:selectItem itemLabel="Selecione uma opcao:" itemValue="" />
+		            <f:selectItem itemLabel="Selecione uma opção:" itemValue="" />
 		            <f:selectItems value="" />
         	   </p:selectOneMenu>
        	 	
-       	 	   <p:outputLabel value="Experiencia:" for="sen" />
-			<p:selectOneMenu id="sen" value="" effect="fold" editable="true">
-				<f:selectItem itemLabel="Selecione uma opcao:" itemValue="" />
-				<f:selectItem itemLabel="Junior" itemValue="" />
-				<f:selectItem itemLabel="Intermedio" itemValue="" />
-				<f:selectItem itemLabel="Senior" itemValue="" />
-				<f:selectItem itemLabel="RC" itemValue="" />
-			</p:selectOneMenu>
+       	 	   <p:outputLabel value="Experiência:" for="sen" />
+			   <p:selectOneMenu id="sen" value="" effect="fold" editable="true">
+					<f:selectItem itemLabel="Selecione uma opção:" itemValue="" />
+					<f:selectItem itemLabel="Junior" itemValue="" />
+					<f:selectItem itemLabel="Pleno" itemValue="" />
+					<f:selectItem itemLabel="Senior" itemValue="" />
+					<f:selectItem itemLabel="RL" itemValue="" />
+			   </p:selectOneMenu>
 
-			<p:outputLabel value="Tecnologia: " for="tech" />
-			<p:autoComplete id="tech" value="" />
+			   <p:outputLabel value="Tecnologia: " for="tech" />
+			   <p:autoComplete id="tech" value="" />
+	
+			   <p:outputLabel value="Candidatos:" for="number" />
+			   <p:spinner id="number" value="" min="0" />
+	
+			   <p:outputLabel for="dl" value="Data Limite" />
+			   <p:calendar id="dl" value="" pages="2" effect="fold" />
 
-			<p:outputLabel value="Candidatos:" for="number" />
-			<p:spinner id="number" value="" min="0" />
-
-			<p:outputLabel for="dl" value="Data Limite" />
-			<p:calendar id="dl" value="" pages="2" effect="fold" />
-
-		</h:panelGrid>
+		    </h:panelGrid>
         	   
-        	   <p:commandButton value="Submeter"  />
+        	<p:commandButton value="Submeter"  />
         	
         </h:form>
         

@@ -1,18 +1,11 @@
 package cv_project.models;
 
-public abstract class Person {
+public abstract class Person extends Entity{
 	
 	
-	long id;
-	String name;
-	String email;
+	protected String name;
+	protected String email;
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}

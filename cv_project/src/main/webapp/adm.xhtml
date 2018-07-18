@@ -169,6 +169,153 @@ and open the template in the editor.
 				</p:dataTable>
 			</p:layoutUnit>
 		</p:layout>
+            <h1>Adm Pagina Geral</h1>
+
+
+            <p:layout style="min-width:700px;min-height:350px;">
+		<p:layoutUnit position="west" resizable="false" size="250">
+
+                    <h3></h3>
+                    <p:menu toggleable="true">
+                            <p:submenu label="Manager">
+                                    <p:menuitem value="Criar" icon="ui-icon-disk" url=""/>
+                                    <p:menuitem value="Editar" icon="ui-icon-pencil" url=""/>
+                            </p:submenu>
+                            <p:submenu label="Recrutador">
+                                    <p:menuitem value="Criar"  icon="ui-icon-disk" url=""/>
+                                    <p:menuitem value="Editar"  icon="ui-icon-pencil" url=""/>
+                            </p:submenu>
+                    </p:menu>
+                </p:layoutUnit>
+
+		<p:layoutUnit position="center">
+                    <p:dataTable id="OrderList" var="order" value="" editable="true" style="margin-bottom:20px" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+        
+                        <f:facet name="header">
+                            Lista de pedidos
+                        </f:facet>
+
+                        <p:column style="width:16px" >
+                                <p:rowToggler />
+                            </p:column>
+
+                        <p:column filterBy="#{order}" headerText="Id Pedido" >
+                                <h:outputText value="Sem pedidos" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Manager">
+                                <f:facet name="filter">
+                                <p:selectOneMenu>
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="" />
+                                </p:selectOneMenu>
+                        </f:facet>
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Experiência">
+                                <f:facet name="filter">
+                                <p:selectOneMenu editable="true" >
+                                                        <f:selectItem itemLabel="Junior" itemValue="" />
+                                                        <f:selectItem itemLabel="Pleno" itemValue="" />
+                                                        <f:selectItem itemLabel="Senior" itemValue="" />
+                                                        <f:selectItem itemLabel="RL" itemValue="" />
+                                </p:selectOneMenu>
+                        </f:facet>
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Tecnologia">
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Nº Candidatos">
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Recrutador">
+                                <f:facet name="filter">
+                                <p:selectOneMenu>
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="" />
+                                </p:selectOneMenu>
+                        </f:facet>
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column filterBy="#{order}" headerText="Data Limite" >
+                                <f:facet name="filter" >
+                                        <p:calendar value="" />
+                                </f:facet>
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                           </p:column>
+
+                           <p:column style="width:32px" >
+                                <span class="ui-icon ui-icon-trash"/>
+                           </p:column>
+
+                        <p:rowExpansion>
+                            <p:dataTable value="" editable="true"  >
+
+                                <f:facet name="header">
+                                        Lista de candidatos
+                                        </f:facet>
+
+                                        <p:column style="width:32px" >
+                                         <p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
+                                        </p:column>
+
+                                        <p:column headerText="Nome" >
+                                                <p:cellEditor>
+                                               <f:facet name="output"><h:outputText value="sem candidato nenhum registado"/></f:facet>
+                                               <f:facet name="input"><p:inputText id="nome" value="" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                        </p:column>
+
+                                        <p:column headerText="Email" >
+                                                <p:cellEditor>
+                                               <f:facet name="output"><h:outputText value=""/></f:facet>
+                                               <f:facet name="input"><p:inputText id="email" value="" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                        </p:column>
+
+                                        <p:column headerText="CV" >
+                                                <p:cellEditor>
+                                               <f:facet name="output"><h:outputText value=""/></f:facet>
+                                               <f:facet name="input"><p:inputText id="cv" value="" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                        </p:column>
+
+                                        <p:column style="width:32px">
+                                                 <p:rowEditor />
+                                        </p:column>
+
+                                        <p:column style="width:32px" >
+                                         <span class="ui-icon ui-icon-trash"/>
+                                        </p:column>
+
+                            </p:dataTable>
+                                <p:commandButton value="Adicionar candidato" />
+                                <p:commandButton value="Enviar pedido" action="index" />
+                        </p:rowExpansion>
+
+
+                        </p:dataTable>
+                    
+                        <p:commandButton value="Adicionar Pedido" />
+                        <p:commandButton value="Voltar" action="index" />
+		
+                </p:layoutUnit>    
+            </p:layout>    
+
+	</h:form>
 
 	</h:form>
 </h:body>
