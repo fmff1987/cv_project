@@ -43,7 +43,6 @@ public class Recruiterbean {
 		this.cr = cr;
 	}
 	
-	
 	public List<Recruiter> getRec(){
 		return cr.getRec();
 	}
