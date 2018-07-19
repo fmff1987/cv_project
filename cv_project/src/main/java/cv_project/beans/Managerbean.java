@@ -66,4 +66,9 @@ public class Managerbean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 	
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição Cancelada", ((Manager) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }	
 }

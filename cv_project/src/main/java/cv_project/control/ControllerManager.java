@@ -14,22 +14,20 @@ public class ControllerManager {
 	@Inject
 	ManagerRepository db;
 	
-	public List<Manager> getMan() {
-		return db.getList(Manager.class);
+	public void createManager(Manager p) {
+	db.createEntity(p);
 	}
 	
+	public List<Manager> getMan() {
+	return db.getList(Manager.class);
+	}
 	
+	public void updateMan() {
+	db.updateLocalList();
+	}
 	
 	public void removeManage(Manager p) {
-		db.removeEntity(p);
-		db.updateLocalList();
-	}
-	
-	public void createManager(Manager p) {
-	
-		db.createEntity(p);
-	}
-	public void updateMan() {
+	db.removeEntity(p);
 	db.updateLocalList();
 	}
 }

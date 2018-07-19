@@ -15,7 +15,7 @@ import cv_project.models.Request;
 import cv_project.models.Manager;
 import cv_project.models.Recruiter;
 
-@Named("recruiterbean")
+@Named("RecBean")
 @RequestScoped
 public class Recruiterbean {
 
@@ -43,27 +43,20 @@ public class Recruiterbean {
 		this.cr = cr;
 	}
 	
-	/*public void getListO(){
-		recruiter.getListO();
-	}
-	
-	public void setList(List<Request> listO){
-		recruiter.setListO(listO);
-	}*/
 	public List<Recruiter> getRec(){
 		return cr.getRec();
 	}
 	
 	public void createRec() {
-		cr.createRecruiter(recruiter);
-		//return "index";
+		cr.createRec(recruiter);
 	}
 	
 	public void removeRec() {
-		cr.removeRecruter(recruiter);
+		cr.removeRec(recruiter);
 	}
+	
 	public void updateRec() {
-		cr.updateList();
+		cr.updateRec();
 	}
 	
 	public void onRowEdit(RowEditEvent event) {

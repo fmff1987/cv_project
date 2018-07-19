@@ -12,33 +12,48 @@ public class Request extends cv_project.models.Entity{
 	
 	private static final long serialVersionUID = 1L;
     
-        @ManyToOne
+	protected String date;
+	
+    @ManyToOne
 	protected Manager manager;
         
-        @ManyToOne
+    @ManyToOne
 	protected Recruiter recruiter;
         
-        @OneToOne
+    @OneToOne
 	protected Candidate candidate;
-	
-	
-	public Manager getIdManager() {
-		return manager;
-	}
-	public void setIdManager(Manager id) {
-		this.manager = id;
-	}
-	public Recruiter getRecruiterList() {
-		return recruiter;
-	}
-	public void setRecruiterList(Recruiter id) {
-		recruiter = id;
-	}
-	public Candidate getCandidateList() {
-		return candidate;
-	}
-	public void setCandidateList(Candidate id) {
-		candidate = id;
-	}
 
+        
+		public String getDate() {
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
+		}
+
+		public Manager getManager() {
+			return manager;
+		}
+
+		public void setManager(Manager manager) {
+			this.manager = manager;
+		}
+
+		public Recruiter getRecruiter() {
+			return recruiter;
+		}
+
+		public void setRecruiter(Recruiter recruiter) {
+			this.recruiter = recruiter;
+		}
+
+		public Candidate getCandidate() {
+			return candidate;
+		}
+
+		public void setCandidate(Candidate candidate) {
+			this.candidate = candidate;
+		}
+	
 }

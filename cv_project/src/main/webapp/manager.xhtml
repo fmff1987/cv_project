@@ -15,7 +15,7 @@
 
 	<h3 style="text-align:center;">Criar Pedido</h3>
 
-	<h:form>
+	<h:form id="form1">
 
        	<h:panelGrid columns="2" cellpadding="5">
 
@@ -32,7 +32,7 @@
 	        <p:inputText  id="email_c" value="#{CanBean.candidate.email}" style="width:280px;"></p:inputText>
 	
 	        <p:outputLabel for="datetime" value="Data Limite / Hora" />
-	        <p:calendar id="datetime"  pattern="dd/MM/yyyy HH:00" />
+	        <p:calendar id="datetime" value="#{ReqBean.request.date}" pattern="dd/MM/yyyy HH:00" /> 
 	                
 	        <p:outputLabel value="Curriculo:" for="cv" />
 	        <p:fileUpload id="cv" value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Anexar" />
@@ -41,7 +41,7 @@
 
 		<p:commandButton value="Voltar" action="index.xhtml" />
 	
-		<p:commandButton value="Submeter Pedido" />
+		<p:commandButton value="Submeter Pedido" action="#{CanBean.createCan()}" update="form2:candidateTable" />
 
 		<br></br>
 		<br></br>
@@ -49,29 +49,34 @@
 
 	</h:form>
 
-	<h:form>
-            <p:dataTable var="" value="#{dtPaginatorView.cars}" rows="10"
+	<h:form id="form2">
+            <p:dataTable var="can" id="candidateTable" value="#{CanBean.can}" rows="10"
                             paginator="true"
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="10,20,40">
+                
                 <f:facet name="header">
                     Lista de pedidos Aprovados
                 </f:facet>
-                    <p:column headerText="Nome do Candidato">
-                        <h:outputText value="#{car.id}" />
-                    </p:column>
+                
+                <p:column headerText="Nome do Candidato">
+                    <h:outputText value="#{CanBean.candidate.name}" />
+                </p:column>
+                
+                <p:column headerText="Email do Candidato">
+                    <h:outputText value="#{CanBean.candidate.email}" />
+                </p:column>
 
-                    <p:column headerText="Recrutador">
-                            <h:outputText value="#{car.year}" />
-                    </p:column>
+                <p:column headerText="Recrutador">
+                        <h:outputText value="#{RecBean.recruiter.name}" />
+                </p:column>
 
-                    <p:column headerText="Data Limite">
-                            <h:outputText value="#{car.brand}" />
-                    </p:column>
-
-
+                <p:column headerText="Cv Aubay">
+                        <h:outputText value="#{RecBean.recruiter.name}" />
+                </p:column>
 
             </p:dataTable>
+            
 	</h:form>
 
 </h:body>
