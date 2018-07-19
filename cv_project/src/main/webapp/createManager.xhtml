@@ -6,47 +6,96 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head></h:head>
 <h:body>
+	<p:menubar>
+		<p:submenu label="Manager">
+			<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
+				url="createManager.xhtml" />
 
-	<h1>Criar Managers</h1>
+		</p:submenu>
+
+		<p:submenu label="Recrutador">
+			<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
+				url="createRecruiter.xhtml" />
+		</p:submenu>
+
+		<p:submenu label="Pedidos">
+			<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
+		</p:submenu>
+
+	</p:menubar>
+	<h1>Registo de Managers</h1>
 	<h:form id="form">
-		Nome <h:inputText value="#{ManBean.manager.name}" style="width:200px;"></h:inputText>
-		<br> </br>
-		Email <h:inputText value="#{ManBean.manager.email}" style="width:200px;"></h:inputText>
-		<br> </br>
 
 
-		<p:commandButton value="Criar" action="#{ManBean.createMan()}" icon="ui-icon-check" update=":form:managerTable"/>
-                
-                <p:growl id="msgs" showDetail="true"/>
-                
-		<p:dataTable var="manager" value="#{ManBean.man}" id="managerTable" editable="true">
-                    
-                    <f:facet name="header">
-                        Managers
-                    </f:facet>
-                    
-                    <p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}" update=":form:msgs" />
-                    <p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}" update=":form:msgs" />
-                    
-                    <p:column headerText="Nome">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{manager.name}" /></f:facet>
-                            <f:facet name="input"><p:inputText  value="#{manager.name}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
+		<p:layout style="min-height:800px;border-style:none;min-width:400px;">
+			<p:layoutUnit position="west" resizable="true" minSize="40"
+				maxSize="1000" size="300" style="border-style:none;">
+					     Nome <h:inputText value="#{ManBean.manager.name}"
+					style="width:200px;"></h:inputText>
+				<br> </br>
+							Email <h:inputText value="#{ManBean.manager.email}"
+					style="width:200px;"></h:inputText>
+				<br> </br>
 
-                    <p:column headerText="Email">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{manager.email}" /></f:facet>
-                            <f:facet name="input"><p:inputText  value="#{manager.email}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-                    
-		</p:dataTable>
+
+				<p:commandButton value="Criar" action="#{ManBean.createMan()}"
+					icon="ui-icon-check" update=":form:managerTable" />
+				<p:commandButton value="Voltar" action="index" icon="ui-icon-home" />
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" style="border-style:none;">
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:dataTable var="manager" value="#{ManBean.man}" id="managerTable"
+					editable="true" rows="15" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,15, 20" style="border-style:none;">
+
+					<f:facet name="header">
+		                       Lista Managers
+		                    </f:facet>
+
+					<p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}"
+						update=":form:msgs" />
+					<p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}"
+						update=":form:msgs" />
+
+					<p:column headerText="Nome" filterBy="#{manager.name}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{manager.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{manager.name}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Email" filterBy="#{manager.email}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{manager.email}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{manager.email}" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
+					</p:column>
+					<p:column style="width:35px">
+						<p:commandButton icon="ui-icon-trash" title="Delete this actor"
+							action="#{ManBean.removeMan()}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</p:layoutUnit>
+		</p:layout>
+
+
 	</h:form>
-    </h:body>
+</h:body>
 </html>
