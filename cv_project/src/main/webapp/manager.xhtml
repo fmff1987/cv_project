@@ -17,29 +17,29 @@
 
 	<h:form>
 
-		<h:panelGrid columns="2" cellpadding="5">
+            <h:panelGrid columns="2" cellpadding="5">
 
-			<p:outputLabel value="Nome do Manager:" for="name" />
-			<p:selectOneMenu id="name" effect="fold" editable="true">
-				<f:selectItem itemLabel="Selecione uma opção:"  />
-				<f:selectItems/>
-			</p:selectOneMenu>
-			<p>Nome Candidato</p>  <p:inputText style="width:400px;"></p:inputText>
-			<p>Email do Candidato </p> <p:inputText  style="width:400px;"></p:inputText>
+		<p:outputLabel value="Nome do Manager:" for="name_m" />	
+                <p:selectOneMenu id="name_m" value="#{ManBean.manager.name}" effect="fold" editable="true" var="manager" filter="true" filterMatchMode="startsWith" style="width:160px" >
+                        <f:selectItem itemLabel="Selecione uma opção:"  />
+                        <f:selectItems  value="#{ManBean.man}" var="m" itemLabel="#{m.name}" itemValue="#{m.id}"/>
+                </p:selectOneMenu>
+
+		<p:outputLabel value="Nome do Candidato:" for="name_c" />	
+                <p:inputText id="name_c" style="width:400px;"></p:inputText>
+                
+                <p:outputLabel value="E-mail do Candidato:" for="email_c" />	
+                <p:inputText  id="email_c" style="width:400px;"></p:inputText>
 
 
-			<p:outputLabel for="datetime" value="Data Limite / Hora" />
-			<p:calendar id="datetime" 
-				pattern="dd/MM/yyyy HH:00" />
-				<p>Curriculo</p>
+                <p:outputLabel for="datetime" value="Data Limite / Hora" />
+                <p:calendar id="datetime"  pattern="dd/MM/yyyy HH:00" />
+                
+                <p:outputLabel value="Curriculo:" for="cv" />
+                <p:fileUpload id="cv" value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Anexar" />
 
-				<p:fileUpload value="#{fileUploadView.file}" mode="simple"
-				skinSimple="true" label="Anexar" />
 
-			<!-- <p:commandButton value="Submit" ajax="false"
-					actionListener="#{fileUploadView.upload}" disabled="true" /> -->
-
-		</h:panelGrid>
+            </h:panelGrid>
 
 
 
@@ -55,38 +55,28 @@
 
 
 	<h:form>
-		<p:dataTable var="" value="#{dtPaginatorView.cars}" rows="10"
-			paginator="true"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="10,20,40">
-			 <f:facet name="header">
-            Lista de pedidos Aprovados
-        </f:facet>
-			<p:column headerText="Nome do Candidato">
-				<h:outputText value="#{car.id}" />
-			</p:column>
+            <p:dataTable var="" value="#{dtPaginatorView.cars}" rows="10"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,20,40">
+                <f:facet name="header">
+                    Lista de pedidos Aprovados
+                </f:facet>
+                    <p:column headerText="Nome do Candidato">
+                        <h:outputText value="#{car.id}" />
+                    </p:column>
 
-			<p:column headerText="Recrutador">
-				<h:outputText value="#{car.year}" />
-			</p:column>
+                    <p:column headerText="Recrutador">
+                            <h:outputText value="#{car.year}" />
+                    </p:column>
 
-			<p:column headerText="Data Limite">
-				<h:outputText value="#{car.brand}" />
-			</p:column>
+                    <p:column headerText="Data Limite">
+                            <h:outputText value="#{car.brand}" />
+                    </p:column>
 
-<!-- 			<p:column filterBy="#{car.sold}" headerText="Estado" footerText="equals" filterMatchMode="equals">
-            <f:facet name="filter">
-                <p:selectOneButton onchange="PF('carsTable').filter()">
-                    <f:converter converterId="javax.faces.Boolean" />
-                    <f:selectItem itemLabel="Aprovado" itemValue="" icon="fa fa-fw fa-remove" />
-                    <f:selectItem itemLabel="Reprovado" itemValue="true" />
-                    
-                </p:selectOneButton>
-            </f:facet>
-            
-        </p:column> -->
 
-		</p:dataTable>
+
+            </p:dataTable>
 	</h:form>
 
 </h:body>
