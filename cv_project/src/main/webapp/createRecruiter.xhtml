@@ -9,6 +9,7 @@
 	
 	<h1>Criar Recrutadores</h1>
 	<h:form id="form">
+<<<<<<< HEAD
 		Nome <h:inputText value="#{recruiterbean.recruiter.name}" style="width:200px;"></h:inputText>
 		<br> </br>
 		Email <h:inputText value="#{recruiterbean.recruiter.email}" style="width:200px;"></h:inputText>
@@ -46,6 +47,7 @@
                         <p:rowEditor />
                     </p:column>
                     
+=======
 		<p:menubar>
 			<p:submenu label="Manager">
 				<p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createManager.xhtml" />	
@@ -111,6 +113,68 @@
 	</h:form>
 </h:body>
 
+<!-- <h:body>
+	<h1 style="text-align: center;">Lista de Usuarios</h1>
+	<h:form>
+		<p:dataTable id="cars1" value="" editable="true" style="margin:10pc;">
+			<f:facet name="header">
+          Lista de Usuarios
+       </f:facet>
+
+				<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+				/>
+			<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"
+				update=":form:msgs" />
+
+			<p:column headerText="Nome">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{car.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText id="modelInput" value="#{car.id}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Email">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{car.year}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{car.year}" style="width:100%" label="Year" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Cargo">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{car.brand}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:selectOneMenu id="txt3" value="#{selectorView.text3}"
+							required="true" label="Selecionar cargo"
+							style="width:300px;text-align:center;">
+							<f:selectItem itemLabel="Selecionar" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Recrutador" itemValue="Recrutador" />
+							<f:selectItem itemLabel="Manager" itemValue="Manager" />
+
+						</h:selectOneMenu>	
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column style="width:32px">
+				<p:rowEditor />
+			</p:column>
+			<p:column style="width:35px">
+				<p:commandButton icon="ui-icon-trash" title="Delete this actor"
+					action="#{ProductBean.removeProduct(product)}" ajax="false" />
+			</p:column>
+>>>>>>> Andre
 		</p:dataTable>
 	</h:form>
     </h:body>
