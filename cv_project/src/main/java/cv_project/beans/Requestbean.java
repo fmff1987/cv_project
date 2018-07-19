@@ -12,7 +12,7 @@ import cv_project.models.Request;
 
 @Named("ReqBean")
 @RequestScoped
-public class Requestbean {
+public class Requestbean {   //joana
 
 	////////////////////////////// ATRIBUTS
 	 private Request request = new Request();
