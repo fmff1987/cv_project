@@ -9,7 +9,7 @@ import javax.inject.Named;
 import cv_project.control.ControllerRecruiter;
 import cv_project.models.Recruiter;
 
-@Named("recruiterbean")
+@Named("RecBean")
 @RequestScoped
 public class Recruiterbean {
 
