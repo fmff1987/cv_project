@@ -12,44 +12,42 @@ import cv_project.models.Candidate;
 @RequestScoped
 public class Candidatebean {
 
-	////////////////////////////// ATRIBUTS
-	 private Candidate candidate = new Candidate();
-	 
-	 @Inject
-	 private ControllerCandidate cc;
-	 
-	 
-	 ////////////////////////////// GETTER & SETTER
 	
-		public Candidate getCandidate() {
-			return candidate;
-		}
-
-		public void setCandidate(Candidate candidate) {
-			this.candidate = candidate;
-		}
-
-		public ControllerCandidate getCc() {
-			return cc;
-		}
-
-		public void setCc(ControllerCandidate cc) {
-			this.cc = cc;
-		}
-
-		public List<Candidate> getCan(){
-			return cc.getCan();
-		}
-		
-		public void createCan() {
-			cc.createCandidate(candidate);
-		}
+	private Candidate candidate = new Candidate();
+	 
+	@Inject
+	private ControllerCandidate cc;
+	 
 	
-		public void removeRec() {
-			cc.removeCandidate(candidate);
-		}
-		
-		public void updateCan() {
-			cc.updateCan();
-		}
+        public Candidate getCandidate() {
+                return candidate;
+        }
+
+        public void setCandidate(Candidate candidate) {
+                this.candidate = candidate;
+        }
+
+        public ControllerCandidate getCc() {
+                return cc;
+        }
+
+        public void setCc(ControllerCandidate cc) {
+                this.cc = cc;
+        }
+
+        public List<Candidate> getCan(){
+                return cc.getCan();
+        }
+
+        public void createCan() {
+                cc.createCandidate(candidate);
+        }
+
+        public void removeRec() {
+                cc.removeCandidate(candidate);
+        }
+
+        public void updateCan() {
+                cc.updateCan();
+        }
 }

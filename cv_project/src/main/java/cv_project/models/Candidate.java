@@ -10,7 +10,8 @@ import javax.persistence.OneToOne;
 @Table(name="cadidate")
 public class Candidate extends Person {
 	
-    protected String cv;
+    protected String cvAubay;
+    
     
     @OneToOne(mappedBy="candidate")
     protected Request request;
@@ -24,11 +25,11 @@ public class Candidate extends Person {
             this.request = id;
     }
     
-    public String getCv() {
-            return cv;
+    public String getCvAubay() {
+            return cvAubay;
     }
-    public void setCv(String cv) {
-            this.cv = cv;
+    public void setCvAubay(String cv) {
+            this.cvAubay = cv;
     }
 
 }

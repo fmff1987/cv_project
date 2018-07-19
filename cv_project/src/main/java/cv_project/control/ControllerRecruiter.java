@@ -22,7 +22,7 @@ public class ControllerRecruiter {
 	return db.getList(Recruiter.class);
 	}
 	
-	public void updateRec() {
+	public void updateList() {
 	db.updateLocalList();
 	}
 	

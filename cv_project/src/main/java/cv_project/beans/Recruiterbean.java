@@ -19,14 +19,14 @@ import cv_project.models.Recruiter;
 @RequestScoped
 public class Recruiterbean {
 
-	////////////////////////////// ATRIBUTS
+
 	 private Recruiter recruiter = new Recruiter();
 	 
 	 @Inject
 	 private ControllerRecruiter cr;
 	 
 	 
-	 ////////////////////////////// GETTER & SETTER
+
 	public Recruiter getRecruiter() {
 		return recruiter;
 	}
@@ -43,24 +43,18 @@ public class Recruiterbean {
 		this.cr = cr;
 	}
 	
-	/*public void getListO(){
-		recruiter.getListO();
-	}
 	
-	public void setList(List<Request> listO){
-		recruiter.setListO(listO);
-	}*/
 	public List<Recruiter> getRec(){
 		return cr.getRec();
 	}
 	
 	public void createRec() {
-		cr.createRecruiter(recruiter);
+		cr.createRec(recruiter);
 		//return "index";
 	}
 	
 	public void removeRec() {
-		cr.removeRecruter(recruiter);
+		cr.removeRec(recruiter);
 	}
 	public void updateRec() {
 		cr.updateList();
