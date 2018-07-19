@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<h:body>
+
+	<h1>Cadastro de Managers</h1>
+	<h:form id="form">
+		Nome <h:inputText value="#{ManBean.manager.name}" style="width:200px;"></h:inputText>
+		<br> </br>
+		Email <h:inputText value="#{ManBean.manager.email}" style="width:200px;"></h:inputText>
+		<br> </br>
+
+
+		<p:commandButton value="Criar" action="#{ManBean.createMan()}" icon="ui-icon-check" update=":form:managerTable"/>
+                
+                <p:growl id="msgs" showDetail="true"/>
+                
+		<p:dataTable var="manager" value="#{ManBean.man}" id="managerTable" editable="true">
+                    
+                    <f:facet name="header">
+                        Managers
+                    </f:facet>
+                    
+                    <p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}" update=":form:msgs" />
+                    <p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}" update=":form:msgs" />
+                    
+                    <p:column headerText="Nome">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{manager.name}" /></f:facet>
+                            <f:facet name="input"><p:inputText  value="#{manager.name}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Email">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{manager.email}" /></f:facet>
+                            <f:facet name="input"><p:inputText  value="#{manager.email}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                    
+		</p:dataTable>
+	</h:form>
+    </h:body>
+</html>

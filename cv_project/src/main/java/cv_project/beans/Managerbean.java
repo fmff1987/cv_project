@@ -1,23 +1,29 @@
 package cv_project.beans;
 
 import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import cv_project.control.ControllerManager;
+
 import cv_project.models.Manager;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 @RequestScoped
 @Named("ManBean")
 public class Managerbean {
 	
-	//////////////////////////////ATRIBUTS
+	
 	private Manager manager = new Manager();
 
 	@Inject
 	private ControllerManager cm;
 	
-	//////////////////////////////GETTER & SETTER
+	
 	public Manager getManager() {
 		return manager;
 	}
@@ -49,5 +55,15 @@ public class Managerbean {
 	public void updateMan() {
 		cm.updateMan();
 	}
+        
+        public void onRowEdit(RowEditEvent event) {
+            FacesMessage msg = new FacesMessage("Manager Editado", ((Manager) event.getObject()).getName());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+     
+        public void onRowCancel(RowEditEvent event) {
+            FacesMessage msg = new FacesMessage("Edição Cancelada", ((Manager) event.getObject()).getName());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
 	
 }
