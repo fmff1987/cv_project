@@ -1,9 +1,8 @@
 package cv_project.models;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
-        
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity

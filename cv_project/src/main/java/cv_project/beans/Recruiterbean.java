@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import cv_project.control.ControllerRecruiter;
-import cv_project.models.Request;
 import cv_project.models.Recruiter;
 
 @Named("recruiterbean")
