@@ -16,8 +16,6 @@ and open the template in the editor.
 </h:head>
 <h:body>
 	<h:form>
-        <h1>Adm Pagina Geral</h1>
-
 		
 		<!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU -->
 		
@@ -25,13 +23,12 @@ and open the template in the editor.
 			
 				<p:menubar>
 					<p:submenu label="Manager">
-						<p:menuitem value="Criar Manager" icon="ui-icon-disk" action="AdmCreateUser" />
-						<p:menuitem value="Editar Manager" icon="ui-icon-pencil" url="" />
+						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createManager.xhtml" />
+						
 					</p:submenu>
 					
 					<p:submenu label="Recrutador">
-						<p:menuitem value="Criar Recrutador" icon="ui-icon-disk" action="AdmCreateUser" />
-						<p:menuitem value="Editar Recrutador" icon="ui-icon-pencil" url="" />
+						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createRecruiter.xhtml" />
 					</p:submenu>
 					
 					<p:submenu label="Pedidos">
@@ -164,13 +161,7 @@ and open the template in the editor.
 					
 					<!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS -->
 					
-					<p:rowExpansion>
-						<p:dataTable value="" editable="true">
-							<f:facet name="header">
-                            Lista de candidatos
-                            </f:facet>
-						</p:dataTable>			
-					</p:rowExpansion>
+					
 					
 					<p:commandButton value="Distribuir" action="index" />
 					<p:commandButton value="Confirmar" />
@@ -180,5 +171,6 @@ and open the template in the editor.
 
 	</h:form>
 
-</h:body>
+
+	</h:body>
 </html>
