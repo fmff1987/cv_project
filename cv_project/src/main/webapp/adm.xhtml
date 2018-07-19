@@ -35,8 +35,7 @@ and open the template in the editor.
 						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
 					</p:submenu>
 				 </p:menubar>
-				 
-				 <br/><br/>
+				 <h1>Pagina Admin</h1>
 			
 		
 		<!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA -->
@@ -55,7 +54,7 @@ and open the template in the editor.
 						<f:facet name="filter">
 							<p:selectOneMenu>
 								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="" />
+								<f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
 							</p:selectOneMenu>
 						</f:facet>
 						<h:outputText value="" />
@@ -63,9 +62,9 @@ and open the template in the editor.
 					
 					<p:column filterBy="#{order}" headerText="Recrutador">
 						<f:facet name="filter">
-							<p:selectOneMenu>
+							<p:selectOneMenu >
 								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="" />
+								<f:selectItems value="#{recruiterbean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
 							</p:selectOneMenu>
 						</f:facet>
 						<h:outputText value="" />
