@@ -109,3 +109,4 @@ nb-configuration.xml
 
 
 # End of https://www.gitignore.io/api/java,eclipse,netbeans,java-web
+cv_project/src/main/webapp/adm.xhtml
