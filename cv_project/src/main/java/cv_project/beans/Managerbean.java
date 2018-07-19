@@ -56,14 +56,14 @@ public class Managerbean {
 		cm.updateMan();
 	}
         
-        public void onRowEdit(RowEditEvent event) {
-            FacesMessage msg = new FacesMessage("Manager Editado", ((Manager) event.getObject()).getName());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-     
-        public void onRowCancel(RowEditEvent event) {
-            FacesMessage msg = new FacesMessage("Edição Cancelada", ((Manager) event.getObject()).getName());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Manager Editado", ((Manager) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição Cancelada", ((Manager) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 	
 }
