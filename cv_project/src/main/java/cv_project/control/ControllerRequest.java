@@ -11,7 +11,7 @@ import cv_project.repositories.RequestRepository;
 public class ControllerRequest {
 	
 	@Inject
-	RequestRepository db; //joana
+	RequestRepository db; 
 		
 	public void createRequest(Request r) {
 		db.createEntity(r);
