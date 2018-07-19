@@ -15,7 +15,7 @@ import cv_project.models.Request;
 import cv_project.models.Manager;
 import cv_project.models.Recruiter;
 
-@Named("recruiterbean")
+@Named("RecBean")
 @RequestScoped
 public class Recruiterbean {
 

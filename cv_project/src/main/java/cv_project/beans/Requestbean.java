@@ -9,19 +9,24 @@ import cv_project.control.ControllerCandidate;
 import cv_project.control.ControllerRequest;
 import cv_project.models.Candidate;
 import cv_project.models.Request;
+import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Named("ReqBean")
 @RequestScoped
 public class Requestbean {  
 
-	////////////////////////////// ATRIBUTS
-	 private Request request = new Request();
+   
+    
+	
+        private Request request = new Request();
 	 
 	 @Inject
 	 private ControllerRequest cr;
 	 
-	 
-	 ////////////////////////////// GETTER & SETTER
+            
+	
 	
 	 	public Request getRequest() {
 			return request;

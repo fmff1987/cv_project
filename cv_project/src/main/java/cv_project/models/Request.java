@@ -1,10 +1,13 @@
 package cv_project.models;
 
+import java.util.Date;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="request")
@@ -20,6 +23,17 @@ public class Request extends cv_project.models.Entity{
         
         @OneToOne
 	protected Candidate candidate;
+        
+        @Temporal(TemporalType.TIMESTAMP)
+	private Date deadline;
+        
+        public Date getDeadline() {
+            return deadline;
+        }
+
+        public void setDeadline(Date deadline) {
+            this.deadline = deadline;
+        }
 	
 	
 	public Manager getIdManager() {
