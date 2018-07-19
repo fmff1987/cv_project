@@ -2,17 +2,22 @@ package cv_project.models;
 
 import javax.persistence.ManyToOne;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="request")
-public class Request extends cv_project.models.Entity{
+public class Request extends cv_project.models.Entity {
 	
 	private static final long serialVersionUID = 1L;
     
-        @ManyToOne
+        @ManyToOne(fetch=FetchType.LAZY)
 	protected Manager manager;
         
         @ManyToOne
@@ -20,6 +25,9 @@ public class Request extends cv_project.models.Entity{
         
         @OneToOne
 	protected Candidate candidate;
+        
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deadline;    
 	
 	
 	public Manager getIdManager() {
