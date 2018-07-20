@@ -5,11 +5,9 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 import javax.persistence.Entity;
-<<<<<<< HEAD
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-=======
->>>>>>> master
+
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +17,7 @@ import javax.persistence.TemporalType;
 @Table(name="request")
 public class Request extends cv_project.models.Entity {
 	
-<<<<<<< HEAD
+
 	private static final long serialVersionUID = 1L;
     
         @ManyToOne(fetch=FetchType.LAZY)
@@ -28,41 +26,54 @@ public class Request extends cv_project.models.Entity {
         @ManyToOne
 	protected Recruiter recruiter;
         
-        @OneToOne
-	protected Candidate candidate;
+        private String candidateName;
+        private String candidateEmail;
         
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deadline;    
-	
-	
-	public Manager getIdManager() {
-		return manager;
-	}
-	public void setIdManager(Manager id) {
-		this.manager = id;
-	}
-	public Recruiter getRecruiterList() {
-		return recruiter;
-	}
-	public void setRecruiterList(Recruiter id) {
-		recruiter = id;
-	}
-	public Candidate getCandidateList() {
-		return candidate;
-	}
-	public void setCandidateList(Candidate id) {
-		candidate = id;
-	}
-=======
-    /*@OneToOne
-    protected Candidate candidate;*/
-    
-    /*public Candidate getCandidateList() {
-            return candidate;
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date deadline;    
+
+    public Manager getManager() {
+        return manager;
     }
-    public void setCandidateList(Candidate id) {
-            candidate = id;
-    }*/
->>>>>>> master
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
+    public Recruiter getRecruiter() {
+        return recruiter;
+    }
+
+    public void setRecruiter(Recruiter recruiter) {
+        this.recruiter = recruiter;
+    }
+
+    public String getCandidateName() {
+        return candidateName;
+    }
+
+    public void setCandidateName(String candidateName) {
+        this.candidateName = candidateName;
+    }
+
+    public String getCandidateEmail() {
+        return candidateEmail;
+    }
+
+    public void setCandidateEmail(String candidateEmail) {
+        this.candidateEmail = candidateEmail;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+
+
+
 
 }
