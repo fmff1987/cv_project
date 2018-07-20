@@ -10,26 +10,64 @@ and open the template in the editor.
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<h:link rel="stylesheet" type="text/css" href="style.css"></h:link>
-	<h:outputStylesheet library="css" name="style.css">
-	</h:outputStylesheet>
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css"
+		href="cv_project/src/main/resources/CSS/style.css"></link>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+
 	<title>CV Management - Login</title>
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 <h:body>
+	<div class="header">
 
-	
-	<h:form>
-	
-		<p:panelGrid columns="3" style="margin: 0 auto;width: 75%;">
-			<p:link outcome="manager.xhtml" value="  MANAGER  " />
+		<div class="logo">
+			<IMG id="logoAubay"
+				src="https://websummit.com/wp-content/uploads/2017/09/Aubay_RGB-300x300.png" />
+		</div>
 
-			<p:link outcome="adm.xhtml" value="  ADM  " />
+		<div class="clock">
+			<!-- <p:clock displayMode="analog" /> -->
+			<h:form>
 
-			<p:link outcome="recruiter.xhtml" value="  RECRUITER  " />
+				<p:clock pattern="dd/MM/yyyy" />
+				<br />
+				<br />
+				<p:clock pattern="HH:mm" />
+			</h:form>
+		</div>
 
-		</p:panelGrid>
-	</h:form>
+	</div>
+	<div>
+		<h:form>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-sm manager">
+						<a href="manager.xhtml"> <img class="imagens"
+							src="https://previews.123rf.com/images/ahasoft2000/ahasoft20001801/ahasoft2000180117716/94314050-unhappy-manager-vector-icon-style-is-flat-graphic-black-symbol-with-problem-emotions-.jpg"
+							alt="Manager face"></img>
+						</a>
+					</div>
+					<div class="col-sm admin">
+						<a href="adm.xhtml"> <img class="imagens"
+							src="https://thumbs.dreamstime.com/b/red-admin-sign-pc-laptop-vector-illustration-administrator-icon-screen-controller-man-system-box-88756468.jpg"
+							alt="Admin face"></img>
+						</a>
+					</div>
+					<div class="col-sm recruiter">
+						<a href="recruiter.xhtml"> <img class="imagens"
+							src="https://t4.ftcdn.net/jpg/01/95/05/71/500_F_195057186_52fOYeZGaUFNZ9RlruoD0PFffRhYPJbK.jpg"
+							alt="Recruta face"></img>
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+		</h:form>
+	</div>
 </h:body>
 </html>
