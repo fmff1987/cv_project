@@ -4,7 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+	
 <h:head>
 	<title>Manager</title>
 	<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
@@ -19,7 +22,7 @@
 
        	<h:panelGrid columns="2" cellpadding="5">
 
-<<<<<<< HEAD
+
 			<p:outputLabel value="Nome do Manager:" for="name_m" />	
 					<p:selectOneMenu id="name_m" value="#{ManBean.manager.name}" effect="fold" editable="true" var="manager" filter="true" style="width:250px"> 
 	                        <f:selectItem itemLabel="Selecione uma opção:"  />
@@ -31,20 +34,33 @@
 	                
 	        <p:outputLabel value="E-mail do Candidato:" for="email_c" />	
 	        <p:inputText  id="email_c" value="#{CanBean.candidate.email}" style="width:280px;"></p:inputText>
-=======
->>>>>>> Joana
+
+      	    <p:outputLabel value="Nome do Manager:" for="name_m" />	
+            <p:selectOneMenu id="name_m" value="#{ReqBean.request.idManager}" effect="fold" converter="omnifaces.SelectItemsConverter" style="width:250px"  var="manager" filter="true" filterMatchMode="contains"> 
+                <f:selectItem itemLabel="Selecione uma opção:"  />
+                <f:selectItems  value="#{ManBean.man}" var="m" itemLabel="#{m.name}" itemValue="#{m}"/>
+                    <p:column>
+		                <h:outputText value="#{manager.name}" />
+		            </p:column>
+            </p:selectOneMenu> 
+            
+            <p:outputLabel value="Nome do Candidato:" for="name_c" />	
+            <p:inputText id="name_c" value="#{ReqBean.request.candidateName}" style="width:280px;"></p:inputText>
+	                
+	        <p:outputLabel value="E-mail do Candidato:" for="email_c" />	
+            <p:inputText  id="email_c" value="#{ReqBean.request.candidateEmail}" style="width:280px;"></p:inputText>
+
 	
 	        <p:outputLabel for="datetime" value="Data Limite / Hora" />
 	        <p:calendar id="datetime" value="#{ReqBean.request.deadline}" pattern="dd/MM/yyyy HH:00" /> 
-	                
+	              
 	        <p:outputLabel value="Curriculo:" for="cv" />
 	        <p:fileUpload id="cv" value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Anexar" />
 
         </h:panelGrid>
 
 		<p:commandButton value="Voltar" action="index.xhtml" />
-	
-		<p:commandButton value="Submeter Pedido" action="#{CanBean.createCan()}" update="form2:candidateTable" />
+		<p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}"  />
 
 		<br></br>
 		<br></br>
@@ -53,32 +69,33 @@
 	</h:form>
 
 	<h:form id="form2">
-            <p:dataTable var="can" id="candidateTable" value="#{CanBean.can}" rows="10"
-                            paginator="true"
-                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            rowsPerPageTemplate="10,20,40">
-                
-                <f:facet name="header">
-                    Lista de pedidos Aprovados
-                </f:facet>
-                
-                <p:column headerText="Nome do Candidato">
-                    <h:outputText value="#{CanBean.candidate.name}" />
-                </p:column>
-                
-                <p:column headerText="Email do Candidato">
-                    <h:outputText value="#{CanBean.candidate.email}" />
-                </p:column>
+            
+        <p:dataTable var="can" id="candidateTable" value="#{ReqBean.request}" rows="10"
+                     paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,20,40">
+         
+            <f:facet name="header">
+                Lista de pedidos Aprovados
+            </f:facet>
+            
+            <p:column headerText="Nome do Candidato">
+                <h:outputText value="#{ReqBean.request.candidateName}" />
+            </p:column>
+            
+            <p:column headerText="Email do Candidato">
+                <h:outputText value="#{ReqBean.request.candidateEmail}" />
+            </p:column>
 
-                <p:column headerText="Recrutador">
-                        <h:outputText value="#{RecBean.recruiter.name}" />
-                </p:column>
+            <p:column headerText="Recrutador">
+                    <h:outputText value="#{RecBean.recruiter.name}" />
+            </p:column>
 
-                <p:column headerText="Cv Aubay">
-                        <h:outputText value="#{RecBean.recruiter.name}" />
-                </p:column>
+            <p:column headerText="Cv Aubay">
+                    <h:outputText value="" />
+            </p:column>
 
-            </p:dataTable>
+        </p:dataTable>
             
 	</h:form>
 
