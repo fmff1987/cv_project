@@ -19,17 +19,17 @@
 
        	<h:panelGrid columns="2" cellpadding="5">
 
-                <p:outputLabel value="Nome do Manager:" for="name_m" />	
-                <p:selectOneMenu id="name_m" value="#{ManBean.manager.name}" effect="fold" editable="true" var="manager" filter="true" style="width:250px"> 
-                    <f:selectItem itemLabel="Selecione uma opção:"  />
-                    <f:selectItems  value="#{ManBean.man}" var="m" itemLabel="#{m.name}" itemValue="#{m.id}"/>
-                </p:selectOneMenu>
-
-                <p:outputLabel value="Nome do Candidato:" for="name_c" />	
-                <p:inputText id="name_c" value="#{ReqBean.request.candidateName}" style="width:280px;"></p:inputText>
+			<p:outputLabel value="Nome do Manager:" for="name_m" />	
+					<p:selectOneMenu id="name_m" value="#{ManBean.manager.name}" effect="fold" editable="true" var="manager" filter="true" style="width:250px"> 
+	                        <f:selectItem itemLabel="Selecione uma opção:"  />
+	                        <f:selectItems  value="#{ManBean.man}" var="m" itemLabel="#{m.name}" itemValue="#{m.id}"/>
+	                </p:selectOneMenu>
+	
+			<p:outputLabel value="Nome do Candidato:" for="name_c" />	
+	        <p:inputText id="name_c" value="#{CanBean.candidate.name}" style="width:280px;"></p:inputText>
 	                
 	        <p:outputLabel value="E-mail do Candidato:" for="email_c" />	
-                <p:inputText  id="email_c" value="#{ReqBean.request.candidateEmail}" style="width:280px;"></p:inputText>
+	        <p:inputText  id="email_c" value="#{CanBean.candidate.email}" style="width:280px;"></p:inputText>
 	
 	        <p:outputLabel for="datetime" value="Data Limite / Hora" />
 	        <p:calendar id="datetime" value="#{ReqBean.request.deadline}" pattern="dd/MM/yyyy HH:00" /> 
