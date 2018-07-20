@@ -48,9 +48,9 @@
 
 		
 
-		<p:layout style="min-width:400px;min-height:800px;">
+		<p:layout style="min-height:800px;border-style:none;min-width:400px;">
 
-			<p:layoutUnit position="west" resizable="true" size="300" minSize="40" maxSize="400">	
+			<p:layoutUnit position="west" resizable="true" size="300" minSize="40" maxSize="400" style="border-style:none;">	
 
 				Nome <h:inputText value="#{RecBean.recruiter.name}" style="width:200px;"></h:inputText>
 
@@ -66,13 +66,13 @@
 
 				<p:commandButton value="Criar" action="#{RecBean.createRec()}" icon="ui-icon-check" update=":form:recruiterTable"/>
 
-				<p:commandButton icon="ui-icon-home" value="Voltar" action="adm"/>
+				<p:commandButton icon="ui-icon-home" value="Voltar" action="adm?faces-redirect=true"/>
 
 			</p:layoutUnit>
 
 	         
 
-	        <p:layoutUnit position="center">      
+	        <p:layoutUnit position="center" style="border-style:none;">      
 
 		        <p:growl id="msgs" showDetail="true"/>
 
