@@ -5,16 +5,21 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 
 import javax.persistence.Entity;
+<<<<<<< HEAD
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+=======
+>>>>>>> master
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 @Entity
 @Table(name="request")
 public class Request extends cv_project.models.Entity {
 	
+<<<<<<< HEAD
 	private static final long serialVersionUID = 1L;
     
         @ManyToOne(fetch=FetchType.LAZY)
@@ -48,5 +53,16 @@ public class Request extends cv_project.models.Entity {
 	public void setCandidateList(Candidate id) {
 		candidate = id;
 	}
+=======
+    /*@OneToOne
+    protected Candidate candidate;*/
+    
+    /*public Candidate getCandidateList() {
+            return candidate;
+    }
+    public void setCandidateList(Candidate id) {
+            candidate = id;
+    }*/
+>>>>>>> master
 
 }

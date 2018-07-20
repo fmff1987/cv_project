@@ -15,37 +15,33 @@
 
 	<h3 style="text-align:center;">Criar Pedido</h3>
 
-	<h:form>
+	<h:form id="form1">
 
-		<h:panelGrid columns="2" cellpadding="5">
+       	<h:panelGrid columns="2" cellpadding="5">
 
-			<p:outputLabel value="Nome do Manager:" for="name" />
-			<p:selectOneMenu id="name" effect="fold" editable="true">
-				<f:selectItem itemLabel="Selecione uma opção:"  />
-				<f:selectItems/>
-			</p:selectOneMenu>
-			<p>Nome Candidato</p>  <p:inputText style="width:400px;"></p:inputText>
-			<p>Email do Candidato </p> <p:inputText  style="width:400px;"></p:inputText>
+                <p:outputLabel value="Nome do Manager:" for="name_m" />	
+                <p:selectOneMenu id="name_m" value="#{ManBean.manager.name}" effect="fold" editable="true" var="manager" filter="true" style="width:250px"> 
+                    <f:selectItem itemLabel="Selecione uma opção:"  />
+                    <f:selectItems  value="#{ManBean.man}" var="m" itemLabel="#{m.name}" itemValue="#{m.id}"/>
+                </p:selectOneMenu>
 
+                <p:outputLabel value="Nome do Candidato:" for="name_c" />	
+                <p:inputText id="name_c" value="#{ReqBean.request.candidateName}" style="width:280px;"></p:inputText>
+	                
+	        <p:outputLabel value="E-mail do Candidato:" for="email_c" />	
+                <p:inputText  id="email_c" value="#{ReqBean.request.candidateEmail}" style="width:280px;"></p:inputText>
+	
+	        <p:outputLabel for="datetime" value="Data Limite / Hora" />
+	        <p:calendar id="datetime" value="#{ReqBean.request.deadline}" pattern="dd/MM/yyyy HH:00" /> 
+	                
+	        <p:outputLabel value="Curriculo:" for="cv" />
+	        <p:fileUpload id="cv" value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Anexar" />
 
-			<p:outputLabel for="datetime" value="Data Limite / Hora" />
-			<p:calendar id="datetime" 
-				pattern="dd/MM/yyyy HH:00" />
-				<p>Curriculo</p>
-
-				<p:fileUpload value="#{fileUploadView.file}" mode="simple"
-				skinSimple="true" label="Anexar" />
-
-			<!-- <p:commandButton value="Submit" ajax="false"
-					actionListener="#{fileUploadView.upload}" disabled="true" /> -->
-
-		</h:panelGrid>
-
-
+        </h:panelGrid>
 
 		<p:commandButton value="Voltar" action="index.xhtml" />
 	
-		<p:commandButton value="Submeter Pedido" />
+		<p:commandButton value="Submeter Pedido" action="#{CanBean.createCan()}" update="form2:candidateTable" />
 
 		<br></br>
 		<br></br>
@@ -53,40 +49,34 @@
 
 	</h:form>
 
+	<h:form id="form2">
+            <p:dataTable var="can" id="candidateTable" value="#{CanBean.can}" rows="10"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,20,40">
+                
+                <f:facet name="header">
+                    Lista de pedidos Aprovados
+                </f:facet>
+                
+                <p:column headerText="Nome do Candidato">
+                    <h:outputText value="#{CanBean.candidate.name}" />
+                </p:column>
+                
+                <p:column headerText="Email do Candidato">
+                    <h:outputText value="#{CanBean.candidate.email}" />
+                </p:column>
 
-	<h:form>
-		<p:dataTable var="" value="#{dtPaginatorView.cars}" rows="10"
-			paginator="true"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="10,20,40">
-			 <f:facet name="header">
-            Lista de pedidos Aprovados
-        </f:facet>
-			<p:column headerText="Nome do Candidato">
-				<h:outputText value="#{car.id}" />
-			</p:column>
+                <p:column headerText="Recrutador">
+                        <h:outputText value="#{RecBean.recruiter.name}" />
+                </p:column>
 
-			<p:column headerText="Recrutador">
-				<h:outputText value="#{car.year}" />
-			</p:column>
+                <p:column headerText="Cv Aubay">
+                        <h:outputText value="#{RecBean.recruiter.name}" />
+                </p:column>
 
-			<p:column headerText="Data Limite">
-				<h:outputText value="#{car.brand}" />
-			</p:column>
-
-<!-- 			<p:column filterBy="#{car.sold}" headerText="Estado" footerText="equals" filterMatchMode="equals">
-            <f:facet name="filter">
-                <p:selectOneButton onchange="PF('carsTable').filter()">
-                    <f:converter converterId="javax.faces.Boolean" />
-                    <f:selectItem itemLabel="Aprovado" itemValue="" icon="fa fa-fw fa-remove" />
-                    <f:selectItem itemLabel="Reprovado" itemValue="true" />
-                    
-                </p:selectOneButton>
-            </f:facet>
+            </p:dataTable>
             
-        </p:column> -->
-
-		</p:dataTable>
 	</h:form>
 
 </h:body>

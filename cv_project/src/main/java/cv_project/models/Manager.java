@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 @Table(name="manager")
 public class Manager extends Person {
 	
-    
+    private static final long serialVersionUID = 1L;
     
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "manager", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 		CascadeType.REFRESH })
