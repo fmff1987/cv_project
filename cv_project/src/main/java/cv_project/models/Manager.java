@@ -21,13 +21,14 @@ public class Manager extends Person {
 		CascadeType.REFRESH })
     private List<Request> requestList = new ArrayList<>();
 
-    
-    public List<Request> getListR() {
+    public List<Request> getRequestList() {
         return requestList;
     }
 
-    public void setListR(List<Request> rList) {
-        this.requestList = rList;
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
     }
+
+   
     
 }

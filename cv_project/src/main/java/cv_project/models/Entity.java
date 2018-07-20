@@ -37,6 +37,6 @@ public class Entity implements Serializable{
 
     @Override
     public String toString() {
-            return String.format("ExampleEntity[%d]", id);
+            return String.format("ExampleEntity[%d]", getId());
     }
 }
