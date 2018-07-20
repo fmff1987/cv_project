@@ -10,50 +10,45 @@ import cv_project.control.ControllerRequest;
 
 import cv_project.models.Request;
 
-
 @Named("ReqBean")
 @RequestScoped
-public class Requestbean {  
+public class Requestbean {
 
-   
-    
-	
-private Request request = new Request();
-
-    @Inject
-    private ControllerRequest cr;
+	private Request request = new Request();
 
 
-    public Request getRequest() {
-            return request;
-    }
+	@Inject
+	private ControllerRequest cr;
 
-    public void setRequest(Request request) {
-            this.request = request;
-    }
+	public Request getRequest() {
+		return request;
+	}
 
-    public ControllerRequest getCr() {
-            return cr;
-    }
+	public void setRequest(Request request) {
+		this.request = request;
+	}
 
-    public void setCr(ControllerRequest cr) {
-            this.cr = cr;
-    }
+	public ControllerRequest getCr() {
+		return cr;
+	}
 
-    public List<Request> getReq(){
-            return cr.getReq();
-    }
+	public void setCr(ControllerRequest cr) {
+		this.cr = cr;
+	}
 
-    public void createReq() {
-            cr.createRequest(request);
-    }
+	public List<Request> getReq(){
+		return cr.getReq();
+	}
 
-    public void removeReq() {
-            cr.removeRequest(request);
-    }
+	public void createReq() {
+		cr.createRequest(request);
+	}
 
-    public void updateReq() {
-            cr.updateReq();
-    }
-    
+	public void removeReq() {
+		cr.removeRequest(request);
+	}
+
+	public void updateReq() {
+		cr.updateReq();
+	}
 }
