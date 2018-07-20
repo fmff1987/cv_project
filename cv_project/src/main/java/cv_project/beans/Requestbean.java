@@ -14,15 +14,12 @@ import cv_project.models.Request;
 @Named("ReqBean")
 @RequestScoped
 public class Requestbean {  
-
-   
-    
 	
-private Request request = new Request();
+    private Request request = new Request();
+
 
     @Inject
     private ControllerRequest cr;
-
 
     public Request getRequest() {
             return request;
