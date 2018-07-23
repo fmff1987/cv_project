@@ -32,13 +32,6 @@ public class Managerbean {
 		this.manager = manager;
 	}
 
-	public ControllerManager getCm() {
-		return cm;
-	}
-
-	public void setCm(ControllerManager cm) {
-		this.cm = cm;
-	}
 	
 	public List<Manager> getMan(){
 		return cm.getMan();

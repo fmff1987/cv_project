@@ -21,12 +21,14 @@ public class Recruiter extends Person {
                 CascadeType.REFRESH })
     private List<Request> requestList = new ArrayList<>();
 
-    public List getListO() {
-            return requestList;
+    public List<Request> getRequestList() {
+        return requestList;
     }
 
-    public void setListO(List<Request> rList) {
-            requestList = rList;
-    } 
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
+    }
+
+
     
 }
