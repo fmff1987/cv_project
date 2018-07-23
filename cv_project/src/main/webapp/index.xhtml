@@ -10,17 +10,14 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" type="text/css"
-		href="cv_project/src/main/resources/CSS/style.css"></link>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="CSS" name="style.css"></h:outputStylesheet>
 
 	<title>CV Management - Login</title>
 
 </h:head>
-<h:body>
+<h:body class="body" >
 	<div class="header">
 
 		<div class="logo">
@@ -45,27 +42,23 @@ and open the template in the editor.
 
 			<div class="container">
 				<div class="row">
-					<div class="col-sm manager">
-						<a href="manager.xhtml"> <img class="imagens"
-							src="https://previews.123rf.com/images/ahasoft2000/ahasoft20001801/ahasoft2000180117716/94314050-unhappy-manager-vector-icon-style-is-flat-graphic-black-symbol-with-problem-emotions-.jpg"
-							alt="Manager face"></img>
+					<div class="col-sm-4 manager">
+						<a href="manager.xhtml"> 
+							<img class="buttonsindex" src="resources/Images/managerbutton.png" alt="Manager"></img>
 						</a>
 					</div>
-					<div class="col-sm admin">
-						<a href="adm.xhtml"> <img class="imagens"
-							src="https://thumbs.dreamstime.com/b/red-admin-sign-pc-laptop-vector-illustration-administrator-icon-screen-controller-man-system-box-88756468.jpg"
-							alt="Admin face"></img>
+					<div class="col-sm-4 admin"> 
+						<a href="recruiter.xhtml"> 
+							<img class= "buttonsindex" src="resources/Images/recruiterbutton.png"	alt="Recrutador"></img>
 						</a>
 					</div>
-					<div class="col-sm recruiter">
-						<a href="recruiter.xhtml"> <img class="imagens"
-							src="https://t4.ftcdn.net/jpg/01/95/05/71/500_F_195057186_52fOYeZGaUFNZ9RlruoD0PFffRhYPJbK.jpg"
-							alt="Recruta face"></img>
+					<div class="col-sm-4 recruiter">
+						<a href="adm.xhtml"> 
+							<img class= "buttonsindex" src="resources/Images/adminbutton.png" alt="Administrador"></img>
 						</a>
 					</div>
 				</div>
 			</div>
-
 
 		</h:form>
 	</div>
