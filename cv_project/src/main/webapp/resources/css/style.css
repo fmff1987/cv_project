@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-body {
-	background-color: #FFDDC1;
+.body {
+	background-color: #FFEADD;
 }
 
 .header {
@@ -29,7 +29,7 @@ body {
 }
 
 .imagens {
-	width: 250px;
+	width: 350px;
 	height: auto;
 }
 
@@ -39,12 +39,4 @@ body {
 	align-content: center;
 	
 }
-.manager{
-	vertical-align: middle;
-}
-.admin{
-	vertical-align: middle;
-}
-.recruiter{
-	vertical-align: middle;
-}
+
