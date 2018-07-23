@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import cv_project.models.Manager;
 import cv_project.repositories.ManagerRepository;
 
+@Transactional
 @RequestScoped
 public class ControllerManager {
 	

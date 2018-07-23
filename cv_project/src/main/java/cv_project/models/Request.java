@@ -20,7 +20,7 @@ public class Request extends cv_project.models.Entity {
 
 	private static final long serialVersionUID = 1L;
     
-        @ManyToOne(fetch=FetchType.LAZY)
+        @ManyToOne(fetch=FetchType.EAGER)
 	private Manager manager;
         
         @ManyToOne

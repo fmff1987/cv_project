@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
 <h:head>
 	<title>CV Management - ADM</title>
 	<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
@@ -46,15 +47,8 @@ and open the template in the editor.
 	<h:form>
 
 		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
-		<!-- MENU -->
+
+
 
 
 
@@ -78,13 +72,12 @@ and open the template in the editor.
 
 
 		<!-- FILTRO CONSULTA -->
-		<!-- FILTRO CONSULTA -->
-		<!-- FILTRO CONSULTA -->
-		<!-- FILTRO CONSULTA -->
-		<!-- FILTRO CONSULTA -->
+
+
 
 		<p:tabView>
 			<p:tab title="Pedidos por Concluir">
+
 				<p:dataTable id="RequestList" var="req" value="#{ReqBean.req}"
 					editable="true" style="margin-bottom:20px" rows="10"
 					paginator="true"
@@ -97,50 +90,29 @@ and open the template in the editor.
 
 					<p:column headerText="Manager" filterBy="#{req.manager.name}"
 						filterMatchMode="contains">
-
-
-
 						<h:outputText value="#{req.manager.name}" />
+
+					</p:column>	
+
+					<p:column headerText="Recrutas">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{req.recruiter.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{ReqBean.request.recruiter}"
+									style="width:100%" converter="omnifaces.SelectItemsConverter">
+									<f:selectItems value="#{RecBean.rec}" var="recrutas"
+										itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
+								</h:selectOneMenu>
+							</f:facet>
+
+						</p:cellEditor>
 
 					</p:column>
 
 
-					<!-- <p:column headerText="Manager" filterBy="#{req.manager.name}">
-						<f:facet name="filter">
-							<p:selectOneMenu>s
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{ManBean.man}" var="manager"
-									itemLabel="#{manager.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="#{req.manager.name}" />
-					</p:column> -->
-
-					<p:column filterBy="#{recruiter.name}" headerText="Recrutador">
-						<f:facet name="filter">
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{recruiterbean.rec}" var="recruiter"
-									itemLabel="#{recruiter.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="#{req.recruiter}" />
-
-						<!--     <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{bean.objectId}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <h:selectOneMenu style="width:200px;">
-                                        <f:selectItem itemLabel="Selecione" />
-                                        <f:selectItems value="#{bean.objectIds}" />
-                                        <f:ajax listener="#{bean.idEdited(object)}" render="name" />
-                                    </h:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor> -->
-					</p:column>
-
-					<p:column headerText="Candidato">
+					<p:column headerText="Candidato" filterBy="#{req.candidateName}"> <!-- nao vai ter Filtro -->
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{req.candidateName}" />
@@ -201,7 +173,7 @@ and open the template in the editor.
 						</p:commandButton>
 					</p:column>
 
-					<p:column headerText="Estado">
+					<!-- 	<p:column headerText="Estado">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{bean.objectId}" />
@@ -216,7 +188,7 @@ and open the template in the editor.
 								</h:selectOneMenu>
 							</f:facet>
 						</p:cellEditor>
-					</p:column>
+					</p:column> -->
 
 					<p:column headerText="Comentario">
 						<p:inputTextarea cols="20" />
