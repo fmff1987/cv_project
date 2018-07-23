@@ -6,323 +6,325 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>CV Management - ADM</title>
-	<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script type="text/javascript">
-	PrimeFaces.locales['pt'] = {
-		closeText: 'Fechar',
-		prevText: 'Anterior',
-		nextText: 'Próximo',
-		currentText: 'Começo',
-		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
-		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-		dayNamesMin: ['D','S','T','Q','Q','S','S'],
-		weekHeader: 'Semana',
-		firstDay: 0,
-		isRTL: false,
-		showMonthAfterYear: false,
-		yearSuffix: '',
-		timeOnlyTitle: 'Só Horas',
-		timeText: 'Tempo',
-		hourText: 'Hora',
-		minuteText: 'Minuto',
-		secondText: 'Segundo',
-		ampm: false,
-		month: 'Mês',
-		week: 'Semana',
-		day: 'Dia',
-		allDayText : 'Todo o Dia'
-	}
-</script>
-</h:head>
-<h:body>
-	<h:form>
-		
-		<!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU -->
-		
-			
-			
-				<p:menubar>
-					<p:submenu label="Manager">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createManager.xhtml" />
-						
-					</p:submenu>
-					
-					<p:submenu label="Recrutador">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createRecruiter.xhtml" />
-					</p:submenu>
-					
-					<p:submenu label="Pedidos">
-						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
-					</p:submenu>
-				 </p:menubar>
-				 <h1>Pagina Admin</h1>
-			
-		
-		<!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA -->
-		
-			<p:tabView>
-				<p:tab title="Pedidos por Concluir">
-				<p:dataTable id="OrderList" var="order" value="" editable="true"
-					style="margin-bottom:20px" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>CV Management - ADM</title>
+        <h:outputStylesheet library="css" name="../resources/CSS/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script type="text/javascript">
+            PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo o Dia'
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <h:form>
 
-					<f:facet name="header">
-                        Lista de pedidos
-                    </f:facet>
+            <!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU --><!-- MENU -->
 
-					<p:column filterBy="#{order}" headerText="Manager">
-						<f:facet name="filter">
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="" />
-					</p:column>
-					
-					<p:column filterBy="#{order}" headerText="Recrutador">
-						<f:facet name="filter">
-							<p:selectOneMenu >
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{recruiterbean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="" />
-						
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{bean.objectId}" />
-							</f:facet>
-							<f:facet name="input">
-								<h:selectOneMenu style="width:200px;">
-									<f:selectItem itemLabel="Selecione" />
-									<f:selectItems value="#{bean.objectIds}" />
-									<f:ajax listener="#{bean.idEdited(object)}" render="name" />
-								</h:selectOneMenu>
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
 
-					<p:column headerText="Candidato">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="sem candidato nenhum registado" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText id="nome" value="" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
 
-					<p:column headerText="Email">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText id="email" value="" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
+            <p:menubar>
+                <p:submenu label="Manager">
+                    <p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createManager.xhtml" />
 
-					<p:column filterBy="#{order}" headerText="Data Limite">
-						<f:facet name="filter">
-							<p:outputLabel for="datetime" />
-        					<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt"/>
-						</f:facet>
-						
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{dateComparison.toDate}" >
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-								</h:outputText>
-							</f:facet>
-								<f:facet name="input">
-			  						<p:calendar  locale="pt" styleClass="right" value="#{dateComparison.toDate}" id="byDateButtonCalTo" mode="popup" maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:mm" stepHour="1" stepMinute="30" />  							
-								</f:facet>
-							</p:cellEditor>
-						<h:outputText value="" />
-					</p:column>
+                </p:submenu>
 
-					<p:column headerText="CV Original">
-						<p:commandButton value="Download" ajax="false"
-							onclick="PrimeFaces.monitorDownload(start, stop);"
-							icon="ui-icon-arrowthick-1-s">
-							<p:fileDownload value="" />
-						</p:commandButton>
-					</p:column>
+                <p:submenu label="Recrutador">
+                    <p:menuitem value=" Criar / Editar" icon="ui-icon-disk" url="createRecruiter.xhtml" />
+                </p:submenu>
 
-					<p:column headerText="CV Aubay">
-						<p:commandButton value="Download" ajax="false"
-							onclick="PrimeFaces.monitorDownload(start, stop);"
-							icon="ui-icon-arrowthick-1-s">
-							<p:fileDownload value="" />
-						</p:commandButton>
-					</p:column>
-					
-					<p:column headerText="Estado">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{bean.objectId}" />
-							</f:facet>
-							<f:facet name="input">
-								<h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
-									<f:selectItem itemLabel="Selecione" />
-									<f:selectItem itemLabel="Reprovado" />
-									<f:selectItem itemLabel="Aprovado" />
-									<f:selectItems value="#{bean.objectIds}" />
-									<f:ajax listener="#{bean.idEdited(object)}" render="name" />
-								</h:selectOneMenu>
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
-					
-					<p:column headerText="Comentario">
-   						<p:inputTextarea cols="20" />
-   					</p:column>
-   					
-					<p:column style="width:32px">
-						<p:rowEditor />
-					</p:column>
+                <p:submenu label="Pedidos">
+                    <p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
+                </p:submenu>
+            </p:menubar>
+            <h1>Pagina Admin</h1>
 
-					<p:column style="width:32px">
-						<span class="ui-icon ui-icon-trash" />
-					</p:column>
-					
-					<!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS -->
-					
-					
-					
-					<p:commandButton value="Distribuir" action="index" />
-					<p:commandButton value="Confirmar" />
-				</p:dataTable>
-				</p:tab>
-				
-				<p:tab title="Pedidos Concluidos">
-				<p:dataTable id="OrderList" var="order" value="" editable="true"
-					style="margin-bottom:20px" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
 
-					<f:facet name="header">
-                        Lista de pedidos
-                    </f:facet>
+            <!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA --><!-- FILTRO CONSULTA -->
 
-					<p:column filterBy="#{order}" headerText="Manager">
-						<f:facet name="filter">
-							<p:selectOneMenu>
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="" />
-					</p:column>
-					
-					<p:column filterBy="#{order}" headerText="Recrutador">
-						<f:facet name="filter">
-							<p:selectOneMenu >
-								<f:selectItem itemLabel="Selecione" />
-								<f:selectItems value="#{recruiterbean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
-							</p:selectOneMenu>
-						</f:facet>
-						<h:outputText value="" />
-					</p:column>
+            <p:tabView>
+                <p:tab title="Pedidos por Concluir">
+                    <p:dataTable id="RequestList" var="order" value="" editable="true"
+                                 style="margin-bottom:20px" rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
 
-					<p:column headerText="Candidato">
-							<f:facet name="output">
-								<h:outputText value="sem candidato nenhum registado" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText id="nome" value="" style="width:100%" />
-							</f:facet>
-					</p:column>
+                        <f:facet name="header">
+                            Lista de pedidos
+                        </f:facet>
 
-					<p:column headerText="Email">
-							<f:facet name="output">
-								<h:outputText value="" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText id="email" value="" style="width:100%" />
-							</f:facet>
-					</p:column>
+                        <p:column filterBy="#{order}" headerText="Manager">
+                            <f:facet name="filter">
+                                <p:selectOneMenu>
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="" />
+                        </p:column>
 
-					<p:column filterBy="#{order}" headerText="Data Limite">
-						<f:facet name="filter">
-							<p:outputLabel for="datetime" />
-        					<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" />
-						</f:facet>
-						<h:outputText value="" />
-					</p:column>
+                        <p:column filterBy="#{order}" headerText="Recrutador">
+                            <f:facet name="filter">
+                                <p:selectOneMenu >
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="#{recruiterbean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="" />
 
-					<p:column headerText="CV Original">
-						<p:commandButton value="Download" ajax="false"
-							onclick="PrimeFaces.monitorDownload(start, stop);"
-							icon="ui-icon-arrowthick-1-s">
-							<p:fileDownload value="" />
-						</p:commandButton>
-					</p:column>
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{bean.objectId}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu style="width:200px;">
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItems value="#{bean.objectIds}" />
+                                        <f:ajax listener="#{bean.idEdited(object)}" render="name" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
-					<p:column headerText="CV Aubay">
-						<p:commandButton value="Download" ajax="false"
-							onclick="PrimeFaces.monitorDownload(start, stop);"
-							icon="ui-icon-arrowthick-1-s">
-							<p:fileDownload value="" />
-						</p:commandButton>
-					</p:column>
-					
-					<p:column headerText="Estado">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{bean.objectId}" />
-							</f:facet>
-							<f:facet name="input">
-								<h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
-									<f:selectItem itemLabel="Selecione" />
-									<f:selectItem itemLabel="Reprovado" />
-									<f:selectItem itemLabel="Aprovado" />
-									<f:selectItems value="#{bean.objectIds}" />
-									<f:ajax listener="#{bean.idEdited(object)}" render="name" />
-								</h:selectOneMenu>
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
-					
-					<p:column headerText="Comentario">
-   						<p:scrollPanel mode="native" style="width:230px;height:70px">
-                        <p>Comentarios</p>
-                    	</p:scrollPanel>
-   					</p:column>
-   					
-					<p:column style="width:32px">
-						<p:rowEditor />
-					</p:column>
+                        <p:column headerText="Candidato">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="sem candidato nenhum registado" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="nome" value="" style="width:100%" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
-					<p:column style="width:32px">
-						<span class="ui-icon ui-icon-trash" />
-					</p:column>
-					
-					<!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS -->
-					
-					
-					
-					<p:commandButton value="Distribuir" action="index" />
-					<p:commandButton value="Confirmar" />
-				</p:dataTable>
-                                
-                            </p:tab>
-			</p:tabView>
-		
-                <p:commandButton value="Voltar" action="index?faces-redirect=true"/>
+                        <p:column headerText="Email">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="email" value="" style="width:100%" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
-	</h:form>
-	</h:body>
+                        <p:column filterBy="#{order}" headerText="Data Limite">
+                            <f:facet name="filter">
+                                <p:outputLabel for="datetime" />
+                                <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt"/>
+                            </f:facet>
+
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{dateComparison.toDate}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                    </h:outputText>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:calendar  locale="pt" styleClass="right" value="#{dateComparison.toDate}" id="byDateButtonCalTo" mode="popup" maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:mm" stepHour="1" stepMinute="30" />  							
+                                </f:facet>
+                            </p:cellEditor>
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="CV Original">
+                            <p:commandButton value="Download" ajax="false"
+                                             onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="CV Aubay">
+                            <p:commandButton value="Download" ajax="false"
+                                             onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{bean.objectId}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItem itemLabel="Reprovado" />
+                                        <f:selectItem itemLabel="Aprovado" />
+                                        <f:selectItems value="#{bean.objectIds}" />
+                                        <f:ajax listener="#{bean.idEdited(object)}" render="name" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Comentario">
+                            <p:inputTextarea cols="20" />
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <span class="ui-icon ui-icon-trash" />
+                        </p:column>
+
+                        <!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS -->
+
+
+
+                        <p:commandButton value="Distribuir" action="index" />
+                        <p:commandButton value="Confirmar" />
+                    </p:dataTable>
+                </p:tab>
+
+                <p:tab title="Pedidos Concluidos">
+                    <p:dataTable id="FinishedList" var="order" value="" editable="true"
+                                 style="margin-bottom:20px" rows="10" paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
+
+                        <f:facet name="header">
+                            Lista de pedidos
+                        </f:facet>
+
+                        <p:column filterBy="#{order}" headerText="Manager">
+                            <f:facet name="filter">
+                                <p:selectOneMenu>
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column filterBy="#{order}" headerText="Recrutador">
+                            <f:facet name="filter">
+                                <p:selectOneMenu >
+                                    <f:selectItem itemLabel="Selecione" />
+                                    <f:selectItems value="#{recruiterbean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Candidato">
+                            <f:facet name="output">
+                                <h:outputText value="sem candidato nenhum registado" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="nome" value="" style="width:100%" />
+                            </f:facet>
+                        </p:column>
+
+                        <p:column headerText="Email">
+                            <f:facet name="output">
+                                <h:outputText value="" />
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText id="email" value="" style="width:100%" />
+                            </f:facet>
+                        </p:column>
+
+                        <p:column filterBy="#{order}" headerText="Data Limite">
+                            <f:facet name="filter">
+                                <p:outputLabel for="datetime" />
+                                <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" />
+                            </f:facet>
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="CV Original">
+                            <p:commandButton value="Download" ajax="false"
+                                             onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="CV Aubay">
+                            <p:commandButton value="Download" ajax="false"
+                                             onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{bean.objectId}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
+                                        <f:selectItem itemLabel="Selecione" />
+                                        <f:selectItem itemLabel="Reprovado" />
+                                        <f:selectItem itemLabel="Aprovado" />
+                                        <f:selectItems value="#{bean.objectIds}" />
+                                        <f:ajax listener="#{bean.idEdited(object)}" render="name" />
+                                    </h:selectOneMenu>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Comentario">
+                            <p:scrollPanel mode="native" style="width:230px;height:70px">
+                                <p>Comentarios</p>
+                            </p:scrollPanel>
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <p:rowEditor />
+                        </p:column>
+
+                        <p:column style="width:32px">
+                            <span class="ui-icon ui-icon-trash" />
+                        </p:column>
+
+                        <!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS --><!-- LISTA DE CANDIDATOS -->
+
+
+
+                        <p:column style="width:32px">
+                        <p:commandButton value="Distribuir" action="index" />
+                        <p:commandButton value="Confirmar" />
+                        </p:column>
+                    </p:dataTable>
+
+                </p:tab>
+            </p:tabView>
+
+            <p:commandButton value="Voltar" action="index?faces-redirect=true"/>
+
+        </h:form>
+    </h:body>
 </html>
