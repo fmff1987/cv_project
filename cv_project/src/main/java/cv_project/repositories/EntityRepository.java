@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import cv_project.models.Entity;
 
-@Transactional
+//@Transactional
 public abstract class EntityRepository<T extends Entity> {
 
 	@PersistenceContext(unitName = "database")

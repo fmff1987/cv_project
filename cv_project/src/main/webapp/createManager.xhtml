@@ -71,14 +71,7 @@
 						update=":form:msgs" />
 
 					<p:column headerText="Nome" filterBy="#{manager.name}">
-						<p:cellEditor>
-							<f:facet name="output">
 								<h:outputText value="#{manager.name}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:inputText value="#{manager.name}" style="width:100%" />
-							</f:facet>
-						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Email" filterBy="#{manager.email}">

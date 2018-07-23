@@ -21,10 +21,10 @@ public class Request extends cv_project.models.Entity {
 	private static final long serialVersionUID = 1L;
     
         @ManyToOne(fetch=FetchType.LAZY)
-	protected Manager manager;
+	private Manager manager;
         
         @ManyToOne
-	protected Recruiter recruiter;
+	private Recruiter recruiter;
         
         private String candidateName;
         private String candidateEmail;
