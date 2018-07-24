@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
+
 @Entity
 @Table(name="request")
 public class Request extends cv_project.models.Entity {
@@ -23,7 +24,7 @@ public class Request extends cv_project.models.Entity {
         @ManyToOne(fetch=FetchType.LAZY)
 	protected Manager manager;
         
-        @ManyToOne
+        @ManyToOne(fetch=FetchType.LAZY)
 	protected Recruiter recruiter;
         
         private String candidateName;
@@ -31,7 +32,18 @@ public class Request extends cv_project.models.Entity {
         
         @Temporal(TemporalType.TIMESTAMP)
         private Date deadline;    
+        
+        private String cvOrigPath;
 
+    public String getCvOrigPath() {
+        return cvOrigPath;
+    }
+
+    public void setCvOrigPath(String cvOrigPath) {
+        this.cvOrigPath = cvOrigPath;
+    }
+        
+        
     public Manager getManager() {
         return manager;
     }
