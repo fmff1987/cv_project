@@ -74,7 +74,7 @@ public class Requestbean {
     
     public void upload() {
         try {
-          File file = new File("./resources/cv/cv_Orig/", cvOrig.getFileName());
+          File file = new File("/webapp/resources/cv/cv_Orig/", cvOrig.getFileName());
 
           OutputStream out = new FileOutputStream(file);
           out.write(cvOrig.getContents());
