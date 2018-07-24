@@ -7,12 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.primefaces.event.RowEditEvent;
-
 import cv_project.control.ControllerRecruiter;
-import cv_project.models.Request;
-import cv_project.models.Manager;
 import cv_project.models.Recruiter;
 
 @Named("RecBean")

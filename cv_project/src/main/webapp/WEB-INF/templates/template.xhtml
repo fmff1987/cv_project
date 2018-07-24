@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<h:html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	
+		<title><ui:insert name="pageTitle"></ui:insert></title>
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="CSS" name="style.css"></h:outputStylesheet>
+	
+	</h:head>
+		
+		<ui:insert name="body"></ui:insert>
+		
+				<div class="header">
+				
+					<div class="logo">
+						<IMG id="logoAubay"
+							src="https://websummit.com/wp-content/uploads/2017/09/Aubay_RGB-300x300.png" />
+					</div>
+		
+					<div class="clock">
+						<h:form>
+							<p:clock pattern="dd/MM/yyyy" />
+							<br />
+							<br />
+							<p:clock pattern="HH:mm" />
+						</h:form>
+					</div>
+		
+				</div>
+				
+			<ui:insert name="pageContent"></ui:insert>
+
+</h:html>
