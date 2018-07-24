@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.body {
+body {
 	background-color: #FFDDC1;
 }
 
@@ -28,13 +28,23 @@
 	align-content: unset;
 }
 
-.container {
-	margin-top: 150px;
-	vertical-align: middle;
-	align-content: center;
+.imagens {
+	width: 250px;
+	height: auto;
 }
 
-.buttonsindex{
-	width: 300px;
-	height: auto;
+.container {
+	margin-top: 250px;
+	vertical-align: middle;
+	align-content: center;
+	
+}
+.manager{
+	vertical-align: middle;
+}
+.admin{
+	vertical-align: middle;
+}
+.recruiter{
+	vertical-align: middle;
 }
