@@ -20,15 +20,15 @@ public class ControllerRecruiter {
 	}
 	
 	public List<Recruiter> getRec() {
-	return db.getList(Recruiter.class);
+	return db.getAll();
 	}
 	
 	public void updateList() {
-	db.updateLocalList();
+	//db.updateLocalList();
 	}
 	
 	public void removeRec(Recruiter p) {
 	db.removeEntity(p);
-	db.updateLocalList();
+	//db.updateLocalList();
 	}	
 }

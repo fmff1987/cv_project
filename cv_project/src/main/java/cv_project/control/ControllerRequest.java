@@ -22,15 +22,15 @@ public class ControllerRequest {
 	
 	public void removeRequest(Request r) {
 		db.removeEntity(r);
-		updateReq();
+//		updateReq();
 	}
 	
-	public void updateReq() {
-		db.updateLocalList();
+	public void updateReq(Request r) {
+		db.updateEntity(r);
 	}
 
 	public List<Request> getReq() {
-		return db.getList(Request.class);
+		return db.getAll();
 	}
 	
 }

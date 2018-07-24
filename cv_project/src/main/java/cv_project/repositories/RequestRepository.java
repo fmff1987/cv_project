@@ -1,21 +1,24 @@
 package cv_project.repositories;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 
+import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
+
+import cv_project.models.Recruiter;
 import cv_project.models.Request;
 
-@ApplicationScoped
+@RequestScoped
 public class RequestRepository  extends EntityRepository<Request>{
+
+	public List<Request> getAllWithManagers(){
+		return em.createNamedQuery("Request.getAllWithManagers", Request.class).getResultList();
+	}
+	public List<Request> getAll(){
+		return em.createNamedQuery("Request.getAll", Request.class).getResultList();
+	}
+	public List<Request> getAllWithRecruiter(){
+		return em.createNamedQuery("Request.getAllWithRecruiter",Request.class).getResultList();
+	}
 	
-    @SuppressWarnings("unchecked")
-    @PostConstruct
-    protected void loadFromDB(){
-        localList = em.createQuery("SELECT e FROM Request e").getResultList();
-    }
-    
-    @Override
-    public void updateLocalList() {
-            loadFromDB();
-    }
 }

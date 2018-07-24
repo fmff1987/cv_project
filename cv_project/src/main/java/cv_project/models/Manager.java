@@ -8,10 +8,18 @@ import javax.persistence.Table;
 
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
 @Table(name="manager")
+@NamedQueries({
+	@NamedQuery(name="Manager.getAll",
+			query="SELECT m FROM Manager m"),
+})
+
+
 public class Manager extends Person {
 	
     private static final long serialVersionUID = 1L;

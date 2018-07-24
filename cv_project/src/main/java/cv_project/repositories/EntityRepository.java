@@ -14,33 +14,33 @@ public abstract class EntityRepository<T extends Entity> {
 	@PersistenceContext(unitName = "database")
 	protected EntityManager em;
 
-	protected List<T> localList;
+	//	protected List<T> localList;
 
 	public void createEntity(T ent) {
 		em.persist(ent);
-		updateLocalList();
+		//updateLocalList();
 	}
-
-	public List<T> listEntity(Class<T> entClass) {
-		return localList;
-	}
+	//
+	//	public List<T> listEntity(Class<T> entClass) {
+	//		return localList;
+	//	}
 
 	public T getEntity(Class<T> entClass, Long id) {
 		return em.find(entClass, id);
 	}
-	public List<T> getList(Class<T> entClass) {
-		return localList;
-	}
+	//	public List<T> getList(Class<T> entClass) {
+	//		return localList;
+	//	}
 
 	public void updateEntity(T ent) {
 		em.merge(ent);
-		updateLocalList();
+		//	updateLocalList();
 	}
 
 	public void removeEntity(T ent) {
 		em.remove(em.merge(ent));
 	}
 
-	public abstract void updateLocalList();
+	//public abstract void updateLocalList();
 
 }

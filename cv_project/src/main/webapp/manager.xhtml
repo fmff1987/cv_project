@@ -27,7 +27,7 @@
 				style="width:250px" var="manager" filter="true"
 				filterMatchMode="contains">
 				<f:selectItem itemLabel="Selecione uma opção:" />
-				<f:selectItems value="#{ManBean.man}" var="m" itemLabel="#{m.name}"
+				<f:selectItems value="#{ManBean.managerList}" var="m" itemLabel="#{m.name}"
 					itemValue="#{m}" />
 				<p:column>
 					<h:outputText value="#{manager.name}" />

@@ -1,76 +1,97 @@
 package cv_project.models;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 
 
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
+
+import cv_project.repositories.EntityRepository;
 
 
 @Entity
 @Table(name="request")
-public class Request extends cv_project.models.Entity {
+@NamedQueries({
+	@NamedQuery(name="Request.getAll",
+			query="SELECT r FROM Request r"),
+//	@NamedQuery(name="Request.getAllWithManagers",
+//	query="SELECT r FROM Request r JOIN FETCH r.manager "),
+//	@NamedQuery(name="Request.getAllWithRecruiter",
+//	query="SELECT r FROM Request r JOIN FETCH r.recruiter"),
 	
+}) 
+
+public class Request extends cv_project.models.Entity {
+
 
 	private static final long serialVersionUID = 1L;
-    
-        @ManyToOne(fetch=FetchType.EAGER)
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Manager manager;
-        
-        @ManyToOne
+
+	@ManyToOne
 	private Recruiter recruiter;
-        
-        private String candidateName;
-        private String candidateEmail;
-        
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date deadline;    
 
-    public Manager getManager() {
-        return manager;
-    }
+	private String candidateName;
+	private String candidateEmail;
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date deadline;    
 
-    public Recruiter getRecruiter() {
-        return recruiter;
-    }
 
-    public void setRecruiter(Recruiter recruiter) {
-        this.recruiter = recruiter;
-    }
+	
+	
 
-    public String getCandidateName() {
-        return candidateName;
-    }
+	public Manager getManager() {
+		return manager;
+	}
 
-    public void setCandidateName(String candidateName) {
-        this.candidateName = candidateName;
-    }
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 
-    public String getCandidateEmail() {
-        return candidateEmail;
-    }
+	public Recruiter getRecruiter() {
+		return recruiter;
+	}
 
-    public void setCandidateEmail(String candidateEmail) {
-        this.candidateEmail = candidateEmail;
-    }
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
+	}
 
-    public Date getDeadline() {
-        return deadline;
-    }
+	public String getCandidateName() {
+		return candidateName;
+	}
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+
+	public String getCandidateEmail() {
+		return candidateEmail;
+	}
+
+	public void setCandidateEmail(String candidateEmail) {
+		this.candidateEmail = candidateEmail;
+	}
+
+	public Date getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
 
 
 
