@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import cv_project.models.Recruiter;
 import cv_project.repositories.RecruiterRepository;
-
+@Transactional
 @RequestScoped
 public class ControllerRecruiter {
 	
@@ -19,15 +20,18 @@ public class ControllerRecruiter {
 	}
 	
 	public List<Recruiter> getRec() {
-	return db.getList(Recruiter.class);
+	return db.getAll();
 	}
 	
 	public void updateList() {
-	db.updateLocalList();
+	//db.updateLocalList();
 	}
 	
 	public void removeRec(Recruiter p) {
 	db.removeEntity(p);
-	db.updateLocalList();
+	//db.updateLocalList();
 	}	
+	public void updateRec(Recruiter r) {
+		db.updateEntity(r);
+	}
 }

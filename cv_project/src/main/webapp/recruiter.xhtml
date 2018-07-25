@@ -37,7 +37,7 @@ and open the template in the editor.
 		    	<f:facet name="filter">
 	                <p:selectOneMenu>
 	                    <f:selectItem itemLabel="Selecione" />
-	                    <f:selectItems value="#{ManBean.man}" var="manager" itemLabel="#{manager.name}" />
+	                    <f:selectItems value="#{ManBean.manager}" var="manager" itemLabel="#{manager.name}" />
 	                </p:selectOneMenu>
             	</f:facet>
 		        <h:outputText value="" />
@@ -47,7 +47,7 @@ and open the template in the editor.
 		    	<f:facet name="filter">
 	                <p:selectOneMenu>
 	                    <f:selectItem itemLabel="Selecione" />
-	                    <f:selectItems value="#{RecBean.rec}" var="recruiter" itemLabel="#{recruiter.name}" />
+	                    <f:selectItems value="#{RecBean.recruiterList}" var="recruiter" itemLabel="#{recruiter.name}" />
 	                </p:selectOneMenu>
             	</f:facet>
 		        <h:outputText value="Sem Recrutadores" />

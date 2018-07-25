@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+
 import cv_project.models.Request;
 import cv_project.repositories.RequestRepository;
 
+@Transactional
 @RequestScoped
 public class ControllerRequest {
 	
@@ -19,15 +22,15 @@ public class ControllerRequest {
 	
 	public void removeRequest(Request r) {
 		db.removeEntity(r);
-		updateReq();
+//		updateReq();
 	}
 	
-	public void updateReq() {
-		db.updateLocalList();
+	public void updateReq(Request r) {
+		db.updateEntity(r);
 	}
 
 	public List<Request> getReq() {
-		return db.getList(Request.class);
+		return db.getAll();
 	}
 	
 }
