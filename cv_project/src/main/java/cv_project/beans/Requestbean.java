@@ -9,10 +9,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 import cv_project.control.ControllerRequest;
-import cv_project.models.Manager;
 import cv_project.models.Request;
 
 
@@ -86,5 +86,15 @@ private List<Request> requestList;
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+           
+        }
     }
 }

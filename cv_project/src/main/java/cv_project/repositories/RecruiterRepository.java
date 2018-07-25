@@ -2,8 +2,6 @@ package cv_project.repositories;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 
 import cv_project.models.Recruiter;

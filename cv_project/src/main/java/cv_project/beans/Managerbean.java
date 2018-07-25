@@ -4,15 +4,15 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import cv_project.control.ControllerManager;
-
-import cv_project.models.Manager;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.primefaces.event.RowEditEvent;
+
+import cv_project.control.ControllerManager;
+import cv_project.models.Manager;
 
 @RequestScoped
 @Named("ManBean")

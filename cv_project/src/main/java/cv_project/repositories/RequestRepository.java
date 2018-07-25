@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import cv_project.models.Recruiter;
 import cv_project.models.Request;
 
 @RequestScoped

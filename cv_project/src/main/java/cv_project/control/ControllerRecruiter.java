@@ -31,4 +31,7 @@ public class ControllerRecruiter {
 	db.removeEntity(p);
 	//db.updateLocalList();
 	}	
+	public void updateRec(Recruiter r) {
+		db.updateEntity(r);
+	}
 }

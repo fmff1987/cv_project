@@ -4,10 +4,15 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.RowEditEvent;
+
 import cv_project.control.ControllerRecruiter;
+import cv_project.models.Manager;
 import cv_project.models.Recruiter;
 
 @Named("RecBean")
@@ -59,11 +64,22 @@ public class Recruiterbean {
 	public void removeRec() {
 		cr.removeRec(recruiter);
 	}
-	public void updateRec() {
-		cr.updateList();
-	}
+//	public void updateRec() {
+//		cr.updateList();
+//	}
 	
-
+	public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Recruta Editado", ((Recruiter) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Recruiter recruta = (Recruiter) event.getObject();
+        cr.updateRec(recruta);
+        
+    }
+ 
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição Cancelada", ((Recruiter) event.getObject()).getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 	
 
 }

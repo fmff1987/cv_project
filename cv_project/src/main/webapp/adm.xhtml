@@ -60,7 +60,8 @@ and open the template in the editor.
 			</p:submenu>
 
 			<p:submenu label="Pedidos">
-				<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="manager.xhtml" />
+				<p:menuitem value="Criar Pedidos" icon="ui-icon-disk"
+					url="manager.xhtml" />
 			</p:submenu>
 		</p:menubar>
 		<h1>Pagina Admin</h1>
@@ -69,10 +70,10 @@ and open the template in the editor.
 		<!-- FILTRO CONSULTA -->
 		<p:tabView>
 			<p:tab title="Pedidos por Concluir">
-				
-				<p:dataTable id="RequestList" var="req" value="#{ReqBean.requestList}"
-					editable="true" style="margin-bottom:20px" rows="10"
-					paginator="true"
+
+				<p:dataTable id="RequestList" var="req"
+					value="#{ReqBean.requestList}" editable="true"
+					style="margin-bottom:20px" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15">
 
@@ -83,8 +84,8 @@ and open the template in the editor.
 						update=":form:msgs" />
 					<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
 						update=":form:msgs" />
-						
-						
+
+
 					<p:column headerText="Manager" filterBy="#{req.manager.name}"
 						filterMatchMode="contains">
 						<h:outputText value="#{req.manager.name}" />
@@ -96,8 +97,8 @@ and open the template in the editor.
 								<h:outputText value="#{req.recruiter.name}" />
 							</f:facet>
 							<f:facet name="input">
-								<h:selectOneMenu value="#{req.recruiter}"
-									style="width:100%" converter="omnifaces.SelectItemsConverter">
+								<h:selectOneMenu value="#{req.recruiter}" style="width:100%"
+									converter="omnifaces.SelectItemsConverter">
 									<f:selectItems value="#{RecBean.recruiterList}" var="recrutas"
 										itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
 								</h:selectOneMenu>
@@ -109,8 +110,8 @@ and open the template in the editor.
 
 
 
-					<p:column headerText="Candidato" filterBy="#{req.candidateName}">
-						<!-- nao vai ter Filtro -->
+					<p:column headerText="Candidato" filterBy="#{req.candidateName}" filterMatchMode="contains">
+						<!-- nao vai ter Filtro acho eu-->
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{req.candidateName}" />
@@ -121,10 +122,10 @@ and open the template in the editor.
 						</p:cellEditor>
 					</p:column>
 
-					<p:column headerText="Email">
+					<p:column headerText="Email" >
 						<p:cellEditor>
 							<f:facet name="output">
-								<h:outputText value="#{req.candidateEmail}" />
+								<h:outputText value="#{req.candidateEmail}" style="text-align:center;"/>
 							</f:facet>
 							<f:facet name="input">
 								<p:inputText id="email" value="#{req.candidateEmail}"
@@ -185,7 +186,7 @@ and open the template in the editor.
 					</p:column>
 
 					<!-- LISTA DE CANDIDATOS -->
-									
+
 
 
 					<p:commandButton value="Distribuir" action="index" />
@@ -194,7 +195,7 @@ and open the template in the editor.
 			</p:tab>
 
 		</p:tabView>
-
+		
 		<p:commandButton value="Voltar" action="index?faces-redirect=true" />
 
 	</h:form>
