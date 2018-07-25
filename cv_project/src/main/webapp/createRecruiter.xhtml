@@ -54,7 +54,7 @@
         <p:layoutUnit position="center" style="border-style:none;">
 	        <p:growl id="msgs" showDetail="true"/>
 	                
-			<p:dataTable var="recruiter" value="#{RecBean.rec}" id="recruiterTable" editable="true" paginator="true"
+			<p:dataTable var="recruiter" value="#{RecBean.recruiterList}" id="recruiterTable" editable="true" paginator="true"
 	                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                    rowsPerPageTemplate="10,15,20">	                    
 
