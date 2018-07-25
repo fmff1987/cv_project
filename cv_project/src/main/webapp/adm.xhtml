@@ -182,7 +182,8 @@ and open the template in the editor.
 					</p:column>
 
 					<p:column style="width:32px">
-						<span class="ui-icon ui-icon-trash" />
+						<p:commandButton icon="ui-icon-trash" title="Delete this actor"
+							action="#{ReqBean.removeReq()}" />
 					</p:column>
 
 					<!-- LISTA DE CANDIDATOS -->

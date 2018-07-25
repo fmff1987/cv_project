@@ -53,6 +53,7 @@ public class Managerbean {
 	
 	public void createMan() {
 		cm.createManager(manager);
+		loadManagers();
 	}
 	
 	public void removeMan() {

@@ -21,6 +21,7 @@ public class ControllerRequest {
 	}
 	
 	public void removeRequest(Request r) {
+		
 		db.removeEntity(r);
 //		updateReq();
 	}
@@ -30,7 +31,7 @@ public class ControllerRequest {
 	}
 
 	public List<Request> getReq() {
-		return db.getAll();
+		return db.getAllWithRecruiterAndManager();
 	}
 	
 }

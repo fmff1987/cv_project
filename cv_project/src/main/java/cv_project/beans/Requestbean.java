@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.PreRemove;
 
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
@@ -39,7 +40,8 @@ private List<Request> requestList;
     	requestList = cr.getReq();
     }
     
-
+   
+    
 	public Request getRequest() {
             return request;
     }
@@ -63,8 +65,9 @@ private List<Request> requestList;
     public void createReq() {
             cr.createRequest(request);
     }
-
+    
     public void removeReq() {
+    		
             cr.removeRequest(request);
     }
 //
