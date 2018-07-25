@@ -11,14 +11,17 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="CSS" name="style.css"></h:outputStylesheet>
 
 
 	<title>CV Management - Login</title>
 
 </h:head>
 <h:body class="body">
+=======
+<h:body class="body" >
 	<div class="header">
 
 		<div class="logo">
@@ -58,12 +61,26 @@ and open the template in the editor.
 						<a href="adm.xhtml"><img class="imagens"
 							src="resources/images/adminbutton.png"
 							alt="Admin face"></img>
+					<div class="col-sm-4 manager">
+						<a href="manager.xhtml"> 
+							<img class="buttonsindex" src="resources/Images/managerbutton.png" alt="Manager"></img>
+						</a>
+					</div>
+					<div class="col-sm-4 admin"> 
+						<a href="recruiter.xhtml"> 
+							<img class= "buttonsindex" src="resources/Images/recruiterbutton.png"	alt="Recrutador"></img>
+						</a>
+					</div>
+					<div class="col-sm-4 recruiter">
+						<a href="adm.xhtml"> 
+							<img class= "buttonsindex" src="resources/Images/adminbutton.png" alt="Administrador"></img>
 						</a>
 					</div>
 				</div>
 			</div>
 		
 
+		</h:form>
 	</div>
 </h:body>
 </html>

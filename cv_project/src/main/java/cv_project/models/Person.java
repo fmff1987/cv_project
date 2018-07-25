@@ -1,14 +1,13 @@
 package cv_project.models;
 
-
-
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class Person extends Entity{
 	
+	private static final long serialVersionUID = 1L;
 	
-    protected String name;
+	protected String name;
     protected String email;
 
     public String getName() {

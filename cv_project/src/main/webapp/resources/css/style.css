@@ -2,6 +2,7 @@
 
 .body {
 	background-color: #FFEADD;
+	background-color: #FFDDC1;
 }
 
 .header {
@@ -34,9 +35,15 @@
 }
 
 .container {
-	margin-top: 250px;
+	margin-top: 150px;
 	vertical-align: middle;
 	align-content: center;
 	
 }
 
+}
+
+.buttonsindex{
+	width: 300px;
+	height: auto;
+}
