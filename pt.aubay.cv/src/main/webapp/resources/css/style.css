@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.body {
+	background-color: #FFDDC1;
+}
+
+.header {
+	background-color: red;
+	position: up;
+	height: 140px;
+}
+
+.subheader {
+        background-color: white;
+        margin-bottom: 10px;
+}
+
+.divh3 {
+        margin: 5px;
+}
+
+#logoAubay {
+	margin: 20px;
+	width: 100px;
+	height: auto;
+}
+
+.logo {
+	float: left;
+}
+
+.clock {
+	overflow: hidden;
+	float: right;
+	margin-top: 27px;
+	margin-right: 20px;
+	align-content: unset;
+}
+
+.container {
+	margin-top: 150px;
+	vertical-align: middle;
+	align-content: center;
+}
+
+.buttonsindex{
+	width: 300px;
+	height: auto;
+}

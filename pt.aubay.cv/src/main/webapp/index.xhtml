@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
+
+	<ui:define name="pageTitle">
+			Página Index
+	</ui:define>
+
+    <ui:define name="body">
+		<h:body class="body"></h:body>
+		</ui:define>
+	<ui:define name="pageContent">
+		<h:form>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 manager">
+						<a href="manager.xhtml"> <img class="buttonsindex"
+							src="resources/images/managerbutton.png" alt="Manager"></img>
+						</a>
+					</div>
+					<div class="col-sm-4 admin">
+						<a href="recruiter.xhtml"> <img class="buttonsindex"
+							src="resources/images/recruiterbutton.png" alt="Recrutador"></img>
+						</a>
+					</div>
+					<div class="col-sm-4 recruiter">
+						<a href="adm.xhtml"> <img class="buttonsindex"
+							src="resources/images/adminbutton.png" alt="Administrador"></img>
+						</a>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>
+
