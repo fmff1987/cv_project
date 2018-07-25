@@ -32,9 +32,14 @@ import javax.faces.view.ViewScoped;
 
 @Named("ReqBean")
 @ViewScoped
-public class Requestbean implements Serializable{  
+public class Requestbean implements Serializable {  
 
-    private Request request = new Request();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Request request = new Request();
     
     private UploadedFile cvOrig;
 
