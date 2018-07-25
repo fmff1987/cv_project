@@ -69,7 +69,6 @@ private List<Request> requestList;
     public void removeReq() {
     		
             cr.removeRequest(request);
-        
     }
 //
 //    public void updateReq() {

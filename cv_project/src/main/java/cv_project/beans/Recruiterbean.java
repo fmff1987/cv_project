@@ -63,7 +63,6 @@ public class Recruiterbean {
 	
 	public void removeRec() {
 		cr.removeRec(recruiter);
-		
 	}
 //	public void updateRec() {
 //		cr.updateList();

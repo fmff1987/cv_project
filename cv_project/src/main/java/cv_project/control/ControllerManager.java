@@ -31,7 +31,7 @@ public class ControllerManager {
 
 	public void removeManage(Manager p) {
 		db.removeEntity(p);
-		db.updateEntity(p);
+		
 		//db.updateLocalList();
 	}
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.PreRemove;
 import javax.transaction.Transactional;
 
 import cv_project.models.Request;
@@ -20,11 +19,10 @@ public class ControllerRequest {
 	public void createRequest(Request r) {
 		db.createEntity(r);
 	}
-
-	public void removeRequest(Request r) {
 	
+	public void removeRequest(Request r) {
+		
 		db.removeEntity(r);
-		db.updateEntity(r);
 //		updateReq();
 	}
 	

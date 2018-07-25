@@ -86,10 +86,6 @@ public class Request extends cv_project.models.Entity {
 		this.deadline = deadline;
 	}
 
-	@PreRemove
-	public void preRemove() {
-		manager.getRequestList().remove(this);
-		recruiter.getRequestList().remove(this);
-	}
+	
 
 }

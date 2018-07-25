@@ -1,7 +1,6 @@
 package cv_project.models;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 
@@ -40,11 +38,6 @@ public class Recruiter extends Person {
         this.requestList = requestList;
     }
 
-    @PreRemove
-    public void preRemove() {
-    	for(Request r: requestList) {
-    		r.setRecruiter(null);
-    	}
-    }
+
     
 }

@@ -20,6 +20,5 @@ public class RequestRepository  extends EntityRepository<Request>{
 		return em.createNamedQuery("Request.getAllWithRecruiterAndManager",Request.class).getResultList();
 	}
 	
-	
 }
 	
