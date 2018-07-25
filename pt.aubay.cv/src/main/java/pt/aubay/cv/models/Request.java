@@ -1,4 +1,4 @@
-package cv_project.models;
+package pt.aubay.cv.models;
 
 import java.util.Date;
 
@@ -25,25 +25,24 @@ import javax.persistence.TemporalType;
 	
 }) 
 
-public class Request extends cv_project.models.Entity {
+public class Request extends pt.aubay.cv.models.Entity {
 
 
-	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
-    
-        @ManyToOne(fetch=FetchType.LAZY)
-	protected Manager manager;
-        
-        @ManyToOne(fetch=FetchType.LAZY)
-	protected Recruiter recruiter;
-        
-        private String candidateName;
-        private String candidateEmail;
-        
-        @Temporal(TemporalType.TIMESTAMP)
-        private Date deadline;    
-        
-        private String cvOrigPath;
+    private static final long serialVersionUID = 1L;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    protected Manager manager;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    protected Recruiter recruiter;
+
+    private String candidateName;
+    private String candidateEmail;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deadline;    
+
+    private String cvOrigPath;
 
     public String getCvOrigPath() {
         return cvOrigPath;
@@ -52,8 +51,7 @@ public class Request extends cv_project.models.Entity {
     public void setCvOrigPath(String cvOrigPath) {
         this.cvOrigPath = cvOrigPath;
     }
-        
-        
+            
     public Manager getManager() {
         return manager;
     }
@@ -93,67 +91,4 @@ public class Request extends cv_project.models.Entity {
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
     }
-=======
-
-	@ManyToOne(fetch=FetchType.EAGER)
-	private Manager manager;
-
-	@ManyToOne
-	private Recruiter recruiter;
-
-	private String candidateName;
-	private String candidateEmail;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date deadline;    
-
-
-	
-	
-
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
-
-	public Recruiter getRecruiter() {
-		return recruiter;
-	}
-
-	public void setRecruiter(Recruiter recruiter) {
-		this.recruiter = recruiter;
-	}
-
-	public String getCandidateName() {
-		return candidateName;
-	}
-
-	public void setCandidateName(String candidateName) {
-		this.candidateName = candidateName;
-	}
-
-	public String getCandidateEmail() {
-		return candidateEmail;
-	}
-
-	public void setCandidateEmail(String candidateEmail) {
-		this.candidateEmail = candidateEmail;
-	}
-
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
->>>>>>> Ricardo
-
-
-
-
-
 }

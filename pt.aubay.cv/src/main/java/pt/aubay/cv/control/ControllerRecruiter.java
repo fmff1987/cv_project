@@ -1,4 +1,4 @@
-package cv_project.control;
+package pt.aubay.cv.control;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import cv_project.models.Recruiter;
-import cv_project.repositories.RecruiterRepository;
+import pt.aubay.cv.models.Recruiter;
+import pt.aubay.cv.repositories.RecruiterRepository;
 @Transactional
 @RequestScoped
 public class ControllerRecruiter {

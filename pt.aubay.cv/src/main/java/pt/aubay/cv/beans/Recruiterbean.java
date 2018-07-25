@@ -1,4 +1,4 @@
-package cv_project.beans;
+package pt.aubay.cv.beans;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
-import cv_project.control.ControllerRecruiter;
-import cv_project.models.Manager;
-import cv_project.models.Recruiter;
+import pt.aubay.cv.control.ControllerRecruiter;
+import pt.aubay.cv.models.Manager;
+import pt.aubay.cv.models.Recruiter;
 
 @Named("RecBean")
 @RequestScoped

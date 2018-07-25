@@ -1,4 +1,4 @@
-package cv_project.models;
+package pt.aubay.cv.models;
 
 import javax.persistence.MappedSuperclass;
 

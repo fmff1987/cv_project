@@ -1,10 +1,10 @@
-package cv_project.repositories;
+package pt.aubay.cv.repositories;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import cv_project.models.Entity;
+import pt.aubay.cv.models.Entity;
 
 @Transactional
 public abstract class EntityRepository<T extends Entity> {

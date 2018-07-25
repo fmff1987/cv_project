@@ -1,10 +1,10 @@
-package cv_project.repositories;
+package pt.aubay.cv.repositories;
 
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import cv_project.models.Recruiter;
+import pt.aubay.cv.models.Recruiter;
 
 //@ApplicationScoped
 @RequestScoped

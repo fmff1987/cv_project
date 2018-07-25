@@ -1,11 +1,11 @@
-package cv_project.repositories;
+package pt.aubay.cv.repositories;
 
 
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 
-import cv_project.models.Request;
+import pt.aubay.cv.models.Request;
 
 @RequestScoped
 public class RequestRepository  extends EntityRepository<Request>{

@@ -1,4 +1,4 @@
-package cv_project.beans;
+package pt.aubay.cv.beans;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
 
-import cv_project.control.ControllerManager;
-import cv_project.models.Manager;
+import pt.aubay.cv.control.ControllerManager;
+import pt.aubay.cv.models.Manager;
 
 @RequestScoped
 @Named("ManBean")

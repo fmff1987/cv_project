@@ -1,4 +1,4 @@
-package cv_project.control;
+package pt.aubay.cv.control;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
-import cv_project.models.Request;
-import cv_project.repositories.RequestRepository;
+import pt.aubay.cv.models.Request;
+import pt.aubay.cv.repositories.RequestRepository;
 
 @Transactional
 @RequestScoped

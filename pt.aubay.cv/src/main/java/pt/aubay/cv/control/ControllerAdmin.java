@@ -1,4 +1,4 @@
-package cv_project.control;
+package pt.aubay.cv.control;
 
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;

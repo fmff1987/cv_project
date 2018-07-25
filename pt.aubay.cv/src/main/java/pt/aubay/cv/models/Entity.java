@@ -1,5 +1,5 @@
 
-package cv_project.models;
+package pt.aubay.cv.models;
 
 import java.io.Serializable;
 
