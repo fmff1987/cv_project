@@ -5,46 +5,24 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"       
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="CSS" name="style.css"></h:outputStylesheet>
-
-
-	<title>CV Management - Login</title>
-
-</h:head>
-<h:body class="body">
-=======
-<h:body class="body" >
-	<div class="header">
-
-		<div class="logo">
-			<IMG id="logoAubay"
-				src="https://websummit.com/wp-content/uploads/2017/09/Aubay_RGB-300x300.png" />
-		</div>
-
-		<div class="clock">
-			<!-- <p:clock displayMode="analog" /> -->
-			<h:form>
-
-<!DOCTYPE html>
-
-	</div>
-	<div>
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="WEB-INF/templates/template.xhtml">
+	
+	<h:head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 
+
+	<title>CV Management - Login</title>
+
+	</h:head>
+	
 	<ui:define name="pageTitle">
 			Página Index
 	</ui:define>
@@ -72,6 +50,7 @@ and open the template in the editor.
 						<a href="adm.xhtml"><img class="imagens"
 							src="resources/images/adminbutton.png"
 							alt="Admin face"></img>
+						</a>
 					<div class="col-sm-4 manager">
 						<a href="manager.xhtml"> <img class="buttonsindex"
 							src="resources/Images/managerbutton.png" alt="Manager"></img>
@@ -87,12 +66,10 @@ and open the template in the editor.
 							src="resources/Images/adminbutton.png" alt="Administrador"></img>
 						</a>
 					</div>
-				</div>
+					</div>
+				</div>	
 			</div>
-		
-
-		</h:form>
-		
+		</h:form>		
 	</ui:define>
 
 </ui:composition>
