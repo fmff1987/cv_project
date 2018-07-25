@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 .body {
-	background-color: #FFEADD;
 	background-color: #FFDDC1;
 }
 
@@ -9,6 +8,16 @@
 	background-color: red;
 	position: up;
 	height: 140px;
+	margin-bttom: 10px;
+}
+
+.subheader {
+	background-color: white;
+	margin-bottom: 10px;
+}
+
+.divh3 {
+	margin: 5px;	
 }
 
 #logoAubay {
@@ -29,18 +38,10 @@
 	align-content: unset;
 }
 
-.imagens {
-	width: 350px;
-	height: auto;
-}
-
 .container {
 	margin-top: 150px;
 	vertical-align: middle;
 	align-content: center;
-	
-}
-
 }
 
 .buttonsindex{

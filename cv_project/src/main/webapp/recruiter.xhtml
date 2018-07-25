@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"       
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:p="http://primefaces.org/ui">
-    
-    <h:head>
-    
-        <title>CV Management - Recruiter</title>
-        <h:outputStylesheet library="css" name="../resources/CSS/style.css"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    
-    <h:body>
-        
-        <h1>Recrutador</h1>
-        <h:form>
-        
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
+
+	<ui:define name="pageTitle">
+			Pagina Recruiter
+	</ui:define>
+	
+	<ui:define name="subheader">
+		<div class="subheader">
+			<div class="divh3">
+				<h3>Area Recrutador</h3>
+			</div>
+		</div>
+	</ui:define>
+	
+	<ui:define name="pageContent">
+
+        <h:form>        
         <p:growl id="msgs" showDetail="true"/>
         
         <p:dataTable id="OrderList" var="order" value="" editable="true" style="margin-bottom:20px" rows="10"
@@ -96,10 +98,11 @@ and open the template in the editor.
                         <p>Comentarios</p>
                     </p:scrollPanel>
 		    </p:column> 
-		</p:dataTable>
+			</p:dataTable>
 		
 			<p:commandButton value="Voltar" action="index?faces-redirect=true" />
 		
-		</h:form> 
-    </h:body>
-</html>
+		</h:form>
+    </ui:define>
+    
+</ui:composition>
