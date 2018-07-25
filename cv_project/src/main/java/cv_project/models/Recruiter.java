@@ -17,18 +17,13 @@ public class Recruiter extends Person {
     
     private static final long serialVersionUID = 1L;
 	
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "recruiter", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recruiter", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
                 CascadeType.REFRESH })
     private List<Request> requestList = new ArrayList<>();
 
     public List<Request> getRequestList() {
         return requestList;
     }
-
-    public void setRequestList(List<Request> requestList) {
-        this.requestList = requestList;
-    }
-
 
     
 }

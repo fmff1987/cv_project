@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui"
-      xmlns:of="http://omnifaces.org/functions">
 
-    <h:head>
-        <title>Manager</title>
-        <h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </h:head>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
 
-    <h:body>
+	<ui:define name="pageTitle">
+			Página Manager
+	</ui:define>
+
+	<ui:define name="pageContent">
 
         <h3 style="text-align:center;">Criar Pedido</h3>
+        
+        
 
-        <h:form id="form1">
-
+        <h:form id="form1" enctype="multipart/form-data">
+            
+            <p:growl showDetail="true" id="msg"/> 
+            
             <h:panelGrid columns="2" cellpadding="5">
 
                 <p:outputLabel value="Nome do Manager:" for="name_m" />	
@@ -41,13 +44,12 @@
                 <p:outputLabel for="datetime" value="Data Limite / Hora" />
                 <p:calendar id="datetime" value="#{ReqBean.request.deadline}" pattern="dd/MM/yyyy HH:00" /> 
 
-                <p:outputLabel value="Curriculo:" for="cv" />
-                <p:fileUpload id="cv" value="#{fileUploadView.file}" mode="simple" skinSimple="true" label="Anexar" />
+                
 
             </h:panelGrid>
 
             <p:commandButton value="Voltar" action="index?faces-redirect=true" />
-            <p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}"  />
+            <p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}" update="msg"/>
 
             <br></br>
             <br></br>
@@ -84,8 +86,28 @@
 
             </p:dataTable>
 
+            
         </h:form>
+        
+            <br></br>
+            <br></br>
+            <br></br>
+            
+            <h:form enctype="multipart/form-data">
+                <p:outputLabel value="Curriculo: "  />
+                <p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" />
+                <p:commandButton value="Enviar" ajax="false" actionListener="#{ReqBean.upload}" />
+                <!--
+                <p:fileUpload fileUploadListener="" 
+                           allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+                           invalidFileMessage="Formato do ficheiro inválido."
+                           label="Ficheiro..."  uploadLabel="Enviar" cancelLabel="Cancelar" />-->
+                
+            </h:form>    
+        
 
-    </h:body>
+    </ui:define>
 
-</html>
+
+</ui:composition>
+    
