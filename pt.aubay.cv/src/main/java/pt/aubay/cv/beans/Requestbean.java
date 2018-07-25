@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,25 +13,26 @@ import org.primefaces.event.RowEditEvent;
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
 
+//import javax.enterprise.context.RequestScoped;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.io.OutputStream;
 
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+import javax.faces.view.ViewScoped;
 
 
 
 @Named("ReqBean")
-@RequestScoped
-public class Requestbean {  
+@ViewScoped
+public class Requestbean implements Serializable{  
 
     private Request request = new Request();
     
@@ -50,6 +50,7 @@ public class Requestbean {
     @PostConstruct
     public void loadRequests() {
     	requestList = cr.getReq();
+        System.out.println(requestList.size());
     }
     
 
@@ -93,9 +94,7 @@ public class Requestbean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Request request = (Request) event.getObject();
         
-        //request.getRecruiter().getRequestList().add(request);
         cr.updateReq(request);
-        
     }
  
     public void onRowCancel(RowEditEvent event) {
@@ -110,6 +109,28 @@ public class Requestbean {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
            
+        }
+    }
+    
+    public void upload() {
+        try {
+            File rootDir = new File(".");
+            File applDir = new File(rootDir, "uploadedCVs");
+            applDir.mkdirs();
+            
+            File file = new File(applDir, cvOrig.getFileName());
+            
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvOrig.getContents());
+            out.close();
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvOrigPath(file.getAbsolutePath());
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
     }
 }    

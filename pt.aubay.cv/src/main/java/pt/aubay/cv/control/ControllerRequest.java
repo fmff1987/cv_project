@@ -30,7 +30,7 @@ public class ControllerRequest {
 	}
 
 	public List<Request> getReq() {
-		return db.getAll();
+		return db.getAllWithRecruiterAndManagers();
 	}
 	
 }
