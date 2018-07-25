@@ -53,14 +53,14 @@
 				<p:layoutUnit position="center" style="border-style:none;">
 					<p:growl id="msgs" showDetail="true" />
 	
-					<p:dataTable var="manager" value="#{ManBean.man}" id="managerTable"
+					<p:dataTable var="manager" value="#{ManBean.managerList}" id="managerTable" 
 						editable="true" rows="15" paginator="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="10,15, 20" style="border-style:none;">
 	
 					<f:facet name="header">
-			            Lista de Managers
-			        </f:facet>
+		            	Lista de Managers
+		            </f:facet>
 	
 					<p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}"	update=":form:msgs" />
 					<p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}"	update=":form:msgs" />
@@ -75,7 +75,7 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-	
+					
 					<p:column headerText="Email" filterBy="#{manager.email}">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -86,14 +86,14 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-	
+
 					<p:column style="width:32px">
 						<p:rowEditor />
 					</p:column>
 					<p:column style="width:35px">
 						<p:commandButton icon="ui-icon-trash" title="Delete this actor"	action="#{ManBean.removeMan()}" />
 					</p:column>
-					</p:dataTable>
+					</p:dataTable>	
 				</p:layoutUnit>
 			</p:layout>
 		</h:form>
