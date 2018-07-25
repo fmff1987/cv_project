@@ -18,6 +18,7 @@ public class ControllerManager {
 
 	public void createManager(Manager p) {
 		db.createEntity(p);
+		
 	}
 
 	public List<Manager> getMan() {
@@ -30,6 +31,7 @@ public class ControllerManager {
 
 	public void removeManage(Manager p) {
 		db.removeEntity(p);
+		
 		//db.updateLocalList();
 	}
 
