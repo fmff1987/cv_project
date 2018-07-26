@@ -64,11 +64,21 @@
                         
             <p:outputLabel value="CV" for="cv_c" />	
             <p:inputText  id="cv_c" value="#{ReqBean.request.cvOrigPath}" readonly="true" style="width:500px;"></p:inputText>
+                        <p:outputLabel value="Curriculo: "  />
+                        <p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" />
+                                      
+                        <!--<p:fileUpload fileUploadListener="" 
+                           allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+                           invalidFileMessage="Formato do ficheiro inválido."
+                           label="Ficheiro..."  uploadLabel="Enviar" cancelLabel="Cancelar" />-->
+                        
+                        
 
 		</h:panelGrid>
 
             <p:commandButton value="Voltar" action="index?faces-redirect=true" />
             <p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}" update="msg"/>
+            <p:commandButton value="Submeter Pedido" action="#{ReqBean.upload}" ajax="false" update="msg"/>
 
 		<br></br>
 		<br></br>
@@ -78,7 +88,7 @@
 
 	<h:form id="form2">
 
-		<p:dataTable var="can" id="candidateTable" value="#{ReqBean.request}"
+		<p:dataTable var="can" id="candidateTable" value=""
 			rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10,20,40">
