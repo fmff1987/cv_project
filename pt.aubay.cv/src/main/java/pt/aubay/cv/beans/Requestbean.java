@@ -18,8 +18,6 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
 
-//import javax.enterprise.context.RequestScoped;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,6 +25,8 @@ import java.io.OutputStream;
 
 import java.io.Serializable;
 import javax.faces.view.ViewScoped;
+
+import org.primefaces.event.FileUploadEvent;
 
 
 
@@ -79,7 +79,10 @@ public class Requestbean implements Serializable{
     }
 
     public void createReq() {
+        
         cr.createRequest(request);
+        request = new Request();
+        
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
@@ -113,12 +116,12 @@ public class Requestbean implements Serializable{
     }
     
     public void upload() {
-        try {
-            File rootDir = new File(".");
-            File applDir = new File(rootDir, "uploadedCVs");
-            applDir.mkdirs();
+        try { 
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs";
+            File folder = new File(dir);
+            folder.mkdirs();
             
-            File file = new File(applDir, cvOrig.getFileName());
+            File file = new File(dir, cvOrig.getFileName());
             
             OutputStream out = new FileOutputStream(file);
             out.write(cvOrig.getContents());
@@ -128,10 +131,12 @@ public class Requestbean implements Serializable{
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
             request.setCvOrigPath(file.getAbsolutePath());
+            
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
+        createReq();
     }
 }    
 
