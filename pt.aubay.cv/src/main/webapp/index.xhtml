@@ -7,7 +7,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
@@ -15,36 +16,52 @@ and open the template in the editor.
 	template="WEB-INF/templates/template.xhtml">
 
 	<ui:define name="pageTitle">
-			Página Index
+		Página Index
 	</ui:define>
+
 
     <ui:define name="body">
 		<h:body class="body"></h:body>
-		</ui:define>
+	</ui:define>
+
+
+	<ui:define name="header">
+		<div class="logoaubay">
+			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay"/>
+			<h1 class="title">Plataforma de Gestão de Currículos</h1>
+		</div>
+	</ui:define>
+   
+    	
 	<ui:define name="pageContent">
 		<h:form>
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4 manager">
-						<a href="manager.xhtml"> <img class="buttonsindex"
-							src="resources/images/managerbutton.png" alt="Manager"></img>
+						<a href="manager.xhtml"> <img class="buttonindex"
+							src="resources/images/buttonmember.png" alt="Manager"></img>
 						</a>
+						<h1 class="buttontext">Manager</h1>
 					</div>
-					<div class="col-sm-4 admin">
-						<a href="recruiter.xhtml"> <img class="buttonsindex"
-							src="resources/images/recruiterbutton.png" alt="Recrutador"></img>
-						</a>
-					</div>
+					
 					<div class="col-sm-4 recruiter">
-						<a href="adm.xhtml"> <img class="buttonsindex"
-							src="resources/images/adminbutton.png" alt="Administrador"></img>
+						<a href="recruiter.xhtml"> <img class="buttonindex"
+							src="resources/images/buttonmember.png" alt="Recrutador"></img>
 						</a>
+						<h1 class="buttontext">Recrutador</h1>
+					</div>
+					
+					<div class="col-sm-4 admin">
+						<a href="adm.xhtml"> <img class="buttonindex"
+							src="resources/images/buttonmember.png" alt="Administrador"></img>
+						</a>
+						<h1 class="buttontext">Administrador</h1>
 					</div>
 				</div>
 			</div>
 		</h:form>
 		
 	</ui:define>
-
+    
 </ui:composition>
 

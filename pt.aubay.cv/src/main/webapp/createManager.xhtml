@@ -10,33 +10,26 @@
 	template="WEB-INF/templates/template.xhtml">
 
 	<ui:define name="pageTitle">
-		Registo de Managers
+		Criar Managers
 	</ui:define>
 
-	<ui:define name="subheader">
-			<div class="subheader">
-				<div>
-					<p:menubar>
-						<p:submenu label="Manager">
-							<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"	url="createManager.xhtml" />
-						</p:submenu>
-	
-						<p:submenu label="Recrutador">
-							<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"	url="createRecruiter.xhtml" />
-						</p:submenu>
-	
-						<p:submenu label="Pedidos">
-							<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
-						</p:submenu>
-					</p:menubar>
-				</div>
-				<div class="divh3">
-					<h3>Registo de Managers</h3>
-				</div>
-			</div>
+	<ui:define name="header">
+		<div class="header">
+			<img id="logoman" src="resources/images/logoaubay.png" alt="Aubay"/>
+		
+			<h:form class="clock">
+				<p:clock pattern="dd/MM/yyyy" />
+				<br />
+				<br />
+				<p:clock pattern="HH:mm" />
+			</h:form>
+		</div> 
 	</ui:define>
-	
+
 	<ui:define name="pageContent">
+
+   		<h3 class="subtitles">Registar Managers</h3>
+
 		<h:form id="form">            
 			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
 				<p:layoutUnit position="west" resizable="true" minSize="40"
@@ -97,6 +90,7 @@
 				</p:layoutUnit>
 			</p:layout>
 		</h:form>
+		
     </ui:define>
 
 </ui:composition>

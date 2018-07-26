@@ -1,7 +1,6 @@
 package pt.aubay.cv.models;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -12,7 +11,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 
-
 @Entity
 @Table(name="request")
 @NamedQueries({
@@ -20,7 +18,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name="Request.getAll",
         query="SELECT r FROM Request r"),
     @NamedQuery(name="Request.getAllWithRecruiterAndManagers",
-        query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
+        query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),
 	
 }) 
 

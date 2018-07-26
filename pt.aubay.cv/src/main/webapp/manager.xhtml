@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <ui:composition
-        xmlns="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
@@ -11,21 +11,31 @@
 	template="WEB-INF/templates/template.xhtml">
 
 	<ui:define name="pageTitle">
-            Página Manager
+        Página Manager
+	</ui:define>
+
+	<ui:define name="header">
+		<div class="header">
+			<img id="logoman" src="resources/images/logoaubay.png" alt="Aubay"/>
+		
+			<h:form class="clock">
+				<p:clock pattern="dd/MM/yyyy" />
+				<br />
+				<br />
+				<p:clock pattern="HH:mm" />
+			</h:form>
+		</div> 
 	</ui:define>
 
 	<ui:define name="pageContent">
 
-        <h3 style="text-align:center;">Criar Pedido</h3>
-        
-        
-
+        <h3 class="subtitles">Criar Pedidos</h3>
+  
         <h:form id="form1" enctype="multipart/form-data">
             
             <p:growl showDetail="true" id="msg"/> 
 
 		<h:panelGrid columns="2" cellpadding="5">
-
 
 			<p:outputLabel value="Nome do Manager:" for="name_m" />
 			<p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
@@ -48,22 +58,17 @@
 			<p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
 				style="width:280px;"></p:inputText>
 
-
 			<p:outputLabel for="datetime" value="Data Limite / Hora" />
 			<p:calendar id="datetime" value="#{ReqBean.request.deadline}"
 				pattern="dd/MM/yyyy HH:00" />
                         
-                        <p:outputLabel value="CV" for="cv_c" />	
-                        <p:inputText  id="cv_c" value="#{ReqBean.request.cvOrigPath}" readonly="true" style="width:500px;"></p:inputText>
-
+            <p:outputLabel value="CV" for="cv_c" />	
+            <p:inputText  id="cv_c" value="#{ReqBean.request.cvOrigPath}" readonly="true" style="width:500px;"></p:inputText>
 
 		</h:panelGrid>
 
             <p:commandButton value="Voltar" action="index?faces-redirect=true" />
             <p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}" update="msg"/>
-
-
-
 
 		<br></br>
 		<br></br>
@@ -80,7 +85,7 @@
 
 			<f:facet name="header">
                     Lista de pedidos Aprovados
-                </f:facet>
+            </f:facet>
 
 			<p:column headerText="Nome do Candidato">
 				<h:outputText value="#{ReqBean.request.candidateName}" />
@@ -99,14 +104,13 @@
 			</p:column>
 
 		</p:dataTable>
-
-
-            
+           
         </h:form>
-        
+       
             <br></br>
             <br></br>
             <br></br>
+             
              <h:form enctype="multipart/form-data">
                 <p:outputLabel value="Curriculo: "  />
                 <p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" />
@@ -117,9 +121,8 @@
                            invalidFileMessage="Formato do ficheiro inválido."
                            label="Ficheiro..."  uploadLabel="Enviar" cancelLabel="Cancelar" />-->
                 
-            </h:form>    
+            	</h:form>    
            
-
     </ui:define>
 
 </ui:composition>

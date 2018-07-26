@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<ui:composition
+	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"       
       xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="WEB-INF/templates/template.xhtml">
     
-    <h:head>
+  	<ui:define name="pageTitle">
+        Página Recrutador
+	</ui:define>
     
-        <title>CV Management - Recruiter</title>
-        <h:outputStylesheet library="css" name="../resources/CSS/style.css"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    
-    <h:body>
+    <ui:define name="header">
+		<div class="header">
+			<img id="logoman" src="resources/images/logoaubay.png" alt="Aubay"/>
+		
+			<h:form class="clock">
+				<p:clock pattern="dd/MM/yyyy" />
+				<br />
+				<br />
+				<p:clock pattern="HH:mm" />
+			</h:form>
+		</div> 
+	</ui:define>
+	
+	<ui:define name="pageContent">
         
-        <h1>Recrutador</h1>
+        <h3 class="subtitles">Recrutador</h3>
         <h:form>
         
         <p:growl id="msgs" showDetail="true"/>
@@ -93,7 +103,7 @@ and open the template in the editor.
 		    
 		    <p:column headerText="Comentário">
                     <p:scrollPanel mode="native" style="width:230px;height:70px">
-                        <p>Comentarios</p>
+                        <p>Comentários</p>
                     </p:scrollPanel>
 		    </p:column> 
 		</p:dataTable>
@@ -101,5 +111,7 @@ and open the template in the editor.
 			<p:commandButton value="Voltar" action="index?faces-redirect=true" />
 		
 		</h:form> 
-    </h:body>
-</html>
+ 	
+ 	</ui:define>
+
+</ui:composition>
