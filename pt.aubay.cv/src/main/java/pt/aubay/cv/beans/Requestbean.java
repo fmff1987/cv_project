@@ -44,6 +44,7 @@ public class Requestbean implements Serializable {
     private UploadedFile cvOrig;
 
     private List<Request> requestList;
+    private List<Request> requestListAll;
 
     @Inject
     private ControllerRequest cr;
@@ -51,13 +52,19 @@ public class Requestbean implements Serializable {
     public List<Request> getRequestList() {
         return requestList;
     }
-
+    
+    public List<Request> getRequestListAll(){
+    	return requestListAll;
+    }
+    
     @PostConstruct
     public void loadRequests() {
     	requestList = cr.getReq();
-        System.out.println(requestList.size());
+    	requestListAll = cr.getReqAll();
+       // System.out.println(requestList.size());
     }
     
+ 
 
     public Request getRequest() {
         return request;
@@ -106,16 +113,16 @@ public class Requestbean implements Serializable {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-           
-        }
-    }
+//    public void onCellEdit(CellEditEvent event) {
+//        Object oldValue = event.getOldValue();
+//        Object newValue = event.getNewValue();
+//         
+//        if(newValue != null && !newValue.equals(oldValue)) {
+//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+//            FacesContext.getCurrentInstance().addMessage(null, msg);
+//           
+//        }
+//    }
     
     public void upload() {
         try {

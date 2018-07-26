@@ -18,6 +18,7 @@ public class ControllerManager {
 
 	public void createManager(Manager p) {
 		db.createEntity(p);
+		db.updateEntity(p);
 		
 	}
 

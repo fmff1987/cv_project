@@ -31,11 +31,13 @@ public class ControllerRequest {
 	}
 
 	public List<Request> getReq() {
-<<<<<<< HEAD:cv_project/src/main/java/cv_project/control/ControllerRequest.java
-		return db.getAllWithRecruiterAndManager();
-=======
+
 		return db.getAllWithRecruiterAndManagers();
->>>>>>> origin/Fernando:pt.aubay.cv/src/main/java/pt/aubay/cv/control/ControllerRequest.java
+
+	}
+	
+	public List<Request> getReqAll(){
+		return db.getAll();
 	}
 	
 }

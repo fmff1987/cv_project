@@ -18,9 +18,9 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     //São criadas as queries assim que o programa é compilado 
     @NamedQuery(name="Request.getAll",
-        query="SELECT r FROM Request r"),
-    @NamedQuery(name="Request.getAllWithRecruiterAndManagers",
         query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
+    @NamedQuery(name="Request.getAllWithRecruiterAndManagers",
+        query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),
 	
 }) 
 

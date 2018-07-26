@@ -58,6 +58,7 @@ public class Managerbean {
 	
 	public void removeMan() {
 		cm.removeManage(manager);
+		loadManagers();
 	}
 	
 //	public void updateMan() {
