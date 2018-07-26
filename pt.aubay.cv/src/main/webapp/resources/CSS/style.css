@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+.body {
+	background-image: url(#{resource['images/background.jpg']});
+	background-size: cover;
+}
+
+.logoaubay {
+	text-align: center;
+}
+
+#logo {
+	margin-top: 50px;
+	width: 340px;
+	height: auto;	
+	margin-bottom: 5px;
+}	
+	
+.title {
+	color: #fed1db;
+	font-weight: 100;
+	font-size: 80px;
+	text-align: center;
+	margin-bottom: 100px;
+	margin-top: 20px;
+}
+
+.container {
+	margin-top: 180px;
+	vertical-align: middle;
+	align-content: center;
+}
+
+.buttonindex {
+	width: 300px;
+	height: auto;
+    top:40%;
+    margin-top:-50px;
+    margin-left:30px;
+    margin-rigth:30px;
+}
+
+.buttontext {
+	color: #fed1db;
+	font: bold;
+	font-size: 42px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.header {
+	background-image: url(#{resource['images/header.jpg']});
+}
+
+#logoman {
+	margin: 10px;
+	width: 100px;
+	height: auto;	
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+.clock {
+	float: right;
+	margin-top: 20px;
+	margin-right: 10px;
+}	
+
+.subtitles {
+	color: #C06C84;
+	font: bold;
+	text-align:left;
+	margin: 10px;
+	margin-bottom: 15px;
+}
+
+.orderlist {
+	background-color: orange;
+}
+
+.divbutton {
+	
+}
