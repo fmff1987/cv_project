@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
+
+	<ui:define name="pageTitle">
+            Página Manager
+	</ui:define>
+
+	<ui:define name="pageContent">
+
+        <h3 style="text-align:center;">Criar Pedido</h3>
+        
+        
+
+        <h:form id="form1" enctype="multipart/form-data">
+            
+            <p:growl showDetail="true" id="msg"/> 
+
+		<h:panelGrid columns="2" cellpadding="5">
+
+
+			<p:outputLabel value="Nome do Manager:" for="name_m" />
+			<p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
+				effect="fold" converter="omnifaces.SelectItemsConverter"
+				style="width:250px" var="manager" filter="true"
+				filterMatchMode="contains">
+				<f:selectItem itemLabel="Selecione uma opção:" />
+				<f:selectItems value="#{ManBean.managerList}" var="m" itemLabel="#{m.name}"
+					itemValue="#{m}" />
+				<p:column>
+					<h:outputText value="#{manager.name}" />
+				</p:column>
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Nome do Candidato:" for="name_c" />
+			<p:inputText id="name_c" value="#{ReqBean.request.candidateName}"
+				style="width:280px;"></p:inputText>
+
+			<p:outputLabel value="E-mail do Candidato:" for="email_c" />
+			<p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
+				style="width:280px;"></p:inputText>
+
+
+			<p:outputLabel for="datetime" value="Data Limite / Hora" />
+			<p:calendar id="datetime" value="#{ReqBean.request.deadline}"
+				pattern="dd/MM/yyyy HH:00" />
+                        
+                        <p:outputLabel value="CV" for="cv_c" />	
+                        <p:inputText  id="cv_c" value="#{ReqBean.request.cvOrigPath}" readonly="true" style="width:500px;"></p:inputText>
+
+
+		</h:panelGrid>
+
+            <p:commandButton value="Voltar" action="index?faces-redirect=true" />
+            <p:commandButton value="Submeter Pedido" action="#{ReqBean.createReq()}" update="msg"/>
+
+
+
+
+		<br></br>
+		<br></br>
+		<br></br>
+
+	</h:form>
+
+	<h:form id="form2">
+
+		<p:dataTable var="can" id="candidateTable" value="#{ReqBean.request}"
+			rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,20,40">
+
+			<f:facet name="header">
+                    Lista de pedidos Aprovados
+                </f:facet>
+
+			<p:column headerText="Nome do Candidato">
+				<h:outputText value="#{ReqBean.request.candidateName}" />
+			</p:column>
+
+			<p:column headerText="Email do Candidato">
+				<h:outputText value="#{ReqBean.request.candidateEmail}" />
+			</p:column>
+
+			<p:column headerText="Recrutador">
+				<h:outputText value="#{RecBean.recruiter.name}" />
+			</p:column>
+
+			<p:column headerText="Cv Aubay">
+				<h:outputText value="" />
+			</p:column>
+
+		</p:dataTable>
+
+
+            
+        </h:form>
+        
+            <br></br>
+            <br></br>
+            <br></br>
+             <h:form enctype="multipart/form-data">
+                <p:outputLabel value="Curriculo: "  />
+                <p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" />
+                <p:commandButton value="Submit" ajax="false" actionListener="#{ReqBean.upload()}" />
+
+                <!--<p:fileUpload fileUploadListener="" 
+                           allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+                           invalidFileMessage="Formato do ficheiro inválido."
+                           label="Ficheiro..."  uploadLabel="Enviar" cancelLabel="Cancelar" />-->
+                
+            </h:form>    
+           
+
+    </ui:define>
+
+</ui:composition>
+
+
+
