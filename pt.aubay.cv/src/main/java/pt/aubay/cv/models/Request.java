@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -88,5 +89,12 @@ public class Request extends pt.aubay.cv.models.Entity {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+    
+    @PreRemove
+    public void preRemove() {
+    	manager.getRequestList().remove(this);
+    	recruiter.getRequestList().remove(this);
+
     }
 }

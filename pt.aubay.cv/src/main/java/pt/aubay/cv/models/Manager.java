@@ -9,7 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
+
+import org.omnifaces.util.Components.ForEach;
 
 @Entity
 @Table(name="manager")
@@ -31,6 +34,16 @@ public class Manager extends Person {
         return requestList;
     }
 
+    public void setRequestList(List<Request> requestList) {
+        this.requestList = requestList;
+    }
+
+   @PreRemove
+   public void preRemove() {
+	   for(Request r: requestList) {
+		   r.setManager(null);
+	   }
+   }
    
     
 }
