@@ -52,7 +52,7 @@
 	background-image: url(#{resource['images/header.jpg']});
 }
 
-#logoman {
+#logoheader {
 	margin: 10px;
 	width: 100px;
 	height: auto;	
@@ -76,8 +76,4 @@
 
 .orderlist {
 	background-color: orange;
-}
-
-.divbutton {
-	
 }

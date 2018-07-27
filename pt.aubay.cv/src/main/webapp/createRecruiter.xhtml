@@ -72,9 +72,21 @@
 		                            <f:facet name="input"><p:inputText  value="#{recruiter.email}" style="width:100%"/></f:facet>
 		                        </p:cellEditor>
 		                    </p:column>
-		                    <p:column style="width:32px">
 		                    
-		                    <p:rowEditor />
+		                    <p:column filterBy="#{recruiter.active}" headerText="Status">
+		                        <p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{recruiter.active ? 'Activo' : 'Inactivo'}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:outputLabel value="Activo: " />
+        							<p:selectBooleanCheckbox value="#{recruiter.active}" />
+								</f:facet>
+								</p:cellEditor>
+		                    </p:column>
+		                    
+		                    <p:column style="width:32px">		                    
+		                    	<p:rowEditor />
 		                    </p:column>	
 		            </p:dataTable>
 				</p:layoutUnit>
