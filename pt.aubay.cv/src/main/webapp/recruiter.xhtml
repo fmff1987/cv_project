@@ -3,17 +3,17 @@
 <!DOCTYPE html>
 
 <ui:composition
-            xmlns="http://www.w3.org/1999/xhtml"
-            xmlns:h="http://java.sun.com/jsf/html"       
-            xmlns:f="http://java.sun.com/jsf/core"      
-            xmlns:p="http://primefaces.org/ui"
-            xmlns:ui="http://java.sun.com/jsf/facelets"
-            template="WEB-INF/templates/template.xhtml">
-    
-  	<ui:define name="pageTitle">
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"       
+    xmlns:f="http://java.sun.com/jsf/core"      
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="WEB-INF/templates/template.xhtml">
+
+    <ui:define name="pageTitle">
         Página Recrutador
-	</ui:define>
-    
+    </ui:define>
+
     <ui:define name="header">
         <div class="header">
             <img id="logoman" src="resources/images/logoaubay.png" alt="Aubay"/>
@@ -26,57 +26,57 @@
             </h:form>
         </div> 
     </ui:define>
-	
+
     <ui:define name="pageContent">
-        
+
         <h3 class="subtitles">Recrutador</h3>
-        <h:form>
-        
+        <h:form id="form">
+
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="OrderList" var="order" value="" editable="true" style="margin-bottom:20px" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15">
+            <p:dataTable id="recruiterReqList" var="list"
+                         value="#{ReqBean.requestListAll}" editable="true"
+                         resizableColumns="true"
+                         emptyMessage="Nenhum pedido encontrado com este critério."
+                         style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
 
                 <f:facet name="header">
                     Lista de pedidos
                 </f:facet>
 
-                <p:column filterBy="#{order}" headerText="Manager">
+                <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
+                        update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+                        update=":form:msgs" />
+
+                <p:column headerText="Manager" filterBy="#{list.manager.name}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{list.manager.name}" />
+                </p:column>
+
+                <p:column headerText="Recrutador" filterBy="#{list.recruiter.name}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{list.recruiter.name}" />
+                </p:column>
+
+                <p:column headerText="Candidato" filterBy="#{list.candidateName}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{list.candidateName}" />
+                </p:column>
+
+                <p:column headerText="Data Limite" sortBy="#{list.deadline}">
                     <f:facet name="filter">
-                        <p:selectOneMenu>
-                            <f:selectItem itemLabel="Selecione" />
-                            <f:selectItems value="#{ManBean.managerList}" var="manager" itemLabel="#{manager.name}" />
-                        </p:selectOneMenu>
+                        <p:outputLabel for="datetime" />
+                        <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
+                                    locale="pt" />
                     </f:facet>
-                    <h:outputText value="" />
-                </p:column>
+                    <h:outputText value="#{list.deadline}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+                    </h:outputText>              
+                </p:column>    
 
-                <p:column filterBy="#{order}" headerText="Recrutador">
-                    <f:facet name="filter">
-                        <p:selectOneMenu>
-                            <f:selectItem itemLabel="Selecione" />
-                            <f:selectItems value="#{RecBean.recruiterList}" var="recruiter" itemLabel="#{recruiter.name}" />
-                        </p:selectOneMenu>
-                    </f:facet>
-                    <h:outputText value="Sem Recrutadores" />
-                </p:column>
-
-                <p:column headerText="Candidato" filterBy="#{ReqBean.request.candidateName}" footerText="contains" filterMatchMode="contains">
-
-                </p:column>
-
-                <p:column headerText="Email">
-                    <h:outputText value="" />
-                </p:column>
-
-                <p:column filterBy="#{order}" headerText="Data Limite / Hora" >
-                    <f:facet name="filter" >
-                        <p:calendar pattern="MM/dd/yyyy HH:00" />
-                    </f:facet>
-                    <h:outputText value="" />
-                </p:column>
 
                 <p:column headerText="CV Original" style="width:140px">
                     <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
@@ -89,27 +89,16 @@
                     <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" /> 
                 </p:column>
 
-                <p:column headerText="Estado" >
-                    <p:selectOneButton value="#{selectOneView.option}" >
-                        <h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
-                            <f:selectItem itemLabel="Selecione" />
-                            <f:selectItem itemLabel="Reprovado" />
-                            <f:selectItem itemLabel="Aprovado" />
-                            <f:selectItems value="#{bean.objectIds}" />
-                            <f:ajax listener="#{bean.idEdited(object)}" render="name" />
-                        </h:selectOneMenu>
-                    </p:selectOneButton>
-                </p:column>
 
                 <p:column headerText="Comentário">
-                    <p:scrollPanel mode="native" style="width:230px;height:70px">
+                    <p:scrollPanel mode="native" style="width:370px;height:100px">
                         <p>Comentários</p>
                     </p:scrollPanel>
                 </p:column> 
             </p:dataTable>
 
             <p:commandButton value="Voltar" action="index?faces-redirect=true" />
-		
+
         </h:form> 
-     </ui:define>
+    </ui:define>
 </ui:composition>
