@@ -9,8 +9,15 @@ public abstract class Person extends Entity{
 	
 	protected String name;
     protected String email;
+    protected boolean active;
 
-    public String getName() {
+    public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public String getName() {
             return name;
     }
     public void setName(String name) {
@@ -22,6 +29,4 @@ public abstract class Person extends Entity{
     public void setEmail(String email) {
             this.email = email;
     }
-	
-  
 }

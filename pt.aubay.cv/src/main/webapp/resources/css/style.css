@@ -11,6 +11,7 @@
 
 #logo {
 	margin: 15px;
+	margin-top: 50px;
 	width: 340px;
 	height: auto;	
 	margin-bottom: 5px;
@@ -26,6 +27,14 @@
 
 .container {
 	margin-top: 80px;
+	font-size: 80px;
+	text-align: center;
+	margin-bottom: 100px;
+	margin-top: 20px;
+}
+
+.container {
+	margin-top: 180px;
 	vertical-align: middle;
 	align-content: center;
 }
@@ -42,6 +51,7 @@
 .buttontext {
 	color: #fed1db;
 	font-weight: 65;
+	font: bold;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
@@ -53,6 +63,9 @@
 }
 
 #logoman {
+}
+
+#logoheader {
 	margin: 10px;
 	width: 100px;
 	height: auto;	
@@ -69,7 +82,12 @@
 .subtitles {
 	color: #C06C84;
 	font-weight: bold;
+	font: bold;
 	text-align:left;
 	margin: 10px;
 	margin-bottom: 15px;
+}
+
+.orderlist {
+	background-color: orange;
 }
