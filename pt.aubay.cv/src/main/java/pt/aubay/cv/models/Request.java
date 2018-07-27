@@ -40,8 +40,7 @@ public class Request extends pt.aubay.cv.models.Entity {
 
 	private String candidateName;
 	private String candidateEmail;
-	
-	@Enumerated(EnumType.STRING)
+
 	private Status estado;
 
 	public Status getEstado() {

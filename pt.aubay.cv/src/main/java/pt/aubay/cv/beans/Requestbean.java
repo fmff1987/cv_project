@@ -7,11 +7,12 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -94,7 +95,7 @@ public class Requestbean implements Serializable {
     }
 
     public void createReq() {
-    	request.setEstado(Status.APROVADO);
+    	request.setEstado(pt.aubay.cv.models.Status.APROVADO);
         cr.createRequest(request);
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
