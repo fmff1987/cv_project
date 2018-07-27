@@ -21,16 +21,20 @@ public class Managerbean {
 	
 	private Manager manager = new Manager();
 	private List<Manager> managerList;
+	private List<Manager> activeManagerList;
 	
 	public List<Manager> getManagerList() {
 		return managerList;
 	}
 
-
 	@Inject
 	private ControllerManager cm;
 	
 	
+	public List<Manager> getActiveManagerList() {
+		return activeManagerList;
+	}
+
 	public Manager getManager() {
 		return manager;
 	}
@@ -38,8 +42,10 @@ public class Managerbean {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
+	
 	@PostConstruct
-	private void loadManagers() {
+	public void loadManagers() {
+		activeManagerList = cm.getManagerActive();
 		managerList = cm.getMan();
 	}
 	// Nao se deve usar um getter para ir diretamente á base de dados.
@@ -52,6 +58,7 @@ public class Managerbean {
 //		}
 	
 	public void createMan() {
+		manager.setActive(true);
 		cm.createManager(manager);
 		loadManagers();
 	}
@@ -60,6 +67,9 @@ public class Managerbean {
 		cm.removeManage(manager);
 		loadManagers();
 	}
+//	public void removeMan() {
+//		cm.removeManage(manager);
+//	}
 	
 //	public void updateMan() {
 //		cm.updateMan();
@@ -70,7 +80,6 @@ public class Managerbean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Manager manager = (Manager) event.getObject();
         cm.updateMan(manager);
-        
     }
  
     public void onRowCancel(RowEditEvent event) {

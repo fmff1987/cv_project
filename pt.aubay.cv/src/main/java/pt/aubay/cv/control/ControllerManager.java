@@ -25,6 +25,10 @@ public class ControllerManager {
 	public List<Manager> getMan() {
 		return db.getAll();
 	}
+	
+	public List<Manager> getManagerActive() {
+		return db.getManagerActive();
+	}
 
 	public void updateMan(Manager p) {
 		db.updateEntity(p);
@@ -35,6 +39,8 @@ public class ControllerManager {
 		
 		//db.updateLocalList();
 	}
+//	public void removeManage(Manager p) {
+//		db.removeEntity(p);
+//	}
 
-	
 }
