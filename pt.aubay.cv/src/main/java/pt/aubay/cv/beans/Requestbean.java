@@ -13,6 +13,7 @@ import org.primefaces.event.RowEditEvent;
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -45,6 +46,7 @@ public class Requestbean implements Serializable {
 
     private List<Request> requestList;
     private List<Request> requestListAll;
+    
 
     @Inject
     private ControllerRequest cr;
@@ -67,6 +69,8 @@ public class Requestbean implements Serializable {
  
 
     public Request getRequest() {
+    	
+    	
         return request;
     }
 
@@ -91,6 +95,7 @@ public class Requestbean implements Serializable {
     }
 
     public void createReq() {
+    	request.setEstado(pt.aubay.cv.models.Status.APROVADO);
         cr.createRequest(request);
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
@@ -113,16 +118,7 @@ public class Requestbean implements Serializable {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-//    public void onCellEdit(CellEditEvent event) {
-//        Object oldValue = event.getOldValue();
-//        Object newValue = event.getNewValue();
-//         
-//        if(newValue != null && !newValue.equals(oldValue)) {
-//            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-//           
-//        }
-//    }
+
     
     public void upload() {
         try {

@@ -97,14 +97,14 @@
 
 				<p:growl id="msgs" showDetail="true" />
 				<!-- FILTRO CONSULTA -->
-				<p:tabView >
+				<p:tabView>
 					<p:tab title="A tratar">
 
 						<p:dataTable id="RequestList" var="req"
-							value="#{ReqBean.requestList}" editable="true"
-							 rows="10" paginator="true"
+							value="#{ReqBean.requestList}" editable="true" rows="10"
+							paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+							rowsPerPageTemplate="5,10,15" resizableColumns="true">
 
 							<f:facet name="header">
                                                             Lista de pedidos
@@ -140,7 +140,7 @@
 							</p:column>
 							<p:column headerText="Candidato" filterBy="#{req.candidateName}"
 								filterMatchMode="contains">
-								<!-- nao vai ter Filtro acho eu-->
+								
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{req.candidateName}" />
@@ -183,10 +183,10 @@
 											stepHour="1" stepMinute="30" />
 									</f:facet>
 								</p:cellEditor>
-								
+
 							</p:column>
 
-							<p:column headerText="CV Original" >
+							<p:column headerText="CV Original">
 								<p:commandButton value="Download" ajax="false"
 									onclick="PrimeFaces.monitorDownload(start, stop);"
 									icon="ui-icon-arrowthick-1-s">
@@ -194,13 +194,13 @@
 								</p:commandButton>
 							</p:column>
 
-							
+
 
 
 							<p:column style="width:42px">
 								<p:rowEditor />
 							</p:column>
-	
+
 							<p:column>
 								<p:commandButton value="Distribuir" action="index" />
 								<p:commandButton value="Confirmar" />
@@ -211,14 +211,14 @@
 
 
 					</p:tab>
-				
+
 					<p:tab title="Em Tratamento">
 
-						<p:dataTable id="FinishedList" var="req"
+						<p:dataTable id="OngoingList" var="req"
 							value="#{ReqBean.requestListAll}" editable="true"
 							style="margin-bottom:20px" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+							rowsPerPageTemplate="5,10,15" resizableColumns="true">
 
 							<f:facet name="header">
                                                             Lista de pedidos
@@ -315,7 +315,10 @@
 									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
-
+						<p:column headerText="Estado" >	
+								
+							
+							</p:column> 
 
 							<p:column headerText="Comentario">
 								<p:inputTextarea cols="20" />
@@ -343,11 +346,11 @@
 					</p:tab>
 					<p:tab title="Concluido">
 
-						<p:dataTable id="HistoryList"  var="req"
+						<p:dataTable id="HistoryList" var="req"
 							value="#{ReqBean.requestListAll}" editable="true"
 							style="margin-bottom:20px" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15">
+							rowsPerPageTemplate="5,10,15" resizableColumns="true">
 
 							<f:facet name="header">
                                                             Lista de pedidos
@@ -406,7 +409,7 @@
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Data Limite" sortBy="#{req.deadline}">
+						<!-- 	<p:column headerText="Data Limite" sortBy="#{req.deadline}">
 								<f:facet name="filter">
 									<p:outputLabel for="datetime" />
 									<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
@@ -427,15 +430,15 @@
 									</f:facet>
 								</p:cellEditor>
 								<h:outputText value="" />
-							</p:column>
+							</p:column> -->
 
-							<p:column headerText="CV Original">
+							<!-- <p:column headerText="CV Original">
 								<p:commandButton value="Download" ajax="false"
 									onclick="PrimeFaces.monitorDownload(start, stop);"
 									icon="ui-icon-arrowthick-1-s">
 									<p:fileDownload value="" />
 								</p:commandButton>
-							</p:column>
+							</p:column> -->
 
 							<p:column headerText="CV Aubay">
 								<p:commandButton value="Download" ajax="false"
@@ -444,12 +447,12 @@
 									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
-
+<!-- 
 
 							<p:column headerText="Comentario">
 								<p:inputTextarea cols="20" />
 							</p:column>
-
+ -->
 							<p:column style="width:32px">
 								<p:rowEditor />
 							</p:column>
