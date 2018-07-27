@@ -11,21 +11,9 @@
 	template="WEB-INF/templates/template.xhtml">
 
 	<ui:define name="pageTitle">
-        Página Manager
-	</ui:define>
+            Página Manager
+        </ui:define>    
 
-	<ui:define name="header">
-		<div class="header">
-			<img id="logoman" src="resources/images/logoaubay.png" alt="Aubay"/>
-		
-			<h:form class="clock">
-				<p:clock pattern="dd/MM/yyyy" />
-				<br />
-				<br />
-				<p:clock pattern="HH:mm" />
-			</h:form>
-		</div> 
-	</ui:define>
 
 	<ui:define name="pageContent">
 
@@ -75,7 +63,6 @@
 
 		</h:panelGrid>
 
-            <p:commandButton value="Voltar" action="index?faces-redirect=true" />
             <p:commandButton value="Submeter Pedido" action="#{ReqBean.upload}" ajax="false" update="msg"/>
 
 		<br></br>

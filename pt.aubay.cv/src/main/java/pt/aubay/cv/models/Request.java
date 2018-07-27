@@ -13,112 +13,109 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-@Table(name="request")
+@Table(name = "request")
 @NamedQueries({
     //São criadas as queries assim que o programa é compilado 
-    @NamedQuery(name="Request.getAll",
-        query="SELECT r FROM Request r"),
-    @NamedQuery(name="Request.getAllWithRecruiterAndManagers",
-        query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),
-	
-	//São criadas as queries assim que o programa é compilado 
-	@NamedQuery(name="Request.getAll",
-			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
-	@NamedQuery(name="Request.getAllWithRecruiterAndManagers",
-	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),
-
-}) 
+    @NamedQuery(name = "Request.getAll",
+            query = "SELECT r FROM Request r")
+    ,
+    @NamedQuery(name = "Request.getAllWithRecruiterAndManagers",
+            query = "SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),})
 
 public class Request extends pt.aubay.cv.models.Entity {
 
+    private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
+    @ManyToOne(fetch = FetchType.LAZY)
+    protected Manager manager;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	protected Manager manager;
+    @ManyToOne(fetch = FetchType.LAZY)
+    protected Recruiter recruiter;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	protected Recruiter recruiter;
+    private String candidateName;
+    private String candidateEmail;
 
-	private String candidateName;
-	private String candidateEmail;
-	
-	@Enumerated(EnumType.STRING)
-	private Status estado;
+    @Enumerated(EnumType.STRING)
+    private Status estado;
 
-	public Status getEstado() {
-		return estado;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deadline;
 
-	public void setEstado(Status estado) {
-		this.estado = estado;
-	}
+    private String cvOrigPath;
+    private String cvAubayPath;
 
+    public Status getEstado() {
+        return estado;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date deadline;    
+    public void setEstado(Status estado) {
+        this.estado = estado;
+    }
 
-	private String cvOrigPath;
+    public String getCvOrigPath() {
+        return cvOrigPath;
+    }
 
+    public void setCvOrigPath(String cvOrigPath) {
+        this.cvOrigPath = cvOrigPath;
+    }
 
-	public String getCvOrigPath() {
-		return cvOrigPath;
-	}
+    public String getCvAubayPath() {
+        return cvAubayPath;
+    }
 
-	public void setCvOrigPath(String cvOrigPath) {
-		this.cvOrigPath = cvOrigPath;
-	}
+    public void setCvAubayPath(String cvAubayPath) {
+        this.cvAubayPath = cvAubayPath;
+    }
+    
+    
 
-	public Manager getManager() {
-		return manager;
-	}
+    public Manager getManager() {
+        return manager;
+    }
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
 
-	public Recruiter getRecruiter() {
-		return recruiter;
-	}
+    public Recruiter getRecruiter() {
+        return recruiter;
+    }
 
-	public void setRecruiter(Recruiter recruiter) {
-		this.recruiter = recruiter;
-	}
+    public void setRecruiter(Recruiter recruiter) {
+        this.recruiter = recruiter;
+    }
 
-	public String getCandidateName() {
-		return candidateName;
-	}
+    public String getCandidateName() {
+        return candidateName;
+    }
 
-	public void setCandidateName(String candidateName) {
-		this.candidateName = candidateName;
-	}
+    public void setCandidateName(String candidateName) {
+        this.candidateName = candidateName;
+    }
 
-	public String getCandidateEmail() {
-		return candidateEmail;
-	}
+    public String getCandidateEmail() {
+        return candidateEmail;
+    }
 
-	public void setCandidateEmail(String candidateEmail) {
-		this.candidateEmail = candidateEmail;
-	}
+    public void setCandidateEmail(String candidateEmail) {
+        this.candidateEmail = candidateEmail;
+    }
 
-	public Date getDeadline() {
-		return deadline;
-	}
+    public Date getDeadline() {
+        return deadline;
+    }
 
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
 
-	@PreRemove
-	public void preRemove() {
-		manager.getRequestList().remove(this);
-		recruiter.getRequestList().remove(this);
+    @PreRemove
+    public void preRemove() {
+        manager.getRequestList().remove(this);
+        recruiter.getRequestList().remove(this);
 
-	}
-
-
-
+    }
 
 }

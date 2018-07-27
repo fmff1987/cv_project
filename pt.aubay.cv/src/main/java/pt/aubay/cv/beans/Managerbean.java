@@ -50,7 +50,7 @@ public class Managerbean {
 	}
 	// Nao se deve usar um getter para ir diretamente á base de dados.
 	//em vez disso deve.se usar uma lista local para ir buscar á base de dados, assim só la vai uma vez
-	// @PostConstruct garante que semre que se estanciar ManagerBean o metodo é corrido
+	// @PostConstruct garante que sempre que se estanciar ManagerBean o metodo é corrido
 	
 	
 //	public List<Manager> getMan(){
@@ -61,6 +61,8 @@ public class Managerbean {
 		manager.setActive(true);
 		cm.createManager(manager);
 		loadManagers();
+                FacesMessage msg = new FacesMessage("Manager Criado");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 	public void removeMan() {
