@@ -36,10 +36,10 @@
 
                     <p:commandButton value="Criar" action="#{ManBean.createMan()}" icon="ui-icon-check" update=":form:managerTable" />
                     <p:commandButton value="Voltar" action="adm?faces-redirect=true" icon="ui-icon-home" />
+                
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center" style="border-style:none;">
-
 
                     <p:dataTable var="manager" value="#{ManBean.managerList}" id="managerTable" 
                                  editable="true" rows="15" paginator="true"
@@ -92,8 +92,11 @@
                         </p:column>
 
                     </p:dataTable>	
+                    
                 </p:layoutUnit>
+                
             </p:layout>
+            
         </h:form>
 
     </ui:define>

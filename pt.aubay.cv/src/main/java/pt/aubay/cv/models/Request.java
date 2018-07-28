@@ -18,8 +18,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     //São criadas as queries assim que o programa é compilado 
     @NamedQuery(name = "Request.getAll",
-            query = "SELECT r FROM Request r")
-    ,
+            query = "SELECT r FROM Request r"),
     @NamedQuery(name = "Request.getAllWithRecruiterAndManagers",
             query = "SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),})
 
@@ -68,8 +67,6 @@ public class Request extends pt.aubay.cv.models.Entity {
     public void setCvAubayPath(String cvAubayPath) {
         this.cvAubayPath = cvAubayPath;
     }
-    
-    
 
     public Manager getManager() {
         return manager;
@@ -115,7 +112,6 @@ public class Request extends pt.aubay.cv.models.Entity {
     public void preRemove() {
         manager.getRequestList().remove(this);
         recruiter.getRequestList().remove(this);
-
     }
 
 }

@@ -10,11 +10,8 @@
                 template="WEB-INF/templates/template.xhtml">
 
     <ui:define name="pageTitle">
-        <div class="divh3">
-            <h3>Area Administrador</h3>
-        </div>
+        Página Administrador
     </ui:define>
-
 
     <ui:define name="subheader">
         <div class="subheader">
@@ -31,7 +28,8 @@
                     </p:submenu>
 
                     <p:submenu label="Pedidos">
-                        <p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
+                        <p:menuitem value="Criar Pedidos" icon="ui-icon-disk" 
+                        			url="admCreateRequest.xhtml" />
                     </p:submenu>
                 </p:menubar>
             </div>
@@ -174,13 +172,12 @@
                         <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
                                 update=":form:msgs" />
 
-
                         <p:column headerText="Manager" filterBy="#{ongoingR.manager.name}"
                                   filterMatchMode="contains">
                             <h:outputText value="#{ongoingR.manager.name}" />
                         </p:column>
 
-                        <p:column headerText="Recrutas">
+                        <p:column headerText="Recrutador">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{ongoingR.recruiter.name}" />
@@ -257,12 +254,12 @@
                             </p:commandButton>
                         </p:column>
 
-                        <p:column headerText="Status" filterBy=""
+                        <p:column headerText="Estado" filterBy=""
                                   filterMatchMode="contains" >
                             <h:outputText value="teste" /> 
                         </p:column>
 
-                        <p:column headerText="Comentario">
+                        <p:column headerText="Comentário">
                             <p:inputTextarea cols="20" />
                         </p:column>
 
@@ -280,7 +277,7 @@
                     </p:dataTable>
                 </p:tab>
 
-                <p:tab title="Concluido">
+                <p:tab title="Concluído">
                     <p:dataTable id="FinishedList" var="finishedR"
                                  value="#{ReqBean.requestList}" editable="true" rows="10"
                                  paginator="true" resizableColumns="true"
@@ -340,6 +337,7 @@
             </p:tabView>
 
         </h:form>
+        
     </ui:define>
 
 </ui:composition>

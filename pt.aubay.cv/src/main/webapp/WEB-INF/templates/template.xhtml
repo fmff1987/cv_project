@@ -11,7 +11,34 @@
 		<title><ui:insert name="pageTitle"></ui:insert></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
-		<h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+			<script type="text/javascript">
+			PrimeFaces.locales['pt'] = {
+				closeText: 'Fechar',
+				prevText: 'Anterior',
+				nextText: 'Próximo',
+				currentText: 'Começo',
+				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+				monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+				dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+				dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+				dayNamesMin: ['D','S','T','Q','Q','S','S'],
+				weekHeader: 'Semana',
+				firstDay: 0,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: '',
+				timeOnlyTitle: 'Só Horas',
+				timeText: 'Tempo',
+				hourText: 'Hora',
+				minuteText: 'Minuto',
+				secondText: 'Segundo',
+				ampm: false,
+				month: 'Mês',
+				week: 'Semana',
+				day: 'Dia',
+				allDayText : 'Todo o Dia'
+			}
+		</script>
 	</h:head>
     
         <div class="header">
@@ -22,9 +49,7 @@
         </div> 
 	
 	<ui:insert name="body"></ui:insert>
-	
-       
-	
+
 	<ui:insert name="subheader"></ui:insert>
 			
 	<ui:insert name="pageContent"></ui:insert>

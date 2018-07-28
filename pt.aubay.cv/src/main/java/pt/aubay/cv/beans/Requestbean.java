@@ -1,32 +1,25 @@
 package pt.aubay.cv.beans;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.primefaces.event.RowEditEvent;
-
-import pt.aubay.cv.control.ControllerRequest;
-import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
-import org.primefaces.model.UploadedFile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.io.Serializable;
-import javax.faces.view.ViewScoped;
+import java.util.List;
 
-import org.primefaces.event.FileUploadEvent;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
+
+import pt.aubay.cv.control.ControllerRequest;
+import pt.aubay.cv.models.Request;
+import pt.aubay.cv.models.Status;
 
 
 
@@ -65,11 +58,7 @@ public class Requestbean implements Serializable {
        // System.out.println(requestList.size());
     }
     
- 
-
     public Request getRequest() {
-    	
-    	
         return request;
     }
 
@@ -86,15 +75,14 @@ public class Requestbean implements Serializable {
     }
     
     public ControllerRequest getCr() {
-            return cr;
+        return cr;
     }
 
     public void setCr(ControllerRequest cr) {
-            this.cr = cr;
+        this.cr = cr;
     }
 
     public void createReq() {
-        
     	request.setEstado(Status.APROVADO);
         cr.createRequest(request);
         request = new Request();
@@ -120,7 +108,6 @@ public class Requestbean implements Serializable {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
     
     public void upload() {
         try { 

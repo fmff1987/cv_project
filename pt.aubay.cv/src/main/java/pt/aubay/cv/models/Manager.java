@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
-import org.omnifaces.util.Components.ForEach;
-
 @Entity
 @Table(name="manager")
 @NamedQueries({

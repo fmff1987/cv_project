@@ -26,7 +26,7 @@ public class Recruiterbean {
     private ControllerRecruiter cr;
 
     @PostConstruct
-private void loadRecruiters() {
+    private void loadRecruiters() {
         recruiterList = cr.getRec();
     }
 //	public List<Recruiter> getRec(){
