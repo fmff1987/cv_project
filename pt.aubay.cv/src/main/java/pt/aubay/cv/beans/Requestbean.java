@@ -1,33 +1,27 @@
 package pt.aubay.cv.beans;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
-
-import pt.aubay.cv.control.ControllerRequest;
-import pt.aubay.cv.models.Request;
-
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-
-import org.primefaces.model.UploadedFile;
-
 //import javax.enterprise.context.RequestScoped;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
+
+import pt.aubay.cv.control.ControllerRequest;
+import pt.aubay.cv.models.Request;
+import pt.aubay.cv.models.Status;
 
 
 
@@ -46,9 +40,11 @@ public class Requestbean implements Serializable {
 
     private List<Request> requestList;
     private List<Request> requestListAll;
+    private List<Request> requestListAprovado;
     
 
-    @Inject
+
+	@Inject
     private ControllerRequest cr;
 
     public List<Request> getRequestList() {
@@ -58,11 +54,20 @@ public class Requestbean implements Serializable {
     public List<Request> getRequestListAll(){
     	return requestListAll;
     }
-    
+
+    public List<Request> getRequestListAprovado() {
+		return requestListAprovado;
+	}
+
+	public void setRequestListAprovado(List<Request> requestListAprovado) {
+		this.requestListAprovado = requestListAprovado;
+	}
+
     @PostConstruct
     public void loadRequests() {
     	requestList = cr.getReq();
     	requestListAll = cr.getReqAll();
+    	requestListAprovado = cr.getReqAllAPROVADO();
        // System.out.println(requestList.size());
     }
     
@@ -92,11 +97,12 @@ public class Requestbean implements Serializable {
 
     public void setCr(ControllerRequest cr) {
             this.cr = cr;
-    }
+    }	
 
     public void createReq() {
-    	request.setEstado(pt.aubay.cv.models.Status.APROVADO);
+    	request.setEstado(null);
         cr.createRequest(request);
+       
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }

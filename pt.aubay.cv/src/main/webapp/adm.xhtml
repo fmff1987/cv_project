@@ -140,7 +140,7 @@
 							</p:column>
 							<p:column headerText="Candidato" filterBy="#{req.candidateName}"
 								filterMatchMode="contains">
-								
+
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{req.candidateName}" />
@@ -315,10 +315,30 @@
 									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
-						<p:column headerText="Estado" >	
-								
-							
-							</p:column> 
+							<p:column headerText="Estado">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{req.estado}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneRadio required="true" value="#{req.estado}" layout="responsive"
+											columns="1">
+											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
+											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
+
+										</p:selectOneRadio>
+
+										<!-- <p:selectOneMenu
+											value="#{req.estado}" var="status" style="width:125px">
+			
+											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
+											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
+											
+										</p:selectOneMenu> -->
+									</f:facet>
+								</p:cellEditor>
+
+							</p:column>
 
 							<p:column headerText="Comentario">
 								<p:inputTextarea cols="20" />
@@ -346,7 +366,7 @@
 					</p:tab>
 					<p:tab title="Concluido">
 
-						<p:dataTable id="HistoryList" var="req"
+						<p:dataTable id="AprovedList" var="req"
 							value="#{ReqBean.requestListAll}" editable="true"
 							style="margin-bottom:20px" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -409,7 +429,7 @@
 								</p:cellEditor>
 							</p:column>
 
-						<!-- 	<p:column headerText="Data Limite" sortBy="#{req.deadline}">
+							<!-- 	<p:column headerText="Data Limite" sortBy="#{req.deadline}">
 								<f:facet name="filter">
 									<p:outputLabel for="datetime" />
 									<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
@@ -447,7 +467,7 @@
 									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
-<!-- 
+							<!-- 
 
 							<p:column headerText="Comentario">
 								<p:inputTextarea cols="20" />

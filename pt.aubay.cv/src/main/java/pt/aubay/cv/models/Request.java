@@ -21,17 +21,18 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	//São criadas as queries assim que o programa é compilado 
 	@NamedQuery(name="Request.getAll",
-			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
+			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN r.recruiter"),
 	@NamedQuery(name="Request.getAllWithRecruiterAndManagers",
-	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),
-
+	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS  null"),
+	@NamedQuery(name="Request.getAllAprovado",
+	query="SELECT r FROM Request r JOIN r.manager JOIN r.recruiter WHERE r.estado IS APROVADO "),
 }) 
 
 public class Request extends pt.aubay.cv.models.Entity {
 
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	protected Manager manager;
 
@@ -41,6 +42,8 @@ public class Request extends pt.aubay.cv.models.Entity {
 	private String candidateName;
 	private String candidateEmail;
 
+	
+	@Enumerated(EnumType.STRING)
 	private Status estado;
 
 	public Status getEstado() {
@@ -112,8 +115,6 @@ public class Request extends pt.aubay.cv.models.Entity {
 		recruiter.getRequestList().remove(this);
 
 	}
-
-
 
 
 }

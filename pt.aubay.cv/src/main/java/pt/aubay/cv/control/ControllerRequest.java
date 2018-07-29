@@ -40,5 +40,9 @@ public class ControllerRequest {
 	public List<Request> getReqAll(){
 		return db.getAll();
 	}
+
+	public List<Request> getReqAllAPROVADO() {
+		return db.getAllAprovado();
+	}
 	
 }
