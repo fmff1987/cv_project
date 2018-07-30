@@ -35,6 +35,7 @@ public class Requestbean implements Serializable {
 	private Request request = new Request();
     
     private UploadedFile cvOrig;
+    private UploadedFile cvAubay;
 
     private List<Request> requestList;
     private List<Request> requestListAll;
@@ -43,6 +44,14 @@ public class Requestbean implements Serializable {
     @Inject
     private ControllerRequest cr;
 
+    public UploadedFile getCvAubay() {
+        return cvAubay;
+    }
+
+    public void setCvAubay(UploadedFile cvAubay) {
+        this.cvAubay = cvAubay;
+    }
+    
     public List<Request> getRequestList() {
         return requestList;
     }
@@ -109,9 +118,9 @@ public class Requestbean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
-    public void upload() {
+    public void uploadOrig() {
         try { 
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs";
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
             File folder = new File(dir);
             folder.mkdirs();
             
@@ -131,6 +140,29 @@ public class Requestbean implements Serializable {
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
         createReq();
+    }
+    
+     public void uploadAubay() {
+        try { 
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+            File folder = new File(dir);
+            folder.mkdirs();
+            
+            File file = new File(dir, cvAubay.getFileName());
+            
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvAubay.getContents());
+            out.close();
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvAubayPath(file.getAbsolutePath());
+            
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
     }
 }    
 
