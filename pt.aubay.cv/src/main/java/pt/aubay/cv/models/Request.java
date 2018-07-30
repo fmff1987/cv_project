@@ -16,11 +16,6 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "request")
 @NamedQueries({
-    //São criadas as queries assim que o programa é compilado 
-    @NamedQuery(name = "Request.getAll",
-            query = "SELECT r FROM Request r"),
-    @NamedQuery(name = "Request.getAllWithRecruiterAndManagers",
-            query = "SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),})
 	//São criadas as queries assim que o programa é compilado 
 	@NamedQuery(name="Request.getAll",
 			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
@@ -39,10 +34,6 @@ import javax.persistence.TemporalType;
 public class Request extends pt.aubay.cv.models.Entity {
 
     private static final long serialVersionUID = 1L;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    protected Manager manager;
-	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	protected Manager manager;
@@ -52,23 +43,9 @@ public class Request extends pt.aubay.cv.models.Entity {
 
 	private String candidateName;
 	private String candidateEmail;
-
 	
 	@Enumerated(EnumType.STRING)
 	private Status estado;
-
-	public Status getEstado() {
-		return estado;
-	}
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    protected Recruiter recruiter;
-
-    private String candidateName;
-    private String candidateEmail;
-
-    @Enumerated(EnumType.STRING)
-    private Status estado;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deadline;

@@ -19,7 +19,6 @@ import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
 
 
 

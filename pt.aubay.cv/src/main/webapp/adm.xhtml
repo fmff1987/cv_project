@@ -157,7 +157,7 @@
 
                 <p:tab title="Em Tratamento">
 
-                    <p:dataTable id="OngoingList" var="ongoingR"
+                    <p:dataTable id="OngoingList" var="req"
                                  value="#{ReqBean.requestListAll}" editable="true"
                                  style="margin-bottom:20px" rows="10" paginator="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -172,18 +172,18 @@
                         <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
                                 update=":form:msgs" />
 
-                        <p:column headerText="Manager" filterBy="#{ongoingR.manager.name}"
+                        <p:column headerText="Manager" filterBy="#{req.manager.name}"
                                   filterMatchMode="contains">
-                            <h:outputText value="#{ongoingR.manager.name}" />
+                            <h:outputText value="#{req.manager.name}" />
                         </p:column>
 
                         <p:column headerText="Recrutador">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{ongoingR.recruiter.name}" />
+                                    <h:outputText value="#{req.recruiter.name}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <h:selectOneMenu value="#{ongoingR.recruiter}" 
+                                    <h:selectOneMenu value="#{req.recruiter}" 
                                                      converter="omnifaces.SelectItemsConverter">
                                         <f:selectItems value="#{RecBean.recruiterList}"
                                                        var="recrutas" itemLabel="#{recrutas.name}"
@@ -193,14 +193,14 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Candidato" filterBy="#{ongoingR.candidateName}"
+                        <p:column headerText="Candidato" filterBy="#{req.candidateName}"
                                   filterMatchMode="contains">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{ongoingR.candidateName}" />
+                                    <h:outputText value="#{req.candidateName}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText value="#{ongoingR.candidateName}" />
+                                    <p:inputText value="#{req.candidateName}" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
@@ -208,15 +208,15 @@
                         <p:column headerText="Email">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{ongoingR.candidateEmail}" />
+                                    <h:outputText value="#{req.candidateEmail}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText id="email" value="#{ongoingR.candidateEmail}"/>
+                                    <p:inputText id="email" value="#{req.candidateEmail}"/>
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Data Limite" sortBy="#{ongoingR.deadline}">
+                        <p:column headerText="Data Limite" sortBy="#{req.deadline}">
                             <f:facet name="filter">
                                 <p:outputLabel for="datetime" />
                                 <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
@@ -224,13 +224,13 @@
                             </f:facet>
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{ongoingR.deadline}">
+                                    <h:outputText value="#{req.deadline}">
                                         <f:convertDateTime pattern="dd/MM/yyyy HH:00" />
                                     </h:outputText>
                                 </f:facet>
                                 <f:facet name="input">
                                     <p:calendar locale="pt" styleClass="right"
-                                                value="#{ongoingR.deadline}" id="byDateButtonCalTo" mode="popup"
+                                                value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
                                                 maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
                                                 stepHour="1" stepMinute="30" />
                                 </f:facet>
@@ -254,10 +254,24 @@
                             </p:commandButton>
                         </p:column>
 
-                        <p:column headerText="Estado" filterBy=""
-                                  filterMatchMode="contains" >
-                            <h:outputText value="teste" /> 
-                        </p:column>
+                        <p:column headerText="Estado">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{req.estado}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneRadio required="true" value="#{req.estado}" layout="responsive"
+											columns="1">
+											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
+											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
+
+										</p:selectOneRadio>
+
+										
+									</f:facet>
+								</p:cellEditor>
+
+							</p:column>
 
                         <p:column headerText="Comentário">
                             <p:inputTextarea cols="20" />
@@ -279,7 +293,7 @@
 
                 <p:tab title="Concluído">
                     <p:dataTable id="FinishedList" var="finishedR"
-                                 value="#{ReqBean.requestList}" editable="true" rows="10"
+                                 value="#{ReqBean.requestListAprovado}" editable="true" rows="10"
                                  paginator="true" resizableColumns="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                  rowsPerPageTemplate="5,10,15" >
@@ -339,502 +353,6 @@
         </h:form>
         
     </ui:define>
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="WEB-INF/templates/template.xhtml">
-
-	<ui:define name="pageTitle">
-		Area Administrador
-	</ui:define>
-
-	<ui:define name="subheader">
-		<div class="subheader">
-			<div>
-				<p:menubar>
-					<p:submenu label="Manager">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createManager.xhtml" />
-					</p:submenu>
-
-					<p:submenu label="Recrutador">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createRecruiter.xhtml" />
-					</p:submenu>
-
-					<p:submenu label="Pedidos">
-						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk" url="" />
-					</p:submenu>
-				</p:menubar>
-			</div>
-			<div class="divh3">
-				<h3>Area Administrador</h3>
-			</div>
-		</div>
-	</ui:define>
-
-	<ui:define name="pageContent">
-		<h:head>
-			<title>CV Management - ADM</title>
-			<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-			<script type="text/javascript">
-		            PrimeFaces.locales['pt'] = {
-		                closeText: 'Fechar',
-		                prevText: 'Anterior',
-		                nextText: 'Próximo',
-		                currentText: 'Começo',
-		                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-		                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-		                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-		                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-		                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-		                weekHeader: 'Semana',
-		                firstDay: 0,
-		                isRTL: false,
-		                showMonthAfterYear: false,
-		                yearSuffix: '',
-		                timeOnlyTitle: 'Só Horas',
-		                timeText: 'Tempo',
-		                hourText: 'Hora',
-		                minuteText: 'Minuto',
-		                secondText: 'Segundo',
-		                ampm: false,
-		                month: 'Mês',
-		                week: 'Semana',
-		                day: 'Dia',
-		                allDayText: 'Todo o Dia'
-		            }
-		        </script>
-		</h:head>
-		<h:body>
-			<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
-
-				<!-- MENU -->
-				<p:menubar>
-					<p:submenu label="Manager">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createManager.xhtml" />
-
-					</p:submenu>
-
-					<p:submenu label="Recrutador">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createRecruiter.xhtml" />
-					</p:submenu>
-
-					<p:submenu label="Pedidos">
-						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk"
-							url="manager.xhtml" />
-					</p:submenu>
-				</p:menubar>
-				<h1>Pagina Admin</h1>
-
-				<p:growl id="msgs" showDetail="true" />
-				<!-- FILTRO CONSULTA -->
-				<p:tabView>
-					<p:tab title="A tratar">
-
-						<p:dataTable id="RequestList" var="req"
-							value="#{ReqBean.requestList}" editable="true" rows="10"
-							paginator="true"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15" resizableColumns="true">
-
-							<f:facet name="header">
-                                                            Lista de pedidos
-                                                        </f:facet>
-							<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-								update=":form:msgs" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
-
-
-							<p:column headerText="Manager" filterBy="#{req.manager.name}"
-								filterMatchMode="contains">
-								<h:outputText value="#{req.manager.name}" />
-
-							</p:column>
-
-							<p:column headerText="Recrutas">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.recruiter.name}" />
-									</f:facet>
-									<f:facet name="input">
-										<h:selectOneMenu value="#{req.recruiter}" style="width:100%"
-											converter="omnifaces.SelectItemsConverter">
-											<f:selectItems value="#{RecBean.recruiterList}"
-												var="recrutas" itemLabel="#{recrutas.name}"
-												itemValue="#{recrutas}" />
-										</h:selectOneMenu>
-									</f:facet>
-
-								</p:cellEditor>
-
-							</p:column>
-							<p:column headerText="Candidato" filterBy="#{req.candidateName}"
-								filterMatchMode="contains">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateName}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{req.candidateName}" style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Email">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateEmail}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="email" value="#{req.candidateEmail}"
-											style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Data Limite" sortBy="#{req.deadline}">
-								<f:facet name="filter">
-									<p:outputLabel for="datetime" />
-									<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
-										locale="pt" />
-								</f:facet>
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.deadline}">
-											<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
-										</h:outputText>
-									</f:facet>
-									<f:facet name="input">
-										<p:calendar locale="pt" styleClass="right"
-											value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
-											maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
-											stepHour="1" stepMinute="30" />
-									</f:facet>
-								</p:cellEditor>
-
-							</p:column>
-
-							<p:column headerText="CV Original">
-								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
-								</p:commandButton>
-							</p:column>
-
-
-
-
-							<p:column style="width:42px">
-								<p:rowEditor />
-							</p:column>
-<!-- 
-							<p:column>
-								<p:commandButton value="Distribuir" action="index" />
-								<p:commandButton value="Confirmar" />
-								<p:commandButton value="Delete" icon="ui-icon-trash"
-									action="#{ReqBean.removeReq()}" />
-							</p:column> -->
-						</p:dataTable>
-
-
-					</p:tab>
-
-					<p:tab title="Em Tratamento">
-
-						<p:dataTable id="OngoingList" var="req"
-							value="#{ReqBean.requestListAll}" editable="true"
-							style="margin-bottom:20px" rows="10" paginator="true"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15" resizableColumns="true">
-
-							<f:facet name="header">
-                                                            Lista de pedidos
-                                                        </f:facet>
-							<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-								update=":form:msgs" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
-
-
-							<p:column headerText="Manager" filterBy="#{req.manager.name}"
-								filterMatchMode="contains">
-								<h:outputText value="#{req.manager.name}" />
-
-							</p:column>
-
-							<p:column headerText="Recrutas">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.recruiter.name}" />
-									</f:facet>
-									<f:facet name="input">
-										<h:selectOneMenu value="#{req.recruiter}" style="width:100%"
-											converter="omnifaces.SelectItemsConverter">
-											<f:selectItems value="#{RecBean.recruiterList}"
-												var="recrutas" itemLabel="#{recrutas.name}"
-												itemValue="#{recrutas}" />
-										</h:selectOneMenu>
-									</f:facet>
-
-								</p:cellEditor>
-
-							</p:column>
-							<p:column headerText="Candidato" filterBy="#{req.candidateName}"
-								filterMatchMode="contains">
-								<!-- nao vai ter Filtro acho eu-->
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateName}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{req.candidateName}" style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Email">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateEmail}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="email" value="#{req.candidateEmail}"
-											style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Data Limite" sortBy="#{req.deadline}">
-								<f:facet name="filter">
-									<p:outputLabel for="datetime" />
-									<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
-										locale="pt" />
-								</f:facet>
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.deadline}">
-											<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
-										</h:outputText>
-									</f:facet>
-									<f:facet name="input">
-										<p:calendar locale="pt" styleClass="right"
-											value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
-											maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
-											stepHour="1" stepMinute="30" />
-									</f:facet>
-								</p:cellEditor>
-								<h:outputText value="" />
-							</p:column>
-
-							<p:column headerText="CV Original">
-								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
-								</p:commandButton>
-							</p:column>
-
-							<p:column headerText="CV Aubay">
-								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
-								</p:commandButton>
-							</p:column>
-							<p:column headerText="Estado">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.estado}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:selectOneRadio required="true" value="#{req.estado}" layout="responsive"
-											columns="1">
-											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
-											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
-
-										</p:selectOneRadio>
-
-										<!-- <p:selectOneMenu
-											value="#{req.estado}" var="status" style="width:125px">
-			
-											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
-											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
-											
-										</p:selectOneMenu> -->
-									</f:facet>
-								</p:cellEditor>
-
-							</p:column>
-
-							<p:column headerText="Comentario">
-								<p:inputTextarea cols="20" />
-							</p:column>
-
-							<p:column style="width:32px">
-								<p:rowEditor />
-							</p:column>
-
-							<!-- <p:column style="width:35px">
-								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-									action="#{RecBean.removeRec()}" />
-							</p:column> -->
-							<!-- LISTA DE CANDIDATOS -->
-
-
-
-							<p:commandButton value="Distribuir" action="index" />
-							<p:commandButton value="Confirmar" />
-						</p:dataTable>
-
-
-
-
-					</p:tab>
-					<p:tab title="Concluido">
-
-						<p:dataTable id="AprovedList" var="req"
-							value="#{ReqBean.requestListAprovado}" editable="true"
-							style="margin-bottom:20px" rows="10" paginator="true"
-							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="5,10,15" resizableColumns="true">
-
-							<f:facet name="header">
-                                                            Lista de pedidos
-                                                        </f:facet>
-							<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-								update=":form:msgs" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
-
-
-							<p:column headerText="Manager" filterBy="#{req.manager.name}"
-								filterMatchMode="contains">
-								<h:outputText value="#{req.manager.name}" />
-
-							</p:column>
-
-							<p:column headerText="Recrutas">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.recruiter.name}" />
-									</f:facet>
-									<f:facet name="input">
-										<h:selectOneMenu value="#{req.recruiter}" style="width:100%"
-											converter="omnifaces.SelectItemsConverter">
-											<f:selectItems value="#{RecBean.recruiterList}"
-												var="recrutas" itemLabel="#{recrutas.name}"
-												itemValue="#{recrutas}" />
-										</h:selectOneMenu>
-									</f:facet>
-
-								</p:cellEditor>
-
-							</p:column>
-							<p:column headerText="Candidato" filterBy="#{req.candidateName}"
-								filterMatchMode="contains">
-								<!-- nao vai ter Filtro acho eu-->
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateName}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{req.candidateName}" style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Email">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.candidateEmail}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="email" value="#{req.candidateEmail}"
-											style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<!-- 	<p:column headerText="Data Limite" sortBy="#{req.deadline}">
-								<f:facet name="filter">
-									<p:outputLabel for="datetime" />
-									<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
-										locale="pt" />
-								</f:facet>
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.deadline}">
-											<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
-										</h:outputText>
-									</f:facet>
-									<f:facet name="input">
-										<p:calendar locale="pt" styleClass="right"
-											value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
-											maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
-											stepHour="1" stepMinute="30" />
-									</f:facet>
-								</p:cellEditor>
-								<h:outputText value="" />
-							</p:column> -->
-
-							<!-- <p:column headerText="CV Original">
-								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
-								</p:commandButton>
-							</p:column> -->
-
-							<p:column headerText="CV Aubay">
-								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
-									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
-								</p:commandButton>
-							</p:column>
-							<!-- 
-
-							<p:column headerText="Comentario">
-								<p:inputTextarea cols="20" />
-							</p:column>
- -->
-							<p:column style="width:32px">
-								<p:rowEditor />
-							</p:column>
-
-							<p:column style="width:35px">
-								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-									action="#{ReqBean.removeReq(request)}" />
-							</p:column>
-							<!-- LISTA DE CANDIDATOS -->
-
-
-
-							<p:commandButton value="Distribuir" action="index" />
-							<p:commandButton value="Confirmar" />
-						</p:dataTable>
-
-
-
-
-					</p:tab>
-				</p:tabView>
-
-				<p:commandButton value="Voltar" action="index?faces-redirect=true" />
-
-			</h:form>
-		</h:body>
-	</ui:define>
+	
 
 </ui:composition>
