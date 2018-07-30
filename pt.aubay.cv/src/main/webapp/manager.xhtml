@@ -73,7 +73,7 @@
 
 	<h:form id="form2">
 
-		<p:dataTable var="can" id="candidateTable" value="#{ReqBean.request}"
+		<p:dataTable var="req" id="candidateTable" value="#{ReqBean.requestListAprovado}"
 			rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10,20,40">
@@ -83,19 +83,19 @@
                 </f:facet>
 
 			<p:column headerText="Nome do Candidato">
-				<h:outputText value="#{ReqBean.request.candidateName}" />
+				<h:outputText value="#{req.candidateName}" />
 			</p:column>
 
 			<p:column headerText="Email do Candidato">
-				<h:outputText value="#{ReqBean.request.candidateEmail}" />
+				<h:outputText value="#{req.candidateEmail}" />
 			</p:column>
 
 			<p:column headerText="Recrutador">
-				<h:outputText value="#{RecBean.recruiter.name}" />
+				<h:outputText value="#{req.recruiter.name}" />
 			</p:column>
 
 			<p:column headerText="Cv Aubay">
-				<h:outputText value="" />
+				<p:commandButton value="cv"></p:commandButton>
 			</p:column>
 
 		</p:dataTable>

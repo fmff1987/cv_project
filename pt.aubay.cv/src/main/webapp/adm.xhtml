@@ -200,13 +200,13 @@
 							<p:column style="width:42px">
 								<p:rowEditor />
 							</p:column>
-
+<!-- 
 							<p:column>
 								<p:commandButton value="Distribuir" action="index" />
 								<p:commandButton value="Confirmar" />
 								<p:commandButton value="Delete" icon="ui-icon-trash"
 									action="#{ReqBean.removeReq()}" />
-							</p:column>
+							</p:column> -->
 						</p:dataTable>
 
 
@@ -348,10 +348,10 @@
 								<p:rowEditor />
 							</p:column>
 
-							<p:column style="width:35px">
+							<!-- <p:column style="width:35px">
 								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
 									action="#{RecBean.removeRec()}" />
-							</p:column>
+							</p:column> -->
 							<!-- LISTA DE CANDIDATOS -->
 
 
@@ -367,7 +367,7 @@
 					<p:tab title="Concluido">
 
 						<p:dataTable id="AprovedList" var="req"
-							value="#{ReqBean.requestListAll}" editable="true"
+							value="#{ReqBean.requestListAprovado}" editable="true"
 							style="margin-bottom:20px" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="5,10,15" resizableColumns="true">
@@ -479,7 +479,7 @@
 
 							<p:column style="width:35px">
 								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-									action="#{RecBean.removeRec()}" />
+									action="#{ReqBean.removeReq(request)}" />
 							</p:column>
 							<!-- LISTA DE CANDIDATOS -->
 

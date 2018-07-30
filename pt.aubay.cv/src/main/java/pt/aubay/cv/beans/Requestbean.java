@@ -41,6 +41,7 @@ public class Requestbean implements Serializable {
     private List<Request> requestList;
     private List<Request> requestListAll;
     private List<Request> requestListAprovado;
+    private List<Request> requestListNotAprovado;
     
 
 
@@ -62,12 +63,22 @@ public class Requestbean implements Serializable {
 	public void setRequestListAprovado(List<Request> requestListAprovado) {
 		this.requestListAprovado = requestListAprovado;
 	}
+	 public List<Request> getRequestListNotAprovado() {
+			return requestListNotAprovado;
+		}
+
+		public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
+			this.requestListNotAprovado = requestListNotAprovado;
+		}
+
 
     @PostConstruct
     public void loadRequests() {
     	requestList = cr.getReq();
     	requestListAll = cr.getReqAll();
-    	requestListAprovado = cr.getReqAllAPROVADO();
+    	requestListAprovado = cr.getReqAllAprovado();
+    	requestListNotAprovado = cr.getAllNotAprovado();
+    	
        // System.out.println(requestList.size());
     }
     
@@ -103,12 +114,12 @@ public class Requestbean implements Serializable {
     	request.setEstado(null);
         cr.createRequest(request);
        
-        FacesMessage msg = new FacesMessage("Pedido registrado.");
+        FacesMessage msg = new FacesMessage("Pedido registado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
     
 
-    public void removeReq() {
+    public void removeReq(Request request) {
             cr.removeRequest(request);
     }    
     
