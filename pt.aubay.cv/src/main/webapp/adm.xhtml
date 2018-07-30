@@ -197,10 +197,10 @@
 
 
 
-							<p:column style="width:42px">
+							<p:column style="width:32px">
 								<p:rowEditor />
 							</p:column>
-<!-- 
+							<!-- 
 							<p:column>
 								<p:commandButton value="Distribuir" action="index" />
 								<p:commandButton value="Confirmar" />
@@ -265,7 +265,7 @@
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Email">
+							<p:column headerText="Email" filterBy="#{req.candidateEmail}">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{req.candidateEmail}" />
@@ -315,14 +315,14 @@
 									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
-							<p:column headerText="Estado">
+							<p:column headerText="Estado" sortBy="#{req.estado.label}">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{req.estado}" />
+										<h:outputText value="#{req.estado.label}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:selectOneRadio required="true" value="#{req.estado}" layout="responsive"
-											columns="1">
+										<p:selectOneRadio required="true" value="#{req.estado}"
+											layout="responsive" columns="1">
 											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
 											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
 
@@ -348,16 +348,8 @@
 								<p:rowEditor />
 							</p:column>
 
-							<!-- <p:column style="width:35px">
-								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-									action="#{RecBean.removeRec()}" />
-							</p:column> -->
-							<!-- LISTA DE CANDIDATOS -->
-
-
-
-							<p:commandButton value="Distribuir" action="index" />
-							<p:commandButton value="Confirmar" />
+							<!-- <p:commandButton value="Distribuir" action="index" />
+							<p:commandButton value="Confirmar" /> -->
 						</p:dataTable>
 
 
@@ -480,6 +472,7 @@
 							<p:column style="width:35px">
 								<p:commandButton icon="ui-icon-trash" title="Delete this actor"
 									action="#{ReqBean.removeReq(request)}" />
+
 							</p:column>
 							<!-- LISTA DE CANDIDATOS -->
 
