@@ -5,9 +5,9 @@ public enum Status{
 	APROVADO ("aprovado"), 
 	REPROVADO("reprovado");
 	
-	private String label;
+	public String label;
 	
-	private Status(String label) {
+	Status(String label) {
 		this.label = label;
 	}
 	public String getLabel() {

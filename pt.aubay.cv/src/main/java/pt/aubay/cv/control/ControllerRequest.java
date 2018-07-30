@@ -37,4 +37,13 @@ public class ControllerRequest {
 	public List<Request> getReqAll(){
 		return db.getAll();
 	}
+
+	public List<Request> getReqAllAprovado() {
+		return db.getAllAprovado();
+	}
+
+	public List<Request> getAllNotAprovado() {
+		return db.getAllNotAprovado();
+	}
+	
 }

@@ -65,7 +65,7 @@ public class Managerbean {
                 FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-	public void removeMan() {
+	public void removeMan(Manager manager) {
 		cm.removeManage(manager);
 		loadManagers();
 	}

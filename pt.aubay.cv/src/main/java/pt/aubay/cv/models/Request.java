@@ -21,6 +21,20 @@ import javax.persistence.TemporalType;
             query = "SELECT r FROM Request r"),
     @NamedQuery(name = "Request.getAllWithRecruiterAndManagers",
             query = "SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS NULL"),})
+	//São criadas as queries assim que o programa é compilado 
+	@NamedQuery(name="Request.getAll",
+			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
+	@NamedQuery(name="Request.getAllWithRecruiterAndManagers",
+	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS  null"),
+	
+	@NamedQuery(name="Request.getAllAprovado", 
+	query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE r.estado = :estado "),
+	
+	@NamedQuery(name= "Request.getAllNotAprovado", 
+	query = "SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE NOT r.estado = :estado")
+	
+}) 
+
 
 public class Request extends pt.aubay.cv.models.Entity {
 
@@ -28,6 +42,24 @@ public class Request extends pt.aubay.cv.models.Entity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     protected Manager manager;
+	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	protected Manager manager;
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	protected Recruiter recruiter;
+
+	private String candidateName;
+	private String candidateEmail;
+
+	
+	@Enumerated(EnumType.STRING)
+	private Status estado;
+
+	public Status getEstado() {
+		return estado;
+	}
 
     @ManyToOne(fetch = FetchType.LAZY)
     protected Recruiter recruiter;
