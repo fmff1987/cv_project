@@ -72,7 +72,7 @@
 
                 <p:column headerText="CV Original" style="width:140px">
                     <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{ReqBean.downloadAubay}" />
+                        <p:fileDownload value="#{ReqBean.downloadOrig}" />
                     </p:commandButton>
                 </p:column>                
 
@@ -86,7 +86,7 @@
                 </p:column>
 
                 <p:column  style="width:40px">
-                    <p:commandButton value="Enviar" action="#{ReqBean.uploadAubay()}" ajax="false"/>
+                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay()}" icon="ui-icon-mail-closed" ajax="false"/>
                     
                 </p:column>
             </p:dataTable>

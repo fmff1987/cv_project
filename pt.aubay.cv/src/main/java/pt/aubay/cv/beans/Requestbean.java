@@ -1,6 +1,8 @@
 package pt.aubay.cv.beans;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
@@ -113,10 +116,18 @@ public class Requestbean implements Serializable {
         return downloadAubay;
     }
 
+    public void setDownloadAubay(StreamedContent downloadAubay) {
+        this.downloadAubay = downloadAubay;
+    }
+    
     public StreamedContent getDownloadOrig() {
         return downloadOrig;
     }
 
+    public void setDownloadOrig(StreamedContent downloadOrig) {
+        this.downloadOrig = downloadOrig;
+    }
+    
     public void createReq() {
         request.setEstado(Status.INICIADO);
         cr.createRequest(request);
@@ -167,30 +178,7 @@ public class Requestbean implements Serializable {
         createReq();
     }
     
-  /*  public void uploadAubay() {
-        try {
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-            File folder = new File(dir);
-            folder.mkdirs();
 
-            File file = new File(dir, cvOrig.getFileName());
-
-            OutputStream out = new FileOutputStream(file);
-            out.write(cvOrig.getContents());
-            out.close();
-
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage("Upload completo",
-                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-            request.setCvOrigPath(file.getAbsolutePath());
-
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-        }
-        cr.updateReq(request);
-    }
-*/
     public void uploadAubay() {
         try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
@@ -213,6 +201,22 @@ public class Requestbean implements Serializable {
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
         cr.updateReq(request);
+    }
+    
+    public void downloadOriginal(){
+        try{
+            InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+                    System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/" + cvOrig.getFileName());
+            downloadOrig = new DefaultStreamedContent(input, "", "cv_" + request.getCandidateName());
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Download concluído"));
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        
     }
     
     /*public downloadAubay() {        
