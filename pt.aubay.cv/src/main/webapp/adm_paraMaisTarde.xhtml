@@ -116,8 +116,9 @@
 
 			<p:column style="width:35px">
 				<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-					action="#{RecBean.removeRec()}" actionListener="#{dialogView.destroyWorld}" />
-					
+					action="#{RecBean.removeRec()}"
+					actionListener="#{dialogView.destroyWorld}" />
+
 			</p:column>
 			<!-- LISTA DE CANDIDATOS -->
 
@@ -182,6 +183,26 @@
 
 				<h:outputLabel for="age" value="Age:" />
 				<p:inputText id="age" label="age" />
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:commandButton value="Inserir comentario"
+			onclick="PF('dlgComment').show();" type="button" icon="fa fa-plus" />
+
+		<p:dialog header="Insira um comentario" widgetVar="dlgComment"
+			focus="age">
+			<h:panelGrid columns="1" cellpadding="5">
+
+
+				<h:outputText value="#{req.comment}" />
+
+				<p:inputText value="#{req.comment}" style="width:100%" />
+				<p:commandButton icon="ui-icon-disk" value="#{req.comment}">
+				</p:commandButton>
+
+
+
+
 			</h:panelGrid>
 		</p:dialog>
 
