@@ -3,6 +3,7 @@ package pt.aubay.cv.beans;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
@@ -15,36 +16,32 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.Status;
 
-
-
 @Named("ReqBean")
 @ViewScoped
-public class Requestbean implements Serializable {  
+public class Requestbean implements Serializable {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Request request = new Request();
-    
+    private Request request = new Request();
+
     private UploadedFile cvOrig;
     private UploadedFile cvAubay;
+    private StreamedContent downloadAubay;
+    private StreamedContent downloadOrig;
 
     private List<Request> requestList;
     private List<Request> requestListAll;
     private List<Request> requestListAprovado;
     private List<Request> requestListNotAprovado;
-    
 
-
-	@Inject
+    @Inject
     private ControllerRequest cr;
 
     public UploadedFile getCvAubay() {
@@ -54,47 +51,46 @@ public class Requestbean implements Serializable {
     public void setCvAubay(UploadedFile cvAubay) {
         this.cvAubay = cvAubay;
     }
-    
+
     public List<Request> getRequestList() {
         return requestList;
     }
-    
-    public List<Request> getRequestListAll(){
-    	return requestListAll;
+
+    public List<Request> getRequestListAll() {
+        return requestListAll;
     }
 
     public List<Request> getRequestListAprovado() {
-		return requestListAprovado;
-	}
+        return requestListAprovado;
+    }
 
-	public void setRequestListAprovado(List<Request> requestListAprovado) {
-		this.requestListAprovado = requestListAprovado;
-	}
-	 public List<Request> getRequestListNotAprovado() {
-			return requestListNotAprovado;
-		}
+    public void setRequestListAprovado(List<Request> requestListAprovado) {
+        this.requestListAprovado = requestListAprovado;
+    }
 
-		public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
-			this.requestListNotAprovado = requestListNotAprovado;
-		}
+    public List<Request> getRequestListNotAprovado() {
+        return requestListNotAprovado;
+    }
 
+    public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
+        this.requestListNotAprovado = requestListNotAprovado;
+    }
 
     @PostConstruct
     public void loadRequests() {
-    	requestList = cr.getReq();
-    	requestListAll = cr.getReqAll();
-    	requestListAprovado = cr.getReqAllAprovado();
-    	requestListNotAprovado = cr.getAllNotAprovado();
-    	
-       // System.out.println(requestList.size());
+        requestList = cr.getReq();
+        requestListAll = cr.getReqAll();
+        requestListAprovado = cr.getReqAllAprovado();
+        requestListNotAprovado = cr.getAllNotAprovado();
+
     }
-    
+
     public Request getRequest() {
         return request;
     }
 
     public void setRequest(Request request) {
-            this.request = request;
+        this.request = request;
     }
 
     public UploadedFile getCvOrig() {
@@ -104,7 +100,7 @@ public class Requestbean implements Serializable {
     public void setCvOrig(UploadedFile cvOrig) {
         this.cvOrig = cvOrig;
     }
-    
+
     public ControllerRequest getCr() {
         return cr;
     }
@@ -113,50 +109,57 @@ public class Requestbean implements Serializable {
         this.cr = cr;
     }
 
+    public StreamedContent getDownloadAubay() {
+        return downloadAubay;
+    }
+
+    public StreamedContent getDownloadOrig() {
+        return downloadOrig;
+    }
+
     public void createReq() {
-    	request.setEstado(null);
+        request.setEstado(Status.INICIADO);
         cr.createRequest(request);
         request = new Request();
-        
+
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
-    
 
     public void removeReq(Request request) {
-            cr.removeRequest(request);
-    }    
-    
+        cr.removeRequest(request);
+    }
+
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Pedido Editado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Request request = (Request) event.getObject();
-        
+
         cr.updateReq(request);
     }
- 
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
     public void uploadOrig() {
-        try { 
+        try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
             File folder = new File(dir);
             folder.mkdirs();
-            
+
             File file = new File(dir, cvOrig.getFileName());
-            
+
             OutputStream out = new FileOutputStream(file);
             out.write(cvOrig.getContents());
             out.close();
-            
+
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
             request.setCvOrigPath(file.getAbsolutePath());
-            
+
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
@@ -164,14 +167,38 @@ public class Requestbean implements Serializable {
         createReq();
     }
     
-     public void uploadAubay() {
-        try { 
+  /*  public void uploadAubay() {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
+            File folder = new File(dir);
+            folder.mkdirs();
+
+            File file = new File(dir, cvOrig.getFileName());
+
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvOrig.getContents());
+            out.close();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvOrigPath(file.getAbsolutePath());
+
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        cr.updateReq(request);
+    }
+*/
+    public void uploadAubay() {
+        try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
             File folder = new File(dir);
             folder.mkdirs();
-            
+
             File file = new File(dir, cvAubay.getFileName());
-            
+
             OutputStream out = new FileOutputStream(file);
             out.write(cvAubay.getContents());
             out.close();
@@ -180,11 +207,18 @@ public class Requestbean implements Serializable {
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
             request.setCvAubayPath(file.getAbsolutePath());
-            
+
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
+        cr.updateReq(request);
     }
-}    
-
+    
+    /*public downloadAubay() {        
+        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/deployments/uploadedCVs/cvAubay/" + downloadAubay.);
+        file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_boromir.jpg");
+    }*/
+    
+    
+}
