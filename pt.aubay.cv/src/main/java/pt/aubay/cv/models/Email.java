@@ -12,11 +12,11 @@ import javax.mail.internet.MimeMessage;
 
 public class Email {
 
-	public static void main(String[] args) {
+	public void sendEmail () {
 
 		final String username = "username@gmail.com";
 		final String password = "password";
-
+		
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -35,7 +35,7 @@ public class Email {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("from-email@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("to-email@gmail.com"));
+				InternetAddress.parse("joana.manique@gmail.com"));
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler,"
 				+ "\n\n No spam to my email, please!");
