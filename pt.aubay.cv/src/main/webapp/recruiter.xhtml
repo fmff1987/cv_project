@@ -1,105 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"       
-      xmlns:f="http://java.sun.com/jsf/core"      
-      xmlns:p="http://primefaces.org/ui">
-    
-    <h:head>
-    
-        <title>CV Management - Recruiter</title>
-        <h:outputStylesheet library="css" name="../resources/CSS/style.css"  />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    
-    <h:body>
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"       
+    xmlns:f="http://java.sun.com/jsf/core"      
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="WEB-INF/templates/template.xhtml">
+
+    <ui:define name="pageTitle">
+        Página Recrutador
+    </ui:define>
+
+    <ui:define name="pageContent">
+
+        <h3 class="subtitles">Recrutador</h3>
         
-        <h1>Recrutador</h1>
-        <h:form>
-        
-        <p:growl id="msgs" showDetail="true"/>
-        
-        <p:dataTable id="OrderList" var="order" value="" editable="true" style="margin-bottom:20px" rows="10"
-                         paginator="true"
+        <h:form id="form" enctype="multipart/form-data">
+
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:dataTable id="recruiterReqList" var="doingList"
+                         value="#{ReqBean.requestListAll}" editable="true"         
+                         resizableColumns="true"
+                         emptyMessage="Nenhum pedido encontrado com este critério."
+                         style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
-        
-        	<f:facet name="header">
-	            Lista de pedidos
-	       	</f:facet>
-            
-		    <p:column filterBy="#{order}" headerText="Manager">
-		    	<f:facet name="filter">
-	                <p:selectOneMenu>
-	                    <f:selectItem itemLabel="Selecione" />
-	                    <f:selectItems value="#{ManBean.manager}" var="manager" itemLabel="#{manager.name}" />
-	                </p:selectOneMenu>
-            	</f:facet>
-		        <h:outputText value="" />
-		    </p:column>
-		    
-		    <p:column filterBy="#{order}" headerText="Recrutador">
-		    	<f:facet name="filter">
-	                <p:selectOneMenu>
-	                    <f:selectItem itemLabel="Selecione" />
-	                    <f:selectItems value="#{RecBean.recruiterList}" var="recruiter" itemLabel="#{recruiter.name}" />
-	                </p:selectOneMenu>
-            	</f:facet>
-		        <h:outputText value="Sem Recrutadores" />
-		    </p:column>
-		    
-		    <p:column headerText="Candidato">
-		        <h:outputText value="sem pedidos" />
-		    </p:column>
-		    
-		    <p:column headerText="Email">
-		        <h:outputText value="" />
-		    </p:column>
-		    
-		    <p:column filterBy="#{order}" headerText="Data Limite / Hora" >
-		    	<f:facet name="filter" >
-        			<p:calendar pattern="MM/dd/yyyy HH:00" />
-        		</f:facet>
-		        <h:outputText value="" />
-		    </p:column>
-		    
-		    <p:column headerText="CV Original" style="width:140px">
-		       	<p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-        			<p:fileDownload value="#{fileDownloadView.file}" />
-    			</p:commandButton>
-		    </p:column>
-		    
-		    <p:column headerText="CV Aubay" style="width:140px">
-		       	<p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
- 			    <p:commandButton value="Submit" ajax="false" actionListener="#{fileUploadView.upload}" disabled="false" /> 
-		    </p:column>
-			
-			<p:column headerText="Estado" >
-	            <p:selectOneButton value="#{selectOneView.option}" >
-                        <h:selectOneMenu style="width:200px;" value="#{bean.objectId}">
-                                <f:selectItem itemLabel="Selecione" />
-                                <f:selectItem itemLabel="Reprovado" />
-                                <f:selectItem itemLabel="Aprovado" />
-                                <f:selectItems value="#{bean.objectIds}" />
-                                <f:ajax listener="#{bean.idEdited(object)}" render="name" />
-                        </h:selectOneMenu>
-                    </p:selectOneButton>
-		    </p:column>
-		    
-		    <p:column headerText="Comentário">
-                    <p:scrollPanel mode="native" style="width:230px;height:70px">
-                        <p>Comentarios</p>
+
+                <f:facet name="header">
+                    Lista de pedidos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
+                        update=":form:msgs"/>
+                <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+                        update=":form:msgs" />
+
+                <p:column headerText="Manager" filterBy="#{doingList.manager.name}"
+                          filterMatchMode="contains" style="width:130px">
+                    <h:outputText value="#{doingList.manager.name}" />
+                </p:column>
+
+                <p:column headerText="Recrutador" filterBy="#{doingList.recruiter.name}"
+                          filterMatchMode="contains" style="width:130px">
+                    <h:outputText value="#{doingList.recruiter.name}" />
+                </p:column>
+
+                <p:column headerText="Candidato" filterBy="#{doingList.candidateName}"
+                          filterMatchMode="contains" style="width:130px">
+                    <h:outputText value="#{doingList.candidateName}" />
+                </p:column>
+
+                <p:column headerText="Data Limite" sortBy="#{doingList.deadline}" style="width:150px">
+                    <f:facet name="filter" >
+                        <p:outputLabel for="datetime" />
+                        <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
+                                    locale="pt" />
+                    </f:facet>
+                    <h:outputText value="#{doingList.deadline}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+                    </h:outputText>              
+                </p:column>    
+
+                <p:column headerText="CV Original" style="width:140px">
+                    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload value="#{fileDownloadView.file}" />
+                    </p:commandButton>
+                </p:column>                
+                
+                <p:column headerText="CV Aubay" style="width:117px">
+                    <p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
+                                  skinSimple="true" label="Anexar"/>   
+                </p:column>
+
+                <p:column headerText="Comentário">
+                    <p:scrollPanel mode="native" style="width:370px;height:90px">
+                        <p>Comentários</p>
                     </p:scrollPanel>
-		    </p:column> 
-		</p:dataTable>
-		
-			<p:commandButton value="Voltar" action="index?faces-redirect=true" />
-		
-		</h:form> 
-    </h:body>
-</html>
+                </p:column> 
+                
+                <p:column  style="width:100px">
+                    <p:commandButton value="Enviar" action="#{ReqBean.uploadAubay()}" ajax="false" update="msgs"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form> 
+        
+    </ui:define>
+    
+</ui:composition>

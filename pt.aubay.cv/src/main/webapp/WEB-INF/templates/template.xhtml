@@ -8,35 +8,51 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<h:head>
-	
 		<title><ui:insert name="pageTitle"></ui:insert></title>
-		<link rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"></link>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<h:outputStylesheet library="CSS" name="style.css" />
-	
+		<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+			<script type="text/javascript">
+			PrimeFaces.locales['pt'] = {
+				closeText: 'Fechar',
+				prevText: 'Anterior',
+				nextText: 'Próximo',
+				currentText: 'Começo',
+				monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+				monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+				dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+				dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+				dayNamesMin: ['D','S','T','Q','Q','S','S'],
+				weekHeader: 'Semana',
+				firstDay: 0,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: '',
+				timeOnlyTitle: 'Só Horas',
+				timeText: 'Tempo',
+				hourText: 'Hora',
+				minuteText: 'Minuto',
+				secondText: 'Segundo',
+				ampm: false,
+				month: 'Mês',
+				week: 'Semana',
+				day: 'Dia',
+				allDayText : 'Todo o Dia'
+			}
+		</script>
 	</h:head>
-		
-		<ui:insert name="body"></ui:insert>
-		
-				<div class="header">
-				
-					<div class="logo">
-						<IMG id="logoAubay"
-							src="https://websummit.com/wp-content/uploads/2017/09/Aubay_RGB-300x300.png" />
-					</div>
-		
-					<div class="clock">
-						<h:form>
-							<p:clock pattern="dd/MM/yyyy" />
-							<br />
-							<br />
-							<p:clock pattern="HH:mm" />
-						</h:form>
-					</div>
-		
-				</div>
-				
-			<ui:insert name="pageContent"></ui:insert>
+    
+        <div class="header">
+            <a href="index.xhtml" title="Home">
+                <img id="logoheader" src="resources/images/logoaubay.png" alt="Aubay"/>
+            </a>
+
+        </div> 
+	
+	<ui:insert name="body"></ui:insert>
+
+	<ui:insert name="subheader"></ui:insert>
+			
+	<ui:insert name="pageContent"></ui:insert>
 
 </html>
+	

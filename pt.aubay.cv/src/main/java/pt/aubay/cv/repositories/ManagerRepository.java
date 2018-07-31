@@ -28,5 +28,9 @@ public class ManagerRepository extends EntityRepository<Manager> {
 		return em.createNamedQuery("Manager.getAll", Manager.class).getResultList();
 	}
 	
+	public List<Manager> getManagerActive(){
+		return em.createNamedQuery("Manager.managerActive", Manager.class).getResultList();
+	}
+	
 	
 }

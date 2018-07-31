@@ -12,13 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
-import org.omnifaces.util.Components.ForEach;
-
 @Entity
 @Table(name="manager")
 @NamedQueries({
 	@NamedQuery(name="Manager.getAll",
 			query="SELECT m FROM Manager m"),
+	 @NamedQuery(name="Manager.managerActive",
+	    query="SELECT m FROM Manager m WHERE m.active = true "),
 })
 
 

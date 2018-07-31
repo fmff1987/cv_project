@@ -19,8 +19,7 @@ public class RequestRepository  extends EntityRepository<Request>{
 		return em.createNamedQuery("Request.getAll", Request.class).getResultList();
 	}
 	public List<Request> getAllWithRecruiterAndManagers(){
-		return em.createNamedQuery("Request.getAllWithRecruiterAndManagers",Request.class).getResultList();
-
+		return em.createNamedQuery("Request.getAllWithRecruiterAndManagers", Request.class).getResultList();
 	}
 	public List<Request> getAllAprovado(){
 		TypedQuery<Request> query = em.createNamedQuery("Request.getAllAprovado", Request.class );

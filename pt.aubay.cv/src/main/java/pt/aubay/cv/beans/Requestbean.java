@@ -1,7 +1,5 @@
 package pt.aubay.cv.beans;
 
-//import javax.enterprise.context.RequestScoped;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +19,6 @@ import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
 
 
 
@@ -37,6 +34,7 @@ public class Requestbean implements Serializable {
 	private Request request = new Request();
     
     private UploadedFile cvOrig;
+    private UploadedFile cvAubay;
 
     private List<Request> requestList;
     private List<Request> requestListAll;
@@ -48,6 +46,14 @@ public class Requestbean implements Serializable {
 	@Inject
     private ControllerRequest cr;
 
+    public UploadedFile getCvAubay() {
+        return cvAubay;
+    }
+
+    public void setCvAubay(UploadedFile cvAubay) {
+        this.cvAubay = cvAubay;
+    }
+    
     public List<Request> getRequestList() {
         return requestList;
     }
@@ -82,11 +88,7 @@ public class Requestbean implements Serializable {
        // System.out.println(requestList.size());
     }
     
- 
-
     public Request getRequest() {
-    	
-    	
         return request;
     }
 
@@ -103,18 +105,19 @@ public class Requestbean implements Serializable {
     }
     
     public ControllerRequest getCr() {
-            return cr;
+        return cr;
     }
 
     public void setCr(ControllerRequest cr) {
-            this.cr = cr;
-    }	
+        this.cr = cr;
+    }
 
     public void createReq() {
     	request.setEstado(Status.INICIADO);
         cr.createRequest(request);
-       
-        FacesMessage msg = new FacesMessage("Pedido registado.");
+        request = new Request();
+        
+        FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
     
@@ -135,15 +138,14 @@ public class Requestbean implements Serializable {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-
     
-    public void upload() {
-        try {
-            File rootDir = new File(".");
-            File applDir = new File(rootDir, "uploadedCVs");
-            applDir.mkdirs();
+    public void uploadOrig() {
+        try { 
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
+            File folder = new File(dir);
+            folder.mkdirs();
             
-            File file = new File(applDir, cvOrig.getFileName());
+            File file = new File(dir, cvOrig.getFileName());
             
             OutputStream out = new FileOutputStream(file);
             out.write(cvOrig.getContents());
@@ -153,6 +155,31 @@ public class Requestbean implements Serializable {
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
             request.setCvOrigPath(file.getAbsolutePath());
+            
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        createReq();
+    }
+    
+     public void uploadAubay() {
+        try { 
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+            File folder = new File(dir);
+            folder.mkdirs();
+            
+            File file = new File(dir, cvAubay.getFileName());
+            
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvAubay.getContents());
+            out.close();
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvAubayPath(file.getAbsolutePath());
+            
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
