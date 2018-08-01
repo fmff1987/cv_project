@@ -292,15 +292,15 @@
 								<f:facet name="output">
 									<h:outputText value="#{req.comment}" style="height:40px;" />
 								</f:facet>
-
+								
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{req.comment}" cols="20px"
+										<h:outputText value="#{req.comment}"
 											style="height:40px;" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputTextarea value="#{req.comment}" cols="20"
+										<p:inputTextarea value="#{req.comment}" cols="16"
 											 
 											
 											autoResize="false"  />
@@ -421,7 +421,7 @@
 
 					</p:tab>
 				</p:tabView>
-
+			<p:commandButton icon="fa fa-mail-forward" action="#{ReqBean.sendMail()}" />
 				
 
 			</h:form>
