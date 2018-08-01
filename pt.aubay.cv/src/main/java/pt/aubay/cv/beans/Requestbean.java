@@ -133,6 +133,9 @@ public class Requestbean implements Serializable {
         cr.createRequest(request);
         request = new Request();
 
+    	request.setEstado(Status.INICIADO);
+        cr.createRequest(request);
+        
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
@@ -147,6 +150,21 @@ public class Requestbean implements Serializable {
         Request request = (Request) event.getObject();
 
         cr.updateReq(request);
+        loadRequests();
+    }
+    
+    public void onRowEditOngoingList(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Pedido Editado");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Request request = (Request) event.getObject();
+        if(request.getEstado()==null) {
+        	request.setEstado(Status.INICIADO);
+        }
+        cr.updateReq(request);
+    
+    	requestListNotAprovado = cr.getAllNotAprovado();
+        requestListAprovado = cr.getReqAllAprovado();
+        
     }
 
     public void onRowCancel(RowEditEvent event) {
