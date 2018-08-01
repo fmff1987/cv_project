@@ -87,7 +87,7 @@
 									<f:facet name="input">
 										<h:selectOneMenu value="#{req.recruiter}" style="width:100%"
 											converter="omnifaces.SelectItemsConverter">
-											<f:selectItems value="#{RecBean.recruiterList}"
+											<f:selectItems value="#{RecBean.activeRecruiterList}"
 												var="recrutas" itemLabel="#{recrutas.name}"
 												itemValue="#{recrutas}" />
 										</h:selectOneMenu>
@@ -422,7 +422,7 @@
 					</p:tab>
 				</p:tabView>
 
-				<p:commandButton value="Voltar" action="index?faces-redirect=true" />
+				
 
 			</h:form>
 		</h:body>

@@ -34,4 +34,8 @@ public class ControllerRecruiter {
 	public void updateRec(Recruiter r) {
 		db.updateEntity(r);
 	}
+
+	public List<Recruiter> getRecruiterActive() {
+		return db.getRecruiterActive();
+	}
 }

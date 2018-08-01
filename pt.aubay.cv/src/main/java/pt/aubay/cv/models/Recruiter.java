@@ -18,8 +18,9 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Recruiter.getAll",
 			query="SELECT r FROM Recruiter r"),
+	@NamedQuery(name= "Recruiter.getRecruiterActive",
+	query = "SELECT r FROM Recruiter r WHERE r.active = true"),
 	
-
 })
 
 

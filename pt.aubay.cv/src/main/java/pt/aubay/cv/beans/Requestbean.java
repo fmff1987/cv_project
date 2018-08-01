@@ -116,7 +116,6 @@ public class Requestbean implements Serializable {
     public void createReq() {
     	request.setEstado(Status.INICIADO);
         cr.createRequest(request);
-        request = new Request();
         
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
