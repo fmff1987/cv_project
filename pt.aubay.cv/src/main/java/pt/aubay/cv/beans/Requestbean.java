@@ -206,11 +206,8 @@ public class Requestbean implements Serializable {
     public void downloadOriginal(){
         try{
             InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
-                    System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/" + cvOrig.getFileName());
-            downloadOrig = new DefaultStreamedContent(input, "", "cv_" + request.getCandidateName());
-            
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage("Download concluído"));
+                    System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/" + downloadOrig.getName());
+            downloadOrig = new DefaultStreamedContent(input, "application/pdf", "cv_teste.pdf" );
         }
         catch(Exception e){
             FacesContext.getCurrentInstance().addMessage(
@@ -219,10 +216,6 @@ public class Requestbean implements Serializable {
         
     }
     
-    /*public downloadAubay() {        
-        InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/deployments/uploadedCVs/cvAubay/" + downloadAubay.);
-        file = new DefaultStreamedContent(stream, "image/jpg", "downloaded_boromir.jpg");
-    }*/
-    
+
     
 }

@@ -71,8 +71,9 @@
                 </p:column>    
 
                 <p:column headerText="CV Original" style="width:140px">
-                    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{ReqBean.downloadOrig}" />
+                    <p:commandButton value="Download" ajax="false"  
+                                     actionListener="#{ReqBean.downloadOriginal()}" icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload value="#{ReqBean.downloadOrig}"/>
                     </p:commandButton>
                 </p:column>                
 
