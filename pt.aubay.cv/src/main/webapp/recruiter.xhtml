@@ -17,21 +17,15 @@
     <ui:define name="pageContent">
 
         <h3 class="subtitles">Recrutador</h3>
-        
+
         <h:form id="form" enctype="multipart/form-data">
 
             <p:growl id="msgs" showDetail="true"/>
 
             <p:dataTable id="recruiterReqList" var="doingList"
-<<<<<<< HEAD
-                         value="#{ReqBean.requestListAll}" editable="true"         
-                         resizableColumns="true"
-                         emptyMessage="Nenhum pedido encontrado com este critério."
-=======
                          value="#{ReqBean.requestListNotAprovado}" editable="true"         
                          resizableColumns="true" reflow="true"
                          emptyMessage="Nenhum pedido encontrado."
->>>>>>> origin/Fernando
                          style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15">
@@ -60,6 +54,11 @@
                     <h:outputText value="#{doingList.candidateName}" />
                 </p:column>
 
+                <p:column headerText="Email" filterBy="#{doingList.candidateEmail}" 
+                          filterMatchMode="contains" style="width:250px">
+                    <h:outputText value="#{doingList.candidateEmail}" />
+                </p:column>
+
                 <p:column headerText="Data Limite" sortBy="#{doingList.deadline}" style="width:150px">
                     <f:facet name="filter" >
                         <p:outputLabel for="datetime" />
@@ -72,45 +71,29 @@
                 </p:column>    
 
                 <p:column headerText="CV Original" style="width:140px">
-<<<<<<< HEAD
-                    <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{fileDownloadView.file}" />
-=======
                     <p:commandButton value="Download" ajax="false"  
                                      actionListener="#{ReqBean.download(doingList.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
->>>>>>> origin/Fernando
                     </p:commandButton>
                     
                 </p:column>                
-                
+
                 <p:column headerText="CV Aubay" style="width:117px">
                     <p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
                                   skinSimple="true" label="Anexar"/>   
                 </p:column>
 
-<<<<<<< HEAD
-                <p:column headerText="Comentário">
-                    <p:scrollPanel mode="native" style="width:370px;height:90px">
-                        <p>Comentários</p>
-                    </p:scrollPanel>
-                </p:column> 
-                
-                <p:column  style="width:100px">
-                    <p:commandButton value="Enviar" action="#{ReqBean.uploadAubay()}" ajax="false" update="msgs"/>
-=======
                 <p:column headerText="Comentario">
                     <p:inputTextarea cols="19" />
                 </p:column>
 
                 <p:column  style="width:40px">
-                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(ReqBean.request)}" icon="ui-icon-mail-closed" ajax="false"/>
+                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingList)}" icon="ui-icon-mail-closed" ajax="false"/>
                     
->>>>>>> origin/Fernando
                 </p:column>
             </p:dataTable>
 
         </h:form> 
-        
+
     </ui:define>
-    
+
 </ui:composition>

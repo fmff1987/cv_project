@@ -144,13 +144,13 @@
 
 							</p:column>
 
-							<p:column headerText="CV Original">
+							<p:column headerText="CV Original" style="width:140px">
 								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
+									actionListener="#{ReqBean.download(req.cvOrigPath)}"
 									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
 								</p:commandButton>
 							</p:column>
+
 
 
 
@@ -253,20 +253,20 @@
 								<h:outputText value="" />
 							</p:column>
 
-							<p:column headerText="CV Original">
+							<p:column headerText="CV Original" style="width:140px">
 								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
+									actionListener="#{ReqBean.download(req.cvOrigPath)}"
 									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
 								</p:commandButton>
+
 							</p:column>
 
-							<p:column headerText="CV Aubay">
+							<p:column headerText="CV Original" style="width:140px">
 								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
+									actionListener="#{ReqBean.download(req.cvAubayPath)}"
 									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
 								</p:commandButton>
+
 							</p:column>
 							<p:column headerText="Estado" sortBy="#{req.estado.label}">
 								<p:cellEditor>
@@ -292,18 +292,15 @@
 								<f:facet name="output">
 									<h:outputText value="#{req.comment}" style="height:40px;" />
 								</f:facet>
-								
+
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{req.comment}"
-											style="height:40px;" />
+										<h:outputText value="#{req.comment}" style="height:40px;" />
 									</f:facet>
 									<f:facet name="input">
 										<p:inputTextarea value="#{req.comment}" cols="16"
-											 
-											
-											autoResize="false"  />
+											autoResize="false" />
 									</f:facet>
 								</p:cellEditor>
 								<!-- <p:commandButton value="+"
@@ -398,12 +395,12 @@
 
 
 
-							<p:column headerText="CV Aubay">
+							<p:column headerText="CV Aubay" style="width:140px">
 								<p:commandButton value="Download" ajax="false"
-									onclick="PrimeFaces.monitorDownload(start, stop);"
+									actionListener="#{ReqBean.download(req.cvAubayPath)}"
 									icon="ui-icon-arrowthick-1-s">
-									<p:fileDownload value="" />
 								</p:commandButton>
+
 							</p:column>
 
 
@@ -421,8 +418,9 @@
 
 					</p:tab>
 				</p:tabView>
-			<p:commandButton icon="fa fa-mail-forward" action="#{ReqBean.sendMail()}" />
-				
+				<p:commandButton icon="fa fa-mail-forward"
+					action="#{ReqBean.sendMail()}" />
+
 
 			</h:form>
 		</h:body>
