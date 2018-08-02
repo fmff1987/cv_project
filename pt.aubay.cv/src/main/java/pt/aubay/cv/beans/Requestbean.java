@@ -1,11 +1,9 @@
 package pt.aubay.cv.beans;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
@@ -18,9 +16,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
+
+import org.omnifaces.util.Faces;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
@@ -37,7 +36,6 @@ public class Requestbean implements Serializable {
     private UploadedFile cvOrig;
     private UploadedFile cvAubay;
     private StreamedContent downloadAubay;
-    private StreamedContent downloadOrig;
 
     private List<Request> requestList;
     private List<Request> requestListAll;
@@ -120,22 +118,12 @@ public class Requestbean implements Serializable {
         this.downloadAubay = downloadAubay;
     }
     
-    public StreamedContent getDownloadOrig() {
-        return downloadOrig;
-    }
-
-    public void setDownloadOrig(StreamedContent downloadOrig) {
-        this.downloadOrig = downloadOrig;
-    }
     
     public void createReq() {
         request.setEstado(Status.INICIADO);
         cr.createRequest(request);
         request = new Request();
-
-    	request.setEstado(Status.INICIADO);
-        cr.createRequest(request);
-        
+    	        
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
     }
@@ -172,6 +160,7 @@ public class Requestbean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
+    
     public void uploadOrig() {
         try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
@@ -197,7 +186,7 @@ public class Requestbean implements Serializable {
     }
     
 
-    public void uploadAubay() {
+    public void uploadAubay(Request request) {
         try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
             File folder = new File(dir);
@@ -219,20 +208,18 @@ public class Requestbean implements Serializable {
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
         cr.updateReq(request);
+        loadRequests();
     }
     
-    public void downloadOriginal(){
-        try{
-            InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
-                    System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/" + downloadOrig.getName());
-            downloadOrig = new DefaultStreamedContent(input, "application/pdf", "cv_teste.pdf" );
-        }
-        catch(Exception e){
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-        }
-        
+    
+    public void download(String filePath) throws IOException{
+       File file = new File(filePath);
+        Faces.sendFile(file, true);
+           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+                    filePath);
+            return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
     }
+    
     
 
     

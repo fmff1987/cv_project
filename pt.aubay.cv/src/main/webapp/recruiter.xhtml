@@ -23,8 +23,8 @@
             <p:growl id="msgs" showDetail="true"/>
 
             <p:dataTable id="recruiterReqList" var="doingList"
-                         value="#{ReqBean.requestListAll}" editable="true"         
-                         resizableColumns="true"
+                         value="#{ReqBean.requestListNotAprovado}" editable="true"         
+                         resizableColumns="true" reflow="true"
                          emptyMessage="Nenhum pedido encontrado."
                          style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -72,9 +72,9 @@
 
                 <p:column headerText="CV Original" style="width:140px">
                     <p:commandButton value="Download" ajax="false"  
-                                     actionListener="#{ReqBean.downloadOriginal()}" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{ReqBean.downloadOrig}"/>
+                                     actionListener="#{ReqBean.download(doingList.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
                     </p:commandButton>
+                    
                 </p:column>                
 
                 <p:column headerText="CV Aubay" style="width:117px">
@@ -87,7 +87,7 @@
                 </p:column>
 
                 <p:column  style="width:40px">
-                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay()}" icon="ui-icon-mail-closed" ajax="false"/>
+                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(ReqBean.request)}" icon="ui-icon-mail-closed" ajax="false"/>
                     
                 </p:column>
             </p:dataTable>
