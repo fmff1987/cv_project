@@ -19,6 +19,7 @@ import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
+import pt.aubay.cv.models.Status;
 
 
 
@@ -113,9 +114,8 @@ public class Requestbean implements Serializable {
     }
 
     public void createReq() {
-    	request.setEstado(null);
+    	request.setEstado(Status.INICIADO);
         cr.createRequest(request);
-        request = new Request();
         
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
@@ -130,8 +130,22 @@ public class Requestbean implements Serializable {
         FacesMessage msg = new FacesMessage("Pedido Editado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Request request = (Request) event.getObject();
-        
         cr.updateReq(request);
+        loadRequests();
+    }
+    
+    public void onRowEditOngoingList(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Pedido Editado");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Request request = (Request) event.getObject();
+        if(request.getEstado()==null) {
+        	request.setEstado(Status.INICIADO);
+        }
+        cr.updateReq(request);
+    
+    	requestListNotAprovado = cr.getAllNotAprovado();
+        requestListAprovado = cr.getReqAllAprovado();
+        
     }
  
     public void onRowCancel(RowEditEvent event) {
