@@ -67,9 +67,10 @@
 }	
 
 .subtitles {
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	color: #C06C84;
-	font-weight: bold;
-	font-size: 25px;
+	font-weight: 500;
+	font-size: 50px;
 	text-align:left;
 	margin: 10px;
 	margin-bottom: 15px;
@@ -77,4 +78,49 @@
 
 .orderlist {
 	background-color: orange;
+}
+
+.ui-datatable {
+	background: 
+}
+
+.ui-tabs {
+	background: linear-gradient(#fff, #fff5fe);
+}
+
+.ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
+	background: #fff;
+}
+
+.ui-tabs-header ui-state-default ui-corner-top {
+	background: #fff;
+}
+
+.ui-tabs .ui-tabs-nav li {
+	background: #bfc7e2;
+}
+
+
+.ui-tabs .ui-tabs-nav {
+	background: #ffffff;
+}
+
+.ui-datatable-resizable th.ui-resizable-column {
+	background: linear-gradient(#fff, #92a0ce);
+}
+
+.ui-datatable-header{
+	font-size: 20px;	
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	font-weight: 100;
+	background: linear-gradient(#a86a7f, #6c5b7b);
+	color: #fff;
+}
+
+.ui-paginator{
+	background: #ffffff;
+}
+
+.ui-menubar {
+	background: #ffffff;
 }

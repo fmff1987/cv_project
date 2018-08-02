@@ -52,8 +52,19 @@ public class Request extends pt.aubay.cv.models.Entity {
 
     private String cvOrigPath;
     private String cvAubayPath;
+    
+    private String comment;
+    
 
-    public Status getEstado() {
+    public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Status getEstado() {
         return estado;
     }
 

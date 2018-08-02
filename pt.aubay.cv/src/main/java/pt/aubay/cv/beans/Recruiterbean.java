@@ -18,16 +18,21 @@ public class Recruiterbean {
 
     private Recruiter recruiter = new Recruiter();
     private List<Recruiter> recruiterList;
+    private List<Recruiter> activeRecruiterList;
 
     public List<Recruiter> getRecruiterList() {
         return recruiterList;
     }
-    @Inject
+    public List<Recruiter> getActiveRecruiterList() {
+		return activeRecruiterList;
+	}
+	@Inject
     private ControllerRecruiter cr;
 
     @PostConstruct
     private void loadRecruiters() {
         recruiterList = cr.getRec();
+        activeRecruiterList = cr.getRecruiterActive();
     }
 //	public List<Recruiter> getRec(){
 //		return cr.getRec();
