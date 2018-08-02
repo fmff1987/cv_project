@@ -3,6 +3,7 @@ package pt.aubay.cv.beans;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
@@ -15,10 +16,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+
+
 import org.primefaces.model.StreamedContent;
+
 import org.primefaces.model.UploadedFile;
 
 import org.omnifaces.util.Faces;
+
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.SSLEmail;
@@ -28,6 +33,7 @@ import pt.aubay.cv.models.Status;
 
 @Named("ReqBean")
 @ViewScoped
+
 public class Requestbean implements Serializable {  
 
 	/**
@@ -39,6 +45,7 @@ public class Requestbean implements Serializable {
 
 	private UploadedFile cvOrig;
 	private UploadedFile cvAubay;
+	private StreamedContent downloadAubay;
 
 	private List<Request> requestList;
 	private List<Request> requestListAll;
@@ -80,6 +87,13 @@ public class Requestbean implements Serializable {
 	public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
 		this.requestListNotAprovado = requestListNotAprovado;
 	}
+	public StreamedContent getDownloadAubay() {
+        return downloadAubay;
+    }
+
+    public void setDownloadAubay(StreamedContent downloadAubay) {
+        this.downloadAubay = downloadAubay;
+    }
 
 
 	@PostConstruct
@@ -185,76 +199,11 @@ public class Requestbean implements Serializable {
 		createReq();
 	}
 
-	public void uploadAubay() {
-		try { 
-			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
-			File folder = new File(dir);
-			folder.mkdirs();
 
-			File file = new File(dir, cvAubay.getFileName());
-
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvAubay.getContents());
-			out.close();
-
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvAubayPath(file.getAbsolutePath());
-
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-		}
-	}
 	public void sendMail(String mail, String body) {
 		SSLEmail.SSl(mail, body);
 	}
-}    
-
-    private StreamedContent downloadAubay;
-
-    public UploadedFile getCvOrig() {
-        return cvOrig;
-    }
-
-    public void setCvOrig(UploadedFile cvOrig) {
-        this.cvOrig = cvOrig;
-    }
-
-
-    public StreamedContent getDownloadAubay() {
-        return downloadAubay;
-    }
-
-    public void setDownloadAubay(StreamedContent downloadAubay) {
-        this.downloadAubay = downloadAubay;
-    }
-    
-    
-    public void uploadOrig() {
-        try {
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-            File folder = new File(dir);
-            folder.mkdirs();
-
-            File file = new File(dir, cvOrig.getFileName());
-
-            OutputStream out = new FileOutputStream(file);
-            out.write(cvOrig.getContents());
-            out.close();
-
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage("Upload completo",
-                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-            request.setCvOrigPath(file.getAbsolutePath());
-
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-        }
-        createReq();
-    }
+	
     
 
     public void uploadAubay(Request request) {
@@ -278,6 +227,7 @@ public class Requestbean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
+        request.setEstado(Status.PREAPROVADO);
         cr.updateReq(request);
         loadRequests();
     }
@@ -290,5 +240,7 @@ public class Requestbean implements Serializable {
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
     }
+   
+
     
 }
