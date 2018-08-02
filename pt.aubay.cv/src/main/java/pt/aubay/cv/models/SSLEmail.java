@@ -39,7 +39,7 @@ public class SSLEmail {
 		Session session = Session.getDefaultInstance(props, auth);
 		
 		System.out.println("Session created");
-	        EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
+	        EmailUtil.sendEmail(session, toEmail,"Plantaforma de Gestao de curriculos", emailBody);
 
 	        
 
