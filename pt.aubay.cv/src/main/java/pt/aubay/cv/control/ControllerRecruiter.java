@@ -11,25 +11,25 @@ import pt.aubay.cv.repositories.RecruiterRepository;
 @Transactional
 @RequestScoped
 public class ControllerRecruiter {
-	
+
 	@Inject
 	RecruiterRepository db;
-		
+
 	public void createRec(Recruiter p) {
-	db.createEntity(p);
+		db.createEntity(p);
 	}
-	
+
 	public List<Recruiter> getRec() {
-	return db.getAll();
+		return db.getAll();
 	}
-	
+
 	public void updateList() {
-	//db.updateLocalList();
+		//db.updateLocalList();
 	}
-	
+
 	public void removeRec(Recruiter p) {
-	db.removeEntity(p);
-	//db.updateLocalList();
+		db.removeEntity(p);
+		//db.updateLocalList();
 	}	
 	public void updateRec(Recruiter r) {
 		db.updateEntity(r);

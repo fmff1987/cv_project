@@ -2,98 +2,102 @@
 
 <!DOCTYPE html>
 
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"       
-    xmlns:f="http://java.sun.com/jsf/core"      
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    template="WEB-INF/templates/template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
 
-    <ui:define name="pageTitle">
+	<ui:define name="pageTitle">
         Página Recrutador
     </ui:define>
 
-    <ui:define name="pageContent">
+	<ui:define name="pageContent">
 
-        <h3 class="subtitles">Recrutador</h3>
+		<h3 class="subtitles">Recrutador</h3>
 
-        <h:form id="form" enctype="multipart/form-data">
+		<h:form id="form" enctype="multipart/form-data">
 
-            <p:growl id="msgs" showDetail="true"/>
+			<p:growl id="msgs" showDetail="true" />
 
-            <p:dataTable id="recruiterReqList" var="doingList"
-                         value="#{ReqBean.requestListNotAprovado}" editable="true"         
-                         resizableColumns="true" reflow="true"
-                         emptyMessage="Nenhum pedido encontrado."
-                         style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+			<p:dataTable id="recruiterReqList" var="doingList"
+				value="#{ReqBean.requestListNotAprovado}" editable="true"
+				resizableColumns="true" reflow="true"
+				emptyMessage="Nenhum pedido encontrado."
+				style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
 
-                <f:facet name="header">
+				<f:facet name="header">
                     Lista de pedidos
                 </f:facet>
 
-                <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-                        update=":form:msgs"/>
-                <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-                        update=":form:msgs" />
+				<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
+					update=":form:msgs" />
+				<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+					update=":form:msgs" />
 
-                <p:column headerText="Manager" filterBy="#{doingList.manager.name}"
-                          filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.manager.name}" />
-                </p:column>
+				<p:column headerText="Manager" filterBy="#{doingList.manager.name}"
+					filterMatchMode="contains" style="width:130px">
+					<h:outputText value="#{doingList.manager.name}" />
+				</p:column>
 
-                <p:column headerText="Recrutador" filterBy="#{doingList.recruiter.name}"
-                          filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.recruiter.name}" />
-                </p:column>
+				<p:column headerText="Recrutador"
+					filterBy="#{doingList.recruiter.name}" filterMatchMode="contains"
+					style="width:130px">
+					<h:outputText value="#{doingList.recruiter.name}" />
+				</p:column>
 
-                <p:column headerText="Candidato" filterBy="#{doingList.candidateName}"
-                          filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.candidateName}" />
-                </p:column>
+				<p:column headerText="Candidato"
+					filterBy="#{doingList.candidateName}" filterMatchMode="contains"
+					style="width:130px">
+					<h:outputText value="#{doingList.candidateName}" />
+				</p:column>
 
-                <p:column headerText="Email" filterBy="#{doingList.candidateEmail}" 
-                          filterMatchMode="contains" style="width:250px">
-                    <h:outputText value="#{doingList.candidateEmail}" />
-                </p:column>
+				<p:column headerText="Email" filterBy="#{doingList.candidateEmail}"
+					filterMatchMode="contains" style="width:250px">
+					<h:outputText value="#{doingList.candidateEmail}" />
+				</p:column>
 
-                <p:column headerText="Data Limite" sortBy="#{doingList.deadline}" style="width:150px">
-                    <f:facet name="filter" >
-                        <p:outputLabel for="datetime" />
-                        <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
-                                    locale="pt" />
-                    </f:facet>
-                    <h:outputText value="#{doingList.deadline}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:00" />
-                    </h:outputText>              
-                </p:column>    
+				<p:column headerText="Data Limite" sortBy="#{doingList.deadline}"
+					style="width:150px">
+					<f:facet name="filter">
+						<p:outputLabel for="datetime" />
+						<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
+					</f:facet>
+					<h:outputText value="#{doingList.deadline}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+					</h:outputText>
+				</p:column>
 
-                <p:column headerText="CV Original" style="width:140px">
-                    <p:commandButton value="Download" ajax="false"  
-                                     actionListener="#{ReqBean.download(doingList.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
-                    </p:commandButton>
-                    
-                </p:column>                
+				<p:column headerText="CV Original" style="width:140px">
+					<p:commandButton value="Download" ajax="false"
+						actionListener="#{ReqBean.download(doingList.cvOrigPath)}"
+						icon="ui-icon-arrowthick-1-s">
+					</p:commandButton>
 
-                <p:column headerText="CV Aubay" style="width:117px">
-                    <p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
-                                  skinSimple="true" label="Anexar"/>   
-                </p:column>
+				</p:column>
 
-                <p:column headerText="Comentario">
-                    <p:inputTextarea cols="19" />
-                </p:column>
+				<p:column headerText="CV Aubay" style="width:117px">
+					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
+						skinSimple="true" label="Anexar" />
+				</p:column>
 
-                <p:column  style="width:40px">
-                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingList)}" icon="ui-icon-mail-closed" ajax="false"/>
-                    
-                </p:column>
-            </p:dataTable>
+				<p:column headerText="Comentario">
+					<p:inputTextarea cols="19" />
+				</p:column>
 
-        </h:form> 
+				<p:column style="width:40px">
+					<p:commandButton title="Enviar"
+						action="#{ReqBean.uploadAubay(doingList)}"
+						icon="ui-icon-mail-closed" ajax="false" />
 
-    </ui:define>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
 
 </ui:composition>

@@ -88,12 +88,12 @@ public class Requestbean implements Serializable {
 		this.requestListNotAprovado = requestListNotAprovado;
 	}
 	public StreamedContent getDownloadAubay() {
-        return downloadAubay;
-    }
+		return downloadAubay;
+	}
 
-    public void setDownloadAubay(StreamedContent downloadAubay) {
-        this.downloadAubay = downloadAubay;
-    }
+	public void setDownloadAubay(StreamedContent downloadAubay) {
+		this.downloadAubay = downloadAubay;
+	}
 
 
 	@PostConstruct
@@ -152,8 +152,6 @@ public class Requestbean implements Serializable {
 		requestListNotAprovado = cr.getAllNotAprovado();
 		String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
 		this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-
-
 	}
 
 	public void onRowEditOngoingList(RowEditEvent event) {
@@ -203,44 +201,41 @@ public class Requestbean implements Serializable {
 	public void sendMail(String mail, String body) {
 		SSLEmail.SSl(mail, body);
 	}
-	
-    
 
-    public void uploadAubay(Request request) {
-        try {
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
-            File folder = new File(dir);
-            folder.mkdirs();
 
-            File file = new File(dir, cvAubay.getFileName());
 
-            OutputStream out = new FileOutputStream(file);
-            out.write(cvAubay.getContents());
-            out.close();
-            
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage("Upload completo",
-                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-            request.setCvAubayPath(file.getAbsolutePath());
+	public void uploadAubay(Request request) {
+		try {
+			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+			File folder = new File(dir);
+			folder.mkdirs();
 
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-        }
-        request.setEstado(Status.PREAPROVADO);
-        cr.updateReq(request);
-        loadRequests();
-    }
-    
-    
-    public void download(String filePath) throws IOException{
-       File file = new File(filePath);
-        Faces.sendFile(file, true);
-           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+			File file = new File(dir, cvAubay.getFileName());
+
+			OutputStream out = new FileOutputStream(file);
+			out.write(cvAubay.getContents());
+			out.close();
+
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage("Upload completo",
+							"O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+			request.setCvAubayPath(file.getAbsolutePath());
+
+		} catch (IOException e) {
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+		}
+		request.setEstado(Status.PREAPROVADO);
+		cr.updateReq(request);
+		loadRequests();
+	}
+
+
+	public void download(String filePath) throws IOException{
+		File file = new File(filePath);
+		Faces.sendFile(file, true);
+		/* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
-    }
-   
-
-    
+	}
 }

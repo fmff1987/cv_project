@@ -10,21 +10,19 @@ import pt.aubay.cv.repositories.RequestRepository;
 @Transactional
 @RequestScoped
 public class ControllerRequest {
-	
+
 	@Inject
 	RequestRepository db; 
-		
-	public void createRequest(Request r) {
-    	
 
+	public void createRequest(Request r) {
 		db.createEntity(r);
 	}
-	
+
 	public void removeRequest(Request r) {
 		db.removeEntity(r);
-//		updateReq();
+		//updateReq();
 	}
-	
+
 	public void updateReq(Request r) {
 		db.updateEntity(r);
 	}
@@ -32,7 +30,7 @@ public class ControllerRequest {
 	public List<Request> getReq() {
 		return db.getAllWithRecruiterAndManagers();
 	}
-	
+
 	public List<Request> getReqAll(){
 		return db.getAll();
 	}
@@ -44,5 +42,5 @@ public class ControllerRequest {
 	public List<Request> getAllNotAprovado() {
 		return db.getAllNotAprovado();
 	}
-	
+
 }

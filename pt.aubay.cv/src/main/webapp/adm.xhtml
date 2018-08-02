@@ -46,7 +46,7 @@
 			<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		</h:head>	
+		</h:head>
 		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
 
 			<p:growl id="msgs" showDetail="true" />
@@ -64,9 +64,9 @@
                             Lista de pedidos
                         </f:facet>
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-								update=":form:msgs  :form:tab:OngoingList" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
+							update=":form:msgs  :form:tab:OngoingList" />
+						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+							update=":form:msgs" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains" style="width:120px">
@@ -82,8 +82,9 @@
 								<f:facet name="input">
 									<h:selectOneMenu value="#{req.recruiter}"
 										converter="omnifaces.SelectItemsConverter">
-										<f:selectItems value="#{RecBean.activeRecruiterList}" var="recrutas"
-											itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
+										<f:selectItems value="#{RecBean.activeRecruiterList}"
+											var="recrutas" itemLabel="#{recrutas.name}"
+											itemValue="#{recrutas}" />
 									</h:selectOneMenu>
 								</f:facet>
 							</p:cellEditor>
@@ -160,11 +161,10 @@
                             Lista de pedidos
                         </f:facet>
 
-						<p:ajax event="rowEdit"
-								listener="#{ReqBean.onRowEditOngoingList}"
-								update=":form:msgs :form:tab:AprovedList" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
+						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEditOngoingList}"
+							update=":form:msgs :form:tab:AprovedList" />
+						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+							update=":form:msgs" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains">
@@ -245,35 +245,35 @@
 							</p:commandButton>
 						</p:column>
 
-							<p:column headerText="Estado" sortBy="#{req.estado.label}">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.estado.label}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:selectOneRadio required="true" value="#{req.estado}"
-											layout="responsive" columns="1">
-											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
-											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
-										</p:selectOneRadio>
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+						<p:column headerText="Estado" sortBy="#{req.estado.label}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{req.estado.label}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneRadio required="true" value="#{req.estado}"
+										layout="responsive" columns="1">
+										<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
+										<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-							<p:column headerText="Comentario">
+						<p:column headerText="Comentario">
+							<f:facet name="output">
+								<h:outputText value="#{req.comment}" style="height:40px;" />
+							</f:facet>
+							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.comment}" style="height:40px;" />
 								</f:facet>
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.comment}" style="height:40px;" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputTextarea value="#{req.comment}" cols="16"
-											autoResize="false" />
-									</f:facet>
-								</p:cellEditor>
-								<!-- <p:commandButton value="+"
+								<f:facet name="input">
+									<p:inputTextarea value="#{req.comment}" cols="16"
+										autoResize="false" />
+								</f:facet>
+							</p:cellEditor>
+							<!-- <p:commandButton value="+"
 									onclick="PF('dlgComment').show();" />
 								<p:dialog header="Insira um comentario" widgetVar="dlgComment"
 									>
@@ -282,11 +282,11 @@
 										<p:inputText id="surname" value="#{req.comment}" />
 									</h:panelGrid>
 								</p:dialog> -->
-							</p:column>
+						</p:column>
 
-							<p:column style="width:32px">
-								<p:rowEditor />
-							</p:column>
+						<p:column style="width:32px">
+							<p:rowEditor />
+						</p:column>
 					</p:dataTable>
 				</p:tab>
 
@@ -329,7 +329,7 @@
 							</p:cellEditor>
 
 						</p:column>
-						
+
 						<p:column headerText="Candidato" filterBy="#{req.candidateName}"
 							filterMatchMode="contains">
 							<p:cellEditor>
@@ -353,11 +353,13 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						
+
 						<p:column headerText="CV Aubay" style="width:140px">
-                            <p:commandButton value="Download" ajax="false" actionListener="#{ReqBean.download(req.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
-                            </p:commandButton>
-                        </p:column> 
+							<p:commandButton value="Download" ajax="false"
+								actionListener="#{ReqBean.download(req.cvAubayPath)}"
+								icon="ui-icon-arrowthick-1-s">
+							</p:commandButton>
+						</p:column>
 
 						<p:column style="width:35px">
 							<p:commandButton icon="ui-icon-trash" title="Delete this actor"
