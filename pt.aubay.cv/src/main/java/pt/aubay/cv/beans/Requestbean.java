@@ -15,8 +15,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
+import org.omnifaces.util.Faces;
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.SSLEmail;
@@ -210,3 +212,83 @@ public class Requestbean implements Serializable {
 	}
 }    
 
+    private StreamedContent downloadAubay;
+
+    public UploadedFile getCvOrig() {
+        return cvOrig;
+    }
+
+    public void setCvOrig(UploadedFile cvOrig) {
+        this.cvOrig = cvOrig;
+    }
+
+
+    public StreamedContent getDownloadAubay() {
+        return downloadAubay;
+    }
+
+    public void setDownloadAubay(StreamedContent downloadAubay) {
+        this.downloadAubay = downloadAubay;
+    }
+    
+    
+    public void uploadOrig() {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
+            File folder = new File(dir);
+            folder.mkdirs();
+
+            File file = new File(dir, cvOrig.getFileName());
+
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvOrig.getContents());
+            out.close();
+
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvOrigPath(file.getAbsolutePath());
+
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        createReq();
+    }
+    
+
+    public void uploadAubay(Request request) {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+            File folder = new File(dir);
+            folder.mkdirs();
+
+            File file = new File(dir, cvAubay.getFileName());
+
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvAubay.getContents());
+            out.close();
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvAubayPath(file.getAbsolutePath());
+
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        cr.updateReq(request);
+        loadRequests();
+    }
+    
+    
+    public void download(String filePath) throws IOException{
+       File file = new File(filePath);
+        Faces.sendFile(file, true);
+           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+                    filePath);
+            return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
+    }
+    
+}

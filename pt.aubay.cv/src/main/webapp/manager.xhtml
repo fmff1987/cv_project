@@ -66,6 +66,11 @@
 
 
 
+                <p:column headerText="Cv Aubay">
+                    <p:commandButton value="Download" ajax="false"  
+                                     actionListener="#{ReqBean.download(finishedList.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
+                    </p:commandButton>
+                </p:column>
 
 			<br></br>
 			<br></br>
@@ -114,6 +119,7 @@
 
 	</ui:define>
 
+    </ui:define>
 </ui:composition>
 
 
