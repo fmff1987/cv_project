@@ -36,7 +36,7 @@ public class SSLEmail {
 			}
 		};
 		
-		Session session = Session.getDefaultInstance(props, auth);
+		Session session = Session.getInstance(props, auth);
 		
 		System.out.println("Session created");
 	        EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
