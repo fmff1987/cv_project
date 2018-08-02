@@ -34,19 +34,18 @@ import javax.persistence.TemporalType;
 public class Request extends pt.aubay.cv.models.Entity {
 
     private static final long serialVersionUID = 1L;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	protected Manager manager;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    protected Manager manager;
+	@ManyToOne(fetch=FetchType.LAZY)
+	protected Recruiter recruiter;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    protected Recruiter recruiter;
-
-    private String candidateName;
-    private String candidateEmail;
-
-
-    @Enumerated(EnumType.STRING)
-    private Status estado;
+	private String candidateName;
+	private String candidateEmail;
+	
+	@Enumerated(EnumType.STRING)
+	private Status estado;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deadline;
@@ -65,7 +64,7 @@ public class Request extends pt.aubay.cv.models.Entity {
 		this.comment = comment;
 	}
 
-    public Status getEstado() {
+	public Status getEstado() {
         return estado;
     }
 
