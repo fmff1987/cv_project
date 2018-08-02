@@ -41,12 +41,17 @@
 		<br></br>
 		<br></br>
 		<h3 class="subtitles">Administrador</h3>
+		<h:head>
+			<title>CV Management - ADM</title>
+			<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+		</h:head>	
 		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<p:tabView dynamic="true" cache="true" effect="fold">
+			<p:tabView dynamic="true" cache="true" effect="fold" id="tab">
 				<p:tab title="A Tratar">
 
 					<p:dataTable id="RequestList" var="req"
@@ -59,10 +64,9 @@
                             Lista de pedidos
                         </f:facet>
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-							update=":form:msgs" />
-						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-							update=":form:msgs" />
-
+								update=":form:msgs  :form:tab:OngoingList" />
+							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+								update=":form:msgs" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains" style="width:120px">
@@ -78,7 +82,7 @@
 								<f:facet name="input">
 									<h:selectOneMenu value="#{req.recruiter}"
 										converter="omnifaces.SelectItemsConverter">
-										<f:selectItems value="#{RecBean.recruiterList}" var="recrutas"
+										<f:selectItems value="#{RecBean.activeRecruiterList}" var="recrutas"
 											itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
 									</h:selectOneMenu>
 								</f:facet>
@@ -156,10 +160,11 @@
                             Lista de pedidos
                         </f:facet>
 
-						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-							update=":form:msgs" />
-						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-							update=":form:msgs" />
+						<p:ajax event="rowEdit"
+								listener="#{ReqBean.onRowEditOngoingList}"
+								update=":form:msgs :form:tab:AprovedList" />
+							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+								update=":form:msgs" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains">
@@ -240,10 +245,10 @@
 							</p:commandButton>
 						</p:column>
 
-							<p:column headerText="Estado">
+							<p:column headerText="Estado" sortBy="#{req.estado.label}">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{req.estado}" />
+										<h:outputText value="#{req.estado.label}" />
 									</f:facet>
 									<f:facet name="input">
 										<p:selectOneRadio required="true" value="#{req.estado}"
