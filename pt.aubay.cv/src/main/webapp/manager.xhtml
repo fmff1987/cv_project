@@ -2,24 +2,13 @@
 
 <!DOCTYPE html>
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="WEB-INF/templates/template.xhtml">
-
-	<ui:define name="pageTitle">
-            Página Manager
-    </ui:define>
-
-	<ui:define name="pageContent">
-
-		<h3 style="text-align: center;">Criar Pedido</h3>
-
-		<h:form id="form1" enctype="multipart/form-data">
-
-			<p:growl showDetail="true" id="msg" />
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="WEB-INF/templates/template.xhtml">
 
     <ui:define name="pageTitle">
         Página Manager
@@ -35,17 +24,6 @@
 
             <h:panelGrid columns="2" cellpadding="5">
 
-				<p:outputLabel value="Curriculo: " />
-				<p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" />
-
-			</h:panelGrid>
-
-			<p:commandButton value="Submeter Pedido"
-				actionListener="#{ReqBean.uploadOrig()}" ajax="false" update="msg" />
-
-			<br></br>
-			<br></br>
-			<br></br>
                 <p:outputLabel value="Nome do Manager:" for="name_m" />
                 <p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
                                  effect="fold" converter="omnifaces.SelectItemsConverter"
@@ -88,7 +66,6 @@
         </h:form>
 
         <h:form id="form2">
->>>>>>> master
 
             <p:dataTable id="recruiterReqList" var="finishedList"
                          value="#{ReqBean.requestListAprovado}"          
@@ -131,31 +108,6 @@
 
         </h:form>
 
-<<<<<<< HEAD
-				<p:column headerText="Nome do Candidato">
-					<h:outputText value="#{req.candidateName}" />
-				</p:column>
-
-				<p:column headerText="Email do Candidato">
-					<h:outputText value="#{req.candidateEmail}" />
-				</p:column>
-
-				<p:column headerText="Recrutador">
-					<h:outputText value="#{req.recruiter.name}" />
-				</p:column>
-
-				<p:column headerText="Cv Aubay">
-					<p:commandButton value="cv"></p:commandButton>
-				</p:column>
-
-			</p:dataTable>
-
-		</h:form>
-
-	</ui:define>
-
-=======
     </ui:define>
 			
->>>>>>> master
 </ui:composition>
