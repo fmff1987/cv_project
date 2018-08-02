@@ -1,6 +1,8 @@
 package pt.aubay.cv.models;
 
 public enum Status{
+        INICIADO("Iniciado"),
+	PREAPROVADO("Aguardar aprovação"),
 	INICIADO("Iniciado"),
 	PREAPROVADO("Aguardando Aprovação"),
 	APROVADO ("Aprovado"), 

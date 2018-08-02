@@ -19,7 +19,6 @@ public class ControllerRequest {
 		
 	public void createRequest(Request r) {
     	
-
 		db.createEntity(r);
 	}
 	
@@ -47,5 +46,7 @@ public class ControllerRequest {
 	public List<Request> getAllNotAprovado() {
 		return db.getAllNotAprovado();
 	}
-	
+        
+
+
 }
