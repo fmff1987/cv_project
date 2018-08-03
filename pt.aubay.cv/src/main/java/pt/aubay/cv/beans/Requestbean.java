@@ -56,6 +56,17 @@ public class Requestbean implements Serializable {
 
 	@Inject
 	private ControllerRequest cr;
+	
+	@Inject
+	private AdminEmailBean admEmail;
+
+	public AdminEmailBean getAdmEmail() {
+		return admEmail;
+	}
+
+	public void setAdmEmail(AdminEmailBean admEmail) {
+		this.admEmail = admEmail;
+	}
 
 	public UploadedFile getCvAubay() {
 		return cvAubay;
@@ -251,6 +262,13 @@ public class Requestbean implements Serializable {
         request.setEstado(Status.PREAPROVADO);
         cr.updateReq(request);
         loadRequests();
+        System.out.println(admEmail.getActiveadmEmailListString());
+        
+        if(admEmail.getActiveadmEmailListString().contains("@")) {
+        	this.sendMail(admEmail.getActiveadmEmailListString(), "OLA");
+        }
+        
+      
     }
     
     

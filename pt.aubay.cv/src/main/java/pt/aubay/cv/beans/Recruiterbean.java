@@ -28,6 +28,7 @@ public class Recruiterbean {
 	}
 	@Inject
     private ControllerRecruiter cr;
+	
 
     @PostConstruct
     private void loadRecruiters() {
@@ -73,7 +74,7 @@ public class Recruiterbean {
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Recruiter recruta = (Recruiter) event.getObject();
         cr.updateRec(recruta);
-
+        
     }
 
     public void onRowCancel(RowEditEvent event) {
