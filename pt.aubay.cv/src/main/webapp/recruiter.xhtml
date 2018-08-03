@@ -22,7 +22,7 @@
 
             <p:growl id="msgs" showDetail="true"/>
 
-            <p:dataTable id="recruiterReqList" var="doingList"
+            <p:dataTable id="recruiterReqList" var="doingReq"
                          value="#{ReqBean.requestListNotAprovado}" editable="true"         
                          resizableColumns="true" reflow="true"
                          emptyMessage="Nenhum pedido encontrado."
@@ -39,40 +39,40 @@
                 <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
                         update=":form:msgs" />
 
-                <p:column headerText="Manager" filterBy="#{doingList.manager.name}"
+                <p:column headerText="Manager" filterBy="#{doingReq.manager.name}"
                           filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.manager.name}" />
+                    <h:outputText value="#{doingReq.manager.name}" />
                 </p:column>
 
-                <p:column headerText="Recrutador" filterBy="#{doingList.recruiter.name}"
+                <p:column headerText="Recrutador" filterBy="#{doingReq.recruiter.name}"
                           filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.recruiter.name}" />
+                    <h:outputText value="#{doingReq.recruiter.name}" />
                 </p:column>
 
-                <p:column headerText="Candidato" filterBy="#{doingList.candidateName}"
+                <p:column headerText="Candidato" filterBy="#{doingReq.candidateName}"
                           filterMatchMode="contains" style="width:130px">
-                    <h:outputText value="#{doingList.candidateName}" />
+                    <h:outputText value="#{doingReq.candidateName}" />
                 </p:column>
 
-                <p:column headerText="Email" filterBy="#{doingList.candidateEmail}" 
+                <p:column headerText="Email" filterBy="#{doingReq.candidateEmail}" 
                           filterMatchMode="contains" style="width:250px">
-                    <h:outputText value="#{doingList.candidateEmail}" />
+                    <h:outputText value="#{doingReq.candidateEmail}" />
                 </p:column>
 
-                <p:column headerText="Data Limite" sortBy="#{doingList.deadline}" style="width:150px">
+                <p:column headerText="Data Limite" sortBy="#{doingReq.deadline}" style="width:150px">
                     <f:facet name="filter" >
                         <p:outputLabel for="datetime" />
                         <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00"
                                     locale="pt" />
                     </f:facet>
-                    <h:outputText value="#{doingList.deadline}">
+                    <h:outputText value="#{doingReq.deadline}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:00" />
                     </h:outputText>              
                 </p:column>    
 
                 <p:column headerText="CV Original" style="width:140px">
                     <p:commandButton value="Download" ajax="false"  
-                                     actionListener="#{ReqBean.download(doingList.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
+                                     actionListener="#{ReqBean.download(doingReq.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
                     </p:commandButton>
                     
                 </p:column>                
@@ -83,12 +83,27 @@
                 </p:column>
 
                 <p:column headerText="Comentario">
-                    <p:inputTextarea cols="19" />
+                    <f:facet name="output">
+                        <h:outputText value="#{doingReq.comment}" style="height:40px;" />
+                    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{doingReq.comment}" style="height:40px;" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputTextarea value="#{doingReq.comment}" cols="16"
+                                             autoResize="false" />
+                        </f:facet>
+                    </p:cellEditor>
+
                 </p:column>
 
                 <p:column  style="width:40px">
-                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingList)}" icon="ui-icon-mail-closed" ajax="false"/>
-                    
+                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingReq)}" icon="ui-icon-mail-closed" ajax="false"/>
+                </p:column>
+                
+                <p:column style="width:32px">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
 
