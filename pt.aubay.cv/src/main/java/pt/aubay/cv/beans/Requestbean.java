@@ -139,8 +139,7 @@ public class Requestbean implements Serializable {
         cr.removeRequest(request);
     }
 
-    public void onRowEdit(RowEditEvent event, Request r) {
-        uploadAubay(r);
+    public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Pedido Editado");
         FacesContext.getCurrentInstance().addMessage(null, msg);
         Request request = (Request) event.getObject();
