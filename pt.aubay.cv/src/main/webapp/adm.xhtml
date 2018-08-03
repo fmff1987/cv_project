@@ -38,15 +38,10 @@
     </ui:define>
 
     <ui:define name="pageContent">
-        <br></br>
-        <br></br>
-        <h3 class="subtitles">Administrador</h3>
-        <h:head>
-            <title>CV Management - ADM</title>
-            <h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
 
-        </h:head>	
+        <h3 class="subtitles">Administrador</h3>	
+        
         <h:form id="form" onkeypress="if (event.keyCode == 13)
                             return false;">
 
@@ -172,7 +167,7 @@
                             <h:outputText value="#{req.manager.name}" />
                         </p:column>
 
-                        <p:column headerText="Recrutador">
+                        <p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{req.recruiter.name}" />
@@ -306,7 +301,7 @@
 
                         </p:column>
 
-                        <p:column headerText="Recrutador">
+                        <p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{req.recruiter.name}" />
@@ -348,9 +343,9 @@
                         </p:column>
 
                         <p:column headerText="CV Aubay" style="width:140px">
-						<p:column headerText="Recrutador" style="width:120px" filterBy="#{req.recruiter.name}">
-						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
-						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
+						<p:column headerText="Recrutador" style="width:120px" filterBy="#{req.recruiter.name}"/>
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}"/>
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}"/>
                             <p:commandButton value="Download" ajax="false" actionListener="#{ReqBean.download(req.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
                             </p:commandButton>
                         </p:column> 
@@ -363,8 +358,7 @@
                     </p:dataTable>
                 </p:tab>
             </p:tabView>
-            <p:commandButton icon="fa fa-mail-forward"
-                             action="#{ReqBean.sendMail()}" />
+        
         </h:form>
 
     </ui:define>
