@@ -17,77 +17,75 @@ import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
 
-
 import org.primefaces.model.StreamedContent;
 
 import org.primefaces.model.UploadedFile;
 
 import org.omnifaces.util.Faces;
+import org.primefaces.event.CellEditEvent;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.SSLEmail;
 import pt.aubay.cv.models.Status;
 
-
-
 @Named("ReqBean")
 @ViewScoped
 
-public class Requestbean implements Serializable {  
+public class Requestbean implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	private Request request = new Request();
+    private Request request = new Request();
 
-	private UploadedFile cvOrig;
-	private UploadedFile cvAubay;
-	private StreamedContent downloadAubay;
+    private UploadedFile cvOrig;
+    private UploadedFile cvAubay;
+    private StreamedContent downloadAubay;
 
-	private List<Request> requestList;
-	private List<Request> requestListAll;
-	private List<Request> requestListAprovado;
-	private List<Request> requestListNotAprovado;
+    private List<Request> requestList;
+    private List<Request> requestListAll;
+    private List<Request> requestListAprovado;
+    private List<Request> requestListNotAprovado;
 
+    @Inject
+    private ControllerRequest cr;
 
+    public UploadedFile getCvAubay() {
+        return cvAubay;
+    }
 
-	@Inject
-	private ControllerRequest cr;
+    public void setCvAubay(UploadedFile cvAubay) {
+        this.cvAubay = cvAubay;
+    }
 
-	public UploadedFile getCvAubay() {
-		return cvAubay;
-	}
+    public List<Request> getRequestList() {
+        return requestList;
+    }
 
-	public void setCvAubay(UploadedFile cvAubay) {
-		this.cvAubay = cvAubay;
-	}
+    public List<Request> getRequestListAll() {
+        return requestListAll;
+    }
 
-	public List<Request> getRequestList() {
-		return requestList;
-	}
+    public List<Request> getRequestListAprovado() {
+        return requestListAprovado;
+    }
 
-	public List<Request> getRequestListAll(){
-		return requestListAll;
-	}
+    public void setRequestListAprovado(List<Request> requestListAprovado) {
+        this.requestListAprovado = requestListAprovado;
+    }
 
-	public List<Request> getRequestListAprovado() {
-		return requestListAprovado;
-	}
+    public List<Request> getRequestListNotAprovado() {
+        return requestListNotAprovado;
+    }
 
-	public void setRequestListAprovado(List<Request> requestListAprovado) {
-		this.requestListAprovado = requestListAprovado;
-	}
-	public List<Request> getRequestListNotAprovado() {
-		return requestListNotAprovado;
-	}
+    public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
+        this.requestListNotAprovado = requestListNotAprovado;
+    }
 
-	public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
-		this.requestListNotAprovado = requestListNotAprovado;
-	}
-	public StreamedContent getDownloadAubay() {
+    public StreamedContent getDownloadAubay() {
         return downloadAubay;
     }
 
@@ -95,137 +93,146 @@ public class Requestbean implements Serializable {
         this.downloadAubay = downloadAubay;
     }
 
+    @PostConstruct
+    public void loadRequests() {
+        requestList = cr.getReq();
+        requestListAll = cr.getReqAll();
+        requestListAprovado = cr.getReqAllAprovado();
+        requestListNotAprovado = cr.getAllNotAprovado();
 
-	@PostConstruct
-	public void loadRequests() {
-		requestList = cr.getReq();
-		requestListAll = cr.getReqAll();
-		requestListAprovado = cr.getReqAllAprovado();
-		requestListNotAprovado = cr.getAllNotAprovado();
+        // System.out.println(requestList.size());
+    }
 
-		// System.out.println(requestList.size());
-	}
+    public Request getRequest() {
+        return request;
+    }
 
-	public Request getRequest() {
-		return request;
-	}
+    public void setRequest(Request request) {
+        this.request = request;
+    }
 
-	public void setRequest(Request request) {
-		this.request = request;
-	}
+    public UploadedFile getCvOrig() {
+        return cvOrig;
+    }
 
-	public UploadedFile getCvOrig() {
-		return cvOrig;
-	}
+    public void setCvOrig(UploadedFile cvOrig) {
+        this.cvOrig = cvOrig;
+    }
 
-	public void setCvOrig(UploadedFile cvOrig) {
-		this.cvOrig = cvOrig;
-	}
+    public ControllerRequest getCr() {
+        return cr;
+    }
 
-	public ControllerRequest getCr() {
-		return cr;
-	}
+    public void setCr(ControllerRequest cr) {
+        this.cr = cr;
+    }
 
-	public void setCr(ControllerRequest cr) {
-		this.cr = cr;
-	}
+    public void createReq() {
+        request.setEstado(Status.INICIADO);
+        cr.createRequest(request);
 
-	public void createReq() {
-		request.setEstado(Status.INICIADO);
-		cr.createRequest(request);
+        FacesMessage msg = new FacesMessage("Pedido registrado.");
+        FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
+    }
 
-		FacesMessage msg = new FacesMessage("Pedido registrado.");
-		FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
-	}
+    public void removeReq(Request request) {
+        cr.removeRequest(request);
+    }
 
+    public void onRowEdit(RowEditEvent event, Request r) {
+        uploadAubay(r);
+        FacesMessage msg = new FacesMessage("Pedido Editado");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Request request = (Request) event.getObject();
+        cr.updateReq(request);
+        requestList = cr.getReq();
+        requestListNotAprovado = cr.getAllNotAprovado();
 
-	public void removeReq(Request request) {
-		cr.removeRequest(request);
-	}    
+        if (request.getRecruiter().getEmail().contains("@")) {
+            String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
+            this.sendMail(request.getRecruiter().getEmail(), bodyMail);
+        }
+    }
 
-	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Pedido Editado");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		Request request = (Request) event.getObject();
-		cr.updateReq(request);
-		requestList = cr.getReq();
-		requestListNotAprovado = cr.getAllNotAprovado();
-		
+//    public void onCellEdit(CellEditEvent event) {
+//        Object oldValue = event.getOldValue();
+//        Object newValue = event.getNewValue();
+//
+//        if (newValue != null && !newValue.equals(oldValue)) {
+//            FacesMessage msg = new FacesMessage("Pedido Editado");
+//            FacesContext.getCurrentInstance().addMessage(null, msg);
+//        }
+//        
+//        System.out.println(event.getColumn().getHeaderText());
+//        //Request request = (Request) 
+//        cr.updateReq(request);
+//        requestList = cr.getReq();
+//        requestListNotAprovado = cr.getAllNotAprovado();
+//
+//        if (request.getRecruiter().getEmail().contains("@")) {
+//            String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
+//            this.sendMail(request.getRecruiter().getEmail(), bodyMail);
+//        }
+//    }
 
-		
-		if(request.getRecruiter().getEmail().contains("@")) {
-			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
-		}
-	
+    public void onRowEditOngoingList(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Pedido Editado");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        Request request = (Request) event.getObject();
+        if (request.getEstado() == null) {
+            request.setEstado(Status.INICIADO);
+        }
 
+        if (request.getEstado() == Status.APROVADO) {
+            if (request.getManager().getEmail().contains("@")) {
+                String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
+                this.sendMail(request.getManager().getEmail(), bodymail);
+            }
+        } else if (request.getEstado() == Status.REPROVADO) {
+            if (request.getRecruiter().getEmail().contains("@")) {
+                String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios \n " + request.getComment();
+                this.sendMail(request.getRecruiter().getEmail(), bodymail);
+            }
+        }
+        cr.updateReq(request);
 
-	}
+        requestListNotAprovado = cr.getAllNotAprovado();
+        requestListAprovado = cr.getReqAllAprovado();
 
-	public void onRowEditOngoingList(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Pedido Editado");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		Request request = (Request) event.getObject();
-		if(request.getEstado()==null) {
-			request.setEstado(Status.INICIADO);
-		}
-		
+    }
 
-		
-		
-		if(request.getEstado() == Status.APROVADO) {
-			if(request.getManager().getEmail().contains("@")) {
-				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
-				this.sendMail(request.getManager().getEmail(), bodymail);
-			}
-		}else if(request.getEstado()== Status.REPROVADO) {
-			if(request.getRecruiter().getEmail().contains("@")) {
-				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios \n " + request.getComment();
-				this.sendMail(request.getRecruiter().getEmail(), bodymail);
-			}
-		}
-		cr.updateReq(request);
-		
-		requestListNotAprovado = cr.getAllNotAprovado();
-		requestListAprovado = cr.getReqAllAprovado();
-		
-	}
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição Cancelada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
-	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Edição Cancelada");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+    public void uploadOrig() {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
+            File folder = new File(dir);
+            folder.mkdirs();
 
-	public void uploadOrig() {
-		try { 
-			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-			File folder = new File(dir);
-			folder.mkdirs();
+            File file = new File(dir, cvOrig.getFileName());
 
-			File file = new File(dir, cvOrig.getFileName());
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvOrig.getContents());
+            out.close();
 
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvOrig.getContents());
-			out.close();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvOrigPath(file.getAbsolutePath());
 
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvOrigPath(file.getAbsolutePath());
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        createReq();
+    }
 
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-		}
-		createReq();
-	}
-
-
-	public void sendMail(String mail, String body) {
-		SSLEmail.SSl(mail, body);
-	}
-	
-    
+    public void sendMail(String mail, String body) {
+        SSLEmail.SSl(mail, body);
+    }
 
     public void uploadAubay(Request request) {
         try {
@@ -238,7 +245,7 @@ public class Requestbean implements Serializable {
             OutputStream out = new FileOutputStream(file);
             out.write(cvAubay.getContents());
             out.close();
-            
+
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
@@ -252,16 +259,13 @@ public class Requestbean implements Serializable {
         cr.updateReq(request);
         loadRequests();
     }
-    
-    
-    public void download(String filePath) throws IOException{
-       File file = new File(filePath);
+
+    public void download(String filePath) throws IOException {
+        File file = new File(filePath);
         Faces.sendFile(file, true);
-           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+        /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
     }
-   
 
-    
 }

@@ -23,7 +23,8 @@
             <p:growl id="msgs" showDetail="true"/>
 
             <p:dataTable id="recruiterReqList" var="doingReq"
-                         value="#{ReqBean.requestListNotAprovado}" editable="true"         
+                         value="#{ReqBean.requestListNotAprovado}" 
+                         editable="true"  editMode="cell"       
                          resizableColumns="true" reflow="true"
                          emptyMessage="Nenhum pedido encontrado."
                          style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
@@ -34,7 +35,8 @@
                     Lista de pedidos
                 </f:facet>
 
-                <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
+<!--                <p:ajax event="cellEdit" listener="#{ReqBean.onCellEdit}" update=":form:msgs" />-->
+                <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit(event, doingReq)}"
                         update=":form:msgs"/>
                 <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
                         update=":form:msgs" />
@@ -55,7 +57,7 @@
                 </p:column>
 
                 <p:column headerText="Email" filterBy="#{doingReq.candidateEmail}" 
-                          filterMatchMode="contains" style="width:250px">
+                          filterMatchMode="contains" style="width:200px">
                     <h:outputText value="#{doingReq.candidateEmail}" />
                 </p:column>
 
@@ -74,12 +76,16 @@
                     <p:commandButton value="Download" ajax="false"  
                                      actionListener="#{ReqBean.download(doingReq.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
                     </p:commandButton>
-                    
+
                 </p:column>                
 
                 <p:column headerText="CV Aubay" style="width:117px">
                     <p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
                                   skinSimple="true" label="Anexar"/>   
+                </p:column>
+
+                <p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
+                    <h:outputText value="#{doingReq.estado.label}" />
                 </p:column>
 
                 <p:column headerText="Comentario">
@@ -101,7 +107,7 @@
                 <p:column  style="width:40px">
                     <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingReq)}" icon="ui-icon-mail-closed" ajax="false"/>
                 </p:column>
-                
+
                 <p:column style="width:32px">
                     <p:rowEditor />
                 </p:column>
