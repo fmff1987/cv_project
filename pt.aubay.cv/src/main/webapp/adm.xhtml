@@ -74,7 +74,7 @@
 
 						</p:column>
 
-						<p:column headerText="Recrutador" style="width:120px">
+						<p:column headerText="Recrutador" style="width:120px" filterBy="#{req.recruiter.name}">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.recruiter.name}" />
@@ -85,6 +85,9 @@
 										<f:selectItems value="#{RecBean.activeRecruiterList}"
 											var="recrutas" itemLabel="#{recrutas.name}"
 											itemValue="#{recrutas}" />
+										converter="omnifaces.SelectItemsConverter" style="width:100%">
+										<f:selectItems value="#{RecBean.activeRecruiterList}" var="recrutas"
+											itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
 									</h:selectOneMenu>
 								</f:facet>
 							</p:cellEditor>
@@ -103,13 +106,13 @@
 						</p:column>
 
 						<p:column headerText="Email" filterBy="#{req.candidateEmail}"
-							style="width:300px">
+							style="width:200px">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.candidateEmail}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="email" value="#{req.candidateEmail}" />
+									<p:inputText id="email" value="#{req.candidateEmail}" style="width:100%" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -171,14 +174,14 @@
 							<h:outputText value="#{req.manager.name}" />
 						</p:column>
 
-						<p:column headerText="Recrutador">
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.recruiter.name}" />
 								</f:facet>
 								<f:facet name="input">
 									<h:selectOneMenu value="#{req.recruiter}"
-										converter="omnifaces.SelectItemsConverter">
+										converter="omnifaces.SelectItemsConverter" style="width:100%">
 										<f:selectItems value="#{RecBean.recruiterList}" var="recrutas"
 											itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
 									</h:selectOneMenu>
@@ -313,7 +316,7 @@
 
 						</p:column>
 
-						<p:column headerText="Recrutador">
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.recruiter.name}" />
@@ -369,8 +372,7 @@
 					</p:dataTable>
 				</p:tab>
 			</p:tabView>
-			<p:commandButton icon="fa fa-mail-forward"
-				action="#{ReqBean.sendMail()}" />
+			
 		</h:form>
 
 	</ui:define>
