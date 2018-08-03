@@ -35,8 +35,14 @@ public class SSLEmail {
 				return new PasswordAuthentication(fromEmail, password);
 			}
 		};
-		
+
 		Session session = Session.getInstance(props, auth);
+
+		System.out.println("Session created");
+		new Thread(() -> {
+			EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
+		}).start();
+
 
 		System.out.println("Session created");
 		EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);

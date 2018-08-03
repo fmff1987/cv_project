@@ -28,6 +28,7 @@
 				style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
+            <p:dataTable id="recruiterReqList" var="doingReq"
 
 				<f:facet name="header">
                     Lista de pedidos
@@ -99,5 +100,20 @@
 		</h:form>
 
 	</ui:define>
+                <p:column headerText="Manager" filterBy="#{doingReq.manager.name}"
+                    <h:outputText value="#{doingReq.manager.name}" />
+                <p:column headerText="Recrutador" filterBy="#{doingReq.recruiter.name}"
+                    <h:outputText value="#{doingReq.recruiter.name}" />
+                <p:column headerText="Candidato" filterBy="#{doingReq.candidateName}"
+                    <h:outputText value="#{doingReq.candidateName}" />
+                <p:column headerText="Email" filterBy="#{doingReq.candidateEmail}" 
+                    <h:outputText value="#{doingReq.candidateEmail}" />
+                <p:column headerText="Data Limite" sortBy="#{doingReq.deadline}" style="width:150px">
+                    <h:outputText value="#{doingReq.deadline}">
+                                     actionListener="#{ReqBean.download(doingReq.cvOrigPath)}" icon="ui-icon-arrowthick-1-s">
+                        <h:outputText value="#{doingReq.comment}" style="height:40px;" />
+                            <h:outputText value="#{doingReq.comment}" style="height:40px;" />
+                            <p:inputTextarea value="#{doingReq.comment}" cols="16"
+                    <p:commandButton title="Enviar" action="#{ReqBean.uploadAubay(doingReq)}" icon="ui-icon-mail-closed" ajax="false"/>
 
 </ui:composition>
