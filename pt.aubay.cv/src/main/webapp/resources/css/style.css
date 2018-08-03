@@ -1,8 +1,12 @@
 @charset "UTF-8";
 
 .body {
-	background-image: url(#{resource['images/background.jpg']});
+	background-image: url(#{resource['images/abstractshapes.jpg']});
 	background-size: cover;
+}
+
+.bodytemplate {
+	background-image: url(#{resource['images/abstractshapesbodytemplate.jpg']});
 }
 
 .logoaubay {
@@ -12,14 +16,16 @@
 #logo {
 	margin: 15px;
 	margin-top: 50px;
-	width: 340px;
+	width: 400px;
 	height: auto;	
 	margin-bottom: 5px;
 }	
 	
 .title {
-	color: #fed1db;
-	font-weight: 100;
+	margin-top: 100px;
+	text-shadow: 2px 2px 5px #434345;
+	color: #fff;
+	font-weight: 500;
 	font-size: 70px;
 	text-align: center;
 }
@@ -40,15 +46,16 @@
 }
 
 .buttontext {
-	color: #fed1db;
-	font-weight: 65;
+	text-shadow: 2px 2px 5px #434345;
+	color: #fff;
+	font-weight: 300;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
 }
 
 .header {
-	background-image: url(#{resource['images/header.jpg']});
+	background-image: url(#{resource['images/abstractshapesheader.jpg']});
 	background-size: cover;
 }
 
