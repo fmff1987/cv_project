@@ -150,8 +150,14 @@ public class Requestbean implements Serializable {
 		cr.updateReq(request);
 		requestList = cr.getReq();
 		requestListNotAprovado = cr.getAllNotAprovado();
-		String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-		this.sendMail(request.getRecruiter().getEmail(), bodyMail);
+		
+
+		
+		if(request.getRecruiter().getEmail().contains("@")) {
+			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
+			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
+		}
+	
 
 
 	}
@@ -163,11 +169,26 @@ public class Requestbean implements Serializable {
 		if(request.getEstado()==null) {
 			request.setEstado(Status.INICIADO);
 		}
-		cr.updateReq(request);
+		
 
+		
+		
+		if(request.getEstado() == Status.APROVADO) {
+			if(request.getManager().getEmail().contains("@")) {
+				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
+				this.sendMail(request.getManager().getEmail(), bodymail);
+			}
+		}else if(request.getEstado()== Status.REPROVADO) {
+			if(request.getRecruiter().getEmail().contains("@")) {
+				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios \n " + request.getComment();
+				this.sendMail(request.getRecruiter().getEmail(), bodymail);
+			}
+		}
+		cr.updateReq(request);
+		
 		requestListNotAprovado = cr.getAllNotAprovado();
 		requestListAprovado = cr.getReqAllAprovado();
-
+		
 	}
 
 	public void onRowCancel(RowEditEvent event) {

@@ -348,6 +348,9 @@
                         </p:column>
 
                         <p:column headerText="CV Aubay" style="width:140px">
+						<p:column headerText="Recrutador" style="width:120px" filterBy="#{req.recruiter.name}">
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
+						<p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
                             <p:commandButton value="Download" ajax="false" actionListener="#{ReqBean.download(req.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
                             </p:commandButton>
                         </p:column> 
