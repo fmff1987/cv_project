@@ -88,12 +88,12 @@ public class Requestbean implements Serializable {
 		this.requestListNotAprovado = requestListNotAprovado;
 	}
 	public StreamedContent getDownloadAubay() {
-		return downloadAubay;
-	}
+        return downloadAubay;
+    }
 
-	public void setDownloadAubay(StreamedContent downloadAubay) {
-		this.downloadAubay = downloadAubay;
-	}
+    public void setDownloadAubay(StreamedContent downloadAubay) {
+        this.downloadAubay = downloadAubay;
+    }
 
 
 	@PostConstruct
@@ -143,6 +143,24 @@ public class Requestbean implements Serializable {
 		cr.removeRequest(request);
 	}    
 
+	public void onRowEdit(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Pedido Editado");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Request request = (Request) event.getObject();
+		cr.updateReq(request);
+		requestList = cr.getReq();
+		requestListNotAprovado = cr.getAllNotAprovado();
+		
+
+		
+		if(request.getRecruiter().getEmail().contains("@")) {
+			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si atÃ© Ã¡ Data Limite de " + request.getDeadline();
+			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
+		}
+	
+
+
+	}
 
 	public void onRowEditOngoingList(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Pedido Editado");
@@ -174,7 +192,7 @@ public class Requestbean implements Serializable {
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Edição Cancelada");
+		FacesMessage msg = new FacesMessage("EdiÃ§Ã£o Cancelada");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
@@ -206,46 +224,44 @@ public class Requestbean implements Serializable {
 	public void sendMail(String mail, String body) {
 		SSLEmail.SSl(mail, body);
 	}
+	
+    
 
+    public void uploadAubay(Request request) {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+            File folder = new File(dir);
+            folder.mkdirs();
 
+            File file = new File(dir, cvAubay.getFileName());
 
-	public void uploadAubay(Request request) {
-		try {
-			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
-			File folder = new File(dir);
-			folder.mkdirs();
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvAubay.getContents());
+            out.close();
+            
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+            request.setCvAubayPath(file.getAbsolutePath());
 
-			File file = new File(dir, cvAubay.getFileName());
-
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvAubay.getContents());
-			out.close();
-
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvAubayPath(file.getAbsolutePath());
-
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-		}
-		request.setEstado(Status.PREAPROVADO);
-		cr.updateReq(request);
-		loadRequests();
-	}
-
-
-	public void download(String filePath) throws IOException{
-		File file = new File(filePath);
-		Faces.sendFile(file, true);
-		/* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        request.setEstado(Status.PREAPROVADO);
+        cr.updateReq(request);
+        loadRequests();
+    }
+    
+    
+    public void download(String filePath) throws IOException{
+       File file = new File(filePath);
+        Faces.sendFile(file, true);
+           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
-
-	}
-
-}
+    }
    
 
     
+}

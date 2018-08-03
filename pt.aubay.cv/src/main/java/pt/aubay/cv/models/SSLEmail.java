@@ -42,9 +42,5 @@ public class SSLEmail {
 		new Thread(() -> {
 			EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
 		}).start();
-
-
-		System.out.println("Session created");
-		EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
 	}
 }
