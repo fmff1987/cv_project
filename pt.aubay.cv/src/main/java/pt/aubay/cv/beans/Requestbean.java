@@ -143,26 +143,6 @@ public class Requestbean implements Serializable {
 		cr.removeRequest(request);
 	}    
 
-	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Pedido Editado");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		Request request = (Request) event.getObject();
-		cr.updateReq(request);
-		requestList = cr.getReq();
-		requestListNotAprovado = cr.getAllNotAprovado();
-		String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-		this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-		
-
-		
-		if(request.getRecruiter().getEmail().contains("@")) {
-			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
-		}
-	
-
-
-	}
 
 	public void onRowEditOngoingList(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Pedido Editado");
@@ -262,10 +242,10 @@ public class Requestbean implements Serializable {
 		/* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
+
 	}
+
 }
-    }
    
 
     
-}
