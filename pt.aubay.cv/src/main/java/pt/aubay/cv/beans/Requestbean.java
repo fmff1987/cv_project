@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -152,6 +153,11 @@ public class Requestbean implements Serializable {
 
 	public void removeReq(Request request) {
 		cr.removeRequest(request);
+		//requestList = cr.getReq();
+		//loadRequests();
+		requestListAprovado = cr.getReqAllAprovado();
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Pedido removido");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}    
 
 	public void onRowEdit(RowEditEvent event) {
@@ -166,7 +172,8 @@ public class Requestbean implements Serializable {
 		
 		if(request.getRecruiter().getEmail().contains("@")) {
 			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
+			this.sendMail(request.getRecruiter().getEmail(), bodyMail);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
 		}
 	
 
@@ -177,22 +184,24 @@ public class Requestbean implements Serializable {
 		FacesMessage msg = new FacesMessage("Pedido Editado");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Request request = (Request) event.getObject();
+		
 		if(request.getEstado()==null) {
 			request.setEstado(Status.INICIADO);
 		}
 		
 
-		
-		
 		if(request.getEstado() == Status.APROVADO) {
 			if(request.getManager().getEmail().contains("@")) {
 				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
 				this.sendMail(request.getManager().getEmail(), bodymail);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para admistrador"));
 			}
 		}else if(request.getEstado()== Status.REPROVADO) {
 			if(request.getRecruiter().getEmail().contains("@")) {
-				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios \n " + request.getComment();
+				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios: \n" + request.getComment();
 				this.sendMail(request.getRecruiter().getEmail(), bodymail);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para recrutador "+ request.getRecruiter().getEmail()));
+				
 			}
 		}
 		cr.updateReq(request);
@@ -266,6 +275,7 @@ public class Requestbean implements Serializable {
         
         if(admEmail.getActiveadmEmailListString().contains("@")) {
         	this.sendMail(admEmail.getActiveadmEmailListString(), "OLA");
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado"));
         }
         
       

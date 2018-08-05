@@ -130,6 +130,7 @@ public class Request extends pt.aubay.cv.models.Entity {
 
     @PreRemove
     public void preRemove() {
+    	this.setEstado(null);
         manager.getRequestList().remove(this);
         recruiter.getRequestList().remove(this);
     }
