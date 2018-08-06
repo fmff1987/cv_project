@@ -5,7 +5,7 @@
 	background-size: cover;
 }
 
-.bodytemplate {
+.bodygeral {
 	background-image: url(#{resource['images/abstractshapesbodytemplate.jpg']});
 }
 
@@ -87,12 +87,8 @@
 	background-color: orange;
 }
 
-.ui-datatable {
-	background: 
-}
-
 .ui-tabs {
-	background: linear-gradient(#fff, #fff5fe);
+	background: linear-gradient(#fffcf2, #ff4e00);
 }
 
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {

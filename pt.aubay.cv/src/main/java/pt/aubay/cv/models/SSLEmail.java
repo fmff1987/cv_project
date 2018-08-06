@@ -23,11 +23,10 @@ public class SSLEmail {
 		System.out.println("SSLEmail Start");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-		props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
-		props.put("mail.smtp.socketFactory.class",
-				"javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
 		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
 		props.put("mail.smtp.port", "465"); //SMTP Port
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.transport.protocol", "smtp");
 
 		Authenticator auth = new Authenticator() {
 			//override the getPasswordAuthentication method
@@ -37,6 +36,7 @@ public class SSLEmail {
 		};
 
 		Session session = Session.getInstance(props, auth);
+		session.setDebug(true);
 
 		System.out.println("Session created");
 		new Thread(() -> {
