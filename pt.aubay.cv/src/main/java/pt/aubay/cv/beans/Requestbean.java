@@ -285,8 +285,9 @@ public class Requestbean implements Serializable {
         System.out.println(admEmail.getActiveadmEmailListString());
         
         if(admEmail.getActiveadmEmailListString().contains("@")) {
-        	this.sendMail(admEmail.getActiveadmEmailListString(), "OLA");
-        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado"));
+        	String bodyMail = "O recrutador " + request.getRecruiter().getName() + " adicionou o Cv aubay ao candidato " + request.getCandidateName();
+        	this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
         }
         
       
