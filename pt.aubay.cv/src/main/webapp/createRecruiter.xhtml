@@ -3,92 +3,109 @@
 <!DOCTYPE html>
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="WEB-INF/templates/template.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
 
-    <ui:define name="pageTitle">
+	<ui:define name="pageTitle">
         Criar Recrutadores
     </ui:define>
 
 
-    <ui:define name="pageContent">
+	<ui:define name="pageContent">
 
-        <h3 class="subtitles">Registar Recrutadores</h3>
+		<h3 class="subtitles">Registar Recrutadores</h3>
 
-        <h:form id="form">
+		<h:form id="form">
 
-            <p:growl id="msgs" showDetail="true"/>
+			<p:growl id="msgs" showDetail="true" />
 
-            <p:layout style="min-height:800px;border-style:none;min-width:400px;">
-                <p:layoutUnit position="west" resizable="true" size="300" minSize="40" maxSize="400" style="border-style:none;">	
+			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
+				<p:layoutUnit position="west" resizable="true" size="300"
+					minSize="40" maxSize="400" style="border-style:none;">
 
-                    <p:outputLabel value="Nome: " for="name_r" />
-                    <h:inputText id="name_r" value="#{RecBean.recruiter.name}" style="width:200px;"></h:inputText>
-                    <br> </br>
+					<p:outputLabel value="Nome: " for="name_r" />
+					<h:inputText id="name_r" value="#{RecBean.recruiter.name}"
+						style="width:200px;"></h:inputText>
+					<br> </br>
 
-                    <p:outputLabel value="E-mail: " for="email_r" />
-                    <h:inputText id="email_r" value="#{RecBean.recruiter.email}" style="width:200px;"></h:inputText>
-                    <br> </br>		
+					<p:outputLabel value="E-mail: " for="email_r" />
+					<h:inputText id="email_r" value="#{RecBean.recruiter.email}"
+						style="width:200px;"></h:inputText>
+					<br> </br>
 
-                    <p:commandButton value="Criar" action="#{RecBean.createRec()}" icon="ui-icon-check" update=":form:recruiterTable"/>
-                    <p:commandButton icon="ui-icon-home" value="Voltar" action="adm?faces-redirect=true"/>
+					<p:commandButton value="Criar" action="#{RecBean.createRec()}"
+						icon="ui-icon-check" update=":form:recruiterTable" />
+					<p:commandButton icon="ui-icon-home" value="Voltar"
+						action="adm?faces-redirect=true" />
 
-                </p:layoutUnit>	         
+				</p:layoutUnit>
 
-                <p:layoutUnit position="center" style="border-style:none;">
+				<p:layoutUnit position="center" style="border-style:none;">
 
-                    <p:dataTable var="recruiter" value="#{RecBean.recruiterList}" id="recruiterTable" editable="true" paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="10,15,20">	                    
+					<p:dataTable var="recruiter" value="#{RecBean.recruiterList}"
+						id="recruiterTable" editable="true" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,15,20">
 
-                        <f:facet name="header">
+						<f:facet name="header">
                             Lista de Recrutadores
-                        </f:facet>		                    
+                        </f:facet>
 
-                        <p:ajax event="rowEdit" listener="#{RecBean.onRowEdit}" update=":form:msgs" />
-                        <p:ajax event="rowEditCancel" listener="#{RecBean.onRowCancel}" update=":form:msgs" />		                    
+						<p:ajax event="rowEdit" listener="#{RecBean.onRowEdit}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{RecBean.onRowCancel}"
+							update=":form:msgs" />
 
-                        <p:column filterBy="#{recruiter.name}" headerText="Nome">		                    		
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{recruiter.name}" /></f:facet>
-                                <f:facet name="input"><p:inputText  value="#{recruiter.name}" style="width:100%"/></f:facet>
-                            </p:cellEditor>
-                        </p:column>		
+						<p:column filterBy="#{recruiter.name}" headerText="Nome">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{recruiter.name}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{recruiter.name}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column filterBy="#{recruiter.email}" headerText="Email">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{recruiter.email}" /></f:facet>
-                                <f:facet name="input"><p:inputText  value="#{recruiter.email}" style="width:100%"/></f:facet>
-                            </p:cellEditor>
-                        </p:column>
+						<p:column filterBy="#{recruiter.email}" headerText="Email">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{recruiter.email}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{recruiter.email}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column filterBy="#{recruiter.active}" headerText="Status">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{recruiter.active ? 'Activo' : 'Inactivo'}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:outputLabel value="Activo: " />
-                                    <p:selectBooleanCheckbox value="#{recruiter.active}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+						<p:column filterBy="#{recruiter.active}" headerText="Status">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText
+										value="#{recruiter.active ? 'Activo' : 'Inactivo'}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:outputLabel value="Activo: " />
+									<p:selectBooleanCheckbox value="#{recruiter.active}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column style="width:32px">		                    
-                            <p:rowEditor />
-                        </p:column>	
+						<p:column style="width:32px">
+							<p:rowEditor />
+						</p:column>
 
-                    </p:dataTable>
+					</p:dataTable>
 
-                </p:layoutUnit>
-                
-            </p:layout>
+				</p:layoutUnit>
 
-        </h:form>
+			</p:layout>
 
-    </ui:define>
+		</h:form>
+
+	</ui:define>
 
 </ui:composition>

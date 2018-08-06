@@ -7,8 +7,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 
-<ui:composition 
 	xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
@@ -16,23 +16,35 @@ and open the template in the editor.
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
+
 		Gestão de CVs
+
 	</ui:define>
 
 
-    <ui:define name="body">
+	<ui:define name="body">
+
 		<h:body class="body"></h:body>
+
 	</ui:define>
 
 
 	<ui:define name="header">
+
 		<div class="logoaubay">
-			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay"/>
+
+			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay" />
+
 			<h1 class="title">Plataforma de Gestão de Currículos</h1>
+
 		</div>
+
 	</ui:define>
-   
- 
+
+
+
+
+
 	<ui:define name="pageContent">
 			<div class="container">
 				<div class="d-flex justify-content-between row">
@@ -56,9 +68,55 @@ and open the template in the editor.
 						</a>
 						<h1 class="buttontext">Recrutador</h1>
 					</div>
+
+		<div class="container">
+
+			<div class="d-flex justify-content-between row">
+
+				<div class="col-md-4 manager">
+
+					<a href="manager.xhtml"> <img class="buttonindex"
+						src="resources/images/buttonmemberman.png" alt="Manager"></img>
+
+					</a>
+
+					<h1 class="buttontext">Manager</h1>
+
 				</div>
-			</div>		
+
+
+
+				<div class="col-md-4 admin">
+
+					<a href="adm.xhtml"> <img class="buttonindex"
+						src="resources/images/buttonmemberadm.png" alt="Administrador"></img>
+
+					</a>
+
+					<h1 class="buttontext">Administrador</h1>
+
+				</div>
+
+
+
+				<div class="col-md-4 recruiter">
+
+					<a href="recruiter.xhtml"> <img class="buttonindex"
+						src="resources/images/buttonmemberrec.png" alt="Recrutador"></img>
+
+					</a>
+
+					<h1 class="buttontext">Recrutador</h1>
+
+				</div>
+
+			</div>
+
+		</div>
+
 	</ui:define>
-    
+
+
+
 </ui:composition>
 

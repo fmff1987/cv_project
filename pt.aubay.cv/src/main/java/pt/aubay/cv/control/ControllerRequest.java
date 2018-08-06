@@ -1,33 +1,28 @@
 package pt.aubay.cv.control;
 
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
 import pt.aubay.cv.repositories.RequestRepository;
 
 @Transactional
 @RequestScoped
 public class ControllerRequest {
-	
+
 	@Inject
 	RequestRepository db; 
-		
-	public void createRequest(Request r) {
-    	
 
+	public void createRequest(Request r) {
 		db.createEntity(r);
 	}
-	
+
 	public void removeRequest(Request r) {
 		db.removeEntity(r);
-//		updateReq();
+		//updateReq();
 	}
-	
+
 	public void updateReq(Request r) {
 		db.updateEntity(r);
 	}
@@ -35,7 +30,7 @@ public class ControllerRequest {
 	public List<Request> getReq() {
 		return db.getAllWithRecruiterAndManagers();
 	}
-	
+
 	public List<Request> getReqAll(){
 		return db.getAll();
 	}
@@ -47,5 +42,5 @@ public class ControllerRequest {
 	public List<Request> getAllNotAprovado() {
 		return db.getAllNotAprovado();
 	}
-	
+
 }

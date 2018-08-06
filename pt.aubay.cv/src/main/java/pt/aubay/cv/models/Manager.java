@@ -17,33 +17,30 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="Manager.getAll",
 			query="SELECT m FROM Manager m"),
-	 @NamedQuery(name="Manager.managerActive",
-	    query="SELECT m FROM Manager m WHERE m.active = true "),
+	@NamedQuery(name="Manager.managerActive",
+	query="SELECT m FROM Manager m WHERE m.active = true "),
 })
 
-
 public class Manager extends Person {
-	
-    private static final long serialVersionUID = 1L;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-		CascadeType.REFRESH })
-    private List<Request> requestList = new ArrayList<>();
 
-    public List<Request> getRequestList() {
-        return requestList;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setRequestList(List<Request> requestList) {
-        this.requestList = requestList;
-    }
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REFRESH })
+	private List<Request> requestList = new ArrayList<>();
 
-   @PreRemove
-   public void preRemove() {
-	   for(Request r: requestList) {
-		   r.setManager(null);
-	   }
-   }
-   
-    
+	public List<Request> getRequestList() {
+		return requestList;
+	}
+
+	public void setRequestList(List<Request> requestList) {
+		this.requestList = requestList;
+	}
+
+	@PreRemove
+	public void preRemove() {
+		for(Request r: requestList) {
+			r.setManager(null);
+		}
+	}
 }
