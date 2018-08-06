@@ -39,7 +39,7 @@ public class EmailUtil {
 			
 			Transport.send(msg);
 
-			System.out.println("EMail Sent Successfully!!");
+			System.out.println("Email sent successfully!!");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -154,7 +154,7 @@ public class Requestbean implements Serializable {
 
 		
 		if(request.getRecruiter().getEmail().contains("@")) {
-			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si atÃ© Ã¡ Data Limite de " + request.getDeadline();
+			String bodyMail = "O candidato com o nome " + request.getCandidateName() + " foi-lhe atribuido a si com a data Limite de " + request.getDeadline();
 			this.sendMail(request.getRecruiter().getEmail(), bodyMail);	
 		}
 	
@@ -175,12 +175,12 @@ public class Requestbean implements Serializable {
 		
 		if(request.getEstado() == Status.APROVADO) {
 			if(request.getManager().getEmail().contains("@")) {
-				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
+				String bodymail = "O candidato com o nome de " + request.getCandidateName() + " foi concluído.";
 				this.sendMail(request.getManager().getEmail(), bodymail);
 			}
 		}else if(request.getEstado()== Status.REPROVADO) {
 			if(request.getRecruiter().getEmail().contains("@")) {
-				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios \n " + request.getComment();
+				String bodymail = "Informamos que o pedido foi reprovado, por favor verifique os comentários \n " + request.getComment();
 				this.sendMail(request.getRecruiter().getEmail(), bodymail);
 			}
 		}
@@ -192,7 +192,7 @@ public class Requestbean implements Serializable {
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("EdiÃ§Ã£o Cancelada");
+		FacesMessage msg = new FacesMessage("Edição Cancelada");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 

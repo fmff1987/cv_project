@@ -36,7 +36,7 @@ public class SSLEmail {
 		};
 
 		Session session = Session.getInstance(props, auth);
-		session.setDebug(true);
+		
 
 		System.out.println("Session created");
 		new Thread(() -> {
