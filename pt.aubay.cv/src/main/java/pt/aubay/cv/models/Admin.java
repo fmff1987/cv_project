@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="admin")
+@Table(name="adm")
 @NamedQueries({
 		@NamedQuery(name="Admin.getAll",
 		query= "SELECT a FROM Admin a"),
