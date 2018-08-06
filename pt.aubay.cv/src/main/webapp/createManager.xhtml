@@ -13,7 +13,10 @@
         Criar Managers
     </ui:define>
 
-
+	<ui:define name="body">
+    	<h:body class="bodygeral"></h:body>    
+    </ui:define>
+    
 	<ui:define name="pageContent">
 
 		<h3 class="subtitles">Registar Managers</h3>
@@ -22,10 +25,7 @@
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
-				<p:layoutUnit position="west" resizable="true" minSize="40"
-					maxSize="1000" size="300" style="border-style:none;">
-
+			<div class="register">
 					<p:outputLabel value="Nome: " for="name_m" />
 					<h:inputText id="name_m" value="#{ManBean.manager.name}"
 						style="width:200px;"></h:inputText>
@@ -40,11 +40,10 @@
 						icon="ui-icon-check" update=":form:managerTable" />
 					<p:commandButton value="Voltar" action="adm?faces-redirect=true"
 						icon="ui-icon-home" />
-
-				</p:layoutUnit>
-
-				<p:layoutUnit position="center" style="border-style:none;">
-
+			</div>
+				
+			<div class="list">
+				
 					<p:dataTable var="manager" value="#{ManBean.managerList}"
 						id="managerTable" editable="true" rows="15" paginator="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -98,10 +97,7 @@
 						</p:column>
 
 					</p:dataTable>
-
-				</p:layoutUnit>
-
-			</p:layout>
+			</div>
 
 		</h:form>
 

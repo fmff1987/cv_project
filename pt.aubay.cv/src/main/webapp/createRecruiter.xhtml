@@ -13,7 +13,10 @@
         Criar Recrutadores
     </ui:define>
 
-
+	<ui:define name="body">
+    	<h:body class="bodygeral"></h:body>    
+    </ui:define>
+    
 	<ui:define name="pageContent">
 
 		<h3 class="subtitles">Registar Recrutadores</h3>
@@ -22,10 +25,7 @@
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
-				<p:layoutUnit position="west" resizable="true" size="300"
-					minSize="40" maxSize="400" style="border-style:none;">
-
+			<div class="register">
 					<p:outputLabel value="Nome: " for="name_r" />
 					<h:inputText id="name_r" value="#{RecBean.recruiter.name}"
 						style="width:200px;"></h:inputText>
@@ -40,12 +40,10 @@
 						icon="ui-icon-check" update=":form:recruiterTable" />
 					<p:commandButton icon="ui-icon-home" value="Voltar"
 						action="adm?faces-redirect=true" />
-
-				</p:layoutUnit>
-
-				<p:layoutUnit position="center" style="border-style:none;">
-
-					<p:dataTable var="recruiter" value="#{RecBean.recruiterList}"
+			</div>
+				
+			<div class="list">
+				<p:dataTable var="recruiter" value="#{RecBean.recruiterList}"
 						id="recruiterTable" editable="true" paginator="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="10,15,20">
@@ -98,14 +96,9 @@
 							<p:rowEditor />
 						</p:column>
 
-					</p:dataTable>
-
-				</p:layoutUnit>
-
-			</p:layout>
-
+				</p:dataTable>
+			</div>
 		</h:form>
-
 	</ui:define>
 
 </ui:composition>

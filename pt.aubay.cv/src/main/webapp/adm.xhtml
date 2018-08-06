@@ -12,55 +12,6 @@
     <ui:define name="pageTitle">
         Página Administrador
     </ui:define>
-	
-	<ui:define name="subheader">
-		<div class="subheader">
-			<div>
-				<p:menubar>
-					<p:submenu label="Manager">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createManager.xhtml" />
-					</p:submenu>
-
-					<p:submenu label="Recrutador">
-						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
-							url="createRecruiter.xhtml" />
-					</p:submenu>
-
-					<p:submenu label="Pedidos">
-						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk"
-							url="admCreateRequest.xhtml" />
-					</p:submenu>
-				</p:menubar>
-			</div>
-
-		</div>
-	</ui:define>
-
-	<ui:define name="pageContent">
-		<br></br>
-		<br></br>
-		<h3 class="subtitles">Administrador</h3>
-		<h:head>
-			<title>CV Management - ADM</title>
-			<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-		</h:head>	
-		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
-
-			<p:growl id="msgs" showDetail="true" />
-
-			<p:tabView dynamic="true" cache="true" effect="fold" id="tab">
-				<p:tab title="A Tratar">
-
-					<p:dataTable id="RequestList" var="req"
-						value="#{ReqBean.requestList}" editable="true" rows="10"
-						paginator="true" resizableColumns="true"
-						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" style="padding:15px">
-
-						<f:facet name="header">
 
     <ui:define name="subheader">
         <div class="subheader">
@@ -85,12 +36,14 @@
 
         </div>
     </ui:define>
+    
+    <ui:define name="body">
+    	<h:body class="bodygeral"></h:body>    
+    </ui:define>
 
     <ui:define name="pageContent">
-
-        <h3 class="subtitles">Administrador</h3>	
-        
-        <h:form id="form" onkeypress="if (event.keyCode == 13)
+        <h3 class="subtitles">Administrador</h3>
+            <h:form id="form" onkeypress="if (event.keyCode == 13)
                             return false;">
 
             <p:growl id="msgs" showDetail="true" />
@@ -98,7 +51,7 @@
             <p:tabView dynamic="true" cache="true" effect="fold" id="tab">
                 <p:tab title="A Tratar">
 
-                    <p:dataTable id="RequestList" var="req"
+                    <p:dataTable id="RequestList" var="req" reflow="true"
                                  value="#{ReqBean.requestList}" editable="true" rows="10"
                                  paginator="true" resizableColumns="true"
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -107,6 +60,7 @@
                         <f:facet name="header">
                             Lista de pedidos
                         </f:facet>
+                        
                         <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
                                 update=":form:msgs  :form:tab:OngoingList" />
                         <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
@@ -188,7 +142,6 @@
                         <p:column style="width:20px">
                             <p:rowEditor />
                         </p:column>
-
                     </p:dataTable>
                 </p:tab>
 
@@ -279,7 +232,6 @@
                                              actionListener="#{ReqBean.download(req.cvOrigPath)}"
                                              icon="ui-icon-arrowthick-1-s">
                             </p:commandButton>
-
                         </p:column>
 
                         <p:column headerText="CV Aubay" style="width:140px">
@@ -295,8 +247,7 @@
                                     <h:outputText value="#{req.estado.label}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:selectOneRadio required="true" value="#{req.estado}"
-                                                      layout="responsive" columns="1">
+                                    <p:selectOneRadio required="true" value="#{req.estado}" layout="responsive" columns="1">
                                         <f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
                                         <f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
                                     </p:selectOneRadio>
@@ -313,11 +264,9 @@
                                     <h:outputText value="#{req.comment}" style="height:40px;" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputTextarea value="#{req.comment}" cols="16"
-                                                     autoResize="false" />
+                                    <p:inputTextarea value="#{req.comment}" cols="16" autoResize="false" />
                                 </f:facet>
-                            </p:cellEditor>
-                            
+                            </p:cellEditor>                            
                         </p:column>
 
                         <p:column style="width:32px">
@@ -337,16 +286,14 @@
                         <f:facet name="header">
                             Lista de pedidos
                         </f:facet>
+                        
                         <p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
                                 update=":form:msgs" />
                         <p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
                                 update=":form:msgs" />
 
-
-                        <p:column headerText="Manager" filterBy="#{req.manager.name}"
-                                  filterMatchMode="contains">
+                        <p:column headerText="Manager" filterBy="#{req.manager.name}" filterMatchMode="contains">
                             <h:outputText value="#{req.manager.name}" />
-
                         </p:column>
 
                         <p:column headerText="Recrutador" filterBy="#{req.recruiter.name}">
@@ -355,15 +302,11 @@
                                     <h:outputText value="#{req.recruiter.name}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <h:selectOneMenu value="#{req.recruiter}" style="width:100%"
-                                                     converter="omnifaces.SelectItemsConverter">
-                                        <f:selectItems value="#{RecBean.recruiterList}" var="recrutas"
-                                                       itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
+                                    <h:selectOneMenu value="#{req.recruiter}" style="width:100%" converter="omnifaces.SelectItemsConverter">
+                                        <f:selectItems value="#{RecBean.recruiterList}" var="recrutas" itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
                                     </h:selectOneMenu>
                                 </f:facet>
-
                             </p:cellEditor>
-
                         </p:column>
 
                         <p:column headerText="Candidato" filterBy="#{req.candidateName}"
@@ -384,8 +327,7 @@
                                     <h:outputText value="#{req.candidateEmail}" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText id="email" value="#{req.candidateEmail}"
-                                                 style="width:100%" />
+                                    <p:inputText id="email" value="#{req.candidateEmail}" style="width:100%" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
@@ -399,17 +341,12 @@
                         </p:column> 
 
                         <p:column style="width:35px">
-                            <p:commandButton icon="ui-icon-trash" title="Delete this actor"
-                                             action="#{ReqBean.removeReq(request)}" />
+                            <p:commandButton icon="ui-icon-trash" title="Delete this actor" action="#{ReqBean.removeReq(request)}" />
                         </p:column>
-
                     </p:dataTable>
                 </p:tab>
-            </p:tabView>
-        
+            </p:tabView>        
         </h:form>
-
     </ui:define>
-
-
+   
 </ui:composition>
