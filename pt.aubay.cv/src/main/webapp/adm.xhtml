@@ -45,12 +45,7 @@
 		<br></br>
 		<br></br>
 		<h3 class="subtitles">Administrador</h3>
-		<h:head>
-			<title>CV Management - ADM</title>
-			<h:outputStylesheet library="css" name="../resources/CSS/style.css" />
-			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		</h:head>	
 		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
 
 			<p:growl id="msgs" showDetail="true" />
@@ -58,19 +53,21 @@
 			<p:tabView dynamic="true" cache="true" effect="fold" id="tab">
 				<p:tab title="A Tratar">
 
-					<p:dataTable id="RequestList" var="req"
+					<p:dataTable id="RequestList" var="req" widgetVar="requestList"
 						value="#{ReqBean.requestList}" editable="true" rows="10"
 						paginator="true" resizableColumns="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" style="padding:15px" emptyMessage="Nenhum pedido encontrado.">
+						rowsPerPageTemplate="5,10,15" style="padding:15px"
+						emptyMessage="Nenhum pedido encontrado.">
 
 						<f:facet name="header">
                             Lista de pedidos
                         </f:facet>
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-								update=":form:msgs  :form:tab:OngoingList" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
+							update=":form:msgs  :form:tab:OngoingList"
+							oncomplete="PF('requestList').filter()" />
+						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+							update=":form:msgs" oncomplete="PF('requestList').filter()" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains" style="width:120px">
@@ -78,7 +75,8 @@
 
 						</p:column>
 
-						<p:column headerText="Recrutador" style="width:120px" filterBy="#{req.recruiter.name}">
+						<p:column headerText="Recrutador" style="width:120px"
+							filterBy="#{req.recruiter.name}">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.recruiter.name}" />
@@ -86,8 +84,10 @@
 								<f:facet name="input">
 									<h:selectOneMenu value="#{req.recruiter}"
 										converter="omnifaces.SelectItemsConverter" style="width:100%">
-										<f:selectItems value="#{RecBean.activeRecruiterList}" var="recrutas"
-											itemLabel="#{recrutas.name}" itemValue="#{recrutas}" />
+										<f:selectItem itemLabel="Sem Recruta" itemValue="#{null}" />
+										<f:selectItems value="#{RecBean.activeRecruiterList}"
+											var="recrutas" itemLabel="#{recrutas.name}"
+											itemValue="#{recrutas}" />
 									</h:selectOneMenu>
 								</f:facet>
 							</p:cellEditor>
@@ -112,7 +112,8 @@
 									<h:outputText value="#{req.candidateEmail}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="email" value="#{req.candidateEmail}" style="width:100%" />
+									<p:inputText id="email" value="#{req.candidateEmail}"
+										style="width:100%" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -154,21 +155,22 @@
 
 				<p:tab title="Em Tratamento">
 
-					<p:dataTable id="OngoingList" var="req"
+					<p:dataTable id="OngoingList" var="req" widgetVar="ongoingList"
 						value="#{ReqBean.requestListNotAprovado}" editable="true"
 						style="margin-bottom:20px" rows="10" paginator="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" resizableColumns="true" emptyMessage="Nenhum pedido encontrado.">
+						rowsPerPageTemplate="5,10,15" resizableColumns="true"
+						emptyMessage="Nenhum pedido encontrado.">
 
 						<f:facet name="header">
                             Lista de pedidos
                         </f:facet>
 
-						<p:ajax event="rowEdit"
-								listener="#{ReqBean.onRowEditOngoingList}"
-								update=":form:msgs :form:tab:AprovedList" />
-							<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-								update=":form:msgs" />
+						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEditOngoingList}"
+							update=":form:msgs :form:tab:AprovedList :form:tab:OngoingList"
+							oncomplete="PF('ongoingList').filter()" />
+						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
+							update=":form:msgs" oncomplete="PF('ongoingList').filter()" />
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
 							filterMatchMode="contains">
@@ -249,35 +251,35 @@
 							</p:commandButton>
 						</p:column>
 
-							<p:column headerText="Estado" sortBy="#{req.estado.label}">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.estado.label}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:selectOneRadio value="#{req.estado}"
-											layout="responsive" columns="1">
-											<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
-											<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
-										</p:selectOneRadio>
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+						<p:column headerText="Estado" sortBy="#{req.estado.label}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{req.estado.label}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneRadio value="#{req.estado}" layout="responsive"
+										columns="1">
+										<f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
+										<f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
+									</p:selectOneRadio>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-							<p:column headerText="Comentario">
+						<p:column headerText="Comentario">
+							<f:facet name="output">
+								<h:outputText value="#{req.comment}" style="height:40px;" />
+							</f:facet>
+							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.comment}" style="height:40px;" />
 								</f:facet>
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{req.comment}" style="height:40px;" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputTextarea value="#{req.comment}" cols="16"
-											autoResize="false" />
-									</f:facet>
-								</p:cellEditor>
-								<!-- <p:commandButton value="+"
+								<f:facet name="input">
+									<p:inputTextarea value="#{req.comment}" cols="16"
+										autoResize="false" />
+								</f:facet>
+							</p:cellEditor>
+							<!-- <p:commandButton value="+"
 									onclick="PF('dlgComment').show();" />
 								<p:dialog header="Insira um comentario" widgetVar="dlgComment"
 									>
@@ -286,29 +288,30 @@
 										<p:inputText id="surname" value="#{req.comment}" />
 									</h:panelGrid>
 								</p:dialog> -->
-							</p:column>
+						</p:column>
 
-							<p:column style="width:32px">
-								<p:rowEditor />
-							</p:column>
+						<p:column style="width:32px">
+							<p:rowEditor />
+						</p:column>
 					</p:dataTable>
 				</p:tab>
 
 				<p:tab title="Concluidos">
 
-					<p:dataTable id="AprovedList" var="req"
+					<p:dataTable id="AprovedList" var="req" widgetVar="aprovedList"
 						value="#{ReqBean.requestListAprovado}" editable="true"
 						style="margin-bottom:20px" rows="10" paginator="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" resizableColumns="true" emptyMessage="Nenhum pedido encontrado.">
+						rowsPerPageTemplate="5,10,15" resizableColumns="true"
+						emptyMessage="Nenhum pedido encontrado.">
 
 						<f:facet name="header">
                                  Lista de pedidos
                              </f:facet>
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-							update=":form:msgs" />
+							update=":form:msgs" oncomplete="PF('aprovedList').filter()" />
 						<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-							update=":form:msgs" />
+							update=":form:msgs" oncomplete="PF('aprovedList').filter()" />
 
 
 						<p:column headerText="Manager" filterBy="#{req.manager.name}"
@@ -333,7 +336,7 @@
 							</p:cellEditor>
 
 						</p:column>
-						
+
 						<p:column headerText="Candidato" filterBy="#{req.candidateName}"
 							filterMatchMode="contains">
 							<p:cellEditor>
@@ -357,21 +360,24 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						
+
 						<p:column headerText="CV Aubay" style="width:140px">
-                            <p:commandButton value="Download" ajax="false" actionListener="#{ReqBean.download(req.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
-                            </p:commandButton>
-                        </p:column> 
+							<p:commandButton value="Download" ajax="false"
+								actionListener="#{ReqBean.download(req.cvAubayPath)}"
+								icon="ui-icon-arrowthick-1-s">
+							</p:commandButton>
+						</p:column>
 
 						<p:column style="width:35px">
-							<p:commandButton icon="ui-icon-trash" title="Delete this actor"
-								action="#{ReqBean.removeReq(req)}" update=":form:msgs  :form:tab:AprovedList"/>
+							<p:commandButton icon="fa fa-trash-o" title="Delete this actor"
+								action="#{ReqBean.removeReq(req)}"
+								update=":form:msgs  :form:tab:AprovedList" />
 						</p:column>
 
 					</p:dataTable>
 				</p:tab>
 			</p:tabView>
-			
+
 		</h:form>
 
 	</ui:define>

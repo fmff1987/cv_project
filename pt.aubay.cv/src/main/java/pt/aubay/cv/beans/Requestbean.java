@@ -6,7 +6,9 @@ import java.io.IOException;
 
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -168,10 +170,19 @@ public class Requestbean implements Serializable {
 		requestList = cr.getReq();
 		requestListNotAprovado = cr.getAllNotAprovado();
 		
+//		if(request.getDeadline()!=null) {
+//			DateFormat date =  DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.HOUR0_FIELD, Locale.);
+//			String dateFormat = date.format(request.getDeadline());
+//			System.out.println(dateFormat);
+//		}
+//		
 
 		
 		if(request.getRecruiter().getEmail().contains("@")) {
 			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
+			
+			
+			
 			this.sendMail(request.getRecruiter().getEmail(), bodyMail);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
 		}
