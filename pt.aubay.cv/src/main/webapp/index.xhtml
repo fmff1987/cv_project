@@ -15,49 +15,85 @@ and open the template in the editor.
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
+
 		Gestão de CVs
+
 	</ui:define>
 
 
 	<ui:define name="body">
+
 		<h:body class="body"></h:body>
+
 	</ui:define>
 
 
 	<ui:define name="header">
+
 		<div class="logoaubay">
+
 			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay" />
+
 			<h1 class="title">Plataforma de Gestão de Currículos</h1>
+
 		</div>
+
 	</ui:define>
+
+
+
 
 
 	<ui:define name="pageContent">
+
 		<div class="container">
+
 			<div class="d-flex justify-content-between row">
+
 				<div class="col-md-4 manager">
+
 					<a href="manager.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmember.png" alt="Manager"></img>
+						src="resources/images/buttonmemberman.png" alt="Manager"></img>
+
 					</a>
+
 					<h1 class="buttontext">Manager</h1>
+
 				</div>
 
-				<div class="col-md-4 recruiter">
-					<a href="recruiter.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmember.png" alt="Recrutador"></img>
-					</a>
-					<h1 class="buttontext">Recrutador</h1>
-				</div>
+
 
 				<div class="col-md-4 admin">
+
 					<a href="adm.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmember.png" alt="Administrador"></img>
+						src="resources/images/buttonmemberadm.png" alt="Administrador"></img>
+
 					</a>
+
 					<h1 class="buttontext">Administrador</h1>
+
 				</div>
+
+
+
+				<div class="col-md-4 recruiter">
+
+					<a href="recruiter.xhtml"> <img class="buttonindex"
+						src="resources/images/buttonmemberrec.png" alt="Recrutador"></img>
+
+					</a>
+
+					<h1 class="buttontext">Recrutador</h1>
+
+				</div>
+
 			</div>
+
 		</div>
+
 	</ui:define>
+
+
 
 </ui:composition>
 
