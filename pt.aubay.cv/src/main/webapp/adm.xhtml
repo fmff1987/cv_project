@@ -215,12 +215,12 @@
 						<p:column headerText="Data Limite" sortBy="#{req.deadline}">
 							<f:facet name="filter">
 								<p:outputLabel for="datetime" />
-								<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
+								<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" timeZone="Europe/Lisbon"/>
 							</f:facet>
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.deadline}">
-										<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+										<f:convertDateTime pattern="dd/MM/yyyy HH:00" timeZone="Europe/Lisbon"/>
 									</h:outputText>
 								</f:facet>
 								<f:facet name="input">

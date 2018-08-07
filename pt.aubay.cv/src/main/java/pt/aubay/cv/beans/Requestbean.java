@@ -203,7 +203,7 @@ public class Requestbean implements Serializable {
 			if(request.getManager().getEmail().contains("@")) {
 				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
 				this.sendMail(request.getManager().getEmail(), bodymail);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para admistrador"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para manager"));
 			}
 		}else if(request.getEstado()== Status.REPROVADO) {
 			if(request.getRecruiter().getEmail().contains("@")) {
@@ -286,6 +286,7 @@ public class Requestbean implements Serializable {
         	String bodyMail = "O recrutador " + request.getRecruiter().getName() + " adicionou o Cv aubay ao candidato " + request.getCandidateName();
         	this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
         	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
+        	System.out.println(admEmail.getActiveadmEmailListString());  
         }
         
       

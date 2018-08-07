@@ -15,7 +15,7 @@ import org.omnifaces.util.Faces;
 @RequestScoped
 public class Logout {
 
-	public static final String HOME_URL = "main-page.xhtml";
+	public static final String HOME_URL = "index.xhtml";
 
     public void submit() throws IOException {
         SecurityUtils.getSubject().logout();

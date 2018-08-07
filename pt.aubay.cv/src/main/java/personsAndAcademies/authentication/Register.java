@@ -8,32 +8,32 @@ import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
+import pt.aubay.cv.beans.Adminbean;
+import pt.aubay.cv.models.Admin;
+
+
 @Named
 @RequestScoped
 public class Register  {
 
-//    private User user;
-//
-//    @Inject
-//    private UserService service;
-//
-//    @PostConstruct
-//    public void init() {
-//        user = new User();
-//    }
-//
-//    public void submit() {
-//        try {
-//            service.create(user);
-//            defineGrowl("O utilizador foi criado com sucesso","", "registar");
-//        }
-//        catch (RuntimeException e) {
-//            Messages.addGlobalError("Registration failed: {0}", e.getMessage());
-//            e.printStackTrace(); // TODO: logger.
-//        }
-//    }
-//
-//    public User getUser() {
-//        return user;
+    private Admin user = new Admin();
+
+    @Inject
+    private Adminbean service;
+
+
+    public void submit() {
+        try {
+            service.createAdmin();            
+        }
+        catch (RuntimeException e) {
+            Messages.addGlobalError("Registration failed: {0}", e.getMessage());
+            e.printStackTrace(); // TODO: logger.
+        }
     }
+
+    public Admin getUser() {
+        return user;
+    }
+}
 

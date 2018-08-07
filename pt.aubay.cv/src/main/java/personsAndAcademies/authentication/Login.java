@@ -19,7 +19,7 @@ import org.omnifaces.util.Faces;
 @RequestScoped
 public class Login {
 
-    public static final String HOME_URL = "main-page.xhtml";
+    public static final String HOME_URL = "index.xhtml";
 
     private String username;
     private String password;
