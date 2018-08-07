@@ -16,7 +16,7 @@
     <ui:define name="subheader">
         <div class="subheader">
             <div>
-                <p:menubar>
+                <p:menubar style="border-style:none;border-radius: 0px;">
                     <p:submenu label="Manager">
                         <p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
                                     url="createManager.xhtml" />
@@ -48,7 +48,7 @@
 
             <p:growl id="msgs" showDetail="true" />
 
-            <p:tabView dynamic="true" cache="true" effect="fold" id="tab">
+            <p:tabView dynamic="true" cache="true" effect="fold" id="tab" style="border-style:none;">
                 <p:tab title="A Tratar">
 
                     <p:dataTable id="RequestList" var="req" reflow="true"

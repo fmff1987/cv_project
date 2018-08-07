@@ -116,6 +116,26 @@ form {
 	background: white;
 }
 
+.ui-button {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.ui-button-text-icon-left .ui-button-text {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.ui-button-icon-only .ui-button-text {
+	background: #fdb883;
+}
+
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
 	background: #fff;
 }
@@ -125,11 +145,20 @@ form {
 }
 
 .ui-tabs .ui-tabs-nav li {
-	background: #bfc7e2;
+	background: #e3e4e3;
 }
 
 .ui-tabs .ui-tabs-nav {
 	background: #ffffff;
+}
+
+.ui-datatable thead th, .ui-datatable tfoot td {
+	background: linear-gradient(#fdba83, #fe9483, #eb6653);
+	font-size: 20px;	
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	font-weight: 100;
+	color: #fff;
+	text-shadow: 1px 1px 5px #434345;
 }
 
 .ui-datatable-resizable th.ui-resizable-column {
@@ -149,17 +178,25 @@ form {
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
-
-.ui-datatable-resizable thead th, .ui-datatable-resizable tbody td, .ui-datatable-resizable tfoot td {
-	background: #d6d5d5;
-}
 	
+.ui-datatable-even {
+	background: #e4e4e4;
+}
+
+.ui-datatable-odd {
+	background: #fff;
+}
 .ui-paginator{
 	background: linear-gradient(#fff, #eaf4f7);
 }
 
 .ui-menubar {
 	background: #ffffff;
+}
+
+.ui-menubar .ui-menu-child {
+	background: #fff;
+	width: 135px;
 }
 
 .footer {
