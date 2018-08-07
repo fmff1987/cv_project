@@ -22,7 +22,7 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import org.omnifaces.util.Faces;
-import org.primefaces.event.CellEditEvent;
+
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
@@ -52,6 +52,9 @@ public class Requestbean implements Serializable {
 
     @Inject
     private ControllerRequest cr;
+    
+    @Inject
+    private SSLEmail email;
 
     public UploadedFile getCvAubay() {
         return cvAubay;
@@ -153,26 +156,6 @@ public class Requestbean implements Serializable {
         }
     }
 
-//    public void onCellEdit(CellEditEvent event) {
-//        Object oldValue = event.getOldValue();
-//        Object newValue = event.getNewValue();
-//
-//        if (newValue != null && !newValue.equals(oldValue)) {
-//            FacesMessage msg = new FacesMessage("Pedido Editado");
-//            FacesContext.getCurrentInstance().addMessage(null, msg);
-//        }
-//        
-//        System.out.println(event.getColumn().getHeaderText());
-//        //Request request = (Request) 
-//        cr.updateReq(request);
-//        requestList = cr.getReq();
-//        requestListNotAprovado = cr.getAllNotAprovado();
-//
-//        if (request.getRecruiter().getEmail().contains("@")) {
-//            String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
-//            this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-//        }
-//    }
 
     public void onRowEditOngoingList(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Pedido Editado");
@@ -230,7 +213,7 @@ public class Requestbean implements Serializable {
     }
 
     public void sendMail(String mail, String body) {
-        SSLEmail.SSl(mail, body);
+        email.SSl(mail, body);
     }
 
     public void uploadAubay(Request request) {
@@ -260,11 +243,13 @@ public class Requestbean implements Serializable {
     }
 
     public void download(String filePath) throws IOException {
-        File file = new File(filePath);
-        Faces.sendFile(file, true);
-        /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
-                    filePath);
-            return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
+        try {
+            File file = new File(filePath);
+            Faces.sendFile(file, true);
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
     }
 
 }
