@@ -32,12 +32,12 @@
 					style="width:200px;"></h:inputText>
 				<br> </br>
 
-				<p:outputLabel value="E-mail: " for="email_m" />
+				<p:outputLabel value="Email: " for="email_m" />
 				<h:inputText id="email_m" value="#{ManBean.manager.email}"
 					style="width:200px;"></h:inputText>
 				<br> </br>
 
-				<p:commandButton value="Criar" action="#{ManBean.createMan()}"
+				<p:commandButton value="Registar" action="#{ManBean.createMan()}"
 					icon="ui-icon-check" update=":form:managerTable" />
 
 				<p:commandButton value="Voltar" action="adm?faces-redirect=true"
@@ -83,7 +83,7 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column filterBy="#{manager.active}" headerText="Status">
+					<p:column filterBy="#{manager.active}" headerText="Estado">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{manager.active ? 'Activo' : 'Inactivo'}" />

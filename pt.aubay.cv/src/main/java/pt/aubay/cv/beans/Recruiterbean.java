@@ -34,9 +34,6 @@ public class Recruiterbean {
 		recruiterList = cr.getRec();
 		activeRecruiterList = cr.getRecruiterActive();
 	}
-	//	public List<Recruiter> getRec(){
-	//		return cr.getRec();
-	//	}
 
 	public Recruiter getRecruiter() {
 		return recruiter;
@@ -58,15 +55,11 @@ public class Recruiterbean {
 		recruiter.setActive(true);
 		cr.createRec(recruiter);
 		loadRecruiters();
-		//return "index";
 	}
 
 	public void removeRec() {
 		cr.removeRec(recruiter);
 	}
-	//	public void updateRec() {
-	//		cr.updateList();
-	//	}
 
 	public void onRowEdit(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Recruta Editado", ((Recruiter) event.getObject()).getName());

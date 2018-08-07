@@ -64,14 +64,14 @@ public class Adminbean {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Admin Editado", ((Admin) event.getObject()).getName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-        Admin adm = (Admin) event.getObject();
-        ca.updateAdmin(adm);
-    }
+		FacesMessage msg = new FacesMessage("Admin Editado", ((Admin) event.getObject()).getName());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Admin adm = (Admin) event.getObject();
+		ca.updateAdmin(adm);
+	}
 
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edição Cancelada", ((Admin) event.getObject()).getName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Edição Cancelada", ((Admin) event.getObject()).getName());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 }

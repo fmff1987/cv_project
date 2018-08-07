@@ -2,8 +2,8 @@ package pt.aubay.cv.models;
 
 public enum Status{
 	
-	INICIADO("Em Analise"),
-	PREAPROVADO("Aguardando Aprovação"),
+	INICIADO("Em Análise"),
+	PREAPROVADO("Aguarda Aprovação"),
 	APROVADO ("Aprovado"), 
 	REPROVADO("Reprovado");
 	
@@ -12,6 +12,7 @@ public enum Status{
 	Status(String label) {
 		this.label = label;
 	}
+	
 	public String getLabel() {
 		return label;
 	}

@@ -32,12 +32,12 @@
 					style="width:200px;"></h:inputText>
 				<br> </br>
 
-				<p:outputLabel value="E-mail: " for="email_r" />
+				<p:outputLabel value="Email: " for="email_r" />
 				<h:inputText id="email_r" value="#{RecBean.recruiter.email}"
 					style="width:200px;"></h:inputText>
 				<br> </br>
 
-				<p:commandButton value="Criar" action="#{RecBean.createRec()}"
+				<p:commandButton value="Registar" action="#{RecBean.createRec()}"
 					icon="ui-icon-check" update=":form:recruiterTable" />
 
 				<p:commandButton icon="ui-icon-home" value="Voltar"
@@ -84,7 +84,7 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column filterBy="#{recruiter.active}" headerText="Status">
+					<p:column filterBy="#{recruiter.active}" headerText="Estado">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText
