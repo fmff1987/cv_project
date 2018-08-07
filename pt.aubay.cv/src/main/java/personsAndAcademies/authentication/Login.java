@@ -21,8 +21,8 @@ public class Login {
 
     public static final String HOME_URL = "index.xhtml";
 
-    private String username;
-    private String password;
+    private String username, password;
+    
 
 
     public void submit() throws IOException {
@@ -35,6 +35,15 @@ public class Login {
            
             e.printStackTrace(); // TODO: logger.
         }
+    }
+    public void logout() throws IOException {
+    	
+
+        
+            SecurityUtils.getSubject().logout();
+            Faces.invalidateSession();
+            Faces.redirect("index.xhtml");
+        
     }
 
 	public String getUsername() {
