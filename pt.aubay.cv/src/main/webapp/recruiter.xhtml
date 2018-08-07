@@ -86,6 +86,10 @@
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="Anexar" />
 				</p:column>
+				
+				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
+                    <h:outputText value="#{doingReq.estado.label}" />
+                </p:column>
 
 				<p:column headerText="Comentario">
 					<f:facet name="output">

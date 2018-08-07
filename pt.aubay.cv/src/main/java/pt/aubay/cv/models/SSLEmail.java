@@ -1,46 +1,87 @@
-
 package pt.aubay.cv.models;
 
+
+
+import java.io.Serializable;
 import java.util.Properties;
 
-import javax.mail.Authenticator;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-public class SSLEmail {
+import pt.aubay.cv.app.bean.Application;
 
-	/**
-	   Outgoing Mail (SMTP) Server
-	   requires TLS or SSL: smtp.gmail.com (use authentication)
-	   Use Authentication: Yes
-	   Port for SSL: 465
-	 */
-	public static void SSl(String toEmail, String emailBody) {
-		final String fromEmail = "pt.aubay@gmail.com"; //requires valid gmail id
-		final String password = "aubay123"; // correct password for gmail id
-		//final String toEmail = "russoricardo1@gmail.com"; // can be any email id 
 
-		System.out.println("SSLEmail Start");
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
-		props.put("mail.smtp.port", "465"); //SMTP Port
-		props.put("mail.smtp.ssl.enable", "true");
-		props.put("mail.transport.protocol", "smtp");
 
-		Authenticator auth = new Authenticator() {
-			//override the getPasswordAuthentication method
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(fromEmail, password);
-			}
-		};
+@RequestScoped
 
-		Session session = Session.getInstance(props, auth);
-		
+public class SSLEmail implements Serializable {
 
-		System.out.println("Session created");
-		new Thread(() -> {
-			EmailUtil.sendEmail(session, toEmail,"Plataforma de Gestao de curriculos", emailBody);
-		}).start();
-	}
+
+
+    @Inject
+
+    private Application appConfig;
+
+
+
+    private static final long serialVersionUID = 1L;
+
+
+
+    public void SSl(String toEmail, String emailBody) {
+
+        final String fromEmail = "pt.aubay@gmail.com";
+        final String password = "aubay123";
+
+        Properties props = appConfig.getMailConfig();
+        new Properties();
+
+        System.out.println("SSLEmail Start");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+
+            protected PasswordAuthentication getPasswordAuthentication() {
+
+                return new PasswordAuthentication(fromEmail, password);
+
+            }
+
+        });
+
+        System.out.println("Session created");
+
+        new Thread(() -> {
+
+            try {
+
+                Message message = new MimeMessage(session);
+
+                message.setFrom(new InternetAddress(fromEmail, "Gestor de Curriculos"));
+
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+                message.setSubject("Plataforma de Gestao de curriculos");
+
+                message.setText(emailBody);
+
+                Transport.send(message);
+
+                System.out.println("EMail Sent Successfully!!");
+
+            }  catch (Exception e) {
+
+	      e.printStackTrace();
+
+	    }
+
+        }
+
+        ).start();
+    }
 }

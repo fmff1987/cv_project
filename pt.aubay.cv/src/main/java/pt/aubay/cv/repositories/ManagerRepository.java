@@ -28,5 +28,4 @@ public class ManagerRepository extends EntityRepository<Manager> {
 		return em.createNamedQuery("Manager.managerActive", Manager.class).getResultList();
 	}
 
-
 }
