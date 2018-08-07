@@ -169,25 +169,23 @@ public class Requestbean implements Serializable {
 		cr.updateReq(request);
 		requestList = cr.getReq();
 		requestListNotAprovado = cr.getAllNotAprovado();
-		
-//		if(request.getDeadline()!=null) {
-//			DateFormat date =  DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.HOUR0_FIELD, Locale.);
-//			String dateFormat = date.format(request.getDeadline());
-//			System.out.println(dateFormat);
-//		}
-//		
-
-		
-		if(request.getRecruiter().getEmail().contains("@")) {
-			String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + request.getDeadline();
 			
+		if(request.getRecruiter()!=null && request.getRecruiter().getEmail().contains("@")) {
+					
+			if(request.getDeadline()!=null){
+				Locale PT = new Locale("pt", "PT");
+				DateFormat date =  DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, PT);
+				String dateFormat = date.format(request.getDeadline());
+				String bodyMailWithDataFormat = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + dateFormat;
+				this.sendMail(request.getRecruiter().getEmail(), bodyMailWithDataFormat);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
+			}else {
+				String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si" ;
+				this.sendMail(request.getRecruiter().getEmail(), bodyMail);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
+			}
 			
-			
-			this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
 		}
-	
-
 
 	}
 

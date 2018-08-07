@@ -120,21 +120,18 @@
 
 						<p:column headerText="Data Limite" sortBy="#{req.deadline}"
 							style="width:150px">
-							<f:facet name="filter">
-								<p:outputLabel for="datetime" />
-								<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
-							</f:facet>
+							
 							<p:cellEditor>
-								<f:facet name="output">
+								<f:facet name="output" >
 									<h:outputText value="#{req.deadline}">
-										<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+										<f:convertDateTime pattern="dd/MM/yyyy HH:00"   locale="pt" timeZone="Europe/Lisbon"/>
 									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
 									<p:calendar locale="pt" styleClass="right"
 										value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
-										maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
-										stepHour="1" stepMinute="30" />
+										maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" 
+										stepHour="1" timeZone="Europe/Lisbon"/>
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
