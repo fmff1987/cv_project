@@ -11,26 +11,21 @@ import pt.aubay.cv.models.Manager;
 
 public class ManagerRepository extends EntityRepository<Manager> {
 
-	
-	
-	
-	
-//	protected void loadFromDB() {
-//		localList = em.createQuery("SELECT e FROM Manager e").getResultList();
-//	}
-//	
-//	@Override
-//	public void updateLocalList() {
-//		loadFromDB();
-//	}
-	
+	//	protected void loadFromDB() {
+	//		localList = em.createQuery("SELECT e FROM Manager e").getResultList();
+	//	}
+	//	
+	//	@Override
+	//	public void updateLocalList() {
+	//		loadFromDB();
+	//	}
+
 	public List<Manager> getAll(){
 		return em.createNamedQuery("Manager.getAll", Manager.class).getResultList();
 	}
-	
+
 	public List<Manager> getManagerActive(){
 		return em.createNamedQuery("Manager.managerActive", Manager.class).getResultList();
 	}
-	
-	
+
 }

@@ -20,31 +20,29 @@ import javax.persistence.Table;
 			query="SELECT r FROM Recruiter r"),
 	@NamedQuery(name= "Recruiter.getRecruiterActive",
 	query = "SELECT r FROM Recruiter r WHERE r.active = true"),
-	
+
 })
 
-
 public class Recruiter extends Person {
-    
-    private static final long serialVersionUID = 1L;
-	
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recruiter", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
-                CascadeType.REFRESH })
-    private List<Request> requestList = new ArrayList<>();
 
-    public List<Request> getRequestList() {
-        return requestList;
-    }
+	private static final long serialVersionUID = 1L;
 
-    public void setRequestList(List<Request> requestList) {
-        this.requestList = requestList;
-    }
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "recruiter", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REFRESH })
+	private List<Request> requestList = new ArrayList<>();
 
-    @PreRemove
-    public void preRemove() {
-    	for(Request r: requestList) {
-    		r.setRecruiter(null);
-    	}
-    }
-    
+	public List<Request> getRequestList() {
+		return requestList;
+	}
+
+	public void setRequestList(List<Request> requestList) {
+		this.requestList = requestList;
+	}
+
+	@PreRemove
+	public void preRemove() {
+		for(Request r: requestList) {
+			r.setRecruiter(null);
+		}
+	}
 }

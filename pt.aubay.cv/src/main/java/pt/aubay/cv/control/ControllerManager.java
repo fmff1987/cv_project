@@ -1,11 +1,9 @@
 package pt.aubay.cv.control;
 
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
 import pt.aubay.cv.models.Manager;
 import pt.aubay.cv.repositories.ManagerRepository;
 
@@ -19,7 +17,6 @@ public class ControllerManager {
 	public void createManager(Manager p) {
 		db.createEntity(p);
 		db.updateEntity(p);
-		
 	}
 
 	public List<Manager> getMan() {
@@ -36,11 +33,10 @@ public class ControllerManager {
 
 	public void removeManage(Manager p) {
 		db.removeEntity(p);
-		
 		//db.updateLocalList();
 	}
+
 //	public void removeManage(Manager p) {
 //		db.removeEntity(p);
 //	}
-
 }

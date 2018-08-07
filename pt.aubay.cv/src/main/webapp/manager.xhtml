@@ -2,112 +2,120 @@
 
 <!DOCTYPE html>
 
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    template="WEB-INF/templates/template.xhtml">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
 
-    <ui:define name="pageTitle">
+	<ui:define name="pageTitle">
         Página Manager
-    </ui:define>    
+    </ui:define>
 
-    <ui:define name="pageContent">
+	<ui:define name="body">
+		<h:body class="bodygeral"></h:body>
+	</ui:define>
 
-        <h3 class="subtitles">Criar Pedidos</h3>
+	<ui:define name="pageContent">
 
-        <h:form id="form1" enctype="multipart/form-data">
+		<h3 class="subtitles">Criar Pedidos</h3>
 
-            <p:growl showDetail="true" id="msg"/> 
+		<h:form id="form1" enctype="multipart/form-data">
 
-            <h:panelGrid columns="2" cellpadding="5">
+			<p:growl showDetail="true" id="msg" />
 
-                <p:outputLabel value="Nome do Manager:" for="name_m" />
-                <p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
-                                 effect="fold" converter="omnifaces.SelectItemsConverter"
-                                 style="width:250px" var="manager" filter="true"
-                                 filterMatchMode="contains">
-                    <f:selectItem itemLabel="Selecione uma opção:" />
-                    <f:selectItems value="#{ManBean.activeManagerList}" var="m" itemLabel="#{m.name}"
-                                   itemValue="#{m}" />
-                    <p:column>
-                        <h:outputText value="#{manager.name}" />
-                    </p:column>
-                </p:selectOneMenu>
+			<h:panelGrid columns="2" cellpadding="5">
 
-                <p:outputLabel value="Nome do Candidato:" for="name_c" />
-                <p:inputText id="name_c" value="#{ReqBean.request.candidateName}"
-                             style="width:280px;"></p:inputText>
+				<p:outputLabel value="Nome do Manager:" for="name_m" />
+				<p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
+					effect="fold" converter="omnifaces.SelectItemsConverter"
+					style="width:250px" var="manager" filter="true"
+					filterMatchMode="contains">
+					<f:selectItem itemLabel="Selecione uma opção:" />
+					<f:selectItems value="#{ManBean.activeManagerList}" var="m"
+						itemLabel="#{m.name}" itemValue="#{m}" />					
+					<p:column>
+						<h:outputText value="#{manager.name}" />
+					</p:column>
+				</p:selectOneMenu>
 
-                <p:outputLabel value="E-mail do Candidato:" for="email_c" />
-                <p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
-                             style="width:280px;"></p:inputText>
+				<p:outputLabel value="Nome do Candidato:" for="name_c" />
+				<p:inputText id="name_c" value="#{ReqBean.request.candidateName}"
+					style="width:280px;"></p:inputText>
 
-                <p:outputLabel for="datetime" value="Data Limite / Hora" />
-                <p:calendar id="datetime" value="#{ReqBean.request.deadline}" locale="pt" styleClass="right" mode="popup" 
-                            maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" stepHour="1" stepMinute="30" />  							
+				<p:outputLabel value="E-mail do Candidato:" for="email_c" />
+				<p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
+					style="width:280px;"></p:inputText>
 
-                <p:outputLabel value="Curriculo: "  />
-                <p:fileUpload value="#{ReqBean.cvOrig}" mode="simple" 
-                              skinSimple="true" label="Anexar"
-                              allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
-                              invalidFileMessage="Formato de Ficheiro inválido"/>              
+				<p:outputLabel for="datetime" value="Data Limite / Hora:" />
+				<p:calendar id="datetime" value="#{ReqBean.request.deadline}"
+					locale="pt" styleClass="right" mode="popup"
+					maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" stepHour="1"
+					stepMinute="30" style="width:280px;" />
 
-            </h:panelGrid>
+				<p:outputLabel value="Curriculo: " />
+				<p:fileUpload value="#{ReqBean.cvOrig}" mode="simple"
+					skinSimple="true" label="Anexar"
+					allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
+					invalidFileMessage="Formato de Ficheiro inválido" />
 
-            <p:commandButton value="Submeter Pedido" action="#{ReqBean.uploadOrig()}" ajax="false" update="msg"/>
+			</h:panelGrid>
 
-            <br></br>
-            <br></br>
-            <br></br>
+			<p:commandButton value="Submeter Pedido"
+				action="#{ReqBean.uploadOrig()}" ajax="false" update="msg" />
 
-        </h:form>
+			<br></br>
+			<br></br>
+			<br></br>
 
-        <h:form id="form2">
+		</h:form>
 
-            <p:dataTable id="recruiterReqList" var="finishedList"
-                         value="#{ReqBean.requestListAprovado}"          
-                         resizableColumns="true"
-                         emptyMessage="Nenhum pedido encontrado."
-                         style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+		<h:form id="form2">
 
-                <f:facet name="header">
+			<p:dataTable id="recruiterReqList" var="finishedList"
+				value="#{ReqBean.requestListAprovado}" resizableColumns="true"
+				emptyMessage="Nenhum pedido encontrado." rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+
+				<f:facet name="header">
                     Lista de pedidos Aprovados
                 </f:facet>
-                
-               <p:column headerText="Manager" filterBy="#{finishedList.manager.name}"
-                          filterMatchMode="contains" style="width:150px">
-                    <h:outputText value="#{finishedList.manager.name}" />
-                </p:column>
-                
-                <p:column headerText="Recrutador" style="width:150px">
-                    <h:outputText value="#{finishedList.recruiter.name}" />
-                </p:column>
 
-                <p:column headerText="Candidato" filterBy="#{finishedList.candidateName}"
-                          filterMatchMode="contains" style="width:150px">
-                    <h:outputText value="#{finishedList.candidateName}" />
-                </p:column>
+				<p:column headerText="Manager"
+					filterBy="#{finishedList.manager.name}" filterMatchMode="contains"
+					style="width:150px">
+					<h:outputText value="#{finishedList.manager.name}" />
+				</p:column>
 
-                <p:column headerText="Email" filterBy="#{finishedList.candidateEmail}"
-                          filterMatchMode="contains" style="width:250px">
-                    <h:outputText value="#{finishedList.candidateEmail}" />
-                </p:column>
+				<p:column headerText="Recrutador" style="width:150px">
+					<h:outputText value="#{finishedList.recruiter.name}" />
+				</p:column>
 
-                <p:column headerText="Cv Aubay">
-                    <p:commandButton value="Download" ajax="false"  
-                                     actionListener="#{ReqBean.download(finishedList.cvAubayPath)}" icon="ui-icon-arrowthick-1-s">
-                    </p:commandButton>
-                </p:column>
+				<p:column headerText="Candidato"
+					filterBy="#{finishedList.candidateName}" filterMatchMode="contains"
+					style="width:150px">
+					<h:outputText value="#{finishedList.candidateName}" />
+				</p:column>
 
-            </p:dataTable>
+				<p:column headerText="Email"
+					filterBy="#{finishedList.candidateEmail}"
+					filterMatchMode="contains" style="width:250px">
+					<h:outputText value="#{finishedList.candidateEmail}" />
+				</p:column>
 
-        </h:form>
+				<p:column headerText="Cv Aubay">
+					<p:commandButton value="Download" ajax="false"
+						actionListener="#{ReqBean.download(finishedList.cvAubayPath)}"
+						icon="ui-icon-arrowthick-1-s">
+					</p:commandButton>
+				</p:column>
 
-    </ui:define>
-			
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+
 </ui:composition>
