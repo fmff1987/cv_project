@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
@@ -15,8 +10,8 @@ and open the template in the editor.
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
-		Gestão de CVs
-	</ui:define>
+        Gestão de CVs
+    </ui:define>
 
 	<ui:define name="body">
 		<h:body class="body"></h:body>
@@ -28,36 +23,121 @@ and open the template in the editor.
 			<h1 class="title">Plataforma de Gestão de Currículos</h1>
 		</div>
 	</ui:define>
-	
+
 	<ui:define name="pageContent">
-	<h:form>
+
 		<div class="container">
+
 			<div class="d-flex justify-content-between row">
+
 				<div class="col-md-4 manager">
-					<a href="manager.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberman.png" alt="Manager"></img>
-					</a>
+					<a href="manager.xhtml"><img
+						src="resources/images/buttonmemberman.png" class="buttonindex"
+						alt="Manager" /></a>
 					<h1 class="buttontext">Manager</h1>
 				</div>
 
 				<div class="col-md-4 admin">
-				
-					<a href="adm.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberadm.png" alt="Administrador" ></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlg').show();" title="login">
+						<p:graphicImage name="images/buttonmemberadm.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Administrador</h1>
 				</div>
 
 				<div class="col-md-4 recruiter">
-					<a href="recruiter.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberrec.png" alt="Recrutador"></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlg2').show();" title="login">
+						<p:graphicImage name="images/buttonmemberrec.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Recrutador</h1>
 				</div>
-			</div>
-		</div>
-		</h:form>
-	</ui:define>
-	
-</ui:composition>
 
+
+
+				<h:form id="loginAdmin">
+					<p:growl id="msgs" showDetail="true" />
+
+					<p:dialog header="Login" widgetVar="dlg" resizable="false">
+						<h:panelGrid columns="2" widgetVar="dlg">
+							<h:outputLabel for="username" value="Username:">
+								<br />
+								<h:message id="m_username" for="username"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputText id="username" value="#{login.username}"
+								required="true" requiredMessage="Coloque username!">
+								<f:ajax event="blur" render="m_username" />
+							</h:inputText>
+
+							<h:outputLabel for="password" value="Password:">
+								<br />
+								<h:message id="m_password" for="password"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputSecret id="password" value="#{login.password}"
+								required="true" requiredMessage="Coloque password">
+								<f:ajax event="blur" render="m_password" />
+							</h:inputSecret>
+							<p:commandButton value="Login" actionListener="#{login.submit}"
+								update=":loginAdmin:msgs">
+
+							</p:commandButton>
+							<p:commandButton value="Recuperar Password"
+								actionListener="#{login.recPassword}" update=":loginAdmin:msgs">
+							</p:commandButton>
+						</h:panelGrid>
+					</p:dialog>
+
+					<!-- 	<script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    } else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+            </script> -->
+				</h:form>
+				<h:form id="loginRecruiter">
+					<p:growl id="msgs" showDetail="true" />
+					<p:dialog header="Login" widgetVar="dlg2" resizable="false">
+						<h:panelGrid columns="2" widgetVar="dlg">
+							<h:outputLabel for="username" value="Username:">
+								<br />
+								<h:message id="m_username" for="username"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputText id="username" value="#{login.username}"
+								required="true" requiredMessage="Coloque username!">
+								<f:ajax event="blur" render="m_username" />
+							</h:inputText>
+
+							<h:outputLabel for="password" value="Password:">
+								<br />
+								<h:message id="m_password" for="password"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputSecret id="password" value="#{login.password}"
+								required="true" requiredMessage="Coloque password">
+								<f:ajax event="blur" render="m_password" />
+							</h:inputSecret>
+							<p:commandButton update=":loginRecruiter:msgs" value="Login"
+								actionListener="#{login.submitRecruiter}">
+
+							</p:commandButton>
+						</h:panelGrid>
+					</p:dialog>
+
+				</h:form>
+			</div>
+
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>
