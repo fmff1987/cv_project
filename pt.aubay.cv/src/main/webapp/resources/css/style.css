@@ -41,10 +41,10 @@
 .buttonindex {
 	width: 300px;
 	height: auto;
-	top: 40%;
-	margin-top: -50px;
-	margin-left: 30px;
-	margin-rigth: 30px;
+    top:40%;
+    margin-top:-50px;
+    margin-left:30px;
+    margin-rigth:30px;
 }
 
 .buttontext {
@@ -64,7 +64,7 @@
 #logoheader {
 	margin: 10px;
 	width: 100px;
-	height: auto;
+	height: auto;	
 	margin-bottom: 10px;
 	margin-left: 10px;
 }
@@ -73,17 +73,17 @@
 	float: right;
 	margin-top: 20px;
 	margin-right: 10px;
-}
+}	
 
 .subtitles {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	color: #ff7b64;
 	font-weight: 500;
 	font-size: 40px;
-	text-align: left;
+	text-align:left;
 	margin-left: 30px;
 	margin-bottom: 15px;
-	margin-top: 50px;
+	margin-top: 40px;
 }
 
 .orderlist {
@@ -117,6 +117,26 @@ form {
 	background: white;
 }
 
+.ui-button {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.ui-button-text-icon-left .ui-button-text {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.ui-button-icon-only .ui-button-text {
+	background: #fdb883;
+}
+
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
 	background: #fff;
 }
@@ -126,24 +146,33 @@ form {
 }
 
 .ui-tabs .ui-tabs-nav li {
-	background: #b7e7a9;
+	background: #e3e4e3;
 }
 
 .ui-tabs .ui-tabs-nav {
 	background: #ffffff;
 }
 
-.ui-datatable-resizable th.ui-resizable-column {
+.ui-datatable thead th, .ui-datatable tfoot td {
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
-	font-size: 20px;
+	font-size: 20px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	font-weight: 100;
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
 
-.ui-datatable-header {
-	font-size: 25px;
+.ui-datatable-resizable th.ui-resizable-column {
+	background: linear-gradient(#fdba83, #fe9483, #eb6653);
+	font-size: 20px;	
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	font-weight: 100;
+	color: #fff;
+	text-shadow: 1px 1px 5px #434345;
+}
+
+.ui-datatable-header{
+	font-size: 25px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	font-weight: 100;
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
@@ -156,30 +185,46 @@ form {
 }
 
 .ui-datatable-odd {
-	background: #ffffff;
+	background: #fff;
 }
 
-.ui-paginator {
+.ui-paginator{
 	background: linear-gradient(#fff, #eaf4f7);
 }
 
 .ui-menubar {
-	background: #b7e7a9;
+	background: #ffffff;
 }
 
-.ui-menubar .ui-menu-child{
-	background: #ffffff;
-	width: 20px;
+.ui-menubar .ui-menu-child {
+	background: #fff;
+	width: 135px;
 }
 
 .footer {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: white;
-	color: black;
-	text-align: center;
+   	left: 0;
+   	bottom: 0;
+   	width: 100%;
+   	background-color: white;
+   	color: black;
+   	text-align: center;
 }
 
+.login {
+	border-style:none; 
+	border-radius:5px;
+	font-size: 18px;	
+	font-weight: 700;
+	background: #ffffff;
+	color: black;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+.recPass {
+	font-size: 15px;	
+	font-weight: 700;
+	color: grey;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}

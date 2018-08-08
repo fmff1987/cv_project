@@ -10,8 +10,8 @@
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
-		Gestão de CVs
-	</ui:define>
+        Gestão de CVs
+    </ui:define>
 
 	<ui:define name="body">
 		<h:body class="body"></h:body>
@@ -31,31 +31,65 @@
 			<div class="d-flex justify-content-between row">
 
 				<div class="col-md-4 manager">
-					<a href="manager.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberman.png" alt="Manager"></img>
-					</a>
+					<a href="manager.xhtml"><img
+						src="resources/images/buttonmemberman.png" class="buttonindex"
+						alt="Manager" /></a>
 					<h1 class="buttontext">Manager</h1>
 				</div>
 
 				<div class="col-md-4 admin">
-					<a href="adm.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberadm.png" alt="Administrador"></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlg').show();" title="login">
+						<p:graphicImage name="images/buttonmemberadm.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Administrador</h1>
 				</div>
 
 				<div class="col-md-4 recruiter">
-					<a href="recruiter.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberrec.png" alt="Recrutador"></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlg').show();" title="login">
+						<p:graphicImage name="images/buttonmemberrec.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Recrutador</h1>
 				</div>
 
+				<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+				<p:dialog header="Login" widgetVar="dlg" resizable="false" class="login" >
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputLabel for="username" value="User:"/>
+						<p:inputText id="username" value="#{login.username}"
+							required="true" label="username" />
+
+						<h:outputLabel for="password" value="Password:" />
+						<p:password id="password" value="#{ulogin.password}"
+							required="true" label="password" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Login" update="growl"
+								actionListener="#{login.submit}"
+								oncomplete="handleLoginRequest(xhr, status, args)" style="border-style:none; background:#fdb883;" />
+							<a href="" class="recPass" >Recuperar password</a>
+						</f:facet>
+					</h:panelGrid>
+				</p:dialog>
+
 			</div>
 
+			<script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    } else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+            </script>
 		</div>
 
 	</ui:define>
 
 </ui:composition>
-
