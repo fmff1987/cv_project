@@ -29,6 +29,7 @@
 	font-weight: 500;
 	font-size: 70px;
 	text-align: center;
+	position:relative;
 }
 
 .container {
@@ -44,6 +45,7 @@
     margin-top:-50px;
     margin-left:30px;
     margin-rigth:30px;
+    margin-bottom:15px;
 }
 
 .buttontext {
@@ -99,6 +101,13 @@ form {
 	padding-right: 0px;
 }
 
+#form3 {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
 .register {
 	float: left;
 }
@@ -114,7 +123,7 @@ form {
 
 .ui-tabs {
 	background: white;
-}
+} 
 
 .ui-button {
 	color: #fff;
@@ -122,6 +131,14 @@ form {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	text-shadow: 2px 2px 5px #434345;
 	background: #fdb883;
+}
+
+.buttonindex {
+	transition: 0.5s;
+}
+.buttonindex:hover {
+	transform: scale(1.1);
+	
 }
 
 .ui-button-text-icon-left .ui-button-text {
@@ -201,11 +218,14 @@ form {
 
 .footer {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-	position: fixed;
-   	left: 0;
-   	bottom: 0;
-   	width: 100%;
-   	background-color: white;
-   	color: black;
-   	text-align: center;
+	position: absolute;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	background-color: #ffffff;
+  	text-align: center;
+}
+
+.footertitle {
+	margin: 5px;
 }
