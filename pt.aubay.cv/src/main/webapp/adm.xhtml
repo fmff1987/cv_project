@@ -142,10 +142,10 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="CV Original" style="width:140px" >
+						<p:column headerText="CV Original" style="width:100px" >
 							<p:commandButton ajax="false"
 								actionListener="#{ReqBean.download(req.cvOrigPath)}"
-								icon="fa fa-cloud-download" style="float:right;">
+								icon="fa fa-cloud-download" style="float:absolute;">
 							</p:commandButton>
 						</p:column>
 
@@ -368,14 +368,14 @@
 						<p:column headerText="CV Aubay" style="width:140px">
 							<p:commandButton value="Download" ajax="false"
 								actionListener="#{ReqBean.download(req.cvAubayPath)}"
-								icon="ui-icon-arrowthick-1-s">
+								icon="fa fa-cloud-upload">
 							</p:commandButton>
 						</p:column>
 
 						<p:column style="width:35px">
 							<p:commandButton icon="fa fa-trash-o" title="Delete this actor"
 								action="#{ReqBean.removeReq(req)}"
-								update=":form:msgs  :form:tab:AprovedList" />
+								update=":form:msgs  :form:tab:AprovedList" style="background-color:LightSalmon;"/>
 						</p:column>
 
 					</p:dataTable>
