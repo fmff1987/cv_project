@@ -3,97 +3,103 @@
 <!DOCTYPE html>
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="WEB-INF/templates/template.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="WEB-INF/templates/template.xhtml">
 
-    <ui:define name="pageTitle">
+	<ui:define name="pageTitle">
         Criar Managers
     </ui:define>
 
 
-    <ui:define name="pageContent">
+	<ui:define name="pageContent">
 
-        <h3 class="subtitles">Registar Managers</h3>
+		<h3 class="subtitles">Registar Managers</h3>
 
-        <h:form id="form">   
+		<h:form id="form">
 
-            <p:growl id="msgs" showDetail="true" />
+			<p:growl id="msgs" showDetail="true" />
 
-            <p:layout style="min-height:800px;border-style:none;min-width:400px;">
-                <p:layoutUnit position="west" resizable="true" minSize="40"
-                              maxSize="1000" size="300" style="border-style:none;">
+			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
+				<p:layoutUnit position="west" resizable="true" minSize="40"
+					maxSize="1000" size="300" style="border-style:none;">
 
-                    <p:outputLabel value="Nome: " for="name_m" />
-                    <h:inputText id="name_m" value="#{ManBean.manager.name}" style="width:200px;"></h:inputText>
-                    <br> </br>
+					<p:outputLabel value="Nome: " for="name_m" />
+					<h:inputText id="name_m" value="#{ManBean.manager.name}"
+						style="width:200px;"></h:inputText>
+					<br> </br>
 
-                    <p:outputLabel value="E-mail: " for="email_m" />
-                    <h:inputText id="email_m" value="#{ManBean.manager.email}"	style="width:200px;"></h:inputText>
-                    <br> </br>
+					<p:outputLabel value="Email: " for="email_m" />
+					<h:inputText id="email_m" value="#{ManBean.manager.email}"
+						style="width:200px;"></h:inputText>
+					<br> </br>
 
-                    <p:commandButton value="Criar" action="#{ManBean.createMan()}" icon="ui-icon-check" update=":form:managerTable" />
-                    <p:commandButton value="Voltar" action="adm?faces-redirect=true" icon="fa fa-home"	/>
+					<p:commandButton value="Criar" action="#{ManBean.createMan()}"
+						icon="ui-icon-check" update=":form:managerTable" />
+					<p:commandButton value="Voltar" action="adm?faces-redirect=true"
+						icon="fa fa-home" />
 
-                </p:layoutUnit>
+				</p:layoutUnit>
 
-                <p:layoutUnit position="center" style="border-style:none;">
+				<p:layoutUnit position="center" style="border-style:none;">
 
-                    <p:dataTable var="manager" value="#{ManBean.managerList}" id="managerTable" 
-                                 editable="true" rows="15" paginator="true"
-                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="10,15, 20" style="border-style:none;">
+					<p:dataTable var="manager" value="#{ManBean.managerList}"
+						id="managerTable" editable="true" rows="15" paginator="true"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,15, 20" style="border-style:none;">
 
-                        <f:facet name="header">
+						<f:facet name="header">
                             Lista de Managers
                         </f:facet>
 
-                        <p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}"	update=":form:msgs" />
-                        <p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}"	update=":form:msgs" />
+						<p:ajax event="rowEdit" listener="#{ManBean.onRowEdit}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{ManBean.onRowCancel}"
+							update=":form:msgs" />
 
-                        <p:column headerText="Nome" filterBy="#{manager.name}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{manager.name}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{manager.name}" style="width:100%" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+						<p:column headerText="Nome" filterBy="#{manager.name}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{manager.name}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{manager.name}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column headerText="Email" filterBy="#{manager.email}">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{manager.email}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{manager.email}" style="width:100%" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+						<p:column headerText="Email" filterBy="#{manager.email}">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{manager.email}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{manager.email}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column filterBy="#{manager.active}" headerText="Status">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{manager.active ? 'Activo' : 'Inactivo'}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:outputLabel value="Activo: " />
-                                    <p:selectBooleanCheckbox value="#{manager.active}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
+						<p:column filterBy="#{manager.active}" headerText="Estado">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{manager.active ? 'Activo' : 'Inactivo'}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:outputLabel value="Activo: " />
+									<p:selectBooleanCheckbox value="#{manager.active}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
 
-                        <p:column style="width:32px">
-                            <p:rowEditor />
-                        </p:column>
+						<p:column style="width:32px">
+							<p:rowEditor />
+						</p:column>
 
-                    </p:dataTable>	
-                </p:layoutUnit>
-            </p:layout>
-        </h:form>
-    </ui:define>
+					</p:dataTable>
+				</p:layoutUnit>
+			</p:layout>
+		</h:form>
+	</ui:define>
 </ui:composition>

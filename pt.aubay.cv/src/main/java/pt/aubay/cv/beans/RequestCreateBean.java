@@ -21,13 +21,13 @@ import pt.aubay.cv.models.Status;
 @RequestScoped
 @Named("ReqCreateBean")
 public class RequestCreateBean {
-	
+
 	private Request request = new Request();
 	private UploadedFile cvOrig;
-	
-        @Inject
+
+	@Inject
 	ControllerRequest cr;
-	
+
 	public UploadedFile getCvOrig() {
 		return cvOrig;
 	}
@@ -43,7 +43,7 @@ public class RequestCreateBean {
 	public void setCr(ControllerRequest cr) {
 		this.cr = cr;
 	}
-	
+
 	public Request getRequest() {
 		return request;
 	}
@@ -51,7 +51,7 @@ public class RequestCreateBean {
 	public void setRequest(Request request) {
 		this.request = request;
 	}
-	
+
 	public void uploadOrig() {
 		try { 
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
@@ -66,7 +66,7 @@ public class RequestCreateBean {
 
 			FacesContext.getCurrentInstance().addMessage(
 					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
+							"O arquivo " + cvOrig.getFileName() + " foi guardado em " + file.getAbsolutePath()));
 			request.setCvOrigPath(file.getAbsolutePath());
 
 		} catch (IOException e) {
@@ -79,8 +79,8 @@ public class RequestCreateBean {
 	public void createReq() {
 		request.setEstado(Status.INICIADO);
 		cr.createRequest(request);
-		FacesMessage msg = new FacesMessage("Pedido registrado.");
+		FacesMessage msg = new FacesMessage("Pedido registado");
 		FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
 	}
-	
+
 }

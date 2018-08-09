@@ -12,12 +12,13 @@
 }
 
 .logoaubay {
-	text-align: center;
+	text-align:center;
+	
 }
 
 #logo {
 	margin: 15px;
-	margin-top: 90px;
+	margin-top: 50px;
 	width: 400px;
 	height: auto;	
 	margin-bottom: 5px;
@@ -26,11 +27,16 @@
 .title {
 	margin-top: 30px;
 	text-shadow: 2px 2px 5px #434345;
-	color: #fff;
-	font-weight: 500;
-	font-size: 70px;
+	color: #ffffff;
+	font-weight: 650;
+	font-size: 75px;
 	text-align: center;
 	position:relative;
+}
+
+.firstWord {
+	color: #ff7b64;
+	font-weight: 745;
 }
 
 .container {

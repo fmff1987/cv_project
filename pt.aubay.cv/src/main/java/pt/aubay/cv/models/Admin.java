@@ -9,15 +9,15 @@ import javax.persistence.Table;
 @Table(name="adm")
 @NamedQueries({
 
-		@NamedQuery(name="Admin.getAll",
-		query= "SELECT a FROM Admin a"),
+	@NamedQuery(name="Admin.getAll",
+			query= "SELECT a FROM Admin a"),
 
-		@NamedQuery(name="Admin.getAllActive",
-		query = "SELECT a FROM Admin a WHERE a.active = true"),
+	@NamedQuery(name="Admin.getAllActive",
+	query = "SELECT a FROM Admin a WHERE a.active = true"),
 
-		@NamedQuery(name= "Admin.getAllActiveEmail",
-		query= "SELECT a.email FROM Admin a WHERE a.active = true")
-	})
+	@NamedQuery(name= "Admin.getAllActiveEmail",
+	query= "SELECT a.email FROM Admin a WHERE a.active = true")
+})
 
 public class Admin extends Person {
 

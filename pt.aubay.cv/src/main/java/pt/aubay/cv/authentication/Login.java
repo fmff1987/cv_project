@@ -24,99 +24,99 @@ import pt.aubay.cv.models.SSLEmail;
 @ViewScoped
 public class Login implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final String HOME_URL = "index.xhtml";
-    public static final String ADM_URL = "adm.xhtml";
-    public static final String REC_URL = "recruiter.xhtml";
-        
-    @Inject
-    private SSLEmail email;
-    
-    @Inject
-    AdminEmailBean admMails;
+	public static final String ADM_URL = "adm.xhtml";
+	public static final String REC_URL = "recruiter.xhtml";
 
-    private String username, password;
-    
-    public String getUsername() {
-        return username;
-    }
+	@Inject
+	private SSLEmail email;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@Inject
+	AdminEmailBean admMails;
 
-    public String getPassword() {
-        return password;
-    }
+	private String username, password;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void submitAdm(ActionEvent event) throws IOException {
-        FacesMessage msg = null;
-        try {
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-            PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+	public String getPassword() {
+		return password;
+	}
 
-            if (SecurityUtils.getSubject().hasRole("adm")) {
-                Faces.redirect(ADM_URL);
-            }
-        } catch (AuthenticationException e) {
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
+	public void submitAdm(ActionEvent event) throws IOException {
+		FacesMessage msg = null;
+		try {
+			SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
 
-            e.printStackTrace(); // TODO: logger.
-        }
+			PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 
-    }
+			if (SecurityUtils.getSubject().hasRole("adm")) {
+				Faces.redirect(ADM_URL);
+			}
+		} catch (AuthenticationException e) {
 
-    public void submitRec(ActionEvent event) throws IOException {
-        FacesMessage msg = null;
-        try {
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
+			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
 
-            PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+			e.printStackTrace(); // TODO: logger.
+		}
 
-            if (SecurityUtils.getSubject().hasRole("user")) {
-                Faces.redirect(REC_URL);
-            }
-        } catch (AuthenticationException e) {
+	}
 
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-            PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
+	public void submitRec(ActionEvent event) throws IOException {
+		FacesMessage msg = null;
+		try {
+			SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
 
-            e.printStackTrace(); // TODO: logger.
-        }
+			PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 
-    }
+			if (SecurityUtils.getSubject().hasRole("user")) {
+				Faces.redirect(REC_URL);
+			}
+		} catch (AuthenticationException e) {
 
-    public void logout() throws IOException {
-        SecurityUtils.getSubject().logout();
-        Faces.invalidateSession();
-        Faces.redirect("index.xhtml");
+			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
 
-    }
+			e.printStackTrace(); // TODO: logger.
+		}
 
-    public void recPassword() {
-        System.out.println(admMails.getActiveadmEmailListString());
-        String bodyMailpassAdmin = "Username = admin \nPalavra passe = adminaubay ";
-        String bodyMailpassRecruiter = "Username = recruiter \nPalavra passe = recaubay";
-        email.SSl(admMails.getActiveadmEmailListString(), bodyMailpassAdmin + "\n\n" + bodyMailpassRecruiter);
-        FacesContext.getCurrentInstance().addMessage(
-                null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Email enviado para " + admMails.getActiveadmEmailListString()));
-    }
+	}
+
+	public void logout() throws IOException {
+		SecurityUtils.getSubject().logout();
+		Faces.invalidateSession();
+		Faces.redirect("index.xhtml");
+
+	}
+
+	public void recPassword() {
+		System.out.println(admMails.getActiveadmEmailListString());
+		String bodyMailpassAdmin = "Username = admin \nPalavra passe = adminaubay ";
+		String bodyMailpassRecruiter = "Username = recruiter \nPalavra passe = recaubay";
+		email.SSl(admMails.getActiveadmEmailListString(), bodyMailpassAdmin + "\n\n" + bodyMailpassRecruiter);
+		FacesContext.getCurrentInstance().addMessage(
+				null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Email enviado para " + admMails.getActiveadmEmailListString()));
+	}
 
 
 }
