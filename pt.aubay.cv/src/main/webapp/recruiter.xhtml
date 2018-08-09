@@ -12,19 +12,17 @@
 	<ui:define name="pageTitle">
         Página Recrutador
     </ui:define>
-     <ui:define name="subheader">
+	<ui:define name="subheader">
 		<div class="subheader">
-			
+
 			<h:form>
 				<p:menubar style="border-style:none;">
-				
-					
-					<p:menuitem value="Logout" icon="fa fa-sign-out"  action="#{login.logout}" style="position: absolute; right: 6px;"/>
-						
+					<p:menuitem value="Logout" icon="fa fa-sign-out"
+						action="#{login.logout}" style="position: absolute; right: 6px;" />
 				</p:menubar>
-				</h:form>
-				
-			
+			</h:form>
+
+
 
 		</div>
 	</ui:define>
@@ -102,18 +100,19 @@
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="Anexar" />
 				</p:column>
-				
+
 				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
-                    <h:outputText value="#{doingReq.estado.label}" />
-                </p:column>
+					<h:outputText value="#{doingReq.estado.label}" />
+				</p:column>
 
 				<p:column headerText="Comentario">
-					<f:facet name="output">
-						<h:outputText value="#{doingReq.comment}" style="height:40px;" />
-					</f:facet>
+
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{doingReq.comment}" style="height:40px;" />
+							<h:outputText id="track" value="#{doingReq.comment}"
+								style="height:40px;" />
+								<p:tooltip for="track"  value="#{doingReq.comment}" position="bottom"/>
+							
 						</f:facet>
 						<f:facet name="input">
 							<p:inputTextarea value="#{doingReq.comment}" cols="16"

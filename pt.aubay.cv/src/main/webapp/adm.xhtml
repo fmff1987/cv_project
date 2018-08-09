@@ -63,7 +63,7 @@
 						value="#{ReqBean.requestList}" editable="true" rows="10"
 						paginator="true" resizableColumns="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="5,10,15" style="padding:15px"
+						rowsPerPageTemplate="10,20,50" style="padding:15px"
 						emptyMessage="Nenhum pedido encontrado.">
 
 						<f:facet name="header">
@@ -112,7 +112,7 @@
 						</p:column>
 
 						<p:column headerText="Email" filterBy="#{req.candidateEmail}"
-							style="width:200px">
+							style="width:140px">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.candidateEmail}" />
@@ -271,12 +271,11 @@
 						</p:column>
 
 						<p:column headerText="Comentario">
-							<f:facet name="output">
-								<h:outputText value="#{req.comment}" style="height:40px;" />
-							</f:facet>
+						
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{req.comment}" style="height:40px;" />
+									<h:outputText id="track" value="#{req.comment}" style="height:40px;" />
+									<p:tooltip for="track"  value="#{req.comment}" position="bottom"/>
 								</f:facet>
 								<f:facet name="input">
 									<p:inputTextarea value="#{req.comment}" cols="16"

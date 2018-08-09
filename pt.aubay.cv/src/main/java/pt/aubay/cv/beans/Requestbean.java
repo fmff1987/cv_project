@@ -294,8 +294,14 @@ public class Requestbean implements Serializable {
     
     
     public void download(String filePath) throws IOException{
-       File file = new File(filePath);
-        Faces.sendFile(file, true);
+    	try {
+    		File file = new File(filePath);
+            Faces.sendFile(file, true);
+    	}
+    	catch (IOException e ){
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Erro", "Nenhum ficheiro encontrado" ));
+    	}
+       
            /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
                     filePath);
             return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
