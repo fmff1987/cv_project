@@ -1,4 +1,4 @@
-package personsAndAcademies.authentication;
+package pt.aubay.cv.authentication;
 
 import java.io.IOException;
 

@@ -1,6 +1,8 @@
 
 package pt.aubay.cv.models;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -22,6 +24,16 @@ public class SSLEmail {
 
 		System.out.println("SSLEmail Start");
 		Properties props = new Properties();
+		
+		
+//		try {
+//			InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
+//			props.load(in);
+//			in.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
 		props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
 		props.put("mail.smtp.socketFactory.class",

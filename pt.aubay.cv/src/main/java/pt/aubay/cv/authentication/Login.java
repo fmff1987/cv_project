@@ -1,4 +1,4 @@
-package personsAndAcademies.authentication;
+package pt.aubay.cv.authentication;
 
 
 import java.io.IOException;
@@ -41,8 +41,7 @@ public class Login implements Serializable{
 
 
     public void submit() throws IOException {
-    	System.out.println(username);
-    	System.out.println(password);
+ 
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
             System.out.println(SecurityUtils.getSubject());
@@ -69,8 +68,7 @@ public class Login implements Serializable{
     }
     
     public void submitRecruiter() throws IOException {
-    	System.out.println(username);
-    	System.out.println(password);
+    	
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
             System.out.println(SecurityUtils.getSubject());
