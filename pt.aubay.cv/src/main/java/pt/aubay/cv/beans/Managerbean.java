@@ -47,10 +47,10 @@ public class Managerbean {
 		activeManagerList = cm.getManagerActive();
 		managerList = cm.getMan();
 	}
-	
 	// Nao se deve usar um getter para ir diretamente á base de dados.
 	//em vez disso deve.se usar uma lista local para ir buscar á base de dados, assim só la vai uma vez
 	// @PostConstruct garante que sempre que se estanciar ManagerBean o metodo é corrido
+
 
 	public void createMan() {
 		manager.setActive(true);

@@ -20,6 +20,7 @@ public class ControllerRequest {
 
 	public void removeRequest(Request r) {
 		db.removeEntity(r);
+		//updateReq();
 	}
 
 	public void updateReq(Request r) {

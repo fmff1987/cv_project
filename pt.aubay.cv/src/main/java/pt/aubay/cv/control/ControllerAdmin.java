@@ -9,6 +9,7 @@ import pt.aubay.cv.repositories.AdminRepository;
 
 @Transactional
 @RequestScoped
+
 public class ControllerAdmin {
 
 	@Inject

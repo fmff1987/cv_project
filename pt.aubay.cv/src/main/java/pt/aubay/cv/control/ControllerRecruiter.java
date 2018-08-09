@@ -1,12 +1,13 @@
 package pt.aubay.cv.control;
 
 import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+
 import pt.aubay.cv.models.Recruiter;
 import pt.aubay.cv.repositories.RecruiterRepository;
-
 @Transactional
 @RequestScoped
 public class ControllerRecruiter {
@@ -23,10 +24,12 @@ public class ControllerRecruiter {
 	}
 
 	public void updateList() {
+		//db.updateLocalList();
 	}
 
 	public void removeRec(Recruiter p) {
 		db.removeEntity(p);
+		//db.updateLocalList();
 	}	
 	public void updateRec(Recruiter r) {
 		db.updateEntity(r);

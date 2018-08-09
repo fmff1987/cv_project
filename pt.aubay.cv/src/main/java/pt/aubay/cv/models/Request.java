@@ -16,19 +16,17 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "request")
 @NamedQueries({
-	
 	//São criadas as queries assim que o programa é compilado 
-	
 	@NamedQuery(name="Request.getAll",
-		query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
+			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
 	@NamedQuery(name="Request.getAllWithRecruiterAndManagers",
-		query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS  null"),
+	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS  null"),
 
 	@NamedQuery(name="Request.getAllAprovado", 
-		query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE r.estado = :estado "),
+	query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE r.estado = :estado "),
 
 	@NamedQuery(name= "Request.getAllNotAprovado", 
-		query = "SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE NOT r.estado = :estado")
+	query = "SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE NOT r.estado = :estado")
 
 }) 
 

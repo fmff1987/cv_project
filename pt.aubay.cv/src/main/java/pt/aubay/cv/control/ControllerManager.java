@@ -33,5 +33,10 @@ public class ControllerManager {
 
 	public void removeManage(Manager p) {
 		db.removeEntity(p);
+		//db.updateLocalList();
 	}
+
+//	public void removeManage(Manager p) {
+//		db.removeEntity(p);
+//	}
 }

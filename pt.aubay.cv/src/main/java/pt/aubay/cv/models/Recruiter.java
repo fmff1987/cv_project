@@ -16,12 +16,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="recruiter")
 @NamedQueries({
-	
 	@NamedQuery(name="Recruiter.getAll",
-		query="SELECT r FROM Recruiter r"),
-	
+			query="SELECT r FROM Recruiter r"),
 	@NamedQuery(name= "Recruiter.getRecruiterActive",
-		query = "SELECT r FROM Recruiter r WHERE r.active = true"),
+	query = "SELECT r FROM Recruiter r WHERE r.active = true"),
 
 })
 

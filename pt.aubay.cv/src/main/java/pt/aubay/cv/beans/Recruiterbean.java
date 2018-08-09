@@ -55,6 +55,7 @@ public class Recruiterbean {
 		recruiter.setActive(true);
 		cr.createRec(recruiter);
 		loadRecruiters();
+
 	}
 
 	public void removeRec() {
