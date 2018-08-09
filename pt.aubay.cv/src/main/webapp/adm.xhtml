@@ -12,12 +12,16 @@
     <ui:define name="pageTitle">
         Página Administrador
     </ui:define>
+    
+    <ui:define name="body">
+        <h:body class="bodygeral"></h:body>
+    </ui:define>
 
     <ui:define name="subheader">
         <div class="subheader">
             <div>
-                <h:form>
-                    <p:menubar>
+                <h:form id="form2">
+                    <p:menubar style="border-style:none;">
                         <p:submenu label="Manager">
                             <p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
                                         url="createManager.xhtml" />

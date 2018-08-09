@@ -2,12 +2,13 @@
 
 .body {
 	background-image: url(#{resource['images/abstractshapes.jpg']});
-	background-size: cover;
+	background-size: 100% 200%;
 }
 
 .bodygeral {
 	background-image: url(#{resource['images/abstractshapesbodytemplate.jpg']});
 	background-size: 100% 200%;
+	margin-bottom: 50px;
 }
 
 .logoaubay {
@@ -16,14 +17,14 @@
 
 #logo {
 	margin: 15px;
-	margin-top: 50px;
+	margin-top: 90px;
 	width: 400px;
 	height: auto;	
 	margin-bottom: 5px;
 }	
 
 .title {
-	margin-top: 100px;
+	margin-top: 30px;
 	text-shadow: 2px 2px 5px #434345;
 	color: #fff;
 	font-weight: 500;
@@ -33,7 +34,7 @@
 }
 
 .container {
-	margin-top: 80px;
+	margin-top: 120px;
 	vertical-align: middle;
 	align-content: center;
 }
@@ -51,7 +52,7 @@
 .buttontext {
 	text-shadow: 2px 2px 5px #434345;
 	color: #fff;
-	font-weight: 300;
+	font-weight: 500;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
@@ -121,6 +122,9 @@ form {
 	padding-right: 30px;
 }
 
+.ui-menubar {
+	height: 36px;
+}	
 .ui-tabs {
 	background: white;
 } 
@@ -153,6 +157,13 @@ form {
 	background: #fdb883;
 }
 
+.ui-button-text-only .ui-button-text {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}	
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
 	background: #fff;
 }
@@ -178,7 +189,7 @@ form {
 	text-shadow: 1px 1px 5px #434345;
 }
 
-.ui-datatable-resizable th.ui-resizable-column {
+.ui-widget-content .ui-datatable th {
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
 	font-size: 20px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -186,6 +197,7 @@ form {
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
+
 
 .ui-datatable-header{
 	font-size: 25px;	
@@ -216,9 +228,18 @@ form {
 	width: 135px;
 }
 
+.ui-draggable .ui-dialog-titlebar {
+	background: #fff;	
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+	color: #fff;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;	
+}	
 .footer {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-	position: absolute;
+	position: fixed;
   	right: 0;
   	bottom: 0;
   	left: 0;
