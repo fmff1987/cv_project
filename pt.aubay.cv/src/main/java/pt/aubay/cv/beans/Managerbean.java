@@ -52,10 +52,6 @@ public class Managerbean {
 	// @PostConstruct garante que sempre que se estanciar ManagerBean o metodo é corrido
 
 
-	//	public List<Manager> getMan(){
-	//		return cm.getMan();
-	//		}
-
 	public void createMan() {
 		manager.setActive(true);
 		cm.createManager(manager);
@@ -68,13 +64,6 @@ public class Managerbean {
 		cm.removeManage(manager);
 		loadManagers();
 	}
-	//	public void removeMan() {
-	//		cm.removeManage(manager);
-	//	}
-
-	//	public void updateMan() {
-	//		cm.updateMan();
-	//	}
 
 	public void onRowEdit(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Manager Editado", ((Manager) event.getObject()).getName());

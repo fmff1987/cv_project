@@ -17,19 +17,19 @@
 #logo {
 	margin: 15px;
 	margin-top: 50px;
-	width: 350px;
-	height: auto;
+	width: 400px;
+	height: auto;	
 	margin-bottom: 5px;
-}
+}	
 
 .title {
-	margin-top: 40px;
+	margin-top: 100px;
 	text-shadow: 2px 2px 5px #434345;
 	color: #fff;
 	font-weight: 500;
 	font-size: 70px;
 	text-align: center;
-	margin-bottom: 20px;
+	position:relative;
 }
 
 .container {
@@ -41,16 +41,17 @@
 .buttonindex {
 	width: 300px;
 	height: auto;
-	top: 40%;
-	margin-top: -50px;
-	margin-left: 30px;
-	margin-rigth: 30px;
+    top:40%;
+    margin-top:-50px;
+    margin-left:30px;
+    margin-rigth:30px;
+    margin-bottom:15px;
 }
 
 .buttontext {
 	text-shadow: 2px 2px 5px #434345;
 	color: #fff;
-	font-weight: 350;
+	font-weight: 300;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
@@ -64,7 +65,7 @@
 #logoheader {
 	margin: 10px;
 	width: 100px;
-	height: auto;
+	height: auto;	
 	margin-bottom: 10px;
 	margin-left: 10px;
 }
@@ -73,17 +74,17 @@
 	float: right;
 	margin-top: 20px;
 	margin-right: 10px;
-}
+}	
 
 .subtitles {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	color: #ff7b64;
 	font-weight: 500;
 	font-size: 40px;
-	text-align: left;
+	text-align:left;
 	margin-left: 30px;
 	margin-bottom: 15px;
-	margin-top: 50px;
+	margin-top: 40px;
 }
 
 .orderlist {
@@ -98,6 +99,13 @@ form {
 #form2 {
 	padding-left: 0px;
 	padding-right: 0px;
+}
+
+#form3 {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 10px;
 }
 
 .register {
@@ -115,6 +123,34 @@ form {
 
 .ui-tabs {
 	background: white;
+} 
+
+.ui-button {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.buttonindex {
+	transition: 0.5s;
+}
+.buttonindex:hover {
+	transform: scale(1.1);
+	
+}
+
+.ui-button-text-icon-left .ui-button-text {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}
+
+.ui-button-icon-only .ui-button-text {
+	background: #fdb883;
 }
 
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
@@ -126,60 +162,70 @@ form {
 }
 
 .ui-tabs .ui-tabs-nav li {
-	background: #b7e7a9;
+	background: #e3e4e3;
 }
 
 .ui-tabs .ui-tabs-nav {
 	background: #ffffff;
 }
 
+.ui-datatable thead th, .ui-datatable tfoot td {
+	background: linear-gradient(#fdba83, #fe9483, #eb6653);
+	font-size: 20px;	
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	font-weight: 100;
+	color: #fff;
+	text-shadow: 1px 1px 5px #434345;
+}
+
 .ui-datatable-resizable th.ui-resizable-column {
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
-	font-size: 20px;
+	font-size: 20px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	font-weight: 100;
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
 
-.ui-datatable-header {
-	font-size: 25px;
+.ui-datatable-header{
+	font-size: 25px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 	font-weight: 100;
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
-
+	
 .ui-datatable-even {
 	background: #e4e4e4;
 }
 
 .ui-datatable-odd {
-	background: #ffffff;
+	background: #fff;
 }
-
-.ui-paginator {
+.ui-paginator{
 	background: linear-gradient(#fff, #eaf4f7);
 }
 
 .ui-menubar {
-	background: #b7e7a9;
+	background: #ffffff;
 }
 
-.ui-menubar .ui-menu-child{
-	background: #ffffff;
-	width: 20px;
+.ui-menubar .ui-menu-child {
+	background: #fff;
+	width: 135px;
 }
 
 .footer {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: white;
-	color: black;
-	text-align: center;
+	position: absolute;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+  	background-color: #ffffff;
+  	text-align: center;
 }
 
+.footertitle {
+	margin: 5px;
+}

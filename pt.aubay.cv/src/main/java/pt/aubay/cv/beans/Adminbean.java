@@ -17,13 +17,11 @@ import pt.aubay.cv.models.Admin;
 public class Adminbean {
 
 	private Admin adm = new Admin();
-
 	private List<Admin> admList;
-
 	private List<Admin> activeAdmList;
-
 	private List<String> activeadmEmailList;
 
+        
 	public List<String> getActiveadmEmailList() {
 		return activeadmEmailList;
 	}
