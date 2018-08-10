@@ -178,6 +178,15 @@ public class Requestbean implements Serializable {
 		}
 
 	}
+        
+        public void onRowEditRec(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Pedido Editado");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Request request = (Request) event.getObject();
+		cr.updateReq(request);
+		requestList = cr.getReq();
+		requestListNotAprovado = cr.getAllNotAprovado();
+	}
 
 	public void onRowEditOngoingList(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Pedido Editado");
