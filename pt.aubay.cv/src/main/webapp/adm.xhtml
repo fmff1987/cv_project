@@ -149,7 +149,7 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="CV Original" style="width:100px">
+                        <p:column headerText="CV Original" style="width:100px" class="column">
                             <p:commandButton ajax="false" value="Download"
                                              actionListener="#{ReqBean.download(req.cvOrigPath)}"
                                              icon="fa fa-cloud-download" style="float:absolute;">
@@ -251,17 +251,17 @@
                             <h:outputText value="" />
                         </p:column>
 
-                        <p:column headerText="CV Original" style="width:140px">
-                            <p:commandButton value="Download" ajax="false"
+                        <p:column headerText="CV Original" style="width:100px" class="column">
+                            <p:commandButton title="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvOrigPath)}"
                                              icon="fa fa-cloud-download">
                             </p:commandButton>
                         </p:column>
 
-                        <p:column headerText="CV Aubay" style="width:140px">
-                            <p:commandButton value="Download" ajax="false"
+                        <p:column headerText="CV Aubay" style="width:90px" class="column">
+                            <p:commandButton title="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvAubayPath)}"
-                                             icon="fa fa-cloud-upload">
+                                             icon="fa fa-cloud-download" >
                             </p:commandButton>
                         </p:column>
 
@@ -368,15 +368,15 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="CV Aubay" style="width:140px">
+                        <p:column headerText="CV Aubay" style="width:140px" class="column">
                             <p:commandButton value="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvAubayPath)}"
                                              icon="fa fa-cloud-upload">
                             </p:commandButton>
                         </p:column>
 
-                        <p:column style="width:35px">
-                            <p:commandButton icon="fa fa-trash-o" title="Delete this actor"
+                        <p:column style="width:35px" class="column">
+                            <p:commandButton icon="fa fa-trash-o" title="Remover"
                                              action="#{ReqBean.removeReq(req)}"
                                              update=":form:msgs  :form:tab:AprovedList"
                                              style="background-color:LightSalmon;" />

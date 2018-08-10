@@ -83,14 +83,14 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="CV Original">
-					<p:commandButton value="Download" ajax="false"
+				<p:column headerText="CV Original" style="width:100px" class="column">
+					<p:commandButton title="Download" ajax="false"
 						actionListener="#{ReqBean.download(doingReq.cvOrigPath)}"
 						icon="fa fa-cloud-download">
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="CV Aubay">
+				<p:column headerText="CV Aubay" style="width:110px" class="column">
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="Anexar" />
 				</p:column>
