@@ -31,10 +31,10 @@
 				<p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
 					effect="fold" converter="omnifaces.SelectItemsConverter"
 					style="width:250px" var="manager" filter="true"
-					filterMatchMode="contains">
+					filterMatchMode="contains" required="true">
 					<f:selectItem itemLabel="Selecione uma opção:" />
 					<f:selectItems value="#{ManBean.activeManagerList}" var="m"
-						itemLabel="#{m.name}" itemValue="#{m}" />					
+						itemLabel="#{m.name}" itemValue="#{m}" />
 					<p:column>
 						<h:outputText value="#{manager.name}" />
 					</p:column>
@@ -42,9 +42,9 @@
 
 				<p:outputLabel value="Nome do Candidato:" for="name_c" />
 				<p:inputText id="name_c" value="#{ReqBean.request.candidateName}"
-					style="width:280px;"></p:inputText>
+					style="width:280px;" required="true"></p:inputText>
 
-				<p:outputLabel value="E-mail do Candidato:" for="email_c" />
+				<p:outputLabel value="Email do Candidato:" for="email_c" />
 				<p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
 					style="width:280px;"></p:inputText>
 
@@ -54,7 +54,7 @@
 					maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" stepHour="1"
 					stepMinute="30" style="width:280px;" />
 
-				<p:outputLabel value="Curriculo: " />
+				<p:outputLabel value="Currículo: " />
 				<p:fileUpload value="#{ReqBean.cvOrig}" mode="simple"
 					skinSimple="true" label="Anexar"
 					allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
@@ -62,7 +62,7 @@
 
 			</h:panelGrid>
 
-			<p:commandButton value="Submeter Pedido"
+			<p:commandButton value="Submeter Pedido"  icon="ui-icon-check"
 				action="#{ReqBean.uploadOrig()}" ajax="false" update="msg" />
 
 			<br></br>
@@ -80,7 +80,7 @@
 				rowsPerPageTemplate="5,10,15">
 
 				<f:facet name="header">
-                    Lista de pedidos Aprovados
+                    Pedidos Concluídos
                 </f:facet>
 
 				<p:column headerText="Manager"
@@ -105,10 +105,10 @@
 					<h:outputText value="#{finishedList.candidateEmail}" />
 				</p:column>
 
-				<p:column headerText="Cv Aubay">
+				<p:column headerText="Cv Aubay" class="column">
 					<p:commandButton value="Download" ajax="false"
 						actionListener="#{ReqBean.download(finishedList.cvAubayPath)}"
-						icon="ui-icon-arrowthick-1-s">
+						icon="fa fa-cloud-download">
 					</p:commandButton>
 				</p:column>
 

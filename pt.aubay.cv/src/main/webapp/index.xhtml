@@ -10,8 +10,8 @@
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
-		Gestão de CVs
-	</ui:define>
+        AubilousPlus
+    </ui:define>
 
 	<ui:define name="body">
 		<h:body class="body"></h:body>
@@ -20,7 +20,7 @@
 	<ui:define name="header">
 		<div class="logoaubay">
 			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay" />
-			<h1 class="title">Plataforma de Gestão de Currículos</h1>
+			<h1 class="title">Aubilous<span class="firstWord">Plus</span></h1>
 		</div>
 	</ui:define>
 
@@ -31,28 +31,111 @@
 			<div class="d-flex justify-content-between row">
 
 				<div class="col-md-4 manager">
-					<a href="manager.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberman.png" alt="Manager"></img>
-					</a>
+					<a href="manager.xhtml"><img
+						src="resources/images/buttonmemberman.png" class="buttonindex"
+						alt="Manager" title="Manager" /></a>
 					<h1 class="buttontext">Manager</h1>
 				</div>
 
 				<div class="col-md-4 admin">
-					<a href="adm.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberadm.png" alt="Administrador"></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlgAdm').show();" title="Administrador">
+						<p:graphicImage name="images/buttonmemberadm.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Administrador</h1>
 				</div>
 
 				<div class="col-md-4 recruiter">
-					<a href="recruiter.xhtml"> <img class="buttonindex"
-						src="resources/images/buttonmemberrec.png" alt="Recrutador"></img>
-					</a>
+					<h:outputLink value="javascript:void(0)"
+						onclick="PF('dlgRec').show();" title="Recrutador">
+						<p:graphicImage name="images/buttonmemberrec.png"
+							class="buttonindex" />
+					</h:outputLink>
 					<h1 class="buttontext">Recrutador</h1>
 				</div>
 
+
+
+				<h:form id="loginAdm">
+
+					<p:growl id="msg" sticky="true" showDetail="true" life="3000" />
+
+					<p:dialog header="Login" widgetVar="dlgAdm" resizable="false">
+						<h:panelGrid columns="2" cellpadding="5">
+
+							<h:outputLabel for="username" value="Username:">
+							</h:outputLabel>
+							<h:inputText id="username" value="#{login.username}">
+								<f:ajax event="blur" render="m_username" />
+							</h:inputText>
+
+							<h:outputLabel for="password" value="Password:">
+
+							</h:outputLabel>
+							<h:inputSecret id="password" value="#{login.password}">
+								<f:ajax event="blur" render="m_password" />
+							</h:inputSecret>
+
+							<f:facet name="footer">
+								<p:commandButton value="Login"
+									actionListener="#{login.submitAdm}"
+									oncomplete="handleLoginRequest(xhr, status, args)"
+									update="loginAdm:msg">
+								</p:commandButton>
+								<p:commandButton value="Recuperar Password"
+									actionListener="#{login.recPassword}" update=":loginAdm:msg">
+								</p:commandButton>
+							</f:facet>
+						</h:panelGrid>
+					</p:dialog>
+				</h:form>
+
+				<h:form id="loginRec">
+
+
+					<p:dialog header="Login" widgetVar="dlgRec" resizable="false">
+						<h:panelGrid columns="2" cellpadding="5">
+
+							<h:outputLabel for="username" value="Username:">
+								<h:message id="m_username" for="username"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputText id="username" value="#{login.username}">
+								<f:ajax event="blur" render="m_username" />
+							</h:inputText>
+
+							<h:outputLabel for="password" value="Password:">
+								<h:message id="m_password" for="password"
+									styleClass="loginMessage" />
+							</h:outputLabel>
+							<h:inputSecret id="password" value="#{login.password}">
+								<f:ajax event="blur" render="m_password" />
+							</h:inputSecret>
+
+							<f:facet name="footer">
+								<p:commandButton value="Login"
+									actionListener="#{login.submitRec}"
+									oncomplete="handleLoginRequest(xhr, status, args)"
+									update="loginAdm:msg">
+								</p:commandButton>
+								<p:commandButton value="Recuperar Password"
+									actionListener="#{login.recPassword}" update=":loginAdm:msg">
+								</p:commandButton>
+							</f:facet>
+						</h:panelGrid>
+					</p:dialog>
+				</h:form>
+
 			</div>
 
+			<script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlgAdm').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>
 		</div>
 
 	</ui:define>

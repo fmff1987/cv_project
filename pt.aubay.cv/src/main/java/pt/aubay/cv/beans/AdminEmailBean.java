@@ -41,7 +41,7 @@ public class AdminEmailBean {
 	public String getActiveadmEmailListString() {
 		String lista = "";
 		for(String item : activeadmEmailList) {
-			 lista += item + ", ";
+			lista += item + ", ";
 		}
 		return lista;
 	}

@@ -13,6 +13,17 @@
         Página Recrutador
     </ui:define>
 
+	<ui:define name="subheader">
+		<div class="subheader">
+			<h:form id="form2">
+				<p:menubar style="border-style:none;">
+					<p:menuitem value="Logout" icon="fa fa-sign-out"
+						action="#{login.logout}" style="position: absolute; right: 6px;" />
+				</p:menubar>
+			</h:form>
+		</div>
+	</ui:define>
+
 	<ui:define name="body">
 		<h:body class="bodygeral"></h:body>
 	</ui:define>
@@ -21,7 +32,7 @@
 
 		<h3 class="subtitles">Recrutador</h3>
 
-		<h:form id="form" enctype="multipart/form-data">
+		<h:form id="form3" enctype="multipart/form-data">
 
 			<p:growl id="msgs" showDetail="true" />
 
@@ -37,35 +48,32 @@
                     Lista de pedidos
                 </f:facet>
 
-				<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-					update=":form:msgs" />
+                            <p:ajax event="rowEdit" listener="#{ReqBean.onRowEditRec}"
+					update=":form3:msgs" />
 				<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-					update=":form:msgs" />
+					update=":form3:msgs" />
 
 				<p:column headerText="Manager" filterBy="#{doingReq.manager.name}"
-					filterMatchMode="contains" style="width:130px">
+					filterMatchMode="contains">
 					<h:outputText value="#{doingReq.manager.name}" />
 				</p:column>
 
 				<p:column headerText="Recrutador"
-					filterBy="#{doingReq.recruiter.name}" filterMatchMode="contains"
-					style="width:130px">
+					filterBy="#{doingReq.recruiter.name}" filterMatchMode="contains">
 					<h:outputText value="#{doingReq.recruiter.name}" />
 				</p:column>
 
 				<p:column headerText="Candidato"
-					filterBy="#{doingReq.candidateName}" filterMatchMode="contains"
-					style="width:130px">
+					filterBy="#{doingReq.candidateName}" filterMatchMode="contains">
 					<h:outputText value="#{doingReq.candidateName}" />
 				</p:column>
 
 				<p:column headerText="Email" filterBy="#{doingReq.candidateEmail}"
-					filterMatchMode="contains" style="width:250px">
+					filterMatchMode="contains">
 					<h:outputText value="#{doingReq.candidateEmail}" />
 				</p:column>
 
-				<p:column headerText="Data Limite" sortBy="#{doingReq.deadline}"
-					style="width:150px">
+				<p:column headerText="Data Limite" sortBy="#{doingReq.deadline}">
 					<f:facet name="filter">
 						<p:outputLabel for="datetime" />
 						<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
@@ -75,29 +83,28 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="CV Original" style="width:140px">
-					<p:commandButton value="Download" ajax="false"
+				<p:column headerText="CV Original" style="width:100px" class="column">
+					<p:commandButton title="Download" ajax="false"
 						actionListener="#{ReqBean.download(doingReq.cvOrigPath)}"
-						icon="ui-icon-arrowthick-1-s">
+						icon="fa fa-cloud-download">
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="CV Aubay" style="width:117px">
+				<p:column headerText="CV Aubay" style="width:110px" class="column">
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="Anexar" />
 				</p:column>
-				
-				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
-                    <h:outputText value="#{doingReq.estado.label}" />
-                </p:column>
 
-				<p:column headerText="Comentario">
-					<f:facet name="output">
-						<h:outputText value="#{doingReq.comment}" style="height:40px;" />
-					</f:facet>
+				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
+					<h:outputText value="#{doingReq.estado.label}" />
+				</p:column>
+
+				<p:column headerText="Comentário">
 					<p:cellEditor>
 						<f:facet name="output">
-							<h:outputText value="#{doingReq.comment}" style="height:40px;" />
+							<h:outputText id="track" value="#{doingReq.comment}" />
+							<p:tooltip for="track" value="#{doingReq.comment}"
+								position="bottom" />
 						</f:facet>
 						<f:facet name="input">
 							<p:inputTextarea value="#{doingReq.comment}" cols="16"

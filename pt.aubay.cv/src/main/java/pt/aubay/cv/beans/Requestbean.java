@@ -1,7 +1,5 @@
 package pt.aubay.cv.beans;
 
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,551 +26,269 @@ import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.SSLEmail;
 import pt.aubay.cv.models.Status;
 
-
-
-
-
-
-
 @Named("ReqBean")
 
 @ViewScoped
 
-
-
-public class Requestbean implements Serializable {  
-
-
+public class Requestbean implements Serializable {
 
 	/**
-
-	 * 
-
+	 *
+	 *
+	 *
 	 */
-
 	private static final long serialVersionUID = 1L;
 
-
-
 	private Request request = new Request();
-
-
-
 	private UploadedFile cvOrig;
-
 	private UploadedFile cvAubay;
-
 	private StreamedContent downloadAubay;
-
-
-
 	private List<Request> requestList;
-
 	private List<Request> requestListAll;
-
 	private List<Request> requestListAprovado;
-
 	private List<Request> requestListNotAprovado;
 
-
-
-
-
-
-
 	@Inject
-
 	private ControllerRequest cr;
 
-	
-
 	@Inject
-
 	private AdminEmailBean admEmail;
 
 	@Inject
 	private SSLEmail email;
 
 	public AdminEmailBean getAdmEmail() {
-
 		return admEmail;
-
 	}
-
-
 
 	public void setAdmEmail(AdminEmailBean admEmail) {
-
 		this.admEmail = admEmail;
-
 	}
-
-
 
 	public UploadedFile getCvAubay() {
-
 		return cvAubay;
-
 	}
-
-
 
 	public void setCvAubay(UploadedFile cvAubay) {
-
 		this.cvAubay = cvAubay;
-
 	}
-
-
 
 	public List<Request> getRequestList() {
-
 		return requestList;
-
 	}
 
-
-
-	public List<Request> getRequestListAll(){
-
+	public List<Request> getRequestListAll() {
 		return requestListAll;
-
 	}
-
-
 
 	public List<Request> getRequestListAprovado() {
-
 		return requestListAprovado;
-
 	}
 
-
-
 	public void setRequestListAprovado(List<Request> requestListAprovado) {
-
 		this.requestListAprovado = requestListAprovado;
-
 	}
 
 	public List<Request> getRequestListNotAprovado() {
-
 		return requestListNotAprovado;
-
 	}
 
-
-
 	public void setRequestListNotAprovado(List<Request> requestListNotAprovado) {
-
 		this.requestListNotAprovado = requestListNotAprovado;
-
 	}
 
 	public StreamedContent getDownloadAubay() {
+		return downloadAubay;
+	}
 
-        return downloadAubay;
-
-    }
-
-
-
-    public void setDownloadAubay(StreamedContent downloadAubay) {
-
-        this.downloadAubay = downloadAubay;
-
-    }
-
-
-
-
+	public void setDownloadAubay(StreamedContent downloadAubay) {
+		this.downloadAubay = downloadAubay;
+	}
 
 	@PostConstruct
-
 	public void loadRequests() {
-
 		requestList = cr.getReq();
-
 		requestListAll = cr.getReqAll();
-
 		requestListAprovado = cr.getReqAllAprovado();
-
 		requestListNotAprovado = cr.getAllNotAprovado();
-
-
-
-		// System.out.println(requestList.size());
-
 	}
-
-
 
 	public Request getRequest() {
-
 		return request;
-
 	}
-
-
 
 	public void setRequest(Request request) {
-
 		this.request = request;
-
 	}
-
-
 
 	public UploadedFile getCvOrig() {
-
 		return cvOrig;
-
 	}
-
-
 
 	public void setCvOrig(UploadedFile cvOrig) {
-
 		this.cvOrig = cvOrig;
-
 	}
-
-
 
 	public ControllerRequest getCr() {
-
 		return cr;
-
 	}
-
-
 
 	public void setCr(ControllerRequest cr) {
-
 		this.cr = cr;
-
 	}
-
-
 
 	public void createReq() {
-
 		request.setEstado(Status.INICIADO);
-
 		cr.createRequest(request);
-
-
-
-		FacesMessage msg = new FacesMessage("Pedido registrado.");
-
+		FacesMessage msg = new FacesMessage("Pedido registado");
 		FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
-
 	}
-
-
-
-
 
 	public void removeReq(Request request) {
-
 		cr.removeRequest(request);
-
-		//requestList = cr.getReq();
-
-		//loadRequests();
-
 		requestListAprovado = cr.getReqAllAprovado();
-
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", "Pedido removido");
-
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
-	}    
-
-
+	}
 
 	public void onRowEdit(RowEditEvent event) {
-
 		FacesMessage msg = new FacesMessage("Pedido Editado");
-
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
 		Request request = (Request) event.getObject();
-
 		cr.updateReq(request);
-
 		requestList = cr.getReq();
-
 		requestListNotAprovado = cr.getAllNotAprovado();
-
-			
-
-		if(request.getRecruiter()!=null && request.getRecruiter().getEmail().contains("@")) {
-
-					
-
-			if(request.getDeadline()!=null){
-
+		if (request.getRecruiter() != null && request.getRecruiter().getEmail().contains("@")) {
+			if (request.getDeadline() != null) {
 				Locale PT = new Locale("pt", "PT");
-
-				DateFormat date =  DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, PT);
-
+				DateFormat date = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT, PT);
 				String dateFormat = date.format(request.getDeadline());
-
-				String bodyMailWithDataFormat = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si até á Data Limite de " + dateFormat;
-
+				String bodyMailWithDataFormat = "O pedido do candidato com o nome " + request.getCandidateName() + 
+						" foi-lhe atribuido para processar até à data limite de " + dateFormat;
 				this.sendMail(request.getRecruiter().getEmail(), bodyMailWithDataFormat);
-
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
-
-			}else {
-
-				String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si" ;
-
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Notificação", "Email enviado para Recrutador"));
+			} else {
+				String bodyMail = "O pedido do candidato com o nome " + request.getCandidateName() + " foi-lhe atribuido";
 				this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
-
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Notificação", "Email enviado para Recrutador"));
 			}
-
-			
 
 		}
 
-
-
 	}
-
-
+        
+        public void onRowEditRec(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Pedido Editado");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Request request = (Request) event.getObject();
+		cr.updateReq(request);
+		requestList = cr.getReq();
+		requestListNotAprovado = cr.getAllNotAprovado();
+	}
 
 	public void onRowEditOngoingList(RowEditEvent event) {
-
 		FacesMessage msg = new FacesMessage("Pedido Editado");
-
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
 		Request request = (Request) event.getObject();
-
-		
-
-		if(request.getEstado()==null) {
-
+		if (request.getEstado() == null) {
 			request.setEstado(Status.INICIADO);
-
 		}
 
-		
-
-
-
-		if(request.getEstado() == Status.APROVADO) {
-
-			if(request.getManager().getEmail().contains("@")) {
-
-				String bodymail = "O candidato de nome de " + request.getCandidateName() + " foi concluido.";
-
+		if (request.getEstado() == Status.APROVADO) {
+			if (request.getManager().getEmail().contains("@")) {
+				String bodymail = "O pedido do candidato com o nome " + request.getCandidateName() + " foi concluído";
 				this.sendMail(request.getManager().getEmail(), bodymail);
-
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para admistrador"));
-
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para Manager"));
 			}
 
-		}else if(request.getEstado()== Status.REPROVADO) {
-
-			if(request.getRecruiter().getEmail().contains("@")) {
-
-				String bodymail = "Informamos que o pedido foi reprovado, por favor verificar os comentarios: \n" + request.getComment();
-
+		} else if (request.getEstado() == Status.REPROVADO) {
+			if (request.getRecruiter().getEmail().contains("@")) {
+				String bodymail = "O pedido do candidato com o nome " + request.getCandidateName() + " foi reprovado, por favor verifique os comentários: \n" + request.getComment();
 				this.sendMail(request.getRecruiter().getEmail(), bodymail);
-
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para recrutador "+ request.getRecruiter().getEmail()));
-
-				
-
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+						FacesMessage.SEVERITY_INFO, "Notificação Email", "Email enviado para Recrutador " + request.getRecruiter().getEmail()));
 			}
-
 		}
-
 		cr.updateReq(request);
-
-		
-
 		requestListNotAprovado = cr.getAllNotAprovado();
-
 		requestListAprovado = cr.getReqAllAprovado();
-
-		
-
 	}
-
-
 
 	public void onRowCancel(RowEditEvent event) {
-
 		FacesMessage msg = new FacesMessage("Edição Cancelada");
-
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
 	}
-
-
 
 	public void uploadOrig() {
-
-		try { 
-
+		try {
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-
 			File folder = new File(dir);
-
 			folder.mkdirs();
-
-
-
 			File file = new File(dir, cvOrig.getFileName());
-
-
-
 			OutputStream out = new FileOutputStream(file);
-
 			out.write(cvOrig.getContents());
-
 			out.close();
-
-
-
 			FacesContext.getCurrentInstance().addMessage(
-
 					null, new FacesMessage("Upload completo",
-
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-
+							"O arquivo " + cvOrig.getFileName() + " foi guardado em " + file.getAbsolutePath()));
 			request.setCvOrigPath(file.getAbsolutePath());
 
-
-
 		} catch (IOException e) {
-
 			FacesContext.getCurrentInstance().addMessage(
-
 					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-
 		}
-
 		createReq();
-		
-		  if(admEmail.getActiveadmEmailListString().contains("@")) {
-
-	        	String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
-
-	        	this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
-
-	        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
-
-	        }
-
+		if (admEmail.getActiveadmEmailListString().contains("@")) {
+			String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
+			this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Informação", "Email enviado para " + admEmail.getActiveadmEmailListString()));
+		}
 	}
-
-
-
-
 
 	public void sendMail(String mail, String body) {
-
 		email.SSl(mail, body);
+	}
+
+	public void uploadAubay(Request request) {
+		try {
+			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
+			File folder = new File(dir);
+			folder.mkdirs();
+			File file = new File(dir, cvAubay.getFileName());
+			OutputStream out = new FileOutputStream(file);
+			out.write(cvAubay.getContents());
+			out.close();
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage("Upload completo",
+							"O arquivo " + cvAubay.getFileName() + " foi guardado em " + file.getAbsolutePath()));
+			request.setCvAubayPath(file.getAbsolutePath());
+		} catch (IOException e) {
+			FacesContext.getCurrentInstance().addMessage(
+					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+		}
+		request.setEstado(Status.PREAPROVADO);
+		cr.updateReq(request);
+		loadRequests();
+		System.out.println(admEmail.getActiveadmEmailListString());
+		if (admEmail.getActiveadmEmailListString().contains("@")) {
+			String bodyMail = "O recrutador " + request.getRecruiter().getName() + " adicionou o CV aubay ao pedido do candidato " + request.getCandidateName();
+			this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
+		}
 
 	}
 
-	
-
-    
-
-
-
-    public void uploadAubay(Request request) {
-
-        try {
-
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
-
-            File folder = new File(dir);
-
-            folder.mkdirs();
-
-
-
-            File file = new File(dir, cvAubay.getFileName());
-
-
-
-            OutputStream out = new FileOutputStream(file);
-
-            out.write(cvAubay.getContents());
-
-            out.close();
-
-            
-
-            FacesContext.getCurrentInstance().addMessage(
-
-                    null, new FacesMessage("Upload completo",
-
-                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-
-            request.setCvAubayPath(file.getAbsolutePath());
-
-
-
-        } catch (IOException e) {
-
-            FacesContext.getCurrentInstance().addMessage(
-
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-
-        }
-
-        request.setEstado(Status.PREAPROVADO);
-
-        cr.updateReq(request);
-
-        loadRequests();
-
-        System.out.println(admEmail.getActiveadmEmailListString());
-
-        
-
-        if(admEmail.getActiveadmEmailListString().contains("@")) {
-
-        	String bodyMail = "O recrutador " + request.getRecruiter().getName() + " adicionou o Cv aubay ao candidato " + request.getCandidateName();
-
-        	this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
-
-        	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
-
-        }
-
-        
-
-      
-
-    }
-
-    
-
-    
-
-    public void download(String filePath) throws IOException{
-
-       File file = new File(filePath);
-
-        Faces.sendFile(file, true);
-
-           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
-
-                    filePath);
-
-            return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
-
-    }
-
+	public void download(String filePath) throws IOException {
+		try {
+			File file = new File(filePath);
+			Faces.sendFile(file, true);
+		} catch (IOException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Nenhum ficheiro encontrado"));
+		}
+	}
 }
