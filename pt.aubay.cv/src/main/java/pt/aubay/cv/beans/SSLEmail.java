@@ -37,9 +37,11 @@ public class SSLEmail {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream("application.properties");
 			props.load(in);
 			in.close();
+			System.out.println("Load Propreties");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 //		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
 //		props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
