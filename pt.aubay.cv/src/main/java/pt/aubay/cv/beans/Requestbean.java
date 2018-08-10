@@ -227,6 +227,7 @@ public class Requestbean implements Serializable {
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
 			File folder = new File(dir);
 			folder.mkdirs();
+			System.out.println(cvOrig.getFileName());
 			File file = new File(dir, cvOrig.getFileName());
 			OutputStream out = new FileOutputStream(file);
 			out.write(cvOrig.getContents());
