@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.Status;
 import pt.aubay.cv.repositories.RequestRepository;
 
 @Transactional

@@ -1,6 +1,7 @@
 package pt.aubay.cv.models;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

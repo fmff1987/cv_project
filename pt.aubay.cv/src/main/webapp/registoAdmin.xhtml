@@ -12,7 +12,39 @@
     <ui:define name="pageTitle">
         Criar Administrador
     </ui:define>
+<ui:define name="subheader">
+		<div class="subheader">
+			<div>
+			<h:form>
+				<p:menubar>
+					<p:submenu label="Manager">
+						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
+							url="createManager.xhtml" />
+					</p:submenu>
 
+					<p:submenu label="Recrutador">
+						<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
+							url="createRecruiter.xhtml" />
+					</p:submenu>
+					<p:submenu label="Administrador">
+						<p:menuitem value="Criar Administrador" icon="ui-icon-disk"
+							url="registoAdmin.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Pedidos" >
+						<p:menuitem value="Criar Pedidos" icon="ui-icon-disk"
+							url="admCreateRequest.xhtml" />
+					</p:submenu>
+					
+					<p:menuitem value="Logout" icon="fa fa-sign-out"  action="#{login.logout}" style="position: absolute; right: 6px;"/>
+						
+				</p:menubar>
+				</h:form>
+				
+			</div>
+
+		</div>
+	</ui:define>
 
     <ui:define name="pageContent">
 

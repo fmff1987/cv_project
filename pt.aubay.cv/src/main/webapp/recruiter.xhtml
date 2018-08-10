@@ -74,8 +74,10 @@
 				</p:column>
 
 				<p:column headerText="Email" filterBy="#{doingReq.candidateEmail}"
-					filterMatchMode="contains" style="width:250px">
-					<h:outputText value="#{doingReq.candidateEmail}" />
+					filterMatchMode="contains" style="width:140px">
+					<h:outputText id="emailRecuiterlist" value="#{doingReq.candidateEmail}" />
+					<p:tooltip for="emailRecuiterlist" value="#{doingReq.candidateEmail}"
+										position="bottom" />
 				</p:column>
 
 				<p:column headerText="Data Limite" sortBy="#{doingReq.deadline}"
@@ -89,18 +91,15 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="CV Original" style="width:140px">
-					<p:commandButton value="Download" ajax="false"
+				<p:column headerText="CV" style="width:100px">
+					<p:commandButton ajax="false"
 						actionListener="#{ReqBean.download(doingReq.cvOrigPath)}"
-						icon="ui-icon-arrowthick-1-s">
+						icon="fa fa-cloud-download">
+						
 					</p:commandButton>
-				</p:column>
-
-				<p:column headerText="CV Aubay" style="width:117px">
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
-						skinSimple="true" label="Anexar" />
+						skinSimple="true" label="" />
 				</p:column>
-
 				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
 					<h:outputText value="#{doingReq.estado.label}" />
 				</p:column>

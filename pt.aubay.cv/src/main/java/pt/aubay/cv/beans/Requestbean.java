@@ -3,7 +3,6 @@ package pt.aubay.cv.beans;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -12,24 +11,18 @@ import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.event.RowEditEvent;
-
-
-import org.primefaces.model.StreamedContent;
-
-import org.primefaces.model.UploadedFile;
-
 import org.omnifaces.util.Faces;
+import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
-import pt.aubay.cv.models.SSLEmail;
 import pt.aubay.cv.models.Status;
 
 
@@ -62,6 +55,9 @@ public class Requestbean implements Serializable {
 	
 	@Inject
 	private AdminEmailBean admEmail;
+	
+	@Inject
+	private SSLEmail mailService;
 
 	public AdminEmailBean getAdmEmail() {
 		return admEmail;
@@ -251,7 +247,8 @@ public class Requestbean implements Serializable {
 
 
 	public void sendMail(String mail, String body) {
-		SSLEmail.SSl(mail, body);
+		mailService.SSl(mail, body);
+		
 	}
 	
     

@@ -13,7 +13,6 @@ import org.primefaces.event.RowEditEvent;
 
 import pt.aubay.cv.control.ControllerAdmin;
 import pt.aubay.cv.models.Admin;
-import pt.aubay.cv.models.Manager;
 
 @RequestScoped
 @Named("AdmBean")

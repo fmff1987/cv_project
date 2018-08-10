@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -17,10 +16,9 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
-import org.primefaces.PrimeFaces;
 
 import pt.aubay.cv.beans.AdminEmailBean;
-import pt.aubay.cv.models.SSLEmail;
+import pt.aubay.cv.beans.SSLEmail;
 
 
 
@@ -29,6 +27,7 @@ import pt.aubay.cv.models.SSLEmail;
 public class Login implements Serializable{
  @Inject
  AdminEmailBean admMails;
+ @Inject SSLEmail mailService;
     /**
 	 * 
 	 */
@@ -106,7 +105,7 @@ public class Login implements Serializable{
     	System.out.println(admMails.getActiveadmEmailListString());
     	String bodyMailpassAdmin = "Username = admin \nPalavra passe = adminaubay ";
     	String bodyMailpassRecruiter = "Username = recruiter \nPalavra passe = recaubay";
-    	SSLEmail.SSl(admMails.getActiveadmEmailListString(), bodyMailpassAdmin +"\n\n" +bodyMailpassRecruiter);
+    	mailService.SSl(admMails.getActiveadmEmailListString(), bodyMailpassAdmin +"\n\n" +bodyMailpassRecruiter);
     	FacesContext.getCurrentInstance().addMessage(
 					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Email enviado para "+ admMails.getActiveadmEmailListString()));
     }

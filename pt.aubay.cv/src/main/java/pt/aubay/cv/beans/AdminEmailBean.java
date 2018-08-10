@@ -7,8 +7,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.util.Components.ForEach;
-
 import pt.aubay.cv.control.ControllerAdmin;
 
 @RequestScoped
