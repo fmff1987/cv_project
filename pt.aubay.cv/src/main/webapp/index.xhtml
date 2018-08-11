@@ -13,10 +13,6 @@
         AubilousPlus
     </ui:define>
 
-	<ui:define name="body">
-		<h:body class="body"></h:body>
-	</ui:define>
-
 	<ui:define name="header">
 		<div class="logoaubay">
 			<img id="logo" src="resources/images/logoaubay.png" alt="Aubay" />
@@ -66,16 +62,14 @@
 
 							<h:outputLabel for="username" value="Username:">
 							</h:outputLabel>
-							<h:inputText id="username" value="#{login.username}"
-								required="true">
+							<h:inputText id="username" value="#{login.username}">
 								<f:ajax event="blur" render="m_username" />
 							</h:inputText>
 
 							<h:outputLabel for="password" value="Password:">
 
 							</h:outputLabel>
-							<h:inputSecret id="password" value="#{login.password}"
-								required="true">
+							<h:inputSecret id="password" value="#{login.password}">
 								<f:ajax event="blur" render="m_password" />
 							</h:inputSecret>
 
@@ -103,8 +97,7 @@
 								<h:message id="m_username" for="username"
 									styleClass="loginMessage" />
 							</h:outputLabel>
-							<h:inputText id="username" value="#{login.username}"
-								required="true">
+							<h:inputText id="username" value="#{login.username}">
 								<f:ajax event="blur" render="m_username" />
 							</h:inputText>
 
@@ -112,8 +105,7 @@
 								<h:message id="m_password" for="password"
 									styleClass="loginMessage" />
 							</h:outputLabel>
-							<h:inputSecret id="password" value="#{login.password}"
-								required="true">
+							<h:inputSecret id="password" value="#{login.password}">
 								<f:ajax event="blur" render="m_password" />
 							</h:inputSecret>
 

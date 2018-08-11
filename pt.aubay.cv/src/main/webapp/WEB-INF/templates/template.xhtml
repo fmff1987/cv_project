@@ -9,7 +9,7 @@
 
 	<h:head>
 		<title><ui:insert name="pageTitle"></ui:insert></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="charset=UTF-8" />
 		<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
 		<link rel="icon" type="image/x-icon" href="resources/images/logoaubayplus.png"/>
 			<script type="text/javascript">
@@ -48,15 +48,15 @@
         </a>
     </div> 
 	
-	<ui:insert name="body"></ui:insert>
-
-	<ui:insert name="subheader"></ui:insert>
-			
-	<ui:insert name="pageContent"></ui:insert>
-
-	<div class="footer">
-            <h5 class="footertitle">Aubilous Plus</h5>
-	</div>
+    <h:body class="bodygeral">
 	
+		<ui:insert name="subheader"></ui:insert>
+				
+		<ui:insert name="pageContent"></ui:insert>
+	
+		<div class="footer">
+	            <h5 class="footertitle">Aubilous Plus</h5>
+		</div>
+	</h:body>
 </html>
 	

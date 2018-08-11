@@ -256,3 +256,7 @@ form {
 .footertitle {
 	margin: 5px;
 }
+
+.column{
+    text-align: center;
+}

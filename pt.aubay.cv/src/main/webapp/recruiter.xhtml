@@ -24,10 +24,6 @@
 		</div>
 	</ui:define>
 
-	<ui:define name="body">
-		<h:body class="bodygeral"></h:body>
-	</ui:define>
-
 	<ui:define name="pageContent">
 
 		<h3 class="subtitles">Recrutador</h3>
@@ -48,7 +44,7 @@
                     Lista de pedidos
                 </f:facet>
 
-				<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
+                            <p:ajax event="rowEdit" listener="#{ReqBean.onRowEditRec}"
 					update=":form3:msgs" />
 				<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
 					update=":form3:msgs" />
@@ -83,14 +79,14 @@
 					</h:outputText>
 				</p:column>
 
-				<p:column headerText="CV Original">
-					<p:commandButton value="Download" ajax="false"
+				<p:column headerText="CV Original" style="width:100px" class="column">
+					<p:commandButton title="Download" ajax="false"
 						actionListener="#{ReqBean.download(doingReq.cvOrigPath)}"
 						icon="fa fa-cloud-download">
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="CV Aubay">
+				<p:column headerText="CV Aubay" style="width:110px" class="column">
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="Anexar" />
 				</p:column>
