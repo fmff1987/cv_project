@@ -24,64 +24,59 @@ public class SSLEmail implements Serializable {
 
 
 
-    @Inject
+	@Inject
+	private Application appConfig;
 
-    private Application appConfig;
+	private static final long serialVersionUID = 1L;
 
+	public void SSl(String toEmail, String emailBody) {
 
+		final String fromEmail = "pt.aubay@gmail.com";
+		final String password = "aubay123";
 
-    private static final long serialVersionUID = 1L;
+		Properties props = appConfig.getMailConfig();
+		new Properties();
 
+		System.out.println("SSLEmail Start");
 
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 
-    public void SSl(String toEmail, String emailBody) {
+			protected PasswordAuthentication getPasswordAuthentication() {
 
-        final String fromEmail = "pt.aubay@gmail.com";
-        final String password = "aubay123";
+				return new PasswordAuthentication(fromEmail, password);
 
-        Properties props = appConfig.getMailConfig();
-        new Properties();
+			}
 
-        System.out.println("SSLEmail Start");
+		});
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		System.out.println("Session created");
 
-            protected PasswordAuthentication getPasswordAuthentication() {
+		new Thread(() -> {
 
-                return new PasswordAuthentication(fromEmail, password);
+			try {
 
-            }
+				Message message = new MimeMessage(session);
 
-        });
+				message.setFrom(new InternetAddress(fromEmail, "Gestor de Currículos"));
 
-        System.out.println("Session created");
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
 
-        new Thread(() -> {
+				message.setSubject("Plataforma de Gestão de currículos");
 
-            try {
+				message.setText(emailBody);
 
-                Message message = new MimeMessage(session);
+				Transport.send(message);
 
-                message.setFrom(new InternetAddress(fromEmail, "Gestor de Curriculos"));
+				System.out.println("Email Sent Successfully!!");
 
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+			}  catch (Exception e) {
 
-                message.setSubject("Plataforma de Gestao de curriculos");
+				e.printStackTrace();
 
-                message.setText(emailBody);
+			}
 
-                Transport.send(message);
+		}
 
-                System.out.println("EMail Sent Successfully!!");
-
-            }  catch (Exception e) {
-
-	      e.printStackTrace();
-
-	    }
-
-        }
-
-        ).start();
-    }
+				).start();
+	}
 }

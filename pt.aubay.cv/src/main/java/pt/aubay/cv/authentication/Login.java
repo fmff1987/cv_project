@@ -4,7 +4,6 @@ import javax.faces.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -24,18 +23,22 @@ import pt.aubay.cv.models.SSLEmail;
 @ViewScoped
 public class Login implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     public static final String HOME_URL = "index.xhtml";
     public static final String ADM_URL = "adm.xhtml";
     public static final String REC_URL = "recruiter.xhtml";
-        
+
     @Inject
     private SSLEmail email;
-    
+
     @Inject
     AdminEmailBean admMails;
 
     private String username, password;
-    
+
     public String getUsername() {
         return username;
     }
@@ -58,11 +61,13 @@ public class Login implements Serializable {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
 
             PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
 
             if (SecurityUtils.getSubject().hasRole("adm")) {
                 Faces.redirect(ADM_URL);
+            } else if (SecurityUtils.getSubject().hasRole("user")) {
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
             }
         } catch (AuthenticationException e) {
 
@@ -81,11 +86,13 @@ public class Login implements Serializable {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
 
             PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, ":)", "Login efectuado com sucesso!");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
 
             if (SecurityUtils.getSubject().hasRole("user")) {
                 Faces.redirect(REC_URL);
+            }else if (SecurityUtils.getSubject().hasRole("adm")) {
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Inválidas");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+                PrimeFaces.current().ajax().addCallbackParam("loggedIn", false);
             }
         } catch (AuthenticationException e) {
 
@@ -113,6 +120,5 @@ public class Login implements Serializable {
         FacesContext.getCurrentInstance().addMessage(
                 null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Email enviado para " + admMails.getActiveadmEmailListString()));
     }
-
 
 }

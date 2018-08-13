@@ -13,11 +13,12 @@
         Página Administrador
     </ui:define>
 
+
     <ui:define name="subheader">
         <div class="subheader">
             <div>
-                <h:form>
-                    <p:menubar>
+                <h:form id="form2">
+                    <p:menubar style="border-style:none;">
                         <p:submenu label="Manager">
                             <p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
                                         url="createManager.xhtml" />
@@ -28,16 +29,17 @@
                                         url="createRecruiter.xhtml" />
                         </p:submenu>
                         <p:submenu label="Administrador">
-                            <p:menuitem value="Criar Administrador" icon="ui-icon-disk"
+                            <p:menuitem value="Criar / Editar" icon="ui-icon-disk"
                                         url="registoAdmin.xhtml" />
                         </p:submenu>
 
-                        <p:submenu label="Pedidos" >
+                        <p:submenu label="Pedidos">
                             <p:menuitem value="Criar Pedidos" icon="ui-icon-disk"
                                         url="admCreateRequest.xhtml" />
                         </p:submenu>
 
-                        <p:menuitem value="Logout" icon="fa fa-sign-out"  action="#{login.logout}" style="position: absolute; right: 6px;"/>
+                        <p:menuitem value="Logout" icon="fa fa-sign-out"
+                                    action="#{login.logout}" style="position: absolute; right: 6px;" />
 
                     </p:menubar>
                 </h:form>
@@ -52,7 +54,8 @@
         <br></br>
         <h3 class="subtitles">Administrador</h3>
 
-        <h:form id="form" onkeypress="if (event.keyCode == 13)
+        <h:form id="form"
+                onkeypress="if (event.keyCode == 13)
                             return false;">
 
             <p:growl id="msgs" showDetail="true" />
@@ -90,7 +93,7 @@
                                 <f:facet name="input">
                                     <h:selectOneMenu value="#{req.recruiter}"
                                                      converter="omnifaces.SelectItemsConverter" style="width:100%">
-                                        <f:selectItem itemLabel="Sem Recruta" itemValue="#{null}" />
+                                        <f:selectItem itemLabel="Sem Recrutador" itemValue="#{null}" />
                                         <f:selectItems value="#{RecBean.activeRecruiterList}"
                                                        var="recrutas" itemLabel="#{recrutas.name}"
                                                        itemValue="#{recrutas}" />
@@ -128,21 +131,22 @@
                                   style="width:150px">
 
                             <p:cellEditor>
-                                <f:facet name="output" >
+                                <f:facet name="output">
                                     <h:outputText value="#{req.deadline}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:00"   locale="pt" timeZone="Europe/Lisbon"/>
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:00" locale="pt"
+                                                           timeZone="Europe/Lisbon" />
                                     </h:outputText>
                                 </f:facet>
                                 <f:facet name="input">
                                     <p:calendar locale="pt" styleClass="right"
                                                 value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
-                                                maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" 
-                                                stepHour="1" timeZone="Europe/Lisbon"/>
+                                                maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00"
+                                                stepHour="1" timeZone="Europe/Lisbon" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="CV Original" style="width:100px" >
+                        <p:column headerText="CV Original" style="width:100px" class="column">
                             <p:commandButton ajax="false" value="Download"
                                              actionListener="#{ReqBean.download(req.cvOrigPath)}"
                                              icon="fa fa-cloud-download" style="float:absolute;">
@@ -155,6 +159,9 @@
 
                     </p:dataTable>
                 </p:tab>
+
+
+
 
                 <p:tab title="Em Tratamento">
                     <p:dataTable id="OngoingList" var="req" widgetVar="ongoingList"
@@ -209,10 +216,11 @@
                         <p:column headerText="Email" filterBy="#{req.candidateEmail}">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText value="#{req.candidateEmail}" />
+                                    <h:outputText id="emailOngoing" value="#{req.candidateEmail}" />
+                                    <p:tooltip for="emailOngoing" value="#{req.candidateEmail}" position="bottom" />                                                                           
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputText id="email" value="#{req.candidateEmail}" />
+                                    <p:inputText  value="#{req.candidateEmail}" />
                                 </f:facet>
                             </p:cellEditor>
                         </p:column>
@@ -220,12 +228,14 @@
                         <p:column headerText="Data Limite" sortBy="#{req.deadline}">
                             <f:facet name="filter">
                                 <p:outputLabel for="datetime" />
-                                <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" timeZone="Europe/Lisbon"/>
+                                <p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt"
+                                            timeZone="Europe/Lisbon" />
                             </f:facet>
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{req.deadline}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy HH:00" timeZone="Europe/Lisbon"/>
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:00"
+                                                           timeZone="Europe/Lisbon" />
                                     </h:outputText>
                                 </f:facet>
                                 <f:facet name="input">
@@ -238,17 +248,17 @@
                             <h:outputText value="" />
                         </p:column>
 
-                        <p:column headerText="CV Original" style="width:140px">
-                            <p:commandButton value="Download" ajax="false"
+                        <p:column headerText="CV Original" style="width:100px" class="column">
+                            <p:commandButton title="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvOrigPath)}"
                                              icon="fa fa-cloud-download">
                             </p:commandButton>
                         </p:column>
 
-                        <p:column headerText="CV Aubay" style="width:140px">
-                            <p:commandButton value="Download" ajax="false"
+                        <p:column headerText="CV Aubay" style="width:90px" class="column">
+                            <p:commandButton title="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvAubayPath)}"
-                                             icon="fa fa-cloud-upload">
+                                             icon="fa fa-cloud-download" >
                             </p:commandButton>
                         </p:column>
 
@@ -260,7 +270,8 @@
                                 <f:facet name="input">
                                     <p:selectOneRadio value="#{req.estado}" layout="responsive"
                                                       columns="1">
-                                        <f:selectItem itemLabel="Aguardar Aprovacao" itemValue="PREAPROVADO"/>
+                                        <f:selectItem itemLabel="Aguardar Aprovacao"
+                                                      itemValue="PREAPROVADO" />
                                         <f:selectItem itemLabel="Aprovado" itemValue="APROVADO" />
                                         <f:selectItem itemLabel="Reprovado" itemValue="REPROVADO" />
                                     </p:selectOneRadio>
@@ -268,14 +279,15 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Comentario">
+                        <p:column headerText="Comentário">
                             <p:cellEditor>
                                 <f:facet name="output">
-                                    <h:outputText id="track" value="#{req.comment}" style="height:40px;" />
-                                    <p:tooltip for="track"  value="#{req.comment}" position="bottom"/>
+                                    <h:outputText id="track" value="#{req.comment}"
+                                                  style="height:40px;" />
+                                    <p:tooltip for="track" value="#{req.comment}" position="bottom" />
                                 </f:facet>
                                 <f:facet name="input">
-                                    <p:inputTextarea value="#{req.comment}" cols="16"
+                                    <p:inputTextarea value="#{req.comment}" cols="12"
                                                      autoResize="false" />
                                 </f:facet>
                             </p:cellEditor>
@@ -287,7 +299,9 @@
                     </p:dataTable>
                 </p:tab>
 
-                <p:tab title="Concluidos">
+
+
+                <p:tab title="Concluídos">
                     <p:dataTable id="AprovedList" var="req" widgetVar="aprovedList"
                                  value="#{ReqBean.requestListAprovado}" editable="true"
                                  style="margin-bottom:20px" rows="10" paginator="true"
@@ -351,17 +365,18 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="CV Aubay" style="width:140px">
+                        <p:column headerText="CV Aubay" style="width:140px" class="column">
                             <p:commandButton value="Download" ajax="false"
                                              actionListener="#{ReqBean.download(req.cvAubayPath)}"
                                              icon="fa fa-cloud-upload">
                             </p:commandButton>
                         </p:column>
 
-                        <p:column style="width:35px">
-                            <p:commandButton icon="fa fa-trash-o" title="Delete this actor"
+                        <p:column style="width:35px" class="column">
+                            <p:commandButton icon="fa fa-trash-o" title="Remover"
                                              action="#{ReqBean.removeReq(req)}"
-                                             update=":form:msgs  :form:tab:AprovedList" style="background-color:LightSalmon;"/>
+                                             update=":form:msgs  :form:tab:AprovedList"
+                                             style="background-color:LightSalmon;" />
                         </p:column>
 
                     </p:dataTable>
@@ -371,6 +386,5 @@
         </h:form>
 
     </ui:define>
-
 
 </ui:composition>

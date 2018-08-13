@@ -8,31 +8,31 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class Application {
 
-    private Properties mailConfig;
+	private Properties mailConfig;
 
-    public Properties getMailConfig() {
+	public Properties getMailConfig() {
 
-        if (mailConfig == null) {
+		if (mailConfig == null) {
 
-            final InputStream stream = Application.class.getResourceAsStream("/application.properties");
+			final InputStream stream = Application.class.getResourceAsStream("/application.properties");
 
-            if (stream == null) {
+			if (stream == null) {
 
-                throw new RuntimeException("No properties!");
-            }
+				throw new RuntimeException("No properties!");
+			}
 
-            try {
+			try {
 
-                this.mailConfig = new Properties();
+				this.mailConfig = new Properties();
 
-                this.mailConfig.load(stream);
+				this.mailConfig.load(stream);
 
-            } catch (final IOException e) {
+			} catch (final IOException e) {
 
-                throw new RuntimeException("Configuration could not be loaded");
+				throw new RuntimeException("Configuration could not be loaded");
 
-            }
-        }
-        return mailConfig;
-    }
+			}
+		}
+		return mailConfig;
+	}
 }

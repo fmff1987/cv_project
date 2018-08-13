@@ -63,7 +63,7 @@ public class Recruiterbean {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		FacesMessage msg = new FacesMessage("Recruta Editado", ((Recruiter) event.getObject()).getName());
+		FacesMessage msg = new FacesMessage("Recrutador Editado", ((Recruiter) event.getObject()).getName());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		Recruiter recruta = (Recruiter) event.getObject();
 		cr.updateRec(recruta);

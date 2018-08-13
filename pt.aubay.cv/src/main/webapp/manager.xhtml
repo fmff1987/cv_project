@@ -12,11 +12,6 @@
 	<ui:define name="pageTitle">
         Página Manager
     </ui:define>
-
-	<ui:define name="body">
-		<h:body class="bodygeral"></h:body>
-	</ui:define>
-
 	<ui:define name="pageContent">
 
 		<h3 class="subtitles">Criar Pedidos</h3>
@@ -28,42 +23,42 @@
 			<h:panelGrid columns="2" cellpadding="5">
 
 				<p:outputLabel value="Nome do Manager:" for="name_m" />
-				<p:selectOneMenu id="name_m" value="#{CreateRequestManager.request.manager}"
+				<p:selectOneMenu id="name_m" value="#{ReqBean.request.manager}"
 					effect="fold" converter="omnifaces.SelectItemsConverter"
 					style="width:250px" var="manager" filter="true"
-					filterMatchMode="contains">
+					filterMatchMode="contains" required="true">
 					<f:selectItem itemLabel="Selecione uma opção:" />
 					<f:selectItems value="#{ManBean.activeManagerList}" var="m"
-						itemLabel="#{m.name}" itemValue="#{m}" />					
+						itemLabel="#{m.name}" itemValue="#{m}" />
 					<p:column>
 						<h:outputText value="#{manager.name}" />
 					</p:column>
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Nome do Candidato:" for="name_c" />
-				<p:inputText id="name_c" value="#{CreateRequestManager.request.candidateName}"
-					style="width:280px;"></p:inputText>
+				<p:inputText id="name_c" value="#{ReqBean.request.candidateName}"
+					style="width:280px;" required="true"></p:inputText>
 
-				<p:outputLabel value="E-mail do Candidato:" for="email_c" />
-				<p:inputText id="email_c" value="#{CreateRequestManager.request.candidateEmail}"
+				<p:outputLabel value="Email do Candidato:" for="email_c" />
+				<p:inputText id="email_c" value="#{ReqBean.request.candidateEmail}"
 					style="width:280px;"></p:inputText>
 
 				<p:outputLabel for="datetime" value="Data Limite / Hora:" />
-				<p:calendar id="datetime" value="#{CreateRequestManager.request.deadline}"
+				<p:calendar id="datetime" value="#{ReqBean.request.deadline}"
 					locale="pt" styleClass="right" mode="popup"
 					maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" stepHour="1"
 					stepMinute="30" style="width:280px;" />
 
-				<p:outputLabel value="Curriculo: " />
-				<p:fileUpload value="#{CreateRequestManager.cvOrig}" mode="simple"
+				<p:outputLabel value="Currículo: " />
+				<p:fileUpload value="#{ReqBean.cvOrig}" mode="simple"
 					skinSimple="true" label="Anexar"
 					allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
 					invalidFileMessage="Formato de Ficheiro inválido" />
 
 			</h:panelGrid>
 
-			<p:commandButton value="Submeter Pedido"
-				action="#{CreateRequestManager.uploadOrig()}" ajax="false" update="msg" />
+			<p:commandButton value="Submeter Pedido"  icon="ui-icon-check"
+				action="#{ReqBean.uploadOrig()}" ajax="false" update="msg" />
 
 			<br></br>
 			<br></br>
@@ -80,7 +75,7 @@
 				rowsPerPageTemplate="5,10,15">
 
 				<f:facet name="header">
-                    Lista de pedidos Aprovados
+                    Pedidos Concluídos
                 </f:facet>
 
 				<p:column headerText="Manager"
@@ -105,7 +100,7 @@
 					<h:outputText value="#{finishedList.candidateEmail}" />
 				</p:column>
 
-				<p:column headerText="Cv Aubay">
+				<p:column headerText="Cv Aubay" class="column">
 					<p:commandButton value="Download" ajax="false"
 						actionListener="#{ReqBean.download(finishedList.cvAubayPath)}"
 						icon="fa fa-cloud-download">
