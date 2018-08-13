@@ -29,107 +29,91 @@ import pt.aubay.cv.models.Status;
 @RequestScoped
 public class ManagerCreateRequestBean {
 
-	private Request request = new Request();
-	private UploadedFile cvOrig;
-	private List<Request> requestListAprovado;
+    private Request request = new Request();
+    private UploadedFile cvOrig;
+    private List<Request> requestListAprovado;
 
-	public List<Request> getRequestListAprovado() {
-		return requestListAprovado;
-	}
+    @Inject
+    ControllerRequest cr;
 
-	@Inject
-	ControllerRequest cr;
+    @Inject
+    private AdminEmailBean admEmail;
 
-	@Inject
-	ControllerRequest cr;
-        
-        @Inject
-	private AdminEmailBean admEmail;
+    @Inject
+    private SSLEmail email;
 
-	@Inject
-	private SSLEmail email;
+    public List<Request> getRequestListAprovado() {
+        return requestListAprovado;
+    }
 
+    public UploadedFile getCvOrig() {
+        return cvOrig;
+    }
 
-        public List<Request> getRequestListAprovado() {
-		return requestListAprovado;
-	}
-        
-	public UploadedFile getCvOrig() {
-		return cvOrig;
-	}
+    public void setCvOrig(UploadedFile cvOrig) {
+        this.cvOrig = cvOrig;
+    }
 
-	public void setCvOrig(UploadedFile cvOrig) {
-		this.cvOrig = cvOrig;
-	}
+    public ControllerRequest getCr() {
+        return cr;
+    }
 
-	public ControllerRequest getCr() {
-		return cr;
-	}
+    public void setCr(ControllerRequest cr) {
+        this.cr = cr;
+    }
 
-	public void setCr(ControllerRequest cr) {
-		this.cr = cr;
-	}
+    public Request getRequest() {
+        return request;
+    }
 
-	public Request getRequest() {
-		return request;
-	}
+    public void setRequest(Request request) {
+        this.request = request;
+    }
 
-	public void setRequest(Request request) {
-		this.request = request;
-	}
+    @PostConstruct
+    public void loadRequests() {
+        requestListAprovado = cr.getReqAllAprovado();
+    }
 
-	@PostConstruct
-	public void loadRequests() {
-		requestListAprovado = cr.getReqAllAprovado();
-	}
+    public void uploadOrig() {
+        try {
+            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
+            File folder = new File(dir);
+            folder.mkdirs();
 
-	public void uploadOrig() {
-		try {
-			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-			File folder = new File(dir);
-			folder.mkdirs();
+            File file = new File(dir, cvOrig.getFileName());
 
-			File file = new File(dir, cvOrig.getFileName());
+            OutputStream out = new FileOutputStream(file);
+            out.write(cvOrig.getContents());
+            out.close();
 
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvOrig.getContents());
-			out.close();
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage("Upload completo",
+                            "O arquivo " + cvOrig.getFileName() + " foi guardado em " + file.getAbsolutePath()));
+            request.setCvOrigPath(file.getAbsolutePath());
 
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi guardado em " + file.getAbsolutePath()));
-			request.setCvOrigPath(file.getAbsolutePath());
+        } catch (IOException e) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+        }
+        createReq();
+        if (admEmail.getActiveadmEmailListString().contains("@")) {
+            String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
+            this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Informação", "Email enviado para " + admEmail.getActiveadmEmailListString()));
+        }
+    }
 
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-		}
-		createReq();
-                if (admEmail.getActiveadmEmailListString().contains("@")) {
-			String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
-			this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-					FacesMessage.SEVERITY_INFO, "Informação", "Email enviado para " + admEmail.getActiveadmEmailListString()));
-		}
-	}
+    public void createReq() {
+        request.setEstado(Status.INICIADO);
+        cr.createRequest(request);
 
-	public void createReq() {
-		request.setEstado(Status.INICIADO);
-		cr.createRequest(request);
+        FacesMessage msg = new FacesMessage("Pedido registado.");
+        FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
+    }
 
-		FacesMessage msg = new FacesMessage("Pedido registado.");
-		FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
-	}
-
-	public void download(String filePath) throws IOException {
-		try {
-			File file = new File(filePath);
-			Faces.sendFile(file, true);
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Nenhum ficheiro encontrado"));
-		}
-        
-        public void sendMail(String mail, String body) {
-		email.SSl(mail, body);
-	}
+    public void sendMail(String mail, String body) {
+        email.SSl(mail, body);
+    }
 }
