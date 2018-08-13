@@ -23,6 +23,7 @@ import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
+import pt.aubay.cv.models.SSLEmail;
 import pt.aubay.cv.models.Status;
 
 @Named("CreateRequestManager")
@@ -33,27 +34,18 @@ public class ManagerCreateRequestBean {
     private UploadedFile cvOrig;
     private List<Request> requestListAprovado;
 
-    public List<Request> getRequestListAprovado() {
-        return requestListAprovado;
-    }
+    @Inject
+    private AdminEmailBean admEmail;
+
+    @Inject
+    private SSLEmail email;
 
     @Inject
     ControllerRequest cr;
 
-    public UploadedFile getCvOrig() {
-        return cvOrig;
-    }
-
-    public void setCvOrig(UploadedFile cvOrig) {
-        this.cvOrig = cvOrig;
-    }
-
-    public ControllerRequest getCr() {
-        return cr;
-    }
-
-    public void setCr(ControllerRequest cr) {
-        this.cr = cr;
+    @PostConstruct
+    public void loadRequests() {
+        requestListAprovado = cr.getReqAllAprovado();
     }
 
     public Request getRequest() {
@@ -64,10 +56,44 @@ public class ManagerCreateRequestBean {
         this.request = request;
     }
 
-    @PostConstruct
-    public void loadRequests() {
+    public UploadedFile getCvOrig() {
+        return cvOrig;
+    }
 
-        requestListAprovado = cr.getReqAllAprovado();
+    public void setCvOrig(UploadedFile cvOrig) {
+        this.cvOrig = cvOrig;
+    }
+
+    public List<Request> getRequestListAprovado() {
+        return requestListAprovado;
+    }
+
+    public void setRequestListAprovado(List<Request> requestListAprovado) {
+        this.requestListAprovado = requestListAprovado;
+    }
+
+    public AdminEmailBean getAdmEmail() {
+        return admEmail;
+    }
+
+    public void setAdmEmail(AdminEmailBean admEmail) {
+        this.admEmail = admEmail;
+    }
+
+    public SSLEmail getEmail() {
+        return email;
+    }
+
+    public void setEmail(SSLEmail email) {
+        this.email = email;
+    }
+
+    public ControllerRequest getCr() {
+        return cr;
+    }
+
+    public void setCr(ControllerRequest cr) {
+        this.cr = cr;
     }
 
     public void uploadOrig() {
@@ -92,6 +118,16 @@ public class ManagerCreateRequestBean {
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
         }
         createReq();
+        if (admEmail.getActiveadmEmailListString().contains("@")) {
+            String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
+            this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_INFO, "Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
+        }
+    }
+
+    public void sendMail(String mail, String body) {
+        email.SSl(mail, body);
     }
 
     public void createReq() {
@@ -100,14 +136,5 @@ public class ManagerCreateRequestBean {
 
         FacesMessage msg = new FacesMessage("Pedido registrado.");
         FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
-    }
-
-    public void download(String filePath) throws IOException {
-        try {
-            File file = new File(filePath);
-            Faces.sendFile(file, true);
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Nenhum ficheiro encontrado"));
-        }
     }
 }

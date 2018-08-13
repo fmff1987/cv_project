@@ -40,7 +40,6 @@ public class Requestbean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Request request = new Request();
-    private UploadedFile cvOrig;
     private UploadedFile cvAubay;
     private StreamedContent downloadAubay;
     private List<Request> requestList;
@@ -56,6 +55,14 @@ public class Requestbean implements Serializable {
 
     @Inject
     private SSLEmail email;
+    
+    @PostConstruct
+    public void loadRequests() {
+        requestList = cr.getReq();
+        requestListAll = cr.getReqAll();
+        requestListAprovado = cr.getReqAllAprovado();
+        requestListNotAprovado = cr.getAllNotAprovado();
+    }
 
     public AdminEmailBean getAdmEmail() {
         return admEmail;
@@ -105,14 +112,6 @@ public class Requestbean implements Serializable {
         this.downloadAubay = downloadAubay;
     }
 
-    @PostConstruct
-    public void loadRequests() {
-        requestList = cr.getReq();
-        requestListAll = cr.getReqAll();
-        requestListAprovado = cr.getReqAllAprovado();
-        requestListNotAprovado = cr.getAllNotAprovado();
-    }
-
     public Request getRequest() {
         return request;
     }
@@ -121,13 +120,6 @@ public class Requestbean implements Serializable {
         this.request = request;
     }
 
-    public UploadedFile getCvOrig() {
-        return cvOrig;
-    }
-
-    public void setCvOrig(UploadedFile cvOrig) {
-        this.cvOrig = cvOrig;
-    }
 
     public ControllerRequest getCr() {
         return cr;
@@ -137,12 +129,6 @@ public class Requestbean implements Serializable {
         this.cr = cr;
     }
 
-    public void createReq() {
-        request.setEstado(Status.INICIADO);
-        cr.createRequest(request);
-        FacesMessage msg = new FacesMessage("Pedido registrado.");
-        FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
-    }
 
     public void removeReq(Request request) {
         cr.removeRequest(request);
@@ -211,33 +197,6 @@ public class Requestbean implements Serializable {
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void uploadOrig() {
-        try {
-            String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-            File folder = new File(dir);
-            folder.mkdirs();
-            File file = new File(dir, cvOrig.getFileName());
-            OutputStream out = new FileOutputStream(file);
-            out.write(cvOrig.getContents());
-            out.close();
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage("Upload completo",
-                            "O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-            request.setCvOrigPath(file.getAbsolutePath());
-
-        } catch (IOException e) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-        }
-        createReq();
-        if (admEmail.getActiveadmEmailListString().contains("@")) {
-            String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
-            this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                    FacesMessage.SEVERITY_INFO, "Informação", "Email foi enviado para " + admEmail.getActiveadmEmailListString()));
-        }
     }
 
     public void sendMail(String mail, String body) {
