@@ -151,6 +151,15 @@ form {
 	
 }
 
+.buttonhome{
+    transition: 0.5s;
+    text-shadow: 2px 2px 5px #434345;
+}
+.buttonhome:hover {
+	transform: scale(1.1);
+	
+}
+
 .ui-button-text-icon-left .ui-button-text {
 	color: #fff;
 	font-weight: 100;
@@ -259,4 +268,10 @@ form {
 
 .column{
     text-align: center;
+.insertpeople{
+    float: left;
+}
+
+.tableforcreatepeople{
+    overflow: hidden; 
 }

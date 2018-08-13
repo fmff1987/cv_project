@@ -18,11 +18,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.omnifaces.util.Faces;
 import org.primefaces.model.UploadedFile;
 
 import pt.aubay.cv.control.ControllerRequest;
 import pt.aubay.cv.models.Request;
+import pt.aubay.cv.models.SSLEmail;
 import pt.aubay.cv.models.Status;
 
 @Named("CreateRequestManager")
@@ -40,6 +40,20 @@ public class ManagerCreateRequestBean {
 	@Inject
 	ControllerRequest cr;
 
+	@Inject
+	ControllerRequest cr;
+        
+        @Inject
+	private AdminEmailBean admEmail;
+
+	@Inject
+	private SSLEmail email;
+
+
+        public List<Request> getRequestListAprovado() {
+		return requestListAprovado;
+	}
+        
 	public UploadedFile getCvOrig() {
 		return cvOrig;
 	}
@@ -91,6 +105,12 @@ public class ManagerCreateRequestBean {
 					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
 		}
 		createReq();
+                if (admEmail.getActiveadmEmailListString().contains("@")) {
+			String bodyMail = "O manager " + request.getManager().getName() + " criou um novo pedido com o candidato " + request.getCandidateName();
+			this.sendMail(admEmail.getActiveadmEmailListString(), bodyMail);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					FacesMessage.SEVERITY_INFO, "Informação", "Email enviado para " + admEmail.getActiveadmEmailListString()));
+		}
 	}
 
 	public void createReq() {
@@ -108,5 +128,8 @@ public class ManagerCreateRequestBean {
 		} catch (IOException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Nenhum ficheiro encontrado"));
 		}
+        
+        public void sendMail(String mail, String body) {
+		email.SSl(mail, body);
 	}
 }
