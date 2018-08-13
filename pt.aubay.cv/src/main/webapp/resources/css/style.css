@@ -157,6 +157,7 @@ form {
 }
 .buttonhome:hover {
 	transform: scale(1.1);
+	
 }
 
 .ui-button-text-icon-left .ui-button-text {
@@ -267,6 +268,8 @@ form {
 
 .column{
     text-align: center;
+}    
+    
 .insertpeople{
     float: left;
 }
