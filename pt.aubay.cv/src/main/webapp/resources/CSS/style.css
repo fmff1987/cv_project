@@ -2,16 +2,18 @@
 
 .body {
 	background-image: url(#{resource['images/abstractshapes.jpg']});
-	background-size: cover;
+	background-size: 100% 200%;
 }
 
 .bodygeral {
 	background-image: url(#{resource['images/abstractshapesbodytemplate.jpg']});
 	background-size: 100% 200%;
+	margin-bottom: 50px;
 }
 
 .logoaubay {
-	text-align: center;
+	text-align:center;
+	
 }
 
 #logo {
@@ -23,17 +25,22 @@
 }	
 
 .title {
-	margin-top: 100px;
+	margin-top: 30px;
 	text-shadow: 2px 2px 5px #434345;
-	color: #fff;
-	font-weight: 500;
-	font-size: 70px;
+	color: #ffffff;
+	font-weight: 650;
+	font-size: 75px;
 	text-align: center;
 	position:relative;
 }
 
+.firstWord {
+	color: #ff7b64;
+	font-weight: 745;
+}
+
 .container {
-	margin-top: 80px;
+	margin-top: 120px;
 	vertical-align: middle;
 	align-content: center;
 }
@@ -51,7 +58,7 @@
 .buttontext {
 	text-shadow: 2px 2px 5px #434345;
 	color: #fff;
-	font-weight: 300;
+	font-weight: 500;
 	font-size: 42px;
 	text-align: center;
 	vertical-align: middle;
@@ -121,8 +128,12 @@ form {
 	padding-right: 30px;
 }
 
+.ui-menubar {
+	height: 36px;
+}	
 .ui-tabs {
-	background: white;
+	background: none;
+	font-size: 16px;
 } 
 
 .ui-button {
@@ -153,6 +164,13 @@ form {
 	background: #fdb883;
 }
 
+.ui-button-text-only .ui-button-text {
+	color: #fff;
+	font-weight: 100;
+	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;
+}	
 .ui-tabs-header ui-state-default ui-corner-top ui-tabs-selected ui-state-active {
 	background: #fff;
 }
@@ -166,7 +184,7 @@ form {
 }
 
 .ui-tabs .ui-tabs-nav {
-	background: #ffffff;
+	background: none;
 }
 
 .ui-datatable thead th, .ui-datatable tfoot td {
@@ -178,7 +196,7 @@ form {
 	text-shadow: 1px 1px 5px #434345;
 }
 
-.ui-datatable-resizable th.ui-resizable-column {
+.ui-widget-content .ui-datatable th {
 	background: linear-gradient(#fdba83, #fe9483, #eb6653);
 	font-size: 20px;	
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
@@ -186,6 +204,7 @@ form {
 	color: #fff;
 	text-shadow: 1px 1px 5px #434345;
 }
+
 
 .ui-datatable-header{
 	font-size: 25px;	
@@ -216,9 +235,18 @@ form {
 	width: 135px;
 }
 
+.ui-draggable .ui-dialog-titlebar {
+	background: #fff;	
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+	color: #fff;
+	text-shadow: 2px 2px 5px #434345;
+	background: #fdb883;	
+}	
 .footer {
 	font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-	position: absolute;
+	position: fixed;
   	right: 0;
   	bottom: 0;
   	left: 0;
@@ -228,4 +256,25 @@ form {
 
 .footertitle {
 	margin: 5px;
+}
+
+.column{
+    text-align: center;
+}
+.ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options{
+	background: white;
+}
+.ui-paginator .ui-paginator-page{
+	background: white;
+}
+.insertPeople{
+	float: left;
+}
+.tableForCreatePeople{
+	float: center;
+	overflow: hidden;
+}
+.ui-inputfield{
+	width: 280px;
+
 }

@@ -27,7 +27,7 @@
 								url="createRecruiter.xhtml" />
 						</p:submenu>
 						<p:submenu label="Administrador">
-							<p:menuitem value="Criar Administrador" icon="ui-icon-disk"
+							<p:menuitem value="Criar / Editar" icon="ui-icon-disk"
 								url="registoAdmin.xhtml" />
 						</p:submenu>
 
@@ -55,13 +55,10 @@
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
-				<p:layoutUnit position="west" resizable="true" size="300"
-					minSize="40" maxSize="400" style="border-style:none;">
-
-					<p:outputLabel value="Nome: " for="name_r" />
+			<div class="insertPeople" >
+							<p:outputLabel value="Nome: " for="name_r" />
 					<h:inputText id="name_r" value="#{RecBean.recruiter.name}"
-						style="width:200px;"></h:inputText>
+						style="width:200px;" required="true"></h:inputText>
 					<br> </br>
 
 					<p:outputLabel value="E-mail: " for="email_r" />
@@ -70,13 +67,14 @@
 					<br> </br>
 
 					<p:commandButton value="Criar" action="#{RecBean.createRec()}"
-						icon="ui-icon-check" update=":form:recruiterTable" />
-					<p:commandButton icon="ui-icon-home" value="Voltar"
-						action="adm?faces-redirect=true" />
+						icon="ui-icon-check" update=":form:recruiterTable :form:msgs" />
+					<p:commandButton icon="fa fa-home" value="Voltar"
+						action="adm?faces-redirect=true" immediate="true" />
 
-				</p:layoutUnit>
-
-				<p:layoutUnit position="center" style="border-style:none;">
+			
+				</div>
+				<div class="tableForCreatePeople">
+				
 
 					<p:dataTable var="recruiter" value="#{RecBean.recruiterList}"
 						id="recruiterTable" editable="true" paginator="true"
@@ -114,7 +112,7 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column filterBy="#{recruiter.active}" headerText="Status">
+						<p:column filterBy="#{recruiter.active}" headerText="Estado">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText
@@ -133,9 +131,9 @@
 
 					</p:dataTable>
 
-				</p:layoutUnit>
-
-			</p:layout>
+				
+				</div>
+		
 
 		</h:form>
 

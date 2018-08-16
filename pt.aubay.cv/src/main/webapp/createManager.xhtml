@@ -27,7 +27,7 @@
 								url="createRecruiter.xhtml" />
 						</p:submenu>
 						<p:submenu label="Administrador">
-							<p:menuitem value="Criar Administrador" icon="ui-icon-disk"
+							<p:menuitem value="Criar / Editar" icon="ui-icon-disk"
 								url="registoAdmin.xhtml" />
 						</p:submenu>
 
@@ -55,28 +55,28 @@
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<p:layout style="min-height:800px;border-style:none;min-width:400px;">
-				<p:layoutUnit position="west" resizable="true" minSize="40"
-					maxSize="1000" size="300" style="border-style:none;">
+			<div class="insertPeople">
+				
 
 					<p:outputLabel value="Nome: " for="name_m" />
 					<h:inputText id="name_m" value="#{ManBean.manager.name}"
-						style="width:200px;"></h:inputText>
+						style="width:200px;" required="true"></h:inputText>
 					<br> </br>
 
-					<p:outputLabel value="E-mail: " for="email_m" />
+					<p:outputLabel value="E-mail:  " for="email_m" />
 					<h:inputText id="email_m" value="#{ManBean.manager.email}"
 						style="width:200px;"></h:inputText>
 					<br> </br>
 
 					<p:commandButton value="Criar" action="#{ManBean.createMan()}"
-						icon="ui-icon-check" update=":form:managerTable" />
+						icon="ui-icon-check" update=":form:managerTable :form:msgs" />
 					<p:commandButton value="Voltar" action="adm?faces-redirect=true"
-						icon="fa fa-home" />
+						icon="fa fa-home" immediate="true"/>
 
-				</p:layoutUnit>
-
-				<p:layoutUnit position="center" style="border-style:none;">
+				
+			</div>
+			<div class="tableForCreatePeople">
+				
 
 					<p:dataTable var="manager" value="#{ManBean.managerList}"
 						id="managerTable" editable="true" rows="15" paginator="true"
@@ -114,7 +114,7 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column filterBy="#{manager.active}" headerText="Status">
+						<p:column filterBy="#{manager.active}" headerText="Estado">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{manager.active ? 'Activo' : 'Inactivo'}" />
@@ -132,9 +132,9 @@
 
 					</p:dataTable>
 
-				</p:layoutUnit>
-
-			</p:layout>
+				
+			</div>
+			
 
 		</h:form>
 

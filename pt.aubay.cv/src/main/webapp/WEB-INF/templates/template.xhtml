@@ -9,8 +9,9 @@
 
 	<h:head>
 		<title><ui:insert name="pageTitle"></ui:insert></title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="charset=UTF-8" />
 		<h:outputStylesheet library="CSS" name="style.css"></h:outputStylesheet>
+		<link rel="icon" type="image/x-icon" href="resources/images/logoaubayplus.png"/>
 			<script type="text/javascript">
 			PrimeFaces.locales['pt'] = {
 				closeText: 'Fechar',
@@ -41,21 +42,21 @@
 		</script>
 	</h:head>
     
-        <div class="header">
-            <a href="index.xhtml" title="Home">
-                <img id="logoheader" src="resources/images/logoaubay.png" alt="Aubay"/>
-            </a>
-        </div> 
-
-	<ui:insert name="body"></ui:insert>
+    <div class="header">
+        <a href="index.xhtml" title="Home">
+            <img id="logoheader" src="resources/images/logoaubayplus.png" alt="Aubay"/>
+        </a>
+    </div> 
 	
-	<ui:insert name="subheader"></ui:insert>
-			
-	<ui:insert name="pageContent"></ui:insert>
+    <h:body class="bodygeral">
+	
+		<ui:insert name="subheader"></ui:insert>
+				
+		<ui:insert name="pageContent"></ui:insert>
 	
 		<div class="footer">
-			<h5 class="footertitle">Aubilous Plus</h5>
+	            <h5 class="footertitle">Aubilous Plus</h5>
 		</div>
-
+	</h:body>
 </html>
 	

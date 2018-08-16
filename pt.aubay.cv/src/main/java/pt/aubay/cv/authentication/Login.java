@@ -27,7 +27,8 @@ import pt.aubay.cv.beans.SSLEmail;
 public class Login implements Serializable{
  @Inject
  AdminEmailBean admMails;
- @Inject SSLEmail mailService;
+ @Inject 
+ SSLEmail mailService;
     /**
 	 * 
 	 */
@@ -43,7 +44,7 @@ public class Login implements Serializable{
  
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
-            System.out.println(SecurityUtils.getSubject());
+            
             SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
            
          
@@ -52,8 +53,11 @@ public class Login implements Serializable{
         	  FacesContext.getCurrentInstance().addMessage(
   					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Login bem sussedido"));
           	 Faces.redirect("adm.xhtml");
-          	
-          	
+            } else
+          if(SecurityUtils.getSubject().hasRole("user")) {
+            	FacesContext.getCurrentInstance().addMessage(
+    					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Invalidas"));
+            	System.out.println("Erro");
             }
           
         }
@@ -71,9 +75,9 @@ public class Login implements Serializable{
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
             System.out.println(SecurityUtils.getSubject());
-            SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
+            //SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
             
-           //sFaces.redirect(savedRequest != null ? savedRequest.getRequestUrl() : "adm.xhtml");
+           //Faces.redirect(savedRequest != null ? savedRequest.getRequestUrl() : "adm.xhtml");
            // System.out.println(savedRequest );
            //System.out.println(this.getUsername());	
           
@@ -81,6 +85,9 @@ public class Login implements Serializable{
         	   FacesContext.getCurrentInstance().addMessage(
      					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Login bem sussedido"));
             	Faces.redirect("recruiter.xhtml");
+            	} else if(SecurityUtils.getSubject().hasRole("admin")) {
+            		FacesContext.getCurrentInstance().addMessage(
+        					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", "Credenciais Invalidas"));
             	}
           
         }

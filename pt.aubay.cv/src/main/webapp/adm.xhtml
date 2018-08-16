@@ -28,7 +28,7 @@
 								url="createRecruiter.xhtml" />
 						</p:submenu>
 						<p:submenu label="Administrador">
-							<p:menuitem value="Criar Administrador" icon="ui-icon-disk"
+							<p:menuitem value="Criar / Editar" icon="ui-icon-disk"
 								url="registoAdmin.xhtml" />
 						</p:submenu>
 
@@ -63,7 +63,7 @@
 						value="#{ReqBean.requestList}" editable="true" rows="10"
 						paginator="true" resizableColumns="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="10,20,50" style="padding:15px"
+						rowsPerPageTemplate="10,20,50" style="padding:5px"
 						emptyMessage="Nenhum pedido encontrado.">
 
 						<f:facet name="header">
@@ -279,8 +279,8 @@
 									<p:tooltip for="track" value="#{req.comment}" position="bottom" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputTextarea value="#{req.comment}" cols="12"
-										autoResize="false" />
+									<p:inputTextarea value="#{req.comment}" cols="14"
+										autoResize="false" style="width: 116px" />
 								</f:facet>
 							</p:cellEditor>
 

@@ -48,8 +48,6 @@ public class Requestbean implements Serializable {
 	private List<Request> requestListAprovado;
 	private List<Request> requestListNotAprovado;
 
-
-
 	@Inject
 	private ControllerRequest cr;
 	
@@ -276,7 +274,7 @@ public class Requestbean implements Serializable {
         }
         request.setEstado(Status.PREAPROVADO);
         cr.updateReq(request);
-        loadRequests();
+        requestListNotAprovado = cr.getAllNotAprovado();
         System.out.println(admEmail.getActiveadmEmailListString());
         
         if(admEmail.getActiveadmEmailListString().contains("@")) {
