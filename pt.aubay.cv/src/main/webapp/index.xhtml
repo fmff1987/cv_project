@@ -10,12 +10,8 @@
 	template="WEB-INF/templates/templateIndex.xhtml">
 
 	<ui:define name="pageTitle">
-        Gestão de CVs
+        AubilousPlus
     </ui:define>
-
-	<ui:define name="body">
-		<h:body class="body"></h:body>
-	</ui:define>
 
 	<ui:define name="header">
 		<div class="logoaubay">
@@ -33,13 +29,13 @@
 				<div class="col-md-4 manager">
 					<a href="manager.xhtml"><img
 						src="resources/images/buttonmemberman.png" class="buttonindex"
-						alt="Manager" /></a>
+						alt="Manager" title="Manager" /></a>
 					<h1 class="buttontext">Manager</h1>
 				</div>
 
 				<div class="col-md-4 admin">
 					<h:outputLink value="javascript:void(0)"
-						onclick="PF('dlg').show();" title="login">
+						onclick="PF('dlgAdm').show();" title="Administrador">
 						<p:graphicImage name="images/buttonmemberadm.png"
 							class="buttonindex" />
 					</h:outputLink>
@@ -48,7 +44,7 @@
 
 				<div class="col-md-4 recruiter">
 					<h:outputLink value="javascript:void(0)"
-						onclick="PF('dlg2').show();" title="login">
+						onclick="PF('dlgRec').show();" title="Recrutador">
 						<p:graphicImage name="images/buttonmemberrec.png"
 							class="buttonindex" />
 					</h:outputLink>
@@ -57,75 +53,85 @@
 
 
 
-				<h:form id="loginAdmin">
-					<p:growl id="msgs" showDetail="true" />
+				<h:form id="loginAdm">
 
-					<p:dialog header="Login" widgetVar="dlg" resizable="false">
-						<h:panelGrid columns="2" widgetVar="dlg">
+					<p:growl id="msg" sticky="true" showDetail="true" life="3000" />
+
+					<p:dialog header="Login" widgetVar="dlgAdm" resizable="false">
+						<h:panelGrid columns="2" cellpadding="5">
+
 							<h:outputLabel for="username" value="Username:">
-								<br />
-								<h:message id="m_username" for="username"
-									styleClass="loginMessage" />
 							</h:outputLabel>
-							<h:inputText id="username" value="#{login.username}"
-								required="true" requiredMessage="Coloque username!">
+							<h:inputText id="username" value="#{login.username}">
 								<f:ajax event="blur" render="m_username" />
 							</h:inputText>
 
 							<h:outputLabel for="password" value="Password:">
-								<br />
-								<h:message id="m_password" for="password"
-									styleClass="loginMessage" />
+
 							</h:outputLabel>
-							<h:inputSecret id="password" value="#{login.password}"
-								required="true" requiredMessage="Coloque password">
+							<h:inputSecret id="password" value="#{login.password}">
 								<f:ajax event="blur" render="m_password" />
 							</h:inputSecret>
-							<p:commandButton value="Login" actionListener="#{login.submit}"
-								update=":loginAdmin:msgs">
 
-							</p:commandButton>
-							<p:commandButton value="Recuperar Password"
-								actionListener="#{login.recPassword}" update=":loginAdmin:msgs">
-							</p:commandButton>
+							<f:facet name="footer">
+								<p:commandButton value="Login"
+									actionListener="#{login.submitAdm}"
+									oncomplete="handleLoginRequest(xhr, status, args)"
+									update=":loginAdm:msg">
+								</p:commandButton>
+								<p:commandButton value="Recuperar Password"
+									actionListener="#{login.recPassword}" update=":loginAdm:msg">
+								</p:commandButton>
+							</f:facet>
 						</h:panelGrid>
 					</p:dialog>
-
 				</h:form>
-				<h:form id="loginRecruiter">
-					<p:growl id="msgs" showDetail="true" />
-					<p:dialog header="Login" widgetVar="dlg2" resizable="false">
-						<h:panelGrid columns="2" widgetVar="dlg">
+
+				<h:form id="loginRec">
+				<p:growl id="msg" sticky="true" showDetail="true" life="3000" />
+
+
+					<p:dialog header="Login" widgetVar="dlgRec" resizable="false">
+						<h:panelGrid columns="2" cellpadding="5">
+
 							<h:outputLabel for="username" value="Username:">
-								<br />
 								<h:message id="m_username" for="username"
 									styleClass="loginMessage" />
 							</h:outputLabel>
-							<h:inputText id="username" value="#{login.username}"
-								required="true" requiredMessage="Coloque username!">
+							<h:inputText id="username" value="#{login.username}">
 								<f:ajax event="blur" render="m_username" />
 							</h:inputText>
 
 							<h:outputLabel for="password" value="Password:">
-								<br />
 								<h:message id="m_password" for="password"
 									styleClass="loginMessage" />
 							</h:outputLabel>
-							<h:inputSecret id="password" value="#{login.password}"
-								required="true" requiredMessage="Coloque password">
+							<h:inputSecret id="password" value="#{login.password}">
 								<f:ajax event="blur" render="m_password" />
 							</h:inputSecret>
-							<p:commandButton update=":loginRecruiter:msgs" value="Login"
-								actionListener="#{login.submitRecruiter}">
 
-							</p:commandButton>
+							<f:facet name="footer">
+								<p:commandButton value="Login"
+									actionListener="#{login.submitRecruiter}"
+									oncomplete="handleLoginRequest(xhr, status, args)"
+									update=":loginRec:msg">
+								</p:commandButton>
+								
+							</f:facet>
 						</h:panelGrid>
 					</p:dialog>
-
 				</h:form>
+
 			</div>
 
-
+			<script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlgAdm').jq.effect("shake", {times: 5}, 100);
+                        PF('dlgRec').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>
 		</div>
 
 	</ui:define>

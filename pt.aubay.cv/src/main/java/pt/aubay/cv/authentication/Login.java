@@ -13,9 +13,8 @@ import javax.inject.Named;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.web.util.SavedRequest;
-import org.apache.shiro.web.util.WebUtils;
 import org.omnifaces.util.Faces;
+import org.primefaces.PrimeFaces;
 
 import pt.aubay.cv.beans.AdminEmailBean;
 import pt.aubay.cv.beans.SSLEmail;
@@ -40,16 +39,16 @@ public class Login implements Serializable{
     
 
 
-    public void submit() throws IOException {
+    public void submitAdm() throws IOException {
  
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
             
-            SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
+            //SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
            
          
           if(SecurityUtils.getSubject().hasRole("admin") ) {
-        	  
+        	  PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
         	  FacesContext.getCurrentInstance().addMessage(
   					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Login bem sussedido"));
           	 Faces.redirect("adm.xhtml");
@@ -84,6 +83,7 @@ public class Login implements Serializable{
            if(SecurityUtils.getSubject().hasRole("user")){
         	   FacesContext.getCurrentInstance().addMessage(
      					null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Login bem sussedido"));
+        	   PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
             	Faces.redirect("recruiter.xhtml");
             	} else if(SecurityUtils.getSubject().hasRole("admin")) {
             		FacesContext.getCurrentInstance().addMessage(

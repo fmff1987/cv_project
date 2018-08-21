@@ -219,7 +219,7 @@ public class Requestbean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public void uploadOrig() {
+	public void uploadOrig() throws IOException {
 		try { 
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
 			File folder = new File(dir);
@@ -241,6 +241,7 @@ public class Requestbean implements Serializable {
 					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
 		}
 		createReq();
+		
 	}
 
 
@@ -271,6 +272,7 @@ public class Requestbean implements Serializable {
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
+            System.out.println(e.getMessage());
         }
         request.setEstado(Status.PREAPROVADO);
         cr.updateReq(request);

@@ -16,7 +16,7 @@
 	<ui:define name="subheader">
 		<div class="subheader">
 			<div>
-				<h:form>
+				<h:form >
 					<p:menubar>
 						<p:submenu label="Manager">
 							<p:menuitem value=" Criar / Editar" icon="ui-icon-disk"
@@ -46,29 +46,37 @@
 			</div>
 
 		</div>
+	
 	</ui:define>
 
 	<ui:define name="pageContent">
-	
+
 		<h3 class="subtitles">Administrador</h3>
-
-		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;">
-
+     
+		<h:form id="form" onkeypress="if (event.keyCode == 13) return false;" style="padding:30px;">
+			
 			<p:growl id="msgs" showDetail="true" />
+			
 
 			<p:tabView dynamic="true" cache="true" effect="fold" id="tab">
 				<p:tab title="A Tratar">
-
+				
 					<p:dataTable id="RequestList" var="req" widgetVar="requestList"
 						value="#{ReqBean.requestList}" editable="true" rows="10"
 						paginator="true" resizableColumns="true"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="10,20,50" style="padding:5px"
 						emptyMessage="Nenhum pedido encontrado.">
-
+					
 						<f:facet name="header">
                             Lista de pedidos
                         </f:facet>
+                   
+                        
+						<p:ajax event="sort"
+							oncomplete="colorDeadLineUltimate();" />
+						<p:ajax event="filter"
+							oncomplete="colorDeadLineUltimate();" />
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
 							update=":form:msgs  :form:tab:OngoingList"
 							oncomplete="PF('requestList').filter()" />
@@ -126,7 +134,7 @@
 						</p:column>
 
 						<p:column headerText="Data Limite" sortBy="#{req.deadline}"
-							style="width:150px">
+							style="width:150px" styleClass="deadLine">
 
 							<p:cellEditor>
 								<f:facet name="output">
@@ -159,6 +167,11 @@
 				</p:tab>
 
 				<p:tab title="Em Tratamento">
+					<script>
+					colorStatus(), 
+					colorDeadLineUltimate();
+					
+					</script>
 
 					<p:dataTable id="OngoingList" var="req" widgetVar="ongoingList"
 						value="#{ReqBean.requestListNotAprovado}" editable="true"
@@ -167,9 +180,14 @@
 						rowsPerPageTemplate="10,20,50" resizableColumns="true"
 						emptyMessage="Nenhum pedido encontrado.">
 
+
 						<f:facet name="header">
                             Lista de pedidos
                         </f:facet>
+						<p:ajax event="sort"
+							oncomplete="colorStatus();colorDeadLineUltimate();" />
+						<p:ajax event="filter"
+							oncomplete="colorStatus();colorDeadLineUltimate();" />
 
 						<p:ajax event="rowEdit" listener="#{ReqBean.onRowEditOngoingList}"
 							update=":form:msgs :form:tab:AprovedList :form:tab:OngoingList"
@@ -223,15 +241,18 @@
 							</p:cellEditor>
 						</p:column>
 
-						<p:column headerText="Data Limite" sortBy="#{req.deadline}"
-							style="width:130px">
+						<p:column headerText="Data Limite" styleClass="deadLine"
+							sortBy="#{req.deadline}" style="width:130px">
+
 							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{req.deadline}">
-										<f:convertDateTime pattern="dd/MM/yyyy HH:00"
-											timeZone="Europe/Lisbon" />
-									</h:outputText>
-								</f:facet>
+								<div id="deadLine">
+									<f:facet name="output">
+										<h:outputText value="#{req.deadline}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:00"
+												timeZone="Europe/Lisbon" />
+										</h:outputText>
+									</f:facet>
+								</div>
 								<f:facet name="input">
 									<p:calendar locale="pt" styleClass="right"
 										value="#{req.deadline}" id="byDateButtonCalTo" mode="popup"
@@ -241,6 +262,7 @@
 							</p:cellEditor>
 
 						</p:column>
+
 
 						<p:column headerText="CV" style="width:100px">
 							<p:commandButton ajax="false"
@@ -253,7 +275,7 @@
 							</p:commandButton>
 						</p:column>
 
-						<p:column headerText="Estado" sortBy="#{req.estado.label}">
+						<p:column headerText="Estado" sortBy="#{req.estado.label}" styleClass="status">
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{req.estado.label}" />
@@ -376,8 +398,12 @@
 			</p:tabView>
 
 		</h:form>
-
+		<script>
+					$(document).ready(()=>{
+						colorDeadLineUltimate();	
+					});				
+			</script>	
 	</ui:define>
-
+	
 
 </ui:composition>

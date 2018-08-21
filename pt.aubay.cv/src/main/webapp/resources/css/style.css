@@ -99,8 +99,8 @@
 }
 
 form {
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 #form2 {
@@ -130,6 +130,8 @@ form {
 
 .ui-menubar {
 	height: 36px;
+	border: none;
+	width: auto;
 }	
 .ui-tabs {
 	background: none;

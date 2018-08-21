@@ -12,6 +12,7 @@
 	<ui:define name="pageTitle">
         Página Recrutador
     </ui:define>
+
 	<ui:define name="subheader">
 		<div class="subheader">
 
@@ -46,15 +47,26 @@
 				style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
+				<script>
+					colorStatusForRec();	
+								
+				</script>
 
 				<f:facet name="header">
                     Lista de pedidos
                 </f:facet>
+				<p:ajax event="sort"
+					oncomplete="colorStatusForRec();colorDeadLineForRec();" />
+				<p:ajax event="filter"
+					oncomplete="colorStatusForRec();colorDeadLineForRec();" />
+
 
 				<p:ajax event="rowEdit" listener="#{ReqBean.onRowEdit}"
-					update=":form:msgs" />
+					update=":form:msgs"
+					oncomplete="colorStatusForRec();colorDeadLineForRec();" />
 				<p:ajax event="rowEditCancel" listener="#{ReqBean.onRowCancel}"
-					update=":form:msgs" />
+					update=":form:msgs"
+					oncomplete="colorStatusForRec();colorDeadLineForRec();" />
 
 				<p:column headerText="Manager" filterBy="#{doingReq.manager.name}"
 					filterMatchMode="contains" style="width:130px">
@@ -75,13 +87,14 @@
 
 				<p:column headerText="Email" filterBy="#{doingReq.candidateEmail}"
 					filterMatchMode="contains" style="width:140px">
-					<h:outputText id="emailRecuiterlist" value="#{doingReq.candidateEmail}" />
-					<p:tooltip for="emailRecuiterlist" value="#{doingReq.candidateEmail}"
-										position="bottom" />
+					<h:outputText id="emailRecuiterlist"
+						value="#{doingReq.candidateEmail}" />
+					<p:tooltip for="emailRecuiterlist"
+						value="#{doingReq.candidateEmail}" position="bottom" />
 				</p:column>
 
 				<p:column headerText="Data Limite" sortBy="#{doingReq.deadline}"
-					style="width:150px">
+					style="width:150px" styleClass="deadLine">
 					<f:facet name="filter">
 						<p:outputLabel for="datetime" />
 						<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
@@ -95,13 +108,16 @@
 					<p:commandButton ajax="false"
 						actionListener="#{ReqBean.download(doingReq.cvOrigPath)}"
 						icon="fa fa-cloud-download">
-						
+
 					</p:commandButton>
 					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
 						skinSimple="true" label="" />
 				</p:column>
 				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
-					<h:outputText value="#{doingReq.estado.label}" />
+
+
+					<h:outputText value="#{doingReq.estado.label}" styleClass="status" />
+
 				</p:column>
 
 				<p:column headerText="Comentario">
@@ -110,12 +126,13 @@
 						<f:facet name="output">
 							<h:outputText id="track" value="#{doingReq.comment}"
 								style="height:40px;" />
-								<p:tooltip for="track"  value="#{doingReq.comment}" position="bottom"/>
-							
+							<p:tooltip for="track" value="#{doingReq.comment}"
+								position="bottom" />
+
 						</f:facet>
 						<f:facet name="input">
-							<p:inputTextarea value="#{doingReq.comment}" cols="16"
-								autoResize="false" />
+							<p:inputTextarea value="#{doingReq.comment}" cols="14"
+										autoResize="false" style="width: 116px"/>
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
@@ -133,7 +150,12 @@
 			</p:dataTable>
 
 		</h:form>
-
+		<script>
+					$(document).ready(()=>{
+						colorStatusForRec();
+						colorDeadLineForRec();
+					});				
+			</script>
 	</ui:define>
 
 </ui:composition>
