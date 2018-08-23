@@ -176,7 +176,7 @@ public class Requestbean implements Serializable {
 			}else {
 				String bodyMail = "O candidato com o nome de " + request.getCandidateName() + " foi lhe atribuido a si" ;
 				this.sendMail(request.getRecruiter().getEmail(), bodyMail);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email para recruta foi enviado."));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Notificação", "Email foi enviado."));
 			}
 			
 		}

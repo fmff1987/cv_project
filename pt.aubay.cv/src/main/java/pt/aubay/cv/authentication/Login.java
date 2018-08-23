@@ -43,9 +43,7 @@ public class Login implements Serializable{
  
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(username, password));
-            
-            //SavedRequest savedRequest = WebUtils.getAndClearSavedRequest(Faces.getRequest());
-           
+                       
          
           if(SecurityUtils.getSubject().hasRole("admin") ) {
         	  PrimeFaces.current().ajax().addCallbackParam("loggedIn", true);
@@ -101,8 +99,6 @@ public class Login implements Serializable{
     }
     public void logout() throws IOException {
     	
-
-        
             SecurityUtils.getSubject().logout();
             Faces.invalidateSession();
             Faces.redirect("index.xhtml");

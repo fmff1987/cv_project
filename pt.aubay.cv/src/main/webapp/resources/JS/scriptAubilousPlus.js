@@ -114,7 +114,7 @@ function colorDeadLineForRec() {
                 element.style.cssText = "color:red;  font-weight: bold;";
                 break;
             case difDate <= 1.9:
-                element.style.cssText = "color:red ;  font-weight: bold;";
+                element.style.cssText = "color:red;  font-weight: bold;";
 //            setInterval(function () {
 //            	element.style.display = (element.style.display == 'none' ? '' : 'none');
 //            	
