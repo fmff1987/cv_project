@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,8 +41,6 @@ public class Requestbean implements Serializable {
 
 	private Request request = new Request();
 
-	private UploadedFile cvOrig;
-	private UploadedFile cvAubay;
 	private StreamedContent downloadAubay;
 
 	private List<Request> requestList;
@@ -65,13 +65,6 @@ public class Requestbean implements Serializable {
 		this.admEmail = admEmail;
 	}
 
-	public UploadedFile getCvAubay() {
-		return cvAubay;
-	}
-
-	public void setCvAubay(UploadedFile cvAubay) {
-		this.cvAubay = cvAubay;
-	}
 
 	public List<Request> getRequestList() {
 		return requestList;
@@ -122,13 +115,6 @@ public class Requestbean implements Serializable {
 		this.request = request;
 	}
 
-	public UploadedFile getCvOrig() {
-		return cvOrig;
-	}
-
-	public void setCvOrig(UploadedFile cvOrig) {
-		this.cvOrig = cvOrig;
-	}
 
 	public ControllerRequest getCr() {
 		return cr;
@@ -219,30 +205,6 @@ public class Requestbean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public void uploadOrig() throws IOException {
-		try { 
-			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
-			File folder = new File(dir);
-			folder.mkdirs();
-
-			File file = new File(dir, cvOrig.getFileName());
-
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvOrig.getContents());
-			out.close();
-
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvOrigPath(file.getAbsolutePath());
-
-		} catch (IOException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Erro", e.getMessage()));
-		}
-		createReq();
-		
-	}
 
 
 	public void sendMail(String mail, String body) {
@@ -253,21 +215,28 @@ public class Requestbean implements Serializable {
     
 
     public void uploadAubay(Request request) {
-        try {
+    	UploadedFile file = request.getCvAubay();
+    	String fileName = file.getFileName();
+    	
+
+    	
+    	try {
             String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvAubay/";
             File folder = new File(dir);
             folder.mkdirs();
 
-            File file = new File(dir, cvAubay.getFileName());
+            File physicalFile = new File(dir, System.currentTimeMillis() + " " +  fileName);
 
-            OutputStream out = new FileOutputStream(file);
-            out.write(cvAubay.getContents());
+            OutputStream out = new FileOutputStream(physicalFile);
+            out.write(file.getContents());
             out.close();
             
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage("Upload completo",
-                            "O arquivo " + cvAubay.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-            request.setCvAubayPath(file.getAbsolutePath());
+                            "O arquivo " + fileName + " foi salvo em " + physicalFile.getAbsolutePath()));
+            request.setCvAubayPath(physicalFile.getAbsolutePath());
+            System.out.println(request.getCvAubayPath());
+
 
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(

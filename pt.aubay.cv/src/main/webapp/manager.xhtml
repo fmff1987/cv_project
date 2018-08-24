@@ -56,7 +56,7 @@
 						mask="true" />
 
 					<p:outputLabel value="Curriculo: " />
-					<p:fileUpload value="#{CreateRequestManager.cvOrig}" mode="simple"
+					<p:fileUpload value="#{CreateRequestManager.request.cvOrig}" mode="simple"
 						skinSimple="true" label="Anexar"
 						allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
 						invalidFileMessage="Formato de Ficheiro inválido" />

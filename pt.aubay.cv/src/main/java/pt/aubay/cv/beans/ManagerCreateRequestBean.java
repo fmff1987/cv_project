@@ -25,7 +25,6 @@ import pt.aubay.cv.models.Status;
 
 public class ManagerCreateRequestBean {
 	private Request request = new Request();
-	private UploadedFile cvOrig;
 	private List<Request> requestListAprovado;
 	
 	
@@ -36,15 +35,6 @@ public class ManagerCreateRequestBean {
 	@Inject
 	ControllerRequest cr;
 	
-	public UploadedFile getCvOrig() {
-		return cvOrig;
-	}
-
-	
-
-	public void setCvOrig(UploadedFile cvOrig) {
-		this.cvOrig = cvOrig;
-	}
 
 
 	public ControllerRequest getCr() {
@@ -73,21 +63,25 @@ public class ManagerCreateRequestBean {
 	}
 	
 	public void uploadOrig() {
-		try { 
+
+    	UploadedFile file = request.getCvOrig();
+    	String fileName = file.getFileName();
+		try {
+	
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
 			File folder = new File(dir);
 			folder.mkdirs();
 
-			File file = new File(dir, cvOrig.getFileName());
+			File physicalFile = new File(dir, fileName);
 
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvOrig.getContents());
+			OutputStream out = new FileOutputStream(physicalFile);
+			out.write(file.getContents());
 			out.close();
 
 			FacesContext.getCurrentInstance().addMessage(
 					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvOrigPath(file.getAbsolutePath());
+							"O arquivo " + fileName + " foi salvo em " + physicalFile.getAbsolutePath()));
+			request.setCvOrigPath(physicalFile.getAbsolutePath());
 
 		} catch (IOException e) {
 			FacesContext.getCurrentInstance().addMessage(
@@ -103,11 +97,15 @@ public class ManagerCreateRequestBean {
 		FacesMessage msg = new FacesMessage("Pedido registrado.");
 		FacesContext.getCurrentInstance().addMessage("msgUpdate", msg);
 	}
-	  public void download(String filePath) throws IOException{
-	       File file = new File(filePath);
-	        Faces.sendFile(file, true);
-	           /* InputStream input = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(
-	                    filePath);
-	            return  new DefaultStreamedContent(input, "application/octet-stream", "downloaded.pdf" );*/
-	    }
+	
+    public void download(String filePath) throws IOException{
+    	try {
+    		File file = new File(filePath);
+            Faces.sendFile(file, true);
+    	}
+    	catch (IOException e ){
+    		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Erro", "Nenhum ficheiro encontrado" ));
+    	}
+      
+    }
 }

@@ -47,7 +47,7 @@
 				style="margin-bottom:20px;padding:30px;" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
-				
+
 
 				<f:facet name="header">
                     Lista de pedidos
@@ -96,9 +96,11 @@
 						<p:outputLabel for="datetime" />
 						<p:calendar id="datetime" pattern="dd/MM/yyyy HH:00" locale="pt" />
 					</f:facet>
-					<h:outputText value="#{doingReq.deadline}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
-					</h:outputText>
+					<div class="deadlineRec">
+						<h:outputText value="#{doingReq.deadline}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:00" />
+						</h:outputText>
+					</div>
 				</p:column>
 
 				<p:column headerText="CV" style="width:100px">
@@ -107,7 +109,7 @@
 						icon="fa fa-cloud-download">
 
 					</p:commandButton>
-					<p:fileUpload value="#{ReqBean.cvAubay}" mode="simple"
+					<p:fileUpload value="#{doingReq.cvAubay}" mode="simple"
 						skinSimple="true" label=" " />
 				</p:column>
 				<p:column headerText="Estado" sortBy="#{doingReq.estado.label}">
@@ -129,7 +131,7 @@
 						</f:facet>
 						<f:facet name="input">
 							<p:inputTextarea value="#{doingReq.comment}" cols="14"
-										autoResize="false" style="width: 116px"/>
+								autoResize="false" style="width: 116px" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>

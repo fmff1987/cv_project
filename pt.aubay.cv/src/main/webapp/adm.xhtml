@@ -58,7 +58,8 @@
 			<p:growl id="msgs" showDetail="true" />
 			
 
-			<p:tabView dynamic="true" cache="true" effect="fold" id="tab">
+			<p:tabView dynamic="false" cache="true" effect="fold" id="tab">
+				<p:ajax event="tabChange" oncomplete="colorStatus();colorDeadLineUltimate();"/>
 				<p:tab title="A Tratar">
 				
 					<p:dataTable id="RequestList" var="req" widgetVar="requestList"
@@ -167,11 +168,7 @@
 				</p:tab>
 
 				<p:tab title="Em Tratamento">
-					<script>
-					colorStatus(), 
-					colorDeadLineUltimate();
-					
-					</script>
+
 
 					<p:dataTable id="OngoingList" var="req" widgetVar="ongoingList"
 						value="#{ReqBean.requestListNotAprovado}" editable="true"
@@ -399,9 +396,9 @@
 
 		</h:form>
 		<script>
-					$(document).ready(()=>{
-						colorDeadLineUltimate();	
-					});				
+		colorStatus();colorDeadLineUltimate();
+						
+								
 			</script>	
 	</ui:define>
 	

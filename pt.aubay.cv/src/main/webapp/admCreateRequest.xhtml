@@ -81,7 +81,7 @@
 								maxdate="#{Cal.todayDate}" pattern="dd/MM/yyyy HH:00" stepHour="1" mask="true"/>  	
 		   
 		            <p:outputLabel value="Curriculo: "  />
-		            <p:fileUpload value="#{ReqCreateBean.cvOrig}" mode="simple" 
+		            <p:fileUpload value="#{ReqCreateBean.request.cvOrig}" mode="simple" 
                                         skinSimple="true" label="Anexar"
                                         allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
                                         invalidFileMessage="Formato de Ficheiro inválido" />              

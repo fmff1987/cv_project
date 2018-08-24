@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.Timestamp;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -23,18 +24,9 @@ import pt.aubay.cv.models.Status;
 public class RequestCreateBean {
 	
 	private Request request = new Request();
-	private UploadedFile cvOrig;
 	@Inject
 	ControllerRequest cr;
 	
-	public UploadedFile getCvOrig() {
-		return cvOrig;
-	}
-
-
-	public void setCvOrig(UploadedFile cvOrig) {
-		this.cvOrig = cvOrig;
-	}
 
 
 	public ControllerRequest getCr() {
@@ -59,21 +51,25 @@ public class RequestCreateBean {
 	
 	
 	public void uploadOrig() {
-		try { 
+
+    	UploadedFile file = request.getCvOrig();
+    	String fileName = file.getFileName();
+		try {
+			 
 			String dir = System.getProperty("jboss.server.base.dir") + "/deployments/uploadedCVs/cvOrig/";
 			File folder = new File(dir);
 			folder.mkdirs();
 
-			File file = new File(dir, cvOrig.getFileName());
+			File physicalFile = new File(dir, fileName);
 
-			OutputStream out = new FileOutputStream(file);
-			out.write(cvOrig.getContents());
+			OutputStream out = new FileOutputStream(physicalFile);
+			out.write(file.getContents());
 			out.close();
 
 			FacesContext.getCurrentInstance().addMessage(
 					null, new FacesMessage("Upload completo",
-							"O arquivo " + cvOrig.getFileName() + " foi salvo em " + file.getAbsolutePath()));
-			request.setCvOrigPath(file.getAbsolutePath());
+							"O arquivo " + fileName + " foi salvo em " + physicalFile.getAbsolutePath()));
+			request.setCvOrigPath(physicalFile.getAbsolutePath());
 
 		} catch (IOException e) {
 			FacesContext.getCurrentInstance().addMessage(

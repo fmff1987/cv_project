@@ -13,6 +13,9 @@ import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.primefaces.model.UploadedFile;
 
 @Entity
 @Table(name = "request")
@@ -22,20 +25,20 @@ import javax.persistence.TemporalType;
 			query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter"),
 	@NamedQuery(name="Request.getAllWithRecruiterAndManagers",
 	query="SELECT r FROM Request r JOIN FETCH r.manager WHERE r.recruiter IS  null"),
-	
+
 	@NamedQuery(name="Request.getAllAprovado", 
 	query="SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE r.estado = :estado "),
-	
+
 	@NamedQuery(name= "Request.getAllNotAprovado", 
 	query = "SELECT r FROM Request r JOIN FETCH r.manager JOIN FETCH r.recruiter WHERE NOT r.estado = :estado")
-	
+
 }) 
 
 
 public class Request extends pt.aubay.cv.models.Entity {
 
-    private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	protected Manager manager;
 
@@ -44,20 +47,43 @@ public class Request extends pt.aubay.cv.models.Entity {
 
 	private String candidateName;
 	private String candidateEmail;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Status estado;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deadline;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date deadline;
 
-    private String cvOrigPath;
-    private String cvAubayPath;
-    
-    private String comment;
-    
+	private String cvOrigPath;
+	private String cvAubayPath;
 
-    public String getComment() {
+	//nao coloca os campos na base de dados
+	
+	@Transient
+	private UploadedFile cvOrig , cvAubay;
+
+
+
+
+	private String comment;
+
+	public UploadedFile getCvOrig() {
+		return cvOrig;
+	}
+
+	public void setCvOrig(UploadedFile cvOrig) {
+		this.cvOrig = cvOrig;
+	}
+
+	public UploadedFile getCvAubay() {
+		return cvAubay;
+	}
+
+	public void setCvAubay(UploadedFile cvAubay) {
+		this.cvAubay = cvAubay;
+	} 
+
+	public String getComment() {
 		return comment;
 	}
 
@@ -66,74 +92,74 @@ public class Request extends pt.aubay.cv.models.Entity {
 	}
 
 	public Status getEstado() {
-        return estado;
-    }
+		return estado;
+	}
 
-    public void setEstado(Status estado) {
-        this.estado = estado;
-    }
+	public void setEstado(Status estado) {
+		this.estado = estado;
+	}
 
-    public String getCvOrigPath() {
-        return cvOrigPath;
-    }
+	public String getCvOrigPath() {
+		return cvOrigPath;
+	}
 
-    public void setCvOrigPath(String cvOrigPath) {
-        this.cvOrigPath = cvOrigPath;
-    }
+	public void setCvOrigPath(String cvOrigPath) {
+		this.cvOrigPath = cvOrigPath;
+	}
 
-    public String getCvAubayPath() {
-        return cvAubayPath;
-    }
+	public String getCvAubayPath() {
+		return cvAubayPath;
+	}
 
-    public void setCvAubayPath(String cvAubayPath) {
-        this.cvAubayPath = cvAubayPath;
-    }
+	public void setCvAubayPath(String cvAubayPath) {
+		this.cvAubayPath = cvAubayPath;
+	}
 
-    public Manager getManager() {
-        return manager;
-    }
+	public Manager getManager() {
+		return manager;
+	}
 
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
 
-    public Recruiter getRecruiter() {
-        return recruiter;
-    }
+	public Recruiter getRecruiter() {
+		return recruiter;
+	}
 
-    public void setRecruiter(Recruiter recruiter) {
-        this.recruiter = recruiter;
-    }
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
+	}
 
-    public String getCandidateName() {
-        return candidateName;
-    }
+	public String getCandidateName() {
+		return candidateName;
+	}
 
-    public void setCandidateName(String candidateName) {
-        this.candidateName = candidateName;
-    }
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
 
-    public String getCandidateEmail() {
-        return candidateEmail;
-    }
+	public String getCandidateEmail() {
+		return candidateEmail;
+	}
 
-    public void setCandidateEmail(String candidateEmail) {
-        this.candidateEmail = candidateEmail;
-    }
+	public void setCandidateEmail(String candidateEmail) {
+		this.candidateEmail = candidateEmail;
+	}
 
-    public Date getDeadline() {
-        return deadline;
-    }
+	public Date getDeadline() {
+		return deadline;
+	}
 
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
 
-    @PreRemove
-    public void preRemove() {
-    	this.setEstado(null);
-        manager.getRequestList().remove(this);
-        recruiter.getRequestList().remove(this);
-    }
+	@PreRemove
+	public void preRemove() {
+		this.setEstado(null);
+		manager.getRequestList().remove(this);
+		recruiter.getRequestList().remove(this);
+	}
 
 }
