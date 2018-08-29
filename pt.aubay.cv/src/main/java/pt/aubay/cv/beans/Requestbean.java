@@ -5,9 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 
@@ -225,12 +223,12 @@ public class Requestbean implements Serializable {
             File folder = new File(dir);
             folder.mkdirs();
 
-            File physicalFile = new File(dir, System.currentTimeMillis() + " " +  fileName);
+            File physicalFile = new File(dir, System.currentTimeMillis( ) + "_" + fileName);
 
             OutputStream out = new FileOutputStream(physicalFile);
             out.write(file.getContents());
             out.close();
-            
+
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage("Upload completo",
                             "O arquivo " + fileName + " foi salvo em " + physicalFile.getAbsolutePath()));

@@ -61,20 +61,20 @@ function colorDeadLineUltimate() {
 		var convertDeadDate = new Date(mesDeadLineDate + "/" + dayDeadLineDate + "/" + anoDeadLineDate);
 		var difDate = (Math.abs(convertDeadDate - nowDate) / ONEDAY).toFixed(0);
 		console.log(difDate);
-
-
+		
+		
 		switch (true) {
 		case difDate >= 12:
-			element.style.cssText = "color:green;  font-weight: bold;";
+			element.style.cssText = "color:green;font-weight: bold;";
 		break;
 		case difDate >= 6 && difDate < 12: 
-			element.style.cssText = "color:orange;  font-weight: bold;";
+			element.style.cssText = "color:orange;font-weight: bold;";
 		break;
 		case difDate >= 2 && difDate <= 6:
-			element.style.cssText = "color:red;  font-weight: bold;";
+			element.style.cssText = "color:red;font-weight: bold;";
 		break;
 		case difDate <= 1.9:
-			element.style.cssText = "color:red;  font-weight: bold;";
+			element.style.cssText = "color:red;font-weight: bold;";
 			$(element).addClass('danger');
 		break;
 

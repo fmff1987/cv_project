@@ -61,11 +61,9 @@ public class Request extends pt.aubay.cv.models.Entity {
 	
 	@Transient
 	private UploadedFile cvOrig , cvAubay;
-
-
-
-
-	private String comment;
+	
+	
+ 	private String comment;
 
 	public UploadedFile getCvOrig() {
 		return cvOrig;
