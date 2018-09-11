@@ -10,7 +10,7 @@ import pt.aubay.cv.models.Request;
 import pt.aubay.cv.models.Status;
 
 @RequestScoped
-public class RequestRepository  extends EntityRepository<Request>{
+public class RequestRepository extends EntityRepository<Request>{
 
 	public List<Request> getAllWithManagers(){
 		return em.createNamedQuery("Request.getAllWithManagers", Request.class).getResultList();
