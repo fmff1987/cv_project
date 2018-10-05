@@ -16,6 +16,10 @@ import javax.persistence.Table;
 		@NamedQuery(name= "Admin.getAllActiveEmail",
 		query= "SELECT a.email FROM Admin a WHERE a.active = true")
 	})
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43f6514f2f1ebfd513e9cfa53e23b5eb05fbfe93
 public class Admin extends Person {
 
 	/**
